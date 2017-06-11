@@ -1,0 +1,30 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+	<h1>Lista de estados de la región {{region}}</h1>
+
+	<div class="row justify-content-md-center">
+
+		{%for entidad in entidades%}
+
+		<div class="col-xs-4 col-sm-3  d-inline-block text-center">
+			<a href="{{entidad.get_absolute_url}}" class="thumbnail">
+			<img src="{{entidad.imagen.url}}" style="width: 100px;" alt="{{entidad.nombre}}">
+			</a>
+			<div>
+				<span>Partida: {{entidad.partida}}</span>
+				<br>
+				<span>Nombre: {{entidad.nombre}}</span>
+			</div>
+		</div>
+
+		{%empty%}
+
+		<h3>Aún no se han registrado entidades</h3>
+
+		{%endfor%}
+
+	</div>
+
+{%endblock content%}

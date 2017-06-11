@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts'
+    'accounts',
+    'bebederos',
+    'evidencias',
+    'bootstrapform',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +125,6 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
+
+from django.core.urlresolvers import reverse_lazy
+LOGOUT_REDIRECT_URL = reverse_lazy('accounts:login')

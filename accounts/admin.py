@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import *
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-#from bebederos.models import *
+from bebederos.models import *
 
 #Regiones
 admin.site.register(Region)
@@ -24,11 +24,11 @@ class MunicipiodAdmin(admin.ModelAdmin):
 admin.site.register(Municipio, MunicipiodAdmin)
 
 #Usuarios (Constructoras, escuelas, SIM, Residentes, etc)
-#class SistemaBebederosInline(admin.StackedInline):
-#    model = SistemaBebedero
-#    can_delete = False
-#    verbose_name_plural = 'Bebederos'
-#    fk_name = 'escuela'
+class SistemaBebederosInline(admin.StackedInline):
+    model = SistemaBebedero
+    can_delete = False
+    verbose_name_plural = 'Bebederos'
+    fk_name = 'escuela'
 
 class PerfilInline(admin.StackedInline):
     model = Perfil
@@ -36,19 +36,19 @@ class PerfilInline(admin.StackedInline):
     verbose_name_plural = 'Perfiles'
     fk_name = 'user'
 
-#class CustomUserAdmin(UserAdmin):
-#    inlines = (PerfilInline, SistemaBebederosInline)
+class CustomUserAdmin(UserAdmin):
+    inlines = (PerfilInline, SistemaBebederosInline)
 
-#    def get_inline_instances(self, request, obj=None):
-#        if not obj:
-#            return list()
-#        return super(CustomUserAdmin, self).get_inline_instances(request, obj)
+    def get_inline_instances(self, request, obj=None):
+        if not obj:
+            return list()
+        return super(CustomUserAdmin, self).get_inline_instances(request, obj)
 
 admin.site.unregister(User)
-#admin.site.register(User, CustomUserAdmin)
+admin.site.register(User, CustomUserAdmin)
 
-#class PerfildAdmin(admin.ModelAdmin):
-#    list_display = ['tipo', 'user', 'telefono']
-#    search_fields = ['tipo','user__username', 'user__first_name', 'user__last_name', 'telefono']
+class PerfildAdmin(admin.ModelAdmin):
+    list_display = ['tipo', 'user', 'telefono']
+    search_fields = ['tipo','user__username', 'user__first_name', 'user__last_name', 'telefono']
 
-#admin.site.register(Perfil, PerfildAdmin)
+admin.site.register(Perfil, PerfildAdmin)

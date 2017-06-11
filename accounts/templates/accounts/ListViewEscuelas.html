@@ -1,0 +1,34 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+	<h1>Lista de escuelas de {{municipio.nombre}}</h1>
+
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<th>Nombre</th>
+				<th>Avance</th>
+			</thead>
+			<tbody>
+			
+			{%for perfil in perfiles%}
+			
+				<tr>
+					<td><a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">{{perfil.user.get_full_name}}</a></td>
+					<td>Campo a cubrir proximamente</td>
+				</tr>
+
+			{%empty%}
+			
+			<tr>
+				<td colspan="2">Aún no se han registado escuelas</td>
+			</tr>
+
+			{%endfor%}
+			
+			</tbody>
+		</table>
+	</div>
+
+{%endblock content%}

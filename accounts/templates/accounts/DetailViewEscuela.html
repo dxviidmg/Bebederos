@@ -1,0 +1,73 @@
+{%extends 'base.html'%}
+
+{% load bootstrap %}
+
+{%block content%}
+
+	{%if request.user.perfil.tipo != "Escuela"%}
+	<h2>Información de la escuela</h2>
+	
+	<p>Nombre: {{escuela.get_full_name}}</p>
+	<p>CCT: {{escuela.username}}</p>
+	<p>Director: {{perfil.director}}</p>
+	<p>Cantidad de alumnos: {{perfil.cantidad_de_alumnos}}</p>
+	<p>Telefono: {{perfil.teléfono}}</p>
+	<p>Domicilio: {{perfil.domicilio}}</p>
+
+
+	{%endif%}
+
+	<h2>Sistema bebedero</h2>
+	<p>Filtro: {{sistemabebedero.bebedero}}</p>
+	<p>Filtro: {{sistemabebedero.filtro}}</p>
+	<p>Constructora: {{sistemabebedero.constructora}}</p>
+	
+	<h2>Historial de evidencias</h2>
+
+	<div class="table-responsive">
+
+		<table class="table">
+			<thead>
+				<th>Nombre</th>
+				<th>Documento</th>
+				<th>Foto</th>
+				<th>Video</th>
+				<th>Fecha de creación</th>
+				<th>Aprobado</th>
+				<th>Subido por</th>
+			</thead>
+			<tbody>
+
+			{%for exp in evidencias%}
+
+			<tr>
+				<td>{{exp.nombre}}</td>
+				<td><a href="/media/{{exp.archivo}}">Ver</a></td>
+				<td><a href="/media/{{exp.foto}}">Ver</a></td>
+				<td><a href="/media/{{exp.video}}">Ver</a></td>
+				<td>{{exp.creacion}}</td>
+				<td>{%if exp.aprobado is True%}<i class="fa fa-check" aria-hidden="true"></i>{%else%}<i class="fa fa-close fa-2x" aria-hidden="true"></i>{%endif%}</td>
+				<td>{{exp.subido_por}}</td>
+			</tr>
+
+			{%empty%}
+
+			<tr>
+				<td colspan="7">No se han registrado evidencias</td>
+			</tr>
+
+			{%endfor%}
+
+			</tbody>
+		</table>
+	</div>
+
+
+	<form action="." method="post" enctype="multipart/form-data">
+		<h4>Crea un nuevo expediente</h4>
+		{%csrf_token%}
+		{{NuevaEvidenciaForm | bootstrap}}
+		<input type="submit" value="Crear">
+	</form>
+
+{%endblock content%}

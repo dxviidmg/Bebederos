@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+	<h1>Lista de municipios de {{entidad.nombre}}</h1>
+
+	<div class="row justify-content-md-center">
+
+		{%for municipio in municipios%}
+
+		<div class="col-xs-4 col-sm-3  d-inline-block text-center">
+			<a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">{{municipio.nombre}}</a>
+		</div>
+
+		{%empty%}
+
+		<h3>Aún no se han registrado municipios</h3>
+
+		{%endfor%}
+
+	</div>
+
+{%endblock content%}
