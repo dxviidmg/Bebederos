@@ -7,6 +7,8 @@
 		<link rel="stylesheet" type="text/css" href="{%static 'css/font-awesome.min.css'%}">
 
 		<link rel="stylesheet" type="text/css" href="{%static 'css/estilos.css'%}">
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	<body>
 
@@ -22,7 +24,7 @@
     <form class="form-inline my-2 my-lg-0">
 
       {%if request.user.is_authenticated%}
-    	<span>Usuario: {{request.user.get_full_name}}</span>
+    	<span>Usuario: {{request.user.username}}</span>
     	<a class="nav-link" href="{%url 'accounts:ViewProfile'%}">Mi perfil</a>
       
       <a class="nav-link" href="{%url 'accounts:ListViewRegiones'%}">Regiones</a>
@@ -30,7 +32,7 @@
       {%if request.user.perfil.tipo == "Escuela"%}
       <a class="nav-link" href="{%url 'accounts:DetailViewEscuela' request.user.perfil.pk%}">Expediente</a>
       {%endif%}
-    	<a class="nav-link" href="#">Plantillas</a>
+    	<a class="nav-link" href="{%url 'evidencias:ListViewPlantillas'%}">Plantillas</a>
         <a class="nav-link" href="{%url 'accounts:logout'%}">Salir</a>
         {%endif%}
     </form>
