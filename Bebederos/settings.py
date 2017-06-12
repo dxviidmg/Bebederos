@@ -128,3 +128,9 @@ MEDIA_URL = '/media/'
 
 from django.core.urlresolvers import reverse_lazy
 LOGOUT_REDIRECT_URL = reverse_lazy('accounts:login')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
+]
+
