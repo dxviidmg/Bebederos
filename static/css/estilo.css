@@ -1,0 +1,65 @@
+html {
+  height: 100%;
+}
+
+body{
+  padding-top: 50px;
+  background: url(../img/fondo.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.container {
+  background-color: #F7F5F5;
+  min-height: 100%;
+  padding-top: 50px;
+  bottom: 0;
+}
+
+h1, h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+.botonregion {
+  width:60px;
+  height: 60px;
+  background: #F7F7F7;
+  background-size: cover;
+  font-size: 40px;
+}
+
+.botonregion:hover {
+  width:60px;
+  height: 60px;
+  background: #7e8487;
+  background-size: cover;
+  font-size: 40px;
+}
+
+a{
+  color: #292b2c;
+}
+a:hover {
+  text-decoration:none;
+  color: #4e5254;
+}
+
+table, th {
+  text-align: center;
+}
+
+.fa-file-word-o {
+  color: #0060ac;
+  background-color: white;
+}

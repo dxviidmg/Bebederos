@@ -2,16 +2,17 @@
 <html>
 	<head>
 		<title>Seguimiento de bebederos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="{%static 'css/bootstrap.min.css'%}">
 
 		<link rel="stylesheet" type="text/css" href="{%static 'css/font-awesome.min.css'%}">
 
-		<link rel="stylesheet" type="text/css" href="{%static 'css/estilos.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/estilo.css'%}">
 
 	</head>
 	<body>
 
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded navbar-inverse bg-inverse navbar fixed-top">
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -39,8 +40,6 @@
 </nav>
 
 	<div class="container">
-	    <br>
-		
       {%block content%}
       {%endblock content%}
 	
