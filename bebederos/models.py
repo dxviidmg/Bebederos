@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Bebedero(models.Model):
+class Mueble(models.Model):
 	nivel_educativo_choices = (
 		("Preescolar", "Preescolar"),
 		("Primaria", "Primaria"),
@@ -40,24 +40,14 @@ class Filtro(models.Model):
 	class Meta:
 		ordering = ['modelo']
 
-class Mueble(models.Model):
-	modelo = models.CharField(max_length=50)	
-
-	def __str__(self):
-		return 'Modelo {}'.format(self.modelo)
-	
-	class Meta:
-		ordering = ['modelo']
-
 class SistemaBebedero(models.Model):
 	escuela = models.OneToOneField(User, related_name="escuela")
 	constructora = models.ForeignKey(User, related_name="constructora")
-	bebedero = models.ForeignKey(Bebedero, related_name="bebedero")
+	mueble = models.ForeignKey(Mueble, related_name="mueble")
 	filtro = models.ForeignKey(Filtro, related_name="filtro")
-	mueble = models.ForeignKey(Mueble, null=True, related_name="mueble")
 
 	def __str__(self):
-		return 'Bebedero {} para escuela {}'.format(self.bebedero, self.escuela)
+		return 'Bebedero {} para escuela {}'.format(self.mueble, self.escuela)
 	
 	class Meta:
 		ordering = ['escuela']

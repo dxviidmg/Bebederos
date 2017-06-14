@@ -1,9 +1,9 @@
 {%extends 'base.html'%}
 
 {%block content%}
-	
+
+<div class="container">	
 	<h3>Bienvenido(a): {{request.user.get_full_name}}</h3>
-	<br>
 
 	<p>Tipo: {{perfil.tipo}}</p>
 
@@ -20,6 +20,8 @@
 
 	<p>Teléfono: {{perfil.teléfono}}</p>
 	<p>Domicilio: {{perfil.domicilio}}</p>
+
+</div>
 
 
 	

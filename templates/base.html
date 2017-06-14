@@ -16,7 +16,7 @@
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="#">Seguimiento de bebederos</a>
+  <a class="navbar-brand" href="#"><img src="{%static 'img/logos.jpg'%}" style="height: 40px;"> Seguimiento de bebederos </a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
@@ -24,22 +24,28 @@
     <form class="form-inline my-2 my-lg-0">
 
       {%if request.user.is_authenticated%}
-    	<span>Usuario: {{request.user.username}}</span>
+
+    	<span style="color: white;">Usuario: {{request.user.username}}</span>
     	<a class="nav-link" href="{%url 'accounts:ViewProfile'%}">Mi perfil</a>
       
       <a class="nav-link" href="{%url 'accounts:ListViewRegiones'%}">Regiones</a>
 
       {%if request.user.perfil.tipo == "Escuela"%}
+      
       <a class="nav-link" href="{%url 'accounts:DetailViewEscuela' request.user.perfil.pk%}">Expediente</a>
+      
       {%endif%}
-    	<a class="nav-link" href="{%url 'evidencias:ListViewPlantillas'%}">Plantillas</a>
+    	
+      <a class="nav-link" href="{%url 'evidencias:ListViewPlantillas'%}">Plantillas</a>
         <a class="nav-link" href="{%url 'accounts:logout'%}">Salir</a>
+      
         {%endif%}
+
     </form>
   </div>
 </nav>
 
-	<div class="container">
+	<div class="container container-base">
       {%block content%}
       {%endblock content%}
 	
