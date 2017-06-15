@@ -31,7 +31,7 @@ class Filtro(models.Model):
 	)
 	modelo = models.CharField(max_length=10)
 	litros_de_vida = models.IntegerField()
-	presion = models.CharField(max_length=30)
+	presion = models.CharField(max_length=30, verbose_name="Presión")
 	normas_cumplidas = models.CharField(max_length=20, choices=normas_choices)
 
 	def __str__(self):

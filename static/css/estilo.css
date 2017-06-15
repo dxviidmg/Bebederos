@@ -12,13 +12,11 @@ body{
 }
 
 .list-group-item{
-background-color: #F7F5F5;
+  background-color: #F7F5F5;
 }
 .container-base{
-  background-color: #F7F5F5;
-  min-height: 100%;
-  padding-top: 50px;
-  bottom: 0;
+  background-color: #000;
+
 }
 
 h1, h2, h3, h4 {

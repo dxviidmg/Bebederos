@@ -7,7 +7,7 @@ class Plantilla(models.Model):
 	subido_por = models.ForeignKey(User)
 	nombre = models.CharField(max_length=30)
 	archivo = models.FileField(upload_to='plantillas/%Y/%m/%d/')
-	creacion = models.DateTimeField(default=timezone.now)
+	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 
 	def __str__(self):
 		return '{}'.format(self.nombre)
@@ -56,9 +56,9 @@ class Evidencia(models.Model):
 	subido_por = models.ForeignKey(User)
 	nombre = models.CharField(max_length=100, choices=nombre_choices)
 	archivo = models.FileField(upload_to='expedientes/archivos/%Y/%m/%d/')
-	foto = models.FileField(upload_to='expedientes/fotos/%Y/%m/%d/')
-	video = models.FileField(upload_to='expedientes/videos/%Y/%m/%d/')
-	creacion = models.DateTimeField(default=timezone.now)
+	foto = models.FileField(upload_to='expedientes/fotos/%Y/%m/%d/', verbose_name="Evidencia fotografia")
+	video = models.FileField(upload_to='expedientes/videos/%Y/%m/%d/', verbose_name="Evidencia audiovisual")
+	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de registro")
 	aprobado = models.BooleanField(default=False)
 
 	def __str__(self):

@@ -16,7 +16,7 @@ class Region(models.Model):
 		return reverse('accounts:ListViewEntidades', kwargs={'numero': self.numero})
 
 class Entidad(models.Model):
-	region = models.ForeignKey(Region)
+	region = models.ForeignKey(Region, verbose_name="Región")
 	partida = models.IntegerField()
 	nombre = models.CharField(max_length=30)
 	slug = models.SlugField(null=True)
@@ -53,8 +53,9 @@ class Perfil(models.Model):
 	)
 	user = models.OneToOneField(User)
 	tipo = models.CharField(max_length=30, choices=tipo_choices)
-	telefono = models.CharField(max_length=10, blank=True, null=True)
+	telefono = models.CharField(max_length=10, blank=True, null=True, verbose_name="Teléfono")
 	domicilio = models.CharField(max_length=100, blank=True, null=True)
+	referencias = models.CharField(max_length=200, blank=True, null=True)
 	municipio = models.ForeignKey(Municipio, null=True, blank=True)
 	cantidad_de_alumnos = models.IntegerField(blank=True, null=True)
 	director = models.CharField(max_length=100, blank=True, null=True)
