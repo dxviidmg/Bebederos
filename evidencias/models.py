@@ -27,6 +27,18 @@ class Evidencia(models.Model):
 		),
 		('Instalación', (
 			('Constancia de llegada de material', 'Constancia de llegada de material'),
+			('Constancia de realización de la etapa: Limpieza, trazo y nivelación', 'Constancia de realización de la etapa: Limpieza, trazo y nivelación'),
+			('Constancia de realización de la etapa: Demoliciones y desmontajes', 'Constancia de realización de la etapa: Demoliciones y desmontajes'),
+			('Constancia de realización de la etapa: Excavaciones', 'Constancia de realización de la etapa: Excavaciones'),
+			('Constancia de realización de la etapa: Acero en refuerzo estructural', 'Constancia de realización de la etapa: Acero en refuerzo estructural'),
+			('Constancia de realización de la etapa: Albañilería y acabados', 'Constancia de realización de la etapa: Albañilería y acabados'),
+			('Constancia de realización de la etapa: Herreria y cubierta', 'Constancia de realización de la etapa: Herreria y cubierta'),
+			('Constancia de realización de la etapa: Instalación hidráulica', 'Constancia de realización de la etapa: Instalación hidráulica'),
+			('Constancia de realización de la etapa: Instalación sanitaria', 'Constancia de realización de la etapa: Instalación sanitaria'),
+			('Constancia de realización de la etapa: Instalación eléctrica', 'Constancia de realización de la etapa: Instalación eléctrica'),
+			('Constancia de realización de la etapa: Demoliciones y desmontajes', 'Constancia de realización de la etapa: Demoliciones y desmontajes'),
+			('Constancia de realización de la etapa: Obra exterior', 'Constancia de realización de la etapa: Obra exterior'),
+			('Constancia de realización de la etapa: bebedero', 'Constancia de realización de la etapa: Bebedero'),
 			)
 		),
 		('Post-Instalación', (
@@ -34,8 +46,8 @@ class Evidencia(models.Model):
 			('Resultados del segundo análisis de la calidad del agua', 'Resultados del segundo análisis de la calidad del agua'),
 			('Resultados del segundo análisis de la calidad del agua', 'Resultados del segundo análisis de la calidad del agua'),
 			('Dictamen del sistema avalado', 'Dictamen del sistema avalado'),
-					('Recibo de entrega de llaves', 'Recibo de entrega de llaves'),
-							('Acta de inicio de funcionamiento', 'Acta de inicio de funcionamiento'),
+			('Recibo de entrega de llaves', 'Recibo de entrega de llaves'),
+			('Acta de inicio de funcionamiento', 'Acta de inicio de funcionamiento'),
 
 			)
 		),
