@@ -51,6 +51,15 @@ class Perfil(models.Model):
 		("Ejecutora", "Ejecutora"),
 		("Escuela", "Escuela"),
 	)
+
+	nivel_choices = (
+		("Preescolar", "Preescolar"),
+		("Primaria", "Primaria"),
+		("Secundaria", "Secundaria"),
+		("Media Superior", "Media Superior"),
+		("Superior", "Superior"),
+	)
+
 	user = models.OneToOneField(User)
 	tipo = models.CharField(max_length=30, choices=tipo_choices)
 	telefono = models.CharField(max_length=10, blank=True, null=True, verbose_name="Teléfono")
@@ -59,6 +68,7 @@ class Perfil(models.Model):
 	municipio = models.ForeignKey(Municipio, null=True, blank=True)
 	cantidad_de_alumnos = models.IntegerField(blank=True, null=True)
 	director = models.CharField(max_length=100, blank=True, null=True)
+	nivel_educativo = models.CharField(max_length=20, blank=True, null=True, choices=nivel_choices)
 	representante_legal = models.CharField(max_length=100, blank=True, null=True)
 	
 	def __str__(self):
