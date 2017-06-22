@@ -21,38 +21,37 @@
 	<body>
 
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded navbar-inverse bg-inverse navbar fixed-top">
+
+{%if request.user.is_authenticated%}
+
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
+  {%endif%}
   <a class="navbar-brand" href="#">Seguimiento de bebederos v2.0</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    {%if request.user.is_authenticated%}
+    <ul class="navbar-nav mt-2 mt-md-0">
+      <li class="nav-item">
+        <a class="nav-link" href="{%url 'accounts:ViewProfile'%}">Perfil</a>
+      </li>
 
-      {%if request.user.is_authenticated%}
+            <li class="nav-item">
+        <a class="nav-link" href="{%url 'accounts:ListViewRegiones'%}">Regiones</a>
+      </li>
 
-    	<span style="color: white;">Usuario: {{request.user.username}}</span>
-    	<a class="nav-link" href="{%url 'accounts:ViewProfile'%}">Mi perfil</a>
-      
-      <a class="nav-link" href="{%url 'accounts:ListViewRegiones'%}">Regiones</a>
-
-      {%if request.user.perfil.tipo == "Escuela"%}
-      
-      <a class="nav-link" href="{%url 'accounts:DetailViewEscuela' request.user.perfil.pk%}">Expediente</a>
-      
-      {%endif%}
-    	
-      <a class="nav-link" href="{%url 'evidencias:ListViewPlantillas'%}">Plantillas</a>
+            <li class="nav-item">
         <a class="nav-link" href="{%url 'accounts:logout'%}">Salir</a>
-      
-        {%endif%}
+      </li>
+    </ul>
+     {%endif%}
 
-    </form>
   </div>
 </nav>
-
   
   {%if not request.user.is_authenticated%}
   <div class="container" style="padding-top: 30px;">
