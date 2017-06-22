@@ -3,23 +3,57 @@
 {%block content%}
 
 	<style type="text/css">
+.square-box{
+    position: relative;
+    width: 70%;
+    overflow: hidden;
+      display: table;
+  margin: 0 auto;
+}
+.square-box:before{
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+.square-content{
+    position:  absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: white;
+}
+.square-content div {
+   display: table;
+   width: 100%;
+   height: 100%;
+}
+.square-content span {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 4em;
+}
+</style>
 
-	</style>
 
+	<h1>Regiones</h1>
 
-	<h1>Lista de regiones</h1>
-
-	<div class="row justify-content-md-center">
+	<div class="row justify-content-center" >
 
 		{%for region in regiones%}
 
-			<div class="col-md-2 d-flex justify-content-center d-inline-block text-center" style="padding-bottom: 20px;">
-				<a href="{{region.get_absolute_url}}">
-					<div class="rounded-circle botonregion" ><p>{{region}}</p>
-					</div>
-				</a>
-			</div>
+		<div class="col-sm-4 col-md-4" style="margin-bottom: 5%;">
+			
+<a href="{{region.get_absolute_url}}"><div class='square-box' style="background-color: {{region.color}}">
+    <div class='square-content'><div><span>{{region}}</span></div></div>
+</div>
+</a>
 
+		</div>
+
+			
 		{%empty%}
 
 			<h3>Aún no se han registrado regiones</h3>
@@ -27,5 +61,7 @@
 		{%endfor%}
 
 	</div>
+
+
 
 {%endblock content%}

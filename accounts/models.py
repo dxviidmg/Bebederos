@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 
 class Region(models.Model):
 	numero = models.IntegerField()
+	color = models.CharField(max_length=10)
 
 	def __str__(self):
 		return '{}'.format(self.numero)

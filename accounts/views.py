@@ -66,6 +66,7 @@ class ListViewEscuelas(View):
 		template_name = "accounts/ListViewEscuelas.html"
 		municipio = Municipio.objects.get(pk=pk)
 		perfiles = Perfil.objects.filter(municipio=municipio)
+
 		context = {
 			'municipio': municipio,
 			'perfiles': perfiles,

@@ -11,12 +11,11 @@
 
 
     <style type="text/css">
-      .container{
-  background-color: #F7F5F5;
-  min-height: 100%;
-  padding-top: 50px;
-  bottom: 0;
-}
+      .content{
+      min-height: 83%;
+      padding-top: 40px;
+      bottom: 0;
+    }
     </style>
 	</head>
 	<body>
@@ -25,7 +24,7 @@
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="#">Seguimiento de bebederos v1.0</a>
+  <a class="navbar-brand" href="#">Seguimiento de bebederos v2.0</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
@@ -54,12 +53,19 @@
   </div>
 </nav>
 
-	<div class="container">
+  
+  {%if not request.user.is_authenticated%}
+  <div class="container" style="padding-top: 30px;">
+    <img style="width: 100%" src="{%static 'img/Header.png'%}">
+  </div>
+  {%endif%}
+	<div class="container content">
   
       {%block content%}
       {%endblock content%}
 	
 	</div>
+
         <script type="text/javascript" src="{%static 'js/jquery.js'%}"></script>
         <script type="text/javascript" src="{%static 'js/bootstrap.min.js'%}"></script>
         
