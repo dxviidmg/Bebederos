@@ -54,9 +54,12 @@ class ListViewMunicipios(View):
 		template_name = "accounts/ListViewMunicipios.html"
 		entidad = Entidad.objects.get(slug=slug)
 		municipios = Municipio.objects.filter(entidad=entidad)
+		cantidad_escuelas = Perfil.objects.filter(tipo="Escuela", municipio=municipios).count()
+		print(cantidad_escuelas)
 		context = {
 			'entidad': entidad,
-			'municipios': municipios
+			'municipios': municipios,
+			'cantidad_escuelas': cantidad_escuelas,
 		}
 		return render(request,template_name, context)
 

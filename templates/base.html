@@ -40,11 +40,24 @@
         <a class="nav-link" href="{%url 'accounts:ViewProfile'%}">Perfil</a>
       </li>
 
-            <li class="nav-item">
+      {%if request.user.perfil.tipo == "Escuela"%}
+
+      <li class="nav-item">
+        <a class="nav-link" href="{%url 'accounts:DetailViewEscuela' request.user.perfil.pk%}">Expediente</a>
+      </li>
+      
+      {%else%}
+      
+      <li class="nav-item">
         <a class="nav-link" href="{%url 'accounts:ListViewRegiones'%}">Regiones</a>
       </li>
 
-            <li class="nav-item">
+      {%endif%}
+
+      <li class="nav-item">
+        <a class="nav-link" href="{%url 'evidencias:ListViewPlantillas'%}">Plantillas</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="{%url 'accounts:logout'%}">Salir</a>
       </li>
     </ul>

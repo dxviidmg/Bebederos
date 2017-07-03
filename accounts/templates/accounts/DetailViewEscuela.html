@@ -23,4 +23,56 @@
 	<p>Filtro: {{sistemabebedero.filtro}}</p>
 	<p>Constructora: {{sistemabebedero.constructora}}</p>
 
+	<h2>Historial de evidencias</h2>
+
+	<div class="table-responsive">
+
+		<table class="table">
+			<thead>
+				<th>Folio</th>
+				<th>Nombre</th>
+				<th>Documento</th>
+				<th>Foto</th>
+				<th>Video</th>
+				<th>Fecha de creación</th>
+				<th>Aprobado</th>
+				<th>Subido por</th>
+			</thead>
+			<tbody>
+
+			{%for evidencia in evidencias%}
+
+			<tr>
+				<td>{{evidencia.pk}}</td>
+				<td>{{evidencia.nombre}}</td>
+				<td><a href="/media/{{evidencia.archivo}}">Ver</a></td>
+				<td><a href="/media/{{evidencia.foto}}">Ver</a></td>
+				<td><a href="/media/{{evidencia.video}}">Ver</a></td>
+				<td>{{evidencia.creacion}}</td>
+				<td>{%if evidencia.aprobado is True%}<i class="fa fa-check" aria-hidden="true"></i>{%else%}<i class="fa fa-close fa-2x" aria-hidden="true"></i>{%endif%}</td>
+				<td>{{evidencia.subido_por}}</td>
+			</tr>
+
+			{%empty%}
+
+			<tr>
+				<td colspan="8">No se han registrado evidencias</td>
+			</tr>
+
+			{%endfor%}
+
+			</tbody>
+		</table>
+	</div>
+
+	<div class="well">
+		<form action="." method="post" enctype="multipart/form-data">
+			<h3>Crea una evidencia</h3>
+			{%csrf_token%}
+			{{NuevaEvidenciaForm | bootstrap}}
+			<input type="submit" value="Crear">
+		</form>
+
+	</div>
+
 {%endblock content%}

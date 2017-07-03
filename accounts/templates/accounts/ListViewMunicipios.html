@@ -4,19 +4,37 @@
 
 	<h1>Municipios de {{entidad.nombre}}</h1>
 
+	<p>Escuelas registradas: {{cantidad_escuelas}}</p>
+	<p>Escuelas aceptadas: ¿?</p>
 	<div class="row justify-content-md-center">
 
-		{%for municipio in municipios%}
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<th>Nombre</th>
+				<th>Escuelas</th>
+			</thead>
+			<tbody>
 
-		<div class="col-xs-4 col-sm-2  d-inline-block text-center" style="padding-bottom: 20px;">
-			<a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">{{municipio.nombre}}</a>
-		</div>
+	{%for municipio in municipios%}
 
-		{%empty%}
+				<tr>
+					<td><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">{{municipio.nombre}}</a></td>
+					<td>					{{municipio.perfil_set.all|length}}</td>
+				</tr>
+	
+	{%empty%}
+	
+				<tr>
+					<td colspan="5">Lista de solicitudes vacia</td>
+				</tr>	
+	{%endfor%}
 
-		<h3>Aún no se han registrado municipios</h3>
+			</tbody>
+		</table>
+	</div>
 
-		{%endfor%}
+
 
 	</div>
 

@@ -57,7 +57,7 @@ class Evidencia(models.Model):
 			('Revisión mensual (3er mes)', 'Revisión mensual (3er mes)'),
 			('Revisión mensual (4to mes)', 'Revisión mensual (4to mes)'),
 			('Revisión mensual (5to mes)', 'Revisión mensual (5to mes)'),
-			('Constancia de lavado y desinfeccion de tinaco y cisterna (6to mes)', 'Constancia de lavado y desinfeccion de tinaco y cisterna (6to mes)'),
+			('Constancia de lavado y desinfección de tinaco y cisterna (6to mes)', 'Constancia de lavado y desinfección de tinaco y cisterna (6to mes)'),
 			('Revisión mensual (7mo mes)', 'Revisión mensual (7mo mes)'),
 			('Constancia de prueba periodica (8mo mes)', 'Constancia de prueba periodica (8mo mes)'),
 		)
@@ -68,8 +68,8 @@ class Evidencia(models.Model):
 	subido_por = models.ForeignKey(User)
 	nombre = models.CharField(max_length=100, choices=nombre_choices)
 	archivo = models.FileField(upload_to='expedientes/archivos/%Y/%m/%d/')
-	foto = models.FileField(upload_to='expedientes/fotos/%Y/%m/%d/', verbose_name="Evidencia fotografia")
-	video = models.FileField(upload_to='expedientes/videos/%Y/%m/%d/', verbose_name="Evidencia audiovisual")
+	foto = models.FileField(upload_to='expedientes/fotos/%Y/%m/%d/', verbose_name="Fotografía")
+	video = models.FileField(upload_to='expedientes/videos/%Y/%m/%d/', verbose_name="Video")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de registro")
 	aprobado = models.BooleanField(default=False)
 
