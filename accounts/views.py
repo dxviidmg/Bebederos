@@ -54,12 +54,14 @@ class ListViewMunicipios(View):
 		template_name = "accounts/ListViewMunicipios.html"
 		entidad = Entidad.objects.get(slug=slug)
 		municipios = Municipio.objects.filter(entidad=entidad)
-		cantidad_escuelas = Perfil.objects.filter(tipo="Escuela", municipio=municipios).count()
-		print(cantidad_escuelas)
+		escuelasRegistradas = Perfil.objects.filter(tipo="Escuela", municipio=municipios)
+		escuelasAceptadas = escuelasRegistradas.filter(status='Aceptado')
+		print(escuelasAceptadas)
 		context = {
 			'entidad': entidad,
 			'municipios': municipios,
-			'cantidad_escuelas': cantidad_escuelas,
+			'escuelasRegistradas': escuelasRegistradas,
+			'escuelasAceptadas': escuelasAceptadas
 		}
 		return render(request,template_name, context)
 
@@ -68,11 +70,13 @@ class ListViewEscuelas(View):
 	def get(self, request, pk):
 		template_name = "accounts/ListViewEscuelas.html"
 		municipio = Municipio.objects.get(pk=pk)
-		perfiles = Perfil.objects.filter(municipio=municipio)
+		perfiles = Perfil.objects.filter(municipio=municipio).order_by('status')
+		escuelasAceptadas = perfiles.filter(status="Aceptado")
 
 		context = {
 			'municipio': municipio,
 			'perfiles': perfiles,
+			'escuelasAceptadas': escuelasAceptadas,
 		}
 		return render(request,template_name, context)
 
@@ -83,14 +87,26 @@ class DetailViewEscuela(View):
 		perfil = Perfil.objects.get(pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		sistemabebedero = SistemaBebedero.objects.get(escuela=escuela)
-		evidencias = Evidencia.objects.filter(sistemabebedero=sistemabebedero)
-		NuevaEvidenciaForm = EvidenciaCreateForm()
+		evidenciasPrevias = EvidenciaPrevia.objects.filter(sistemabebedero=sistemabebedero)
+		NuevaEvidenciaForm = EvidenciaPreviaCreateForm()
+		evidenciasInstalacion = EvidenciaInstalacion.objects.filter(sistemabebedero=sistemabebedero)
+		NuevaEvidenciaForm2 = EvidenciaInstalacionCreateForm()
+		UltimaEvidenciaPrevia = evidenciasPrevias.last()
+		evidenciasPostInstalacion = EvidenciaPostInstalacion.objects.filter(sistemabebedero=sistemabebedero)
+		UltimaEvidenciaInstalacion = evidenciasInstalacion.last()
+		NuevaEvidenciaForm3 = EvidenciaPostInstalacionCreateForm()
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
 			'sistemabebedero': sistemabebedero,
-			'evidencias': evidencias,
-			'NuevaEvidenciaForm': NuevaEvidenciaForm
+			'evidenciasPrevias': evidenciasPrevias,
+			'NuevaEvidenciaForm': NuevaEvidenciaForm,
+			'evidenciasInstalacion': evidenciasInstalacion,
+			'NuevaEvidenciaForm2': NuevaEvidenciaForm2,
+			'UltimaEvidenciaPrevia': UltimaEvidenciaPrevia,
+			'evidenciasPostInstalacion': evidenciasPostInstalacion,
+			'UltimaEvidenciaInstalacion': UltimaEvidenciaInstalacion,
+			'NuevaEvidenciaForm3': NuevaEvidenciaForm3,
 		}
 		return render(request,template_name, context)
 	def post(self,request, pk):
@@ -100,13 +116,26 @@ class DetailViewEscuela(View):
 		perfil = Perfil.objects.get(pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		sistemabebedero = SistemaBebedero.objects.get(escuela=escuela)
-		evidencia = Evidencia.objects.filter(sistemabebedero=sistemabebedero)
-		NuevaEvidenciaForm = EvidenciaCreateForm(data=request.POST, files=request.FILES)
-		
+
+		NuevaEvidenciaForm = EvidenciaPreviaCreateForm(data=request.POST, files=request.FILES)
+		NuevaEvidenciaForm2 = EvidenciaInstalacionCreateForm(data=request.POST, files=request.FILES)
+
 		if NuevaEvidenciaForm.is_valid(): 
 			NuevaEvidencia = NuevaEvidenciaForm.save(commit=False)
 			NuevaEvidencia.sistemabebedero = sistemabebedero
 			NuevaEvidencia.subido_por = user
 			NuevaEvidencia.save()
 
+		if NuevaEvidenciaForm2.is_valid(): 
+			NuevaEvidencia = NuevaEvidenciaForm2.save(commit=False)
+			NuevaEvidencia.sistemabebedero = sistemabebedero
+			NuevaEvidencia.subido_por = user
+			NuevaEvidencia.save()
+
+		if NuevaEvidenciaForm3.is_valid(): 
+			NuevaEvidencia = NuevaEvidenciaForm3.save(commit=False)
+			NuevaEvidencia.sistemabebedero = sistemabebedero
+			NuevaEvidencia.subido_por = user
+			NuevaEvidencia.save()
+			
 		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)

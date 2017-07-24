@@ -41,10 +41,18 @@ class Filtro(models.Model):
 		ordering = ['modelo']
 
 class SistemaBebedero(models.Model):
+
+	modulo_choices = (
+		("A","A"),
+		("B","B"),
+	)
+
+	identificador = models.IntegerField(default=0)
 	escuela = models.OneToOneField(User, related_name="escuela")
 	constructora = models.ForeignKey(User, related_name="constructora")
 	mueble = models.ForeignKey(Mueble, related_name="mueble")
 	filtro = models.ForeignKey(Filtro, related_name="filtro")
+	modulo = models.CharField(max_length=1, default="A", choices=modulo_choices)
 
 	def __str__(self):
 		return 'Bebedero {} para escuela {}'.format(self.mueble, self.escuela)

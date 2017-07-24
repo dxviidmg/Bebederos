@@ -15,61 +15,81 @@ class Plantilla(models.Model):
 	class Meta:
 		ordering = ['nombre']
 
-class Evidencia(models.Model):
+class EvidenciaPrevia(models.Model):
 	nombre_choices = (
-		('Pre-instalación', (
-			('Dictamen de ubicación', 'Dictamen de ubicación'),
-			('Constancia de toma de agua municipal', 'Constancia de toma de agua municipal'),
-			('Constancia de llegada de agua al laboratorio', 'Constancia de llegada de agua al laboratorio'),
-			('Resultados del primer análisis de la calidad del agua', 'Resultados del primer análisis de la calidad del agua'),
-			('Validación de la calidad del agua', 'Validación de la calidad del agua'),
-		)
-		),
-		('Instalación', (
-			('Constancia de llegada de material', 'Constancia de llegada de material'),
-			('Constancia de realización de la etapa: Limpieza, trazo y nivelación', 'Constancia de realización de la etapa: Limpieza, trazo y nivelación'),
-			('Constancia de realización de la etapa: Demoliciones y desmontajes', 'Constancia de realización de la etapa: Demoliciones y desmontajes'),
-			('Constancia de realización de la etapa: Excavaciones', 'Constancia de realización de la etapa: Excavaciones'),
-			('Constancia de realización de la etapa: Acero en refuerzo estructural', 'Constancia de realización de la etapa: Acero en refuerzo estructural'),
-			('Constancia de realización de la etapa: Albañilería y acabados', 'Constancia de realización de la etapa: Albañilería y acabados'),
-			('Constancia de realización de la etapa: Herreria y cubierta', 'Constancia de realización de la etapa: Herreria y cubierta'),
-			('Constancia de realización de la etapa: Instalación hidráulica', 'Constancia de realización de la etapa: Instalación hidráulica'),
-			('Constancia de realización de la etapa: Instalación sanitaria', 'Constancia de realización de la etapa: Instalación sanitaria'),
-			('Constancia de realización de la etapa: Instalación eléctrica', 'Constancia de realización de la etapa: Instalación eléctrica'),
-			('Constancia de realización de la etapa: Demoliciones y desmontajes', 'Constancia de realización de la etapa: Demoliciones y desmontajes'),
-			('Constancia de realización de la etapa: Obra exterior', 'Constancia de realización de la etapa: Obra exterior'),
-			('Constancia de realización de la etapa: bebedero', 'Constancia de realización de la etapa: Bebedero'),
-			)
-		),
-		('Post-Instalación', (
-			('Constancia de la llegada de la segunda muestra de agua al laboratorio', 'Constancia de la llegada de la segunda muestra de agua al laboratorio'),
-			('Resultados del segundo análisis de la calidad del agua', 'Resultados del segundo análisis de la calidad del agua'),
-			('Resultados del segundo análisis de la calidad del agua', 'Resultados del segundo análisis de la calidad del agua'),
-			('Dictamen del sistema avalado', 'Dictamen del sistema avalado'),
-			('Recibo de entrega de llaves', 'Recibo de entrega de llaves'),
-			('Acta de inicio de funcionamiento', 'Acta de inicio de funcionamiento'),
 
-			)
-		),
-		('Revisiones', (
-			('Revisión mensual (1er mes)', 'Revisión mensual (1er mes)'),
-			('Revisión mensual (2do mes)', 'Revisión mensual (2do mes)'),
-			('Revisión mensual (3er mes)', 'Revisión mensual (3er mes)'),
-			('Revisión mensual (4to mes)', 'Revisión mensual (4to mes)'),
-			('Revisión mensual (5to mes)', 'Revisión mensual (5to mes)'),
-			('Constancia de lavado y desinfección de tinaco y cisterna (6to mes)', 'Constancia de lavado y desinfección de tinaco y cisterna (6to mes)'),
-			('Revisión mensual (7mo mes)', 'Revisión mensual (7mo mes)'),
-			('Constancia de prueba periodica (8mo mes)', 'Constancia de prueba periodica (8mo mes)'),
-		)
-		),
+		('Acta de acuerdos y dictamen de ubicación', 'Acta de acuerdos y dictamen de ubicación'),
+		('Constancia de visita', 'Constancia de visita'),
+		('Constancia de primera toma de agua', 'Constancia de primera toma de agua'),
+		('Constancia de llegada de agua al laboratorio', 'Constancia de llegada de agua al laboratorio'),
+		('Resultados del primer análisis de la calidad del agua', 'Resultados del primer análisis de la calidad del agua'),
+		('Validación de la calidad del agua', 'Validación de la calidad del agua'),
+		('Carta de presentación', 'Carta de presentación'),
+
+	)
+
+	aprobacion_imta_choices = (
+		('Aprobado', 'Aprobado'),
+		('No aprobado', 'No aprobado'),
 	)
 
 	sistemabebedero = models.ForeignKey(SistemaBebedero)
 	subido_por = models.ForeignKey(User)
 	nombre = models.CharField(max_length=100, choices=nombre_choices)
-	archivo = models.FileField(upload_to='expedientes/archivos/%Y/%m/%d/')
-	foto = models.FileField(upload_to='expedientes/fotos/%Y/%m/%d/', verbose_name="Fotografía")
-	video = models.FileField(upload_to='expedientes/videos/%Y/%m/%d/', verbose_name="Video")
+	archivo = models.FileField(upload_to='expedientes/archivos/%Y/%m/%d/', verbose_name="Documento (solo pdf)")
+	foto = models.FileField(upload_to='expedientes/fotos/%Y/%m/%d/', verbose_name="Fotografía (Con camara de 5 megapixeles en adelante)")
+	video = models.FileField(upload_to='expedientes/videos/%Y/%m/%d/', verbose_name="Video (Con camara de 5 megapixeles en adelante)")
+	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de registro")
+	aprobado = models.BooleanField(default=False)
+	aprobacion_imta = models.CharField(choices=aprobacion_imta_choices, max_length=20, null=True, blank=True)
+
+	def __str__(self):
+		return '{} de {}'.format(self.nombre, self.sistemabebedero)
+
+	class Meta:
+		ordering = ['sistemabebedero', 'creacion']
+
+class EvidenciaInstalacion(models.Model):
+	nombre_choices = (
+		('Constancia de llegada de material', 'Constancia de llegada de material'),
+		('Acta de inicio de trabajos', 'Acta de inicio de trabajos'),
+		('Constancia de realización de la fase: Trabajos preliminares', 'Constancia de realización de la fase: Trabajos preliminares'),
+		('Constancia de realización de la fase: Albañileria', 'Constancia de realización de la fase: Albañileria'),
+		('Constancia de realización de la fase: Herreria', 'Constancia de realización de la fase: Herreria'),
+		('Constancia de realización de la fase: Instalaciones', 'Constancia de realización de la fase: Instalaciones'),
+		('Constancia de realización de la fase: Bebedero', 'Constancia de realización de la fase: Bebedero'),
+	)
+
+	sistemabebedero = models.ForeignKey(SistemaBebedero)
+	subido_por = models.ForeignKey(User)
+	nombre = models.CharField(max_length=100, choices=nombre_choices)
+	archivo = models.FileField(upload_to='expedientes/archivos/%Y/%m/%d/', verbose_name="Documento (solo pdf)")
+	foto = models.FileField(upload_to='expedientes/fotos/%Y/%m/%d/', verbose_name="Fotografía (Con camara de 5 megapixeles en adelante)")
+	video = models.FileField(upload_to='expedientes/videos/%Y/%m/%d/', verbose_name="Video (Con camara de 5 megapixeles en adelante)")
+	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de registro")
+	aprobado = models.BooleanField(default=False)
+
+	def __str__(self):
+		return '{} de {}'.format(self.nombre, self.sistemabebedero)
+
+	class Meta:
+		ordering = ['sistemabebedero', 'creacion']
+
+class EvidenciaPostInstalacion(models.Model):
+	nombre_choices = (
+		('Constancia de segunda toma de agua', 'Constancia de segunda toma de agua'),
+		('Constancia de llegada de agua al laboratorio', 'Constancia de llegada de agua al laboratorio'),
+		('Resultados del segundo análisis de la calidad del agua', 'Resultados del segundo análisis de la calidad del agua'),
+		('Dictamen de sistema bebedero avalado', 'Dictamen de sistema bebedero avalado'),
+		('Acta de inicio de funcionamiento', 'Acta de inicio de funcionamiento'),
+	)
+
+	sistemabebedero = models.ForeignKey(SistemaBebedero)
+	subido_por = models.ForeignKey(User)
+	nombre = models.CharField(max_length=100, choices=nombre_choices)
+	archivo = models.FileField(upload_to='expedientes/archivos/%Y/%m/%d/', verbose_name="Documento (solo pdf)")
+	foto = models.FileField(upload_to='expedientes/fotos/%Y/%m/%d/', verbose_name="Fotografía (Con camara de 5 megapixeles en adelante)")
+	video = models.FileField(upload_to='expedientes/videos/%Y/%m/%d/', verbose_name="Video (Con camara de 5 megapixeles en adelante)")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de registro")
 	aprobado = models.BooleanField(default=False)
 

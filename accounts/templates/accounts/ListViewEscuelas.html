@@ -5,12 +5,13 @@
 	<h1>Escuelas de {{municipio.nombre}}</h1>
 
 	<p>Escuelas registradas: {{perfiles.count}}</p>
-	<p>Escuelas aceptadas: ¿?</p>
+	<p>Escuelas aceptadas: {{escuelasAceptadas.count}}</p>
 	<div class="table-responsive text-center">
 		<table class="table">
 			<thead>
 				<th>CCT</th>
 				<th>Nombre</th>
+				<th>Status</th>
 				<th>Avance</th>
 			</thead>
 			<tbody>
@@ -20,6 +21,7 @@
 				<tr>
 					<td><a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">{{perfil.user.username}}</a>
 					<td>{{perfil.tipo}} {{perfil.nivel_educativo}} {{perfil.user.get_full_name}}</td>
+					<td>{{perfil.status}} {%if perfil.UpdateStatus is None%}{%endif%}</td>
 					<td>¿?</td>
 				</tr>
 

@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from bebederos.models import *
+from evidencias.models import *
 
 class Region(models.Model):
 	numero = models.IntegerField()
@@ -61,17 +63,50 @@ class Perfil(models.Model):
 		("Superior", "Superior"),
 	)
 
+	conexion_choices = (
+		("Red Municipal", "Red Municipal"),
+		("No especificado", "No especificado"),
+	)
+
+	turno_choices = (
+		("Matutino", "Matutino"),
+		("Vespertino", "Vespertino"),
+	)
+
 	user = models.OneToOneField(User)
 	tipo = models.CharField(max_length=30, choices=tipo_choices)
 	telefono = models.CharField(max_length=10, blank=True, null=True, verbose_name="Teléfono")
 	domicilio = models.CharField(max_length=100, blank=True, null=True)
 	referencias = models.CharField(max_length=200, blank=True, null=True)
-	municipio = models.ForeignKey(Municipio, null=True, blank=True)
-	cantidad_de_alumnos = models.IntegerField(blank=True, null=True)
+
+	#Atributos exclusivos de escuelas
+	municipio = models.ForeignKey(Municipio, null=True, blank=True)	
 	director = models.CharField(max_length=100, blank=True, null=True)
+	foto_director = models.ImageField(upload_to='fotos/director/%Y/%m/%d/', null=True, blank=True)
 	nivel_educativo = models.CharField(max_length=20, blank=True, null=True, choices=nivel_choices)
+	turno = models.CharField(max_length=20, blank=True, null=True, choices=turno_choices)
+	plantilla_escolar = models.IntegerField(blank=True, null=True)
+	conexion = models.CharField(max_length=20, blank=True, null=True, choices=conexion_choices)
+	aulas_en_uso = models.IntegerField(blank=True, null=True)
+	aulas_existentes = models.IntegerField(blank=True, null=True)
+	status = models.CharField(max_length=20, default='Por definir')
+	#Clave de constructora para escuela
+	clave = models.CharField(max_length=6, blank=True, null=True)
+
 	representante_legal = models.CharField(max_length=100, blank=True, null=True)
-	
+
+	def UpdateStatus(self):
+		perfil = Perfil.objects.get(pk=self.pk)
+		escuela = User.objects.get(perfil=perfil)
+		sistemabebedero = SistemaBebedero.objects.get(escuela=escuela)
+		dictamen = EvidenciaPrevia.objects.filter(sistemabebedero=sistemabebedero).last()
+
+		if dictamen.nombre == "Validación de la calidad del agua" and dictamen.aprobacion_imta == "Aprobado":
+			self.status = "Aceptado"
+		elif dictamen.nombre == "Validación de la calidad del agua" and dictamen.aprobacion_imta == "No aprobado":
+			self.status = "Rechazado"
+		self.save()
+
 	def __str__(self):
 		return '{} {} {}'.format(self.tipo, self.user.first_name, self.user.last_name)
 
