@@ -3,8 +3,6 @@ from django.views.generic import View
 from .models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from bebederos.models import SistemaBebedero
-from evidencias.models import *
-from evidencias.forms import *
 
 class ViewProfile(View):
 #	@method_decorator(login_required)

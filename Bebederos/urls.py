@@ -18,7 +18,6 @@ from django.contrib import admin
 
 #urls
 from accounts import urls as accountsUrls
-from evidencias import urls as evidenciasUrls
 
 #Images
 from django.conf import settings
@@ -27,7 +26,6 @@ from django.conf.urls.static import static
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
 	url(r'^', include(accountsUrls, namespace="accounts")),
-    url(r'^', include(evidenciasUrls, namespace="evidencias")),
 ]
 
 #Images

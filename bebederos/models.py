@@ -13,8 +13,8 @@ class Mueble(models.Model):
 	cantidad_de_boquillas = models.IntegerField()
 	cantidad_de_boquillas_discapacidad = models.IntegerField()
 	cantidad_de_llenador_de_botellas = models.IntegerField()
-	salidas = models.IntegerField()
-	rango = models.CharField(max_length=10)
+	alumnos_min = models.IntegerField(null=True, blank=True)
+	alumnos_max = models.IntegerField(null=True, blank=True)
 
 	def __str__(self):
 		return '{} para escuela {}'.format(self.clave, self.nivel_educativo)
@@ -22,36 +22,28 @@ class Mueble(models.Model):
 	class Meta:
 		ordering = ['clave']
 
-class Filtro(models.Model):
-	normas_choices = (
-		("NOM-127-SSA1-1994","NOM-127-SSA1-1994"),
-		("NOM-201-SSA1-2015","NOM-201-SSA1-2015"),
-		("Ambas","Ambas"),
-		("Ninguna","Ninguna"),
-	)
-	modelo = models.CharField(max_length=10)
+class SistemaPotabilizacion(models.Model):
+	tipo = models.CharField(max_length=15, null=True, blank=True)
+	descipcion = models.TextField(null=True, blank=True)
 	litros_de_vida = models.IntegerField()
-	presion = models.CharField(max_length=30, verbose_name="Presión")
-	normas_cumplidas = models.CharField(max_length=20, choices=normas_choices)
 
 	def __str__(self):
-		return 'Modelo {}'.format(self.modelo)
+		return '{}'.format(self.tipo)
 	
 	class Meta:
-		ordering = ['modelo']
+		ordering = ['tipo']
+		verbose_name_plural = 'Sistemas de potabilización'
 
 class SistemaBebedero(models.Model):
-
 	modulo_choices = (
 		("A","A"),
 		("B","B"),
 	)
-
 	identificador = models.IntegerField(default=0)
 	escuela = models.OneToOneField(User, related_name="escuela")
 	constructora = models.ForeignKey(User, related_name="constructora")
 	mueble = models.ForeignKey(Mueble, related_name="mueble")
-	filtro = models.ForeignKey(Filtro, related_name="filtro")
+	sistema_de_potabilizacion = models.ForeignKey(SistemaPotabilizacion, null=True, blank=True)
 	modulo = models.CharField(max_length=1, default="A", choices=modulo_choices)
 
 	def __str__(self):
@@ -59,3 +51,4 @@ class SistemaBebedero(models.Model):
 	
 	class Meta:
 		ordering = ['escuela']
+		verbose_name_plural = 'Sistemas bebederos'

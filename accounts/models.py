@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from bebederos.models import *
-from evidencias.models import *
 
 class Region(models.Model):
 	numero = models.IntegerField()
@@ -18,9 +17,15 @@ class Region(models.Model):
 	def get_absolute_url(self):
 		return reverse('accounts:ListViewEntidades', kwargs={'numero': self.numero})
 
-class Entidad(models.Model):
+class Partida(models.Model):
 	region = models.ForeignKey(Region, verbose_name="Región")
-	partida = models.IntegerField()
+	numero = models.IntegerField()
+
+	def __str__(self):
+		return 'Región {} Partida {}'.format(self.region, self.numero)	
+
+class Entidad(models.Model):
+	partida = models.ForeignKey(Partida)
 	nombre = models.CharField(max_length=30)
 	slug = models.SlugField(null=True)
 	imagen = models.ImageField(upload_to='estados/%Y/%m/%d/', default='img_no_disponible.jpg')
@@ -29,22 +34,32 @@ class Entidad(models.Model):
 		return '{}'.format(self.nombre)
 
 	class Meta:
-		ordering = ['region', 'partida']
+		ordering = ['partida']
 		verbose_name_plural = "Entidades"
 
 	def get_absolute_url(self):
 		return reverse('accounts:ListViewMunicipios', kwargs={'numero': self.region.numero, 'slug': self.slug})
 
-class Municipio(models.Model):
+class Zona(models.Model):
+	sim = models.ForeignKey(User, null=True, blank=True)
 	entidad = models.ForeignKey(Entidad)
+	nombre = models.CharField(max_length=30)
+	color = models.CharField(max_length=30, default="#fff")
+
+
+	def __str__(self):
+		return '{}, {}'.format(self.nombre, self.entidad)
+
+class Municipio(models.Model):
+	zona = models.ForeignKey(Zona, null=True)
 	nombre = models.CharField(max_length=30)
 	slug = models.SlugField(null=True)
 
 	def __str__(self):
-		return '{}, {}'.format(self.entidad, self.nombre)
+		return '{}, Zona {}'.format(self.nombre, self.zona)
 
 	class Meta:
-		ordering = ['entidad', 'nombre']
+		ordering = ['nombre']
 
 class Perfil(models.Model):
 	tipo_choices = (
@@ -53,6 +68,7 @@ class Perfil(models.Model):
 		("SIM", "SIM"),
 		("Ejecutora", "Ejecutora"),
 		("Escuela", "Escuela"),
+		("Laboratorio", "Laboratorio"),
 	)
 
 	nivel_choices = (
@@ -87,9 +103,10 @@ class Perfil(models.Model):
 	turno = models.CharField(max_length=20, blank=True, null=True, choices=turno_choices)
 	plantilla_escolar = models.IntegerField(blank=True, null=True)
 	conexion = models.CharField(max_length=20, blank=True, null=True, choices=conexion_choices)
-	aulas_en_uso = models.IntegerField(blank=True, null=True)
 	aulas_existentes = models.IntegerField(blank=True, null=True)
+	aulas_en_uso = models.IntegerField(blank=True, null=True)
 	status = models.CharField(max_length=20, default='Por definir')
+
 	#Clave de constructora para escuela
 	clave = models.CharField(max_length=6, blank=True, null=True)
 
@@ -112,6 +129,7 @@ class Perfil(models.Model):
 
 	class Meta:
 		ordering = ['user']
+		verbose_name_plural = "Perfiles"
 
 #Muestra nombre completo	
 def get_full_name(self):

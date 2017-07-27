@@ -8,17 +8,30 @@ from bebederos.models import *
 admin.site.register(Region)
 
 #Entidades/partidas
+class PartidaAdmin(admin.ModelAdmin):
+    list_display = ['region', 'numero']
+    search_fields = ['numero']
+
+admin.site.register(Partida, PartidaAdmin)
+
+#Entidades/partidas
 class EntidadAdmin(admin.ModelAdmin):
-    list_display = ['region', 'partida', 'nombre']
+    list_display = ['partida', 'nombre']
     search_fields = ['nombre']
     prepopulated_fields = {"slug": ("nombre",)}
 
 admin.site.register(Entidad, EntidadAdmin)
 
+class ZonaAdmin(admin.ModelAdmin):
+    list_display = ['entidad', 'nombre']
+    search_fields = ['entidad__nombre', 'nombre']
+
+admin.site.register(Zona, ZonaAdmin)
+
 #Municipios
 class MunicipiodAdmin(admin.ModelAdmin):
-    list_display = ['entidad', 'nombre']
-    search_fields = ['entidad__nombre','nombre']
+    list_display = ['zona', 'nombre']
+    search_fields = ['zona__nombre','nombre']
     prepopulated_fields = {"slug": ("nombre",)}
 
 admin.site.register(Municipio, MunicipiodAdmin)

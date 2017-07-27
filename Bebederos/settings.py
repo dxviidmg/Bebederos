@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'bebederos',
-    'evidencias',
+    'visitas',
+    'pruebasAgua',
+    'construccionSB'
     'bootstrapform',
 ]
 
