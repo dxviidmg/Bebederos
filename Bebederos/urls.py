@@ -18,7 +18,7 @@ from django.contrib import admin
 
 #urls
 from accounts import urls as accountsUrls
-
+from visitas import urls as visitasUrls
 #Images
 from django.conf import settings
 from django.conf.urls.static import static
@@ -26,6 +26,7 @@ from django.conf.urls.static import static
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
 	url(r'^', include(accountsUrls, namespace="accounts")),
+    url(r'^', include(visitasUrls, namespace="visitas")),
 ]
 
 #Images

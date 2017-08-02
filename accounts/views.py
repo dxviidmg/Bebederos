@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from .models import *
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from bebederos.models import SistemaBebedero
+from visitas.models import *
+#from bebederos.models import SistemaBebedero
 
 class ViewProfile(View):
 #	@method_decorator(login_required)
@@ -58,7 +58,7 @@ class ListViewZonas(View):
 		template_name = "accounts/ListViewZonas.html"
 		entidad = Entidad.objects.get(slug=slug)
 		zonas = Zona.objects.filter(entidad=entidad)
-#		municipios = Municipio.objects.filter(zona__in=zonas)
+		municipios = Municipio.objects.filter(zona__in=zonas)
 #		print(municipios)
 
 		ListMunicipiosPorZona = []
@@ -69,14 +69,14 @@ class ListViewZonas(View):
 			print(ListMunicipiosPorZona)
 #			municipios = Municipio.objects.filter(zona=zonas)
 #		print(municipios)
-#		escuelasRegistradas = Perfil.objects.filter(tipo="Escuela", municipio=municipios)
-#		escuelasAceptadas = escuelasRegistradas.filter(status='Aceptado')
+		escuelasRegistradas = Perfil.objects.filter(tipo="Escuela", municipio=municipios)
+		escuelasAceptadas = escuelasRegistradas.filter(status='Aceptado')
 #		print(escuelasAceptadas)
 		context = {
 			'entidad': entidad,
 #			'municipios': municipios,
-#			'escuelasRegistradas': escuelasRegistradas,
-#			'escuelasAceptadas': escuelasAceptadas
+			'escuelasRegistradas': escuelasRegistradas,
+			'escuelasAceptadas': escuelasAceptadas, 
 			'ListMunicipiosPorZona': ListMunicipiosPorZona,
 		}
 		return render(request,template_name, context)
@@ -102,56 +102,14 @@ class DetailViewEscuela(View):
 		user = User.objects.get(pk=request.user.pk)
 		perfil = Perfil.objects.get(pk=pk)
 		escuela = User.objects.get(perfil=perfil)
-#		sistemabebedero = SistemaBebedero.objects.get(escuela=escuela)
-#		evidenciasPrevias = EvidenciaPrevia.objects.filter(sistemabebedero=sistemabebedero)
-#		NuevaEvidenciaForm = EvidenciaPreviaCreateForm()
-#		evidenciasInstalacion = EvidenciaInstalacion.objects.filter(sistemabebedero=sistemabebedero)
-#		NuevaEvidenciaForm2 = EvidenciaInstalacionCreateForm()
-#		UltimaEvidenciaPrevia = evidenciasPrevias.last()
-#		evidenciasPostInstalacion = EvidenciaPostInstalacion.objects.filter(sistemabebedero=sistemabebedero)
-#		UltimaEvidenciaInstalacion = evidenciasInstalacion.last()
-#		NuevaEvidenciaForm3 = EvidenciaPostInstalacionCreateForm()
+
+		try:
+			visitaAlSitio = VisitaAlSitio.objects.get(escuela=escuela)
+		except VisitaAlSitio.DoesNotExist:
+			visitaAlSitio = None	
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
-#			'sistemabebedero': sistemabebedero,
-#			'evidenciasPrevias': evidenciasPrevias,
-#			'NuevaEvidenciaForm': NuevaEvidenciaForm,
-#			'evidenciasInstalacion': evidenciasInstalacion,
-#			'NuevaEvidenciaForm2': NuevaEvidenciaForm2,
-#			'UltimaEvidenciaPrevia': UltimaEvidenciaPrevia,
-#			'evidenciasPostInstalacion': evidenciasPostInstalacion,
-#			'UltimaEvidenciaInstalacion': UltimaEvidenciaInstalacion,
-#			'NuevaEvidenciaForm3': NuevaEvidenciaForm3,
+			'visitaAlSitio': visitaAlSitio,
 		}
 		return render(request,template_name, context)
-#	def post(self,request, pk):
-
-#		template_name = "accounts/DetailViewEscuela.html"
-#		user = User.objects.get(pk=request.user.pk)
-#		perfil = Perfil.objects.get(pk=pk)
-#		escuela = User.objects.get(perfil=perfil)
-#		sistemabebedero = SistemaBebedero.objects.get(escuela=escuela)
-#
-#		NuevaEvidenciaForm = EvidenciaPreviaCreateForm(data=request.POST, files=request.FILES)
-#		NuevaEvidenciaForm2 = EvidenciaInstalacionCreateForm(data=request.POST, files=request.FILES)
-#
-#		if NuevaEvidenciaForm.is_valid(): 
-###			NuevaEvidencia = NuevaEvidenciaForm.save(commit=False)
-#			NuevaEvidencia.sistemabebedero = sistemabebedero
-#			NuevaEvidencia.subido_por = user
-#			NuevaEvidencia.save()
-
-#		if NuevaEvidenciaForm2.is_valid(): 
-#			NuevaEvidencia = NuevaEvidenciaForm2.save(commit=False)
-#			NuevaEvidencia.sistemabebedero = sistemabebedero
-#			NuevaEvidencia.subido_por = user
-#			NuevaEvidencia.save()
-
-#		if NuevaEvidenciaForm3.is_valid(): 
-#			NuevaEvidencia = NuevaEvidenciaForm3.save(commit=False)
-#			NuevaEvidencia.sistemabebedero = sistemabebedero
-#			NuevaEvidencia.subido_por = user
-#			NuevaEvidencia.save()
-#			
-#		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)

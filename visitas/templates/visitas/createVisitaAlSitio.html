@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+
+{% load bootstrap %}
+
+{%block content%}
+
+{{perfil}}
+{{escuela}}
+
+	<form action="." method="post" enctype="multipart/form-data">
+		<h4>Crea un capitulo para el programa {{programa.nombre}}</h4>
+		{%csrf_token%}
+		{{NuevaVisitaForm | bootstrap}}
+		<a href=""><input type="submit" value="Crear"></a>
+		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
+	</form>
+
+{%endblock content%}

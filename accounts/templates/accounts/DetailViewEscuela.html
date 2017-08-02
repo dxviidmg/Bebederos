@@ -4,6 +4,32 @@
 
 {%block content%}
 
-{{perfil.tipo}}
-{{escuela.get_full_name}}
+
+
+
+	<div>
+		<h1>Información general de la {{perfil.tipo}} {{perfil.nivel_educativo}} {{escuela.get_full_name}}</h1>
+		<p>CCT: {{escuela.username}}</p>
+		<p>Turno: {{perfil.turno}}</p>
+		<p>Director: {{perfil.director}}</p>
+		{%if perfil.foto_director%}
+		<p>Foto del director: <a href="{{perfil.foto_director.url}}">Ver</a></p>
+		{%endif%}
+		<p>Cantidad de alumnos: {{perfil.plantilla_escolar}}</p>
+		<p>Telefono: {{perfil.telefono}}</p>
+		<p>Domicilio: {{perfil.domicilio}}</p>
+		<p>Referencias: {{perfil.referencias}}</p>
+		
+		<p>Aulas existentes: {{perfil.aulas_existentes}}</p>
+		<p>Aulas en uso: {{perfil.aulas_en_uso}}</p>
+		
+		<p>Clave interna: {{perfil.clave}}</p>
+	</div>
+	<div>
+		<h2>Primera visita</h2>
+		<a href="{%url 'visitas:CreateViewVisitaAlSitio' perfil.pk%}">Subir archivos de Visita al Sitio</a>
+		<br>
+		<a href="{{visitaAlSitio.constancia_visita.url}}">Ver visita a sitio</a>
+	</div>
+
 {%endblock content%}
