@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+
+	<h1>Lista de municipios por zona de {{entidad}}</h1>
+
+	<div class="row justify-content-center" >
+
+		<div class="table-responsive text-center">
+			<table class="table">
+				<thead>
+					<th>Zona</th>
+					<th>Municipio</th>
+				</thead>
+				<tbody>
+
+					{%for MunicipiosPorZona in ListMunicipiosPorZona%}
+
+					<tr>
+						<td>
+							{{MunicipiosPorZona.zona}}
+						</td>
+						<td>
+							{%for municipio in MunicipiosPorZona.municipios%}
+
+						<p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">{{municipio.nombre}}</a></p>
+	
+							{%empty%}
+
+							<p>La zona {{MunicipiosPorZona.partida}} no tiene municipios registrados</p>
+
+							{%endfor%}
+						</td>
+					</tr>
+
+					{%empty%}
+
+					<tr>
+						<td colspan="2">No hay partidas registradas</td>
+					</tr>
+
+					{%endfor%}
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+{%endblock content%}

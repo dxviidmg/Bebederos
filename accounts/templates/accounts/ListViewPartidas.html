@@ -1,0 +1,49 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+	<h1>Estados por partida de la region {{region}}</h1>
+
+	<div class="row justify-content-center" >
+
+		<div class="table-responsive text-center">
+			<table class="table">
+				<thead>
+					<th>Partida</th>
+					<th>Entidad</th>
+				</thead>
+				<tbody>
+
+					{%for EntidadesPorPartida in ListEntidadesPorPartida%}
+
+					<tr>
+						<td>
+							{{EntidadesPorPartida.partida}}
+						</td>
+						<td>
+							{%for entidad in EntidadesPorPartida.entidades%}
+
+						<p><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">{{entidad}}</a></p>
+	
+							{%empty%}
+
+							<p>La partida {{EntidadesPorPartida.partida}} no tiene entidades registradas</p>
+
+							{%endfor%}
+						</td>
+					</tr>
+
+					{%empty%}
+
+					<tr>
+						<td colspan="2">No hay partidas registradas</td>
+					</tr>
+
+					{%endfor%}
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+{%endblock content%}

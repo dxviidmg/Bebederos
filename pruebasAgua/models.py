@@ -4,7 +4,7 @@ from django.utils import timezone
 
 class PrimerPrueba(models.Model):
 	escuela = models.OneToOneField(User)
-	constancia_de_recepcion = models.FileField(upload_to='pruebas/1/constancia/%Y/%m/%d/', verbose_name="Constancia de recepción de muestra de laboratorio")
+	constancia_recepcion = models.FileField(upload_to='pruebas/1/constancia/%Y/%m/%d/', verbose_name="Constancia de recepción de muestra de laboratorio")
 	video = models.FileField(upload_to='pruebas/1/video/%Y/%m/%d/', verbose_name="Video")
 	resultados = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Resultados")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
@@ -19,7 +19,7 @@ class PrimerPrueba(models.Model):
 
 class SegundaPrueba(models.Model):
 	escuela = models.OneToOneField(User)
-	constancia_de_recepcion = models.FileField(upload_to='pruebas/1/constancia/%Y/%m/%d/', verbose_name="Constancia de recepción de muestra de laboratorio")
+	constancia_recepcion = models.FileField(upload_to='pruebas/1/constancia/%Y/%m/%d/', verbose_name="Constancia de recepción de muestra de laboratorio")
 	video = models.FileField(upload_to='pruebas/1/video/%Y/%m/%d/', verbose_name="Video")
 	resultados = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Resultados")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")

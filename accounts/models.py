@@ -15,18 +15,19 @@ class Region(models.Model):
 		verbose_name_plural = "Regiones"
 
 	def get_absolute_url(self):
-		return reverse('accounts:ListViewEntidades', kwargs={'numero': self.numero})
+		return reverse('accounts:ListViewPartidas', kwargs={'numero': self.numero})
 
 class Partida(models.Model):
 	region = models.ForeignKey(Region, verbose_name="Región")
-	numero = models.IntegerField()
+	numero = models.IntegerField(verbose_name="número")
 
 	def __str__(self):
-		return 'Región {} Partida {}'.format(self.region, self.numero)	
+		return 'Partida {} de la región {}'.format(self.numero, self.region)	
 
 class Entidad(models.Model):
+	representante_inifed = models.ForeignKey(User, null=True, blank=True)
 	partida = models.ForeignKey(Partida)
-	nombre = models.CharField(max_length=30)
+	nombre = models.CharField(max_length=30, verbose_name="número")
 	slug = models.SlugField(null=True)
 	imagen = models.ImageField(upload_to='estados/%Y/%m/%d/', default='img_no_disponible.jpg')
 
@@ -38,14 +39,13 @@ class Entidad(models.Model):
 		verbose_name_plural = "Entidades"
 
 	def get_absolute_url(self):
-		return reverse('accounts:ListViewMunicipios', kwargs={'numero': self.region.numero, 'slug': self.slug})
+		return reverse('accounts:ListViewMunicipios', kwargs={'numero': self.partida.numero, 'slug': self.slug})
 
 class Zona(models.Model):
 	sim = models.ForeignKey(User, null=True, blank=True)
 	entidad = models.ForeignKey(Entidad)
 	nombre = models.CharField(max_length=30)
 	color = models.CharField(max_length=30, default="#fff")
-
 
 	def __str__(self):
 		return '{}, {}'.format(self.nombre, self.entidad)
@@ -69,6 +69,7 @@ class Perfil(models.Model):
 		("Ejecutora", "Ejecutora"),
 		("Escuela", "Escuela"),
 		("Laboratorio", "Laboratorio"),
+		("INIFED Estatal", "INIFED Estatal"),
 	)
 
 	nivel_choices = (

@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'bebederos',
     'visitas',
     'pruebasAgua',
-    'construccionSB'
+    'construccion',
+    'incidencias',
     'bootstrapform',
 ]
 

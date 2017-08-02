@@ -34,32 +34,50 @@ class ListViewRegiones(View):
 		}
 		return render(request,template_name, context)
 
-class ListViewEntidades(View):
+class ListViewPartidas(View):
 #	@method_decorator(login_required)
 	def get(self, request, numero):
-		template_name = "accounts/ListViewEntidades.html"
+		template_name = "accounts/ListViewPartidas.html"
 		region = Region.objects.get(numero=numero)
-		entidades = Entidad.objects.filter(region=region)
+		partidas = Partida.objects.filter(region=region)
+		
+		ListEntidadesPorPartida = []
+
+		for partida in partidas:
+			ListEntidadesPorPartida.append({'partida': partida.numero, 'entidades': Entidad.objects.filter(partida=partida)})
+		
 		context = {
 			'region': region,
-			'entidades': entidades,
+			'ListEntidadesPorPartida': ListEntidadesPorPartida,
 		}
 		return render(request,template_name, context)
 
-class ListViewMunicipios(View):
+class ListViewZonas(View):
 #	@method_decorator(login_required)
-	def get(self, request,numero, slug):
-		template_name = "accounts/ListViewMunicipios.html"
+	def get(self, request, slug):
+		template_name = "accounts/ListViewZonas.html"
 		entidad = Entidad.objects.get(slug=slug)
-		municipios = Municipio.objects.filter(entidad=entidad)
-		escuelasRegistradas = Perfil.objects.filter(tipo="Escuela", municipio=municipios)
-		escuelasAceptadas = escuelasRegistradas.filter(status='Aceptado')
-		print(escuelasAceptadas)
+		zonas = Zona.objects.filter(entidad=entidad)
+#		municipios = Municipio.objects.filter(zona__in=zonas)
+#		print(municipios)
+
+		ListMunicipiosPorZona = []
+		for zona in zonas:
+			print(zona)
+			ListMunicipiosPorZona.append({'zona': zona.nombre, 'municipios': Municipio.objects.filter(zona=zona)})
+
+			print(ListMunicipiosPorZona)
+#			municipios = Municipio.objects.filter(zona=zonas)
+#		print(municipios)
+#		escuelasRegistradas = Perfil.objects.filter(tipo="Escuela", municipio=municipios)
+#		escuelasAceptadas = escuelasRegistradas.filter(status='Aceptado')
+#		print(escuelasAceptadas)
 		context = {
 			'entidad': entidad,
-			'municipios': municipios,
-			'escuelasRegistradas': escuelasRegistradas,
-			'escuelasAceptadas': escuelasAceptadas
+#			'municipios': municipios,
+#			'escuelasRegistradas': escuelasRegistradas,
+#			'escuelasAceptadas': escuelasAceptadas
+			'ListMunicipiosPorZona': ListMunicipiosPorZona,
 		}
 		return render(request,template_name, context)
 
@@ -84,56 +102,56 @@ class DetailViewEscuela(View):
 		user = User.objects.get(pk=request.user.pk)
 		perfil = Perfil.objects.get(pk=pk)
 		escuela = User.objects.get(perfil=perfil)
-		sistemabebedero = SistemaBebedero.objects.get(escuela=escuela)
-		evidenciasPrevias = EvidenciaPrevia.objects.filter(sistemabebedero=sistemabebedero)
-		NuevaEvidenciaForm = EvidenciaPreviaCreateForm()
-		evidenciasInstalacion = EvidenciaInstalacion.objects.filter(sistemabebedero=sistemabebedero)
-		NuevaEvidenciaForm2 = EvidenciaInstalacionCreateForm()
-		UltimaEvidenciaPrevia = evidenciasPrevias.last()
-		evidenciasPostInstalacion = EvidenciaPostInstalacion.objects.filter(sistemabebedero=sistemabebedero)
-		UltimaEvidenciaInstalacion = evidenciasInstalacion.last()
-		NuevaEvidenciaForm3 = EvidenciaPostInstalacionCreateForm()
+#		sistemabebedero = SistemaBebedero.objects.get(escuela=escuela)
+#		evidenciasPrevias = EvidenciaPrevia.objects.filter(sistemabebedero=sistemabebedero)
+#		NuevaEvidenciaForm = EvidenciaPreviaCreateForm()
+#		evidenciasInstalacion = EvidenciaInstalacion.objects.filter(sistemabebedero=sistemabebedero)
+#		NuevaEvidenciaForm2 = EvidenciaInstalacionCreateForm()
+#		UltimaEvidenciaPrevia = evidenciasPrevias.last()
+#		evidenciasPostInstalacion = EvidenciaPostInstalacion.objects.filter(sistemabebedero=sistemabebedero)
+#		UltimaEvidenciaInstalacion = evidenciasInstalacion.last()
+#		NuevaEvidenciaForm3 = EvidenciaPostInstalacionCreateForm()
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
-			'sistemabebedero': sistemabebedero,
-			'evidenciasPrevias': evidenciasPrevias,
-			'NuevaEvidenciaForm': NuevaEvidenciaForm,
-			'evidenciasInstalacion': evidenciasInstalacion,
-			'NuevaEvidenciaForm2': NuevaEvidenciaForm2,
-			'UltimaEvidenciaPrevia': UltimaEvidenciaPrevia,
-			'evidenciasPostInstalacion': evidenciasPostInstalacion,
-			'UltimaEvidenciaInstalacion': UltimaEvidenciaInstalacion,
-			'NuevaEvidenciaForm3': NuevaEvidenciaForm3,
+#			'sistemabebedero': sistemabebedero,
+#			'evidenciasPrevias': evidenciasPrevias,
+#			'NuevaEvidenciaForm': NuevaEvidenciaForm,
+#			'evidenciasInstalacion': evidenciasInstalacion,
+#			'NuevaEvidenciaForm2': NuevaEvidenciaForm2,
+#			'UltimaEvidenciaPrevia': UltimaEvidenciaPrevia,
+#			'evidenciasPostInstalacion': evidenciasPostInstalacion,
+#			'UltimaEvidenciaInstalacion': UltimaEvidenciaInstalacion,
+#			'NuevaEvidenciaForm3': NuevaEvidenciaForm3,
 		}
 		return render(request,template_name, context)
-	def post(self,request, pk):
+#	def post(self,request, pk):
 
-		template_name = "accounts/DetailViewEscuela.html"
-		user = User.objects.get(pk=request.user.pk)
-		perfil = Perfil.objects.get(pk=pk)
-		escuela = User.objects.get(perfil=perfil)
-		sistemabebedero = SistemaBebedero.objects.get(escuela=escuela)
+#		template_name = "accounts/DetailViewEscuela.html"
+#		user = User.objects.get(pk=request.user.pk)
+#		perfil = Perfil.objects.get(pk=pk)
+#		escuela = User.objects.get(perfil=perfil)
+#		sistemabebedero = SistemaBebedero.objects.get(escuela=escuela)
+#
+#		NuevaEvidenciaForm = EvidenciaPreviaCreateForm(data=request.POST, files=request.FILES)
+#		NuevaEvidenciaForm2 = EvidenciaInstalacionCreateForm(data=request.POST, files=request.FILES)
+#
+#		if NuevaEvidenciaForm.is_valid(): 
+###			NuevaEvidencia = NuevaEvidenciaForm.save(commit=False)
+#			NuevaEvidencia.sistemabebedero = sistemabebedero
+#			NuevaEvidencia.subido_por = user
+#			NuevaEvidencia.save()
 
-		NuevaEvidenciaForm = EvidenciaPreviaCreateForm(data=request.POST, files=request.FILES)
-		NuevaEvidenciaForm2 = EvidenciaInstalacionCreateForm(data=request.POST, files=request.FILES)
+#		if NuevaEvidenciaForm2.is_valid(): 
+#			NuevaEvidencia = NuevaEvidenciaForm2.save(commit=False)
+#			NuevaEvidencia.sistemabebedero = sistemabebedero
+#			NuevaEvidencia.subido_por = user
+#			NuevaEvidencia.save()
 
-		if NuevaEvidenciaForm.is_valid(): 
-			NuevaEvidencia = NuevaEvidenciaForm.save(commit=False)
-			NuevaEvidencia.sistemabebedero = sistemabebedero
-			NuevaEvidencia.subido_por = user
-			NuevaEvidencia.save()
-
-		if NuevaEvidenciaForm2.is_valid(): 
-			NuevaEvidencia = NuevaEvidenciaForm2.save(commit=False)
-			NuevaEvidencia.sistemabebedero = sistemabebedero
-			NuevaEvidencia.subido_por = user
-			NuevaEvidencia.save()
-
-		if NuevaEvidenciaForm3.is_valid(): 
-			NuevaEvidencia = NuevaEvidenciaForm3.save(commit=False)
-			NuevaEvidencia.sistemabebedero = sistemabebedero
-			NuevaEvidencia.subido_por = user
-			NuevaEvidencia.save()
-			
-		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)
+#		if NuevaEvidenciaForm3.is_valid(): 
+#			NuevaEvidencia = NuevaEvidenciaForm3.save(commit=False)
+#			NuevaEvidencia.sistemabebedero = sistemabebedero
+#			NuevaEvidencia.subido_por = user
+#			NuevaEvidencia.save()
+#			
+#		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)

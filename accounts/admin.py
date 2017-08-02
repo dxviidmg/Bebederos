@@ -7,14 +7,14 @@ from bebederos.models import *
 #Regiones
 admin.site.register(Region)
 
-#Entidades/partidas
+#Partidas
 class PartidaAdmin(admin.ModelAdmin):
     list_display = ['region', 'numero']
     search_fields = ['numero']
 
 admin.site.register(Partida, PartidaAdmin)
 
-#Entidades/partidas
+#Entidades
 class EntidadAdmin(admin.ModelAdmin):
     list_display = ['partida', 'nombre']
     search_fields = ['nombre']

@@ -1,21 +1,20 @@
 from django.contrib import admin
 from .models import *
 
-class VisitaAlSitioAdmin(admin.ModelAdmin):
+class InicioDeTrabajoAdmin(admin.ModelAdmin):
     list_display = ['escuela']
     search_fields = ['escuela__get_full_name', 'escuela__username']
 
-admin.site.register(VisitaAlSitio, VisitaAlSitioAdmin)
+admin.site.register(InicioDeTrabajo, InicioDeTrabajoAdmin)
 
-class VisitaDeAcuerdoAdmin(admin.ModelAdmin):
+class InstalacionBebederoAdmin(admin.ModelAdmin):
     list_display = ['escuela']
     search_fields = ['escuela__get_full_name', 'escuela__username']
 
-admin.site.register(VisitaDeAcuerdo, VisitaDeAcuerdoAdmin)
+admin.site.register(InstalacionBebedero, InstalacionBebederoAdmin)
 
-class EntregaDeBebederoAdmin(admin.ModelAdmin):
+class TerminoDeTrabajoAdmin(admin.ModelAdmin):
     list_display = ['escuela']
     search_fields = ['escuela__get_full_name', 'escuela__username']
 
-admin.site.register(EntregaDeBebedero, EntregaDeBebederoAdmin)
-
+admin.site.register(TerminoDeTrabajo, TerminoDeTrabajoAdmin)
