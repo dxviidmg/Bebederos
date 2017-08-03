@@ -4,22 +4,18 @@
 
 {%block content%}
 
-	{%if visita%}
+	{%if inicio%}
 
 <h4>Ve y edita la documentación correspondiente de la visita al sitio de la escuela {{escuela.get_full_name}}</h4>
 
-<a href="{{visita.constancia_visita.url}}" class="btn btn-primary" role="button" aria-pressed="true">Ver visita a sitio</a>
-<a href="{{visita.hoja_cotizacion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Hoja cotización</a>
-<a href="{{visita.plantilla_fotografica.url}}" class="btn btn-primary" role="button" aria-pressed="true">Plantilla fotográfica</a>
+<a href="{{inicio.acta_inicio.url}}" class="btn btn-primary" role="button" aria-pressed="true">Acta de inicio</a>
 
-<a href="{{visita.membrete_mail.url}}" class="btn btn-primary" role="button" aria-pressed="true">membrete de e-mail</a>
-<a href="{{visita.agenda.url}}" class="btn btn-primary" role="button" aria-pressed="true">Agenda</a>
-
+<a href="{{inicio.hoja_cotizacion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Hoja de cotización</a>
 
 	<form action="." method="post" enctype="multipart/form-data">
 		
 		{%csrf_token%}
-		{{EdicionVisitaForm | bootstrap}}
+		{{EdicionInicioForm | bootstrap}}
 		<a href=""><input type="submit" value="Guardar cambios"></a>
 		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
 	</form>
@@ -28,7 +24,7 @@
 	<form action="." method="post" enctype="multipart/form-data">
 		<h4>Registra la documentación correspondiente de la visita al sitio de la escuela {{escuela.get_full_name}}</h4>
 		{%csrf_token%}
-		{{NuevaVisitaForm | bootstrap}}
+		{{NuevoInicioForm | bootstrap}}
 		<a href=""><input type="submit" value="Crear registro"></a>
 		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
 	</form>

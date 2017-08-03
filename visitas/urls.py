@@ -3,5 +3,6 @@ from . import views
 
 
 urlpatterns = [
-	url(r'^visitas/alsitio/nuevo/(?P<pk>\d+)/$', views.CreateViewVisitaAlSitio.as_view(), name="CreateViewVisitaAlSitio"),
+	url(r'^visita/de_acuerdo/(?P<pk>\d+)/$', views.ViewVisitaDeAcuerdo.as_view(), name="ViewVisitaDeAcuerdo"),
+	url(r'^visita/al_sitio/(?P<pk>\d+)/$', views.ViewVisitaAlSitio.as_view(), name="ViewVisitaAlSitio"),
 ]

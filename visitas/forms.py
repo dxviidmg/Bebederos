@@ -15,4 +15,15 @@ class VisitaAlSitioEditForm(forms.ModelForm):
 
 	class Meta:
 		model = VisitaAlSitio
-		fields = ('constancia_visita', 'hoja_cotizacion', 'plantilla_fotografica', 'membrete_mail', 'agenda')	
+		fields = ('constancia_visita', 'hoja_cotizacion', 'plantilla_fotografica', 'membrete_mail', 'agenda')
+
+
+class VisitaDeAcuerdoCreateForm(forms.ModelForm):
+	class Meta:
+		model = VisitaDeAcuerdo
+		fields = ('acta_acuerdos', 'reporte_toma_agua')
+
+class VisitaDeAcuerdoEditForm(forms.ModelForm):
+	class Meta:
+		model = VisitaDeAcuerdo
+		fields = ('acta_acuerdos', 'reporte_toma_agua')		

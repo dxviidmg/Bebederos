@@ -16,9 +16,10 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-#urls
+#urls of the apps
 from accounts import urls as accountsUrls
 from visitas import urls as visitasUrls
+from construccion import urls as construccionUrls
 #Images
 from django.conf import settings
 from django.conf.urls.static import static
@@ -27,6 +28,7 @@ urlpatterns = [
 	url(r'^admin/', admin.site.urls),
 	url(r'^', include(accountsUrls, namespace="accounts")),
     url(r'^', include(visitasUrls, namespace="visitas")),
+    url(r'^', include(construccionUrls, namespace="construccion")),
 ]
 
 #Images

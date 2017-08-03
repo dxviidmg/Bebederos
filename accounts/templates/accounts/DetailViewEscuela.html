@@ -26,7 +26,7 @@
 		<p>Clave interna: {{perfil.clave}}</p>
 	</div>
 	<div>
-		<h2>Primera visita</h2>
+		<h2>Agenda de SIM</h2>
 		
 		<br>
 		
@@ -38,11 +38,11 @@
 					<td colspan="6">Formalidades</td>
 				</tr>
 				<tr style="background-color: #0080FF;">
-					<td colspan="3"><a href="{%url 'visitas:CreateViewVisitaAlSitio' perfil.pk%}">Visita al Sitio</a></td>
+					<td colspan="3"><a href="{%url 'visitas:ViewVisitaAlSitio' perfil.pk%}">Visita al Sitio</a></td>
 
 {%if visitaAlSitio%}
 
-					<td colspan="3">Visita de acuerdos</td>
+					<td colspan="3"><a href="{%url 'visitas:ViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a></td>
 
 {%if visitaDeAcuerdo%}
 				</tr>
@@ -50,7 +50,7 @@
 					<td colspan="6">Instalación del Sistema de Bebederos</td>
 				</tr>
 				<tr style="background-color: #FFFF00;">
-					<td colspan="2">Inicio de trabajos</td>
+					<td colspan="2"><a href="{%url 'construccion:ViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajos</a></td>
 
 {%if inicioDeTrabajo%}
 
