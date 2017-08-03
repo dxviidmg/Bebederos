@@ -27,9 +27,58 @@
 	</div>
 	<div>
 		<h2>Primera visita</h2>
-		<a href="{%url 'visitas:CreateViewVisitaAlSitio' perfil.pk%}">Subir archivos de Visita al Sitio</a>
+		
 		<br>
-		<a href="{{visitaAlSitio.constancia_visita.url}}">Ver visita a sitio</a>
+		
 	</div>
+	<div class="table-responsive text-center">
+		<table class="table table-bordered">
+			<tbody style="background-color: #BDBDBD;">
+				<tr>
+					<td colspan="6">Formalidades</td>
+				</tr>
+				<tr style="background-color: #0080FF;">
+					<td colspan="3"><a href="{%url 'visitas:CreateViewVisitaAlSitio' perfil.pk%}">Visita al Sitio</a></td>
 
+{%if visitaAlSitio%}
+
+					<td colspan="3">Visita de acuerdos</td>
+
+{%if visitaDeAcuerdo%}
+				</tr>
+				<tr>
+					<td colspan="6">Instalación del Sistema de Bebederos</td>
+				</tr>
+				<tr style="background-color: #FFFF00;">
+					<td colspan="2">Inicio de trabajos</td>
+
+{%if inicioDeTrabajo%}
+
+					<td colspan="2">Instalación del sistema bebedero</td>
+
+{%if instalacionBebedero%}
+					<td colspan="2">Termino de trabajos</td>
+				</tr>
+{%if terminoDeTrabajo%} 
+				<tr>
+					<td colspan="6">Termino de trabajos de edificación</td>
+				</tr>
+				<tr style="background-color: #00FF00;">
+
+					<td colspan="3">Entrega de trabajos al plantel</td>
+{%if entregaDeBebedero%}
+					<td colspan="3">Mantenimiento</td>
+
+				</tr>
+{%endif%}
+{%endif%}
+{%endif%}
+{%endif%}
+{%endif%}				
+{%endif%}
+
+
+			</tbody>
+		</table>
+	</div>
 {%endblock content%}

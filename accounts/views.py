@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import View
 from .models import *
 from visitas.models import *
+from construccion.models import *
 #from bebederos.models import SistemaBebedero
 
 class ViewProfile(View):
@@ -106,10 +107,41 @@ class DetailViewEscuela(View):
 		try:
 			visitaAlSitio = VisitaAlSitio.objects.get(escuela=escuela)
 		except VisitaAlSitio.DoesNotExist:
-			visitaAlSitio = None	
+			visitaAlSitio = None
+
+		try:
+			visitaDeAcuerdo = VisitaDeAcuerdo.objects.get(escuela=escuela)
+		except VisitaDeAcuerdo.DoesNotExist:
+			visitaDeAcuerdo = None
+
+		try:
+			inicioDeTrabajo = InicioDeTrabajo.objects.get(escuela=escuela)
+		except InicioDeTrabajo.DoesNotExist:
+			inicioDeTrabajo = None
+
+		try:
+			instalacionBebedero = InstalacionBebedero.objects.get(escuela=escuela)
+		except InstalacionBebedero.DoesNotExist:
+			instalacionBebedero = None
+
+		try:
+			terminoDeTrabajo = TerminoDeTrabajo.objects.get(escuela=escuela)
+		except TerminoDeTrabajo.DoesNotExist:
+			terminoDeTrabajo = None
+
+		try:
+			entregaDeBebedero = EntregaDeBebedero.objects.get(escuela=escuela)
+		except EntregaDeBebedero.DoesNotExist:
+			entregaDeBebedero = None
+
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
 			'visitaAlSitio': visitaAlSitio,
+			'visitaDeAcuerdo': visitaDeAcuerdo,
+			'inicioDeTrabajo': inicioDeTrabajo,
+			'instalacionBebedero': instalacionBebedero,
+			'terminoDeTrabajo': terminoDeTrabajo,
+			'entregaDeBebedero': entregaDeBebedero
 		}
 		return render(request,template_name, context)
