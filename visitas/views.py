@@ -40,7 +40,7 @@ class ViewVisitaAlSitio(View):
 			NuevaVisita = NuevaVisitaForm.save(commit=False)
 			NuevaVisita.escuela = escuela
 			NuevaVisita.sim = sim
-			NuevaVisitaForm.save()
+			NuevaVisita.save()
 
 		try:
 			visita = VisitaAlSitio.objects.get(escuela=escuela)
@@ -89,7 +89,7 @@ class ViewVisitaDeAcuerdo(View):
 			NuevaVisita = NuevaVisitaForm.save(commit=False)
 			NuevaVisita.escuela = escuela
 			NuevaVisita.sim = sim
-			NuevaVisitaForm.save()
+			NuevaVisita.save()
 
 		try:
 			visita = VisitaDeAcuerdo.objects.get(escuela=escuela)

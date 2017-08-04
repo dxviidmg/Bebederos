@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+
+{% load bootstrap %}
+
+{%block content%}
+
+
+	<form action="." method="post" enctype="multipart/form-data">
+		<h4>Registra la documentación correspondiente de la visita al sitio de la escuela {{escuela.get_full_name}}</h4>
+		{%csrf_token%}
+		{{NuevaPruebaForm | bootstrap}}
+		<a href=""><input type="submit" value="Crear registro"></a>
+		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
+	</form>
+
+{%endblock content%}
