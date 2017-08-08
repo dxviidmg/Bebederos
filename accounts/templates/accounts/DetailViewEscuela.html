@@ -41,36 +41,48 @@
 
 					<td colspan="3"><a href="{%url 'visitas:ViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a></td>
 				</tr>
+	{%if visitaDeAcuerdo%}			
 				<tr>
 					<td colspan="6">Prueba</td>
 				</tr>
+
 				<tr style="background-color: orange;">
 					<td colspan="6"><a href="{%url 'pruebas:ViewPrimerPrueba' perfil.pk%}">Primer prueba</a></td>
 				</tr>
-{%if visitaDeAcuerdo%}
-				<tr>
-					<td colspan="6">Construcción e instalación</td>
+		{%if primerPrueba.aprobacion == "En espera"%}	
+				<tr style="background-color: yellow;">
+					<td colspan="6">Esperando resultados</td>
 				</tr>
+
+		{%elif primerPrueba.aprobacion == "No aprobado"%}
+				<tr style="background-color: red;">
+					<td colspan="6">No Paso</td>
+				</tr>
+		{%elif primerPrueba.aprobacion == "Aprobado"%}
+
+				<tr style="background-color: green;">
+					<td colspan="6">Si paso</td>
+				</tr>
+
+
 				<tr style="background-color: #FFFF00;">
 					<td colspan="2"><a href="{%url 'construccion:ViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajos</a></td>
 
-{%if inicioDeTrabajo%}
+			{%if inicioDeTrabajo%}
 
 					<td colspan="2"><a href="{%url 'construccion:ViewInstalacionBebedero' perfil.pk%}">Instalación del sistema bebedero</a></td>
 
-{%if instalacionBebedero%}
+				{%if instalacionBebedero%}
 					<td colspan="2"><a href="{%url 'construccion:ViewTerminoDeTrabajo' perfil.pk%}">Termino de trabajos</a></td>
 				</tr>
-{%if terminoDeTrabajo%} 
+					{%if terminoDeTrabajo%} 
 				<tr>
 					<td colspan="6">
 						Pruebas
 					</td>
 				</tr>
 				<tr style="background-color: orange;">
-					<td colspan="6">
-						Segunda prueba de la calidad de agua
-					</td>
+					<td colspan="6"><a href="{%url 'pruebas:ViewSegundaPrueba' perfil.pk%}">Segunda prueba</a></td>
 				</tr>
 				<tr>
 					<td colspan="6">Termino de trabajos de edificación</td>
@@ -78,15 +90,21 @@
 				<tr style="background-color: #00FF00;">
 
 					<td colspan="3">Entrega de trabajos al plantel</td>
-{%if entregaDeBebedero%}
+						{%if entregaDeBebedero%}
 					<td colspan="3">Mantenimiento</td>
 
 				</tr>
+						{%endif%}
+					{%endif%}
+				{%endif%}
 {%endif%}
-{%endif%}
-{%endif%}
-{%endif%}
-{%endif%}				
+
+
+					
+		{%else%}
+				
+		{%endif%}				
+	{%endif%}
 {%endif%}
 
 

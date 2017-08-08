@@ -25,3 +25,8 @@ class TerminoDeTrabajoCreateForm(forms.ModelForm):
 	class Meta:
 		model = TerminoDeTrabajo
 		fields = ('reporte_segunda_toma', 'plantilla_fotografica')
+
+class TerminoDeTrabajoEditForm(forms.ModelForm):
+	class Meta:
+		model = TerminoDeTrabajo
+		fields = ('reporte_segunda_toma', 'plantilla_fotografica')

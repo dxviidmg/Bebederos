@@ -125,3 +125,27 @@ class ViewTerminoDeTrabajo(View):
 			'EdicionTerminoForm': EdicionTerminoForm
 		}
 		return render(request, template_name, context)
+	def post(self, request, pk):
+		perfil = get_object_or_404(Perfil, pk=pk)
+		escuela = User.objects.get(perfil=perfil)
+		NuevoTerminoForm = TerminoDeTrabajoCreateForm(data=request.POST, files=request.FILES)
+		sim = User.objects.get(pk=request.user.pk)
+
+		if NuevoTerminoForm.is_valid():
+			NuevoTermino = NuevoTerminoForm.save(commit=False)
+			NuevoTermino.escuela = escuela
+			NuevoTermino.sim = sim
+			NuevoTermino.save()
+
+		try:
+			termino = TerminoDeTrabajo.objects.get(escuela=escuela)
+			EdicionTerminoForm = TerminoDeTrabajoEditForm(instance=termino, data=request.POST, files=request.FILES)
+
+			if EdicionTerminoForm.is_valid():
+				EdicionTerminoForm.save()
+
+		except TerminoDeTrabajo.DoesNotExist:
+			termino = None
+			EdicionTerminoForm = None
+
+		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)		

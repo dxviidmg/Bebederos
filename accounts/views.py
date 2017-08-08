@@ -3,6 +3,7 @@ from django.views.generic import View
 from .models import *
 from visitas.models import *
 from construccion.models import *
+from pruebasAgua.models import *
 #from bebederos.models import SistemaBebedero
 
 class ViewProfile(View):
@@ -115,6 +116,14 @@ class DetailViewEscuela(View):
 			visitaDeAcuerdo = None
 
 		try:
+			primerPrueba = PrimerPrueba.objects.get(escuela=escuela)
+			if primerPrueba.aprobacion == "En espera":
+				print("No mames wey")
+				
+		except PrimerPrueba.DoesNotExist:
+			primerPrueba = None
+
+		try:
 			inicioDeTrabajo = InicioDeTrabajo.objects.get(escuela=escuela)
 		except InicioDeTrabajo.DoesNotExist:
 			inicioDeTrabajo = None
@@ -142,6 +151,7 @@ class DetailViewEscuela(View):
 			'inicioDeTrabajo': inicioDeTrabajo,
 			'instalacionBebedero': instalacionBebedero,
 			'terminoDeTrabajo': terminoDeTrabajo,
-			'entregaDeBebedero': entregaDeBebedero
+			'entregaDeBebedero': entregaDeBebedero,
+			'primerPrueba': primerPrueba
 		}
 		return render(request,template_name, context)
