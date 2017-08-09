@@ -17,7 +17,6 @@ class VisitaAlSitioEditForm(forms.ModelForm):
 		model = VisitaAlSitio
 		fields = ('constancia_visita', 'hoja_cotizacion', 'plantilla_fotografica', 'membrete_mail', 'agenda')
 
-
 class VisitaDeAcuerdoCreateForm(forms.ModelForm):
 	class Meta:
 		model = VisitaDeAcuerdo
@@ -26,4 +25,14 @@ class VisitaDeAcuerdoCreateForm(forms.ModelForm):
 class VisitaDeAcuerdoEditForm(forms.ModelForm):
 	class Meta:
 		model = VisitaDeAcuerdo
-		fields = ('acta_acuerdos', 'reporte_toma_agua')		
+		fields = ('acta_acuerdos', 'reporte_toma_agua')
+
+class EntregaDeBebederoCreateForm(forms.ModelForm):
+	class Meta:
+		model = EntregaDeBebedero
+		fields = ('acta_entrega', 'convenio_responsabilidades', 'constancia_entrega_llaves', 'video')
+
+class EntregaDeBebederoEditForm(forms.ModelForm):
+	class Meta:
+		model = EntregaDeBebedero
+		fields = ('acta_entrega', 'convenio_responsabilidades', 'constancia_entrega_llaves', 'video')	

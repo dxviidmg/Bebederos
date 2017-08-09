@@ -13,10 +13,10 @@ class PrimerPruebaEditForm(forms.ModelForm):
 
 class SegundaPruebaCreateForm(forms.ModelForm):
 	class Meta:
-		model = PrimerPrueba
+		model = SegundaPrueba
 		fields = ('constancia_recepcion', 'video', 'resultados',)
 
 class SegundaPruebaEditForm(forms.ModelForm):
 	class Meta:
-		model = PrimerPrueba
+		model = SegundaPrueba
 		fields = ('aprobacion',)

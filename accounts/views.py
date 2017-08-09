@@ -139,19 +139,25 @@ class DetailViewEscuela(View):
 			terminoDeTrabajo = None
 
 		try:
+			segundaPrueba = SegundaPrueba.objects.get(escuela=escuela)
+		except segundaPrueba.DoesNotExist:
+			segundaPrueba = None
+
+		try:
 			entregaDeBebedero = EntregaDeBebedero.objects.get(escuela=escuela)
 		except EntregaDeBebedero.DoesNotExist:
 			entregaDeBebedero = None
-
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
 			'visitaAlSitio': visitaAlSitio,
 			'visitaDeAcuerdo': visitaDeAcuerdo,
+			'primerPrueba': primerPrueba,
 			'inicioDeTrabajo': inicioDeTrabajo,
 			'instalacionBebedero': instalacionBebedero,
 			'terminoDeTrabajo': terminoDeTrabajo,
+			'segundaPrueba': segundaPrueba,
 			'entregaDeBebedero': entregaDeBebedero,
-			'primerPrueba': primerPrueba
+			
 		}
 		return render(request,template_name, context)

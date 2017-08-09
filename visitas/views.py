@@ -103,3 +103,52 @@ class ViewVisitaDeAcuerdo(View):
 			EdicionVisitaAlSitioForm = None
 
 		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)
+
+#Creación y edición de la visita de acuerdo
+class ViewEntregaDeBebedero(View):
+#	@method_decorator(login_required)
+	def get(self, request, pk):
+		template_name = "visitas/createEntregaTrabajo.html"
+		perfil = get_object_or_404(Perfil, pk=pk)
+		escuela = User.objects.get(perfil=perfil)
+		NuevaEntregaForm=EntregaDeBebederoCreateForm()
+
+		try:
+			entrega = EntregaDeBebedero.objects.get(escuela=escuela)
+			EdicionEntregaForm=EntregaDeBebederoEditForm(instance=entrega)
+		except VisitaDeAcuerdo.DoesNotExist:
+			entrega = None
+			EdicionEntregaForm = None
+
+		context = {
+			'perfil': perfil,
+			'escuela': escuela,
+			'NuevaEntregaForm': NuevaEntregaForm,
+			'entrega': entrega,
+			'EdicionEntregaForm': EdicionEntregaForm
+		}
+		return render(request, template_name, context)
+	def post(self, request, pk):
+		perfil = get_object_or_404(Perfil, pk=pk)
+		escuela = User.objects.get(perfil=perfil)
+		NuevaEntregaForm=EntregaDeBebederoCreateForm(data=request.POST, files=request.FILES)
+		sim = User.objects.get(pk=request.user.pk)
+
+		if NuevaEntregaForm.is_valid():
+			NuevaEntrega = NuevaEntregaForm.save(commit=False)
+			NuevaEntrega.escuela = escuela
+			NuevaEntrega.sim = sim
+			NuevaEntrega.save()
+
+		try:
+			entrega = EntregaDeBebedero.objects.get(escuela=escuela)
+			EdicionEntregaForm = EntregaBebebederoEditForm(instance=entrega, data=request.POST, files=request.FILES)
+
+			if EdicionEntregaForm.is_valid():
+				EdicionEntregaForm.save()
+
+		except EntregaDeBebedero.DoesNotExist:
+			entrega = None
+			EdicionEntregaForm = None
+
+		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)		

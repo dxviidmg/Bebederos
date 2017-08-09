@@ -23,7 +23,7 @@
 		<p>Clave interna: {{perfil.clave}}</p>
 	</div>
 	<div>
-		<h2>Agenda de SIM</h2>
+		<h2>Cronologia general de la gestión, construcción, instalación y mantetimiento de un bebedero</h2>
 		
 		<br>
 		
@@ -35,7 +35,7 @@
 					<td colspan="6">Formalidades</td>
 				</tr>
 				<tr style="background-color: #0080FF;">
-					<td colspan="3"><a href="{%url 'visitas:ViewVisitaAlSitio' perfil.pk%}">Visita al Sitio</a></td>
+					<td colspan="3"><a href="{%url 'visitas:ViewVisitaAlSitio' perfil.pk%}">Visita al sitio</a></td>
 
 {%if visitaAlSitio%}
 
@@ -43,28 +43,29 @@
 				</tr>
 	{%if visitaDeAcuerdo%}			
 				<tr>
-					<td colspan="6">Prueba</td>
+					<td colspan="6">Pruebas de calidad de agua</td>
 				</tr>
 
 				<tr style="background-color: orange;">
-					<td colspan="6"><a href="{%url 'pruebas:ViewPrimerPrueba' perfil.pk%}">Primer prueba</a></td>
+					<td colspan="6"><a href="{%url 'pruebas:ViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad</a></td>
 				</tr>
 		{%if primerPrueba.aprobacion == "En espera"%}	
 				<tr style="background-color: yellow;">
-					<td colspan="6">Esperando resultados</td>
+					<td colspan="6">Status: Esperando resultados</td>
 				</tr>
 
 		{%elif primerPrueba.aprobacion == "No aprobado"%}
 				<tr style="background-color: red;">
-					<td colspan="6">No Paso</td>
+					<td colspan="6">Status: No aprobado</td>
 				</tr>
 		{%elif primerPrueba.aprobacion == "Aprobado"%}
 
 				<tr style="background-color: green;">
-					<td colspan="6">Si paso</td>
+					<td colspan="6">Status: Aprobado</td>
 				</tr>
-
-
+				<tr>
+					<td colspan="6">Trabajos</td>
+				</tr>
 				<tr style="background-color: #FFFF00;">
 					<td colspan="2"><a href="{%url 'construccion:ViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajos</a></td>
 
@@ -78,31 +79,37 @@
 					{%if terminoDeTrabajo%} 
 				<tr>
 					<td colspan="6">
-						Pruebas
+						Pruebas de calidad de agua
 					</td>
 				</tr>
 				<tr style="background-color: orange;">
-					<td colspan="6"><a href="{%url 'pruebas:ViewSegundaPrueba' perfil.pk%}">Segunda prueba</a></td>
+					<td colspan="6"><a href="{%url 'pruebas:ViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad</a></td>
 				</tr>
-				<tr>
-					<td colspan="6">Termino de trabajos de edificación</td>
-				</tr>
-				<tr style="background-color: #00FF00;">
-
-					<td colspan="3">Entrega de trabajos al plantel</td>
-						{%if entregaDeBebedero%}
-					<td colspan="3">Mantenimiento</td>
-
-				</tr>
+						{%if segundaPrueba.aprobacion == "En espera"%}
+						<tr style="background-color: yellow">
+							<td colspan="6">Esperando resultados</td>
+						</tr>
+						{%elif segundaPrueba.aprobacion == "No aprobado"%}
+							<tr style="background-color: red">
+							<td colspan="6">No paso</td>
+						</tr>
+						{%elif segundaPrueba.aprobacion == "Aprobado"%}
+						<tr style="background-color: green">
+							<td colspan="6">Aprobado</td>
+						</tr>
+						<tr>
+							<td colspan="6">Entrega de bebedero</td>
+						</tr>
+						<tr style="background-color: #00FF00">
+							<td colspan="3"><a href="{%url 'visitas:ViewEntregaDeBebedero' perfil.pk%}">Entrega de bebedero</a></td>
+							{%if entregaDeBebedero%}
+							<td colspan="3"><a href="">Mantenimiento</a></td>
+							{%endif%}
+						</tr>
 						{%endif%}
 					{%endif%}
 				{%endif%}
-{%endif%}
-
-
-					
-		{%else%}
-				
+			{%endif%}
 		{%endif%}				
 	{%endif%}
 {%endif%}
