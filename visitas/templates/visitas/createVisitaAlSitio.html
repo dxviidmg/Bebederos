@@ -4,29 +4,30 @@
 
 {%block content%}
 
+	<h1>Visita al sitio</h1>
 	{%if visita%}
 
-<h4>Ve y edita la documentación correspondiente de la visita al sitio de la escuela {{escuela.get_full_name}}</h4>
+	<h4>Consulta de documentación de la escuela {{escuela.get_full_name}}</h4>
 
-<a href="{{visita.constancia_visita.url}}" class="btn btn-primary" role="button" aria-pressed="true">Ver visita a sitio</a>
-<a href="{{visita.hoja_cotizacion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Hoja cotización</a>
-<a href="{{visita.plantilla_fotografica.url}}" class="btn btn-primary" role="button" aria-pressed="true">Plantilla fotográfica</a>
+	<a href="{{visita.constancia_visita.url}}" class="btn btn-primary" role="button" aria-pressed="true">Ver visita a sitio</a>
+	<a href="{{visita.hoja_cotizacion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Hoja cotización</a>
+	<a href="{{visita.plantilla_fotografica.url}}" class="btn btn-primary" role="button" aria-pressed="true">Plantilla fotográfica</a>
+	<a href="{{visita.membrete_mail.url}}" class="btn btn-primary" role="button" aria-pressed="true">Membrete de e-mail</a>
+	<a href="{{visita.agenda.url}}" class="btn btn-primary" role="button" aria-pressed="true">Agenda</a>
 
-<a href="{{visita.membrete_mail.url}}" class="btn btn-primary" role="button" aria-pressed="true">Membrete de e-mail</a>
-<a href="{{visita.agenda.url}}" class="btn btn-primary" role="button" aria-pressed="true">Agenda</a>
-
-
+	<h4>Actualización de documentación</h4>
 	<form action="." method="post" enctype="multipart/form-data">
-		
 		{%csrf_token%}
 		{{EdicionVisitaForm | bootstrap}}
 		<a href=""><input type="submit" value="Guardar cambios"></a>
-		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
+		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Regresar"></a>
 	</form>
 
 	{%else%}
+
+	<h4>Registro de documentación de la escuela {{escuela.get_full_name}}</h4>
+
 	<form action="." method="post" enctype="multipart/form-data">
-		<h4>Registra la documentación correspondiente de la visita al sitio de la escuela {{escuela.get_full_name}}</h4>
 		{%csrf_token%}
 		{{NuevaVisitaForm | bootstrap}}
 		<a href=""><input type="submit" value="Crear registro"></a>

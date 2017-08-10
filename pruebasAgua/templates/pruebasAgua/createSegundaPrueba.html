@@ -1,35 +1,38 @@
 {%extends 'base.html'%}
 
-{% load bootstrap %}
+{%load bootstrap%}
 
 {%block content%}
 
+	<h1>Segunda prueba de calidad de agua</h1>
+
 	{%if prueba%}
 
-<h4>Ve y edita la documentación correspondiente del Inicio de trabajos de la escuela {{escuela.get_full_name}}</h4>
+		<h4>Consulta de documentación de la escuela {{escuela.get_full_name}}</h4>
 
-<a href="{{prueba.constancia_recepcion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Constancia de recepcion</a>
+		<a href="{{prueba.constancia_recepcion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Constancia de recepcion</a>
 
-<a href="{{prueba.video.url}}" class="btn btn-primary" role="button" aria-pressed="true">Video</a>
+		<a href="{{prueba.video.url}}" class="btn btn-primary" role="button" aria-pressed="true">Video</a>
 
-<a href="{{prueba.resultados.url}}" class="btn btn-primary" role="button" aria-pressed="true">Resultados</a>
+		<a href="{{prueba.resultados.url}}" class="btn btn-primary" role="button" aria-pressed="true">Resultados</a>
 
-	<form action="." method="post" enctype="multipart/form-data">
-		
-		{%csrf_token%}
-		{{EdicionPruebaForm | bootstrap}}
-		<a href=""><input type="submit" value="Guardar cambios"></a>
-		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
-	</form>
+		<form action="." method="post" enctype="multipart/form-data">
+			<h4>Realice la aprobación</h4>
+			{%csrf_token%}
+			{{EdicionPruebaForm | bootstrap}}
+			<a href=""><input type="submit" value="Guardar cambios"></a>
+			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
+		</form>
 
 	{%else%}
-	<form action="." method="post" enctype="multipart/form-data">
-		<h4>Registra la documentación correspondiente de la visita al sitio de la escuela {{escuela.get_full_name}}</h4>
-		{%csrf_token%}
-		{{NuevaPruebaForm | bootstrap}}
-		<a href=""><input type="submit" value="Crear registro"></a>
-		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
-	</form>
+	
+		<form action="." method="post" enctype="multipart/form-data">
+			<h4>Registro de documentación de la escuela {{escuela.get_full_name}}</h4>
+			{%csrf_token%}
+			{{NuevaPruebaForm | bootstrap}}
+			<a href=""><input type="submit" value="Crear registro"></a>
+			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
+		</form>
 
 	{%endif%}
 

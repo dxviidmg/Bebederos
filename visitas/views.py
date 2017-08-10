@@ -108,7 +108,7 @@ class ViewVisitaDeAcuerdo(View):
 class ViewEntregaDeBebedero(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
-		template_name = "visitas/createEntregaTrabajo.html"
+		template_name = "visitas/createEntregaBebedero.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevaEntregaForm=EntregaDeBebederoCreateForm()
@@ -116,7 +116,7 @@ class ViewEntregaDeBebedero(View):
 		try:
 			entrega = EntregaDeBebedero.objects.get(escuela=escuela)
 			EdicionEntregaForm=EntregaDeBebederoEditForm(instance=entrega)
-		except VisitaDeAcuerdo.DoesNotExist:
+		except EntregaDeBebedero.DoesNotExist:
 			entrega = None
 			EdicionEntregaForm = None
 
@@ -142,7 +142,7 @@ class ViewEntregaDeBebedero(View):
 
 		try:
 			entrega = EntregaDeBebedero.objects.get(escuela=escuela)
-			EdicionEntregaForm = EntregaBebebederoEditForm(instance=entrega, data=request.POST, files=request.FILES)
+			EdicionEntregaForm = EntregaDeBebebederoEditForm(instance=entrega, data=request.POST, files=request.FILES)
 
 			if EdicionEntregaForm.is_valid():
 				EdicionEntregaForm.save()

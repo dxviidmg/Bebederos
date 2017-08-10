@@ -5,8 +5,8 @@ from django.utils import timezone
 class PrimerPrueba(models.Model):
 	aprobacion_choices = (
 		("En espera", "En espera"),
-		("No aprobado", "No aprobado"),
 		("Aprobado", "Aprobado"),
+		("No aprobado", "No aprobado"),
 	)
 	escuela = models.OneToOneField(User)
 	constancia_recepcion = models.FileField(upload_to='pruebas/1/constancia/%Y/%m/%d/', verbose_name="Constancia de recepción de muestra de laboratorio")
@@ -26,8 +26,8 @@ class PrimerPrueba(models.Model):
 class SegundaPrueba(models.Model):
 	aprobacion_choices = (
 		("En espera", "En espera"),
-		("No aprobado", "No aprobado"),
 		("Aprobado", "Aprobado"),
+		("No aprobado", "No aprobado"),
 	)
 	escuela = models.OneToOneField(User)
 	constancia_recepcion = models.FileField(upload_to='pruebas/1/constancia/%Y/%m/%d/', verbose_name="Constancia de recepción de muestra de laboratorio")

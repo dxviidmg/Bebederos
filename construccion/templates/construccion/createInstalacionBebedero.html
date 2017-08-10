@@ -3,10 +3,11 @@
 {% load bootstrap %}
 
 {%block content%}
-
+	
+	<h1>Instalación de Bebedero</h1>
 	{%if instalacion%}
 
-<h4>Ve y edita la documentación correspondiente del instalacion de trabajos de la escuela {{escuela.get_full_name}}</h4>
+<h4>Consulta de documentación de la escuela {{escuela.get_full_name}}</h4>
 
 <a href="{{instalacion.reporte.url}}" class="btn btn-primary" role="button" aria-pressed="true">Reporte de instalacion</a>
 
@@ -15,7 +16,7 @@
 <a href="{{instalacion.recepcion_mueble_bebedero.url}}" class="btn btn-primary" role="button" aria-pressed="true">Recepción de mueble bebedero</a>
 
 	<form action="." method="post" enctype="multipart/form-data">
-		
+		<h4>Actualización de documentación</h4>	
 		{%csrf_token%}
 		{{EdicionInstalacionForm | bootstrap}}
 		<a href=""><input type="submit" value="Guardar cambios"></a>
@@ -24,7 +25,7 @@
 
 	{%else%}
 	<form action="." method="post" enctype="multipart/form-data">
-		<h4>Registra la documentación correspondiente de la visita al sitio de la escuela {{escuela.get_full_name}}</h4>
+		<h4>Registro de documentación de la escuela {{escuela.get_full_name}}</h4>
 		{%csrf_token%}
 		{{NuevaInstalacionForm | bootstrap}}
 		<a href=""><input type="submit" value="Crear registro"></a>

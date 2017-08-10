@@ -4,16 +4,17 @@
 
 {%block content%}
 
+<h1>Termino de trabajo</h1>
 	{%if termino%}
 
-<h4>Ve y edita la documentación correspondiente del Inicio de trabajos de la escuela {{escuela.get_full_name}}</h4>
+<h4>Consulta de documentación de la escuela {{escuela.get_full_name}}</h4>
 
 <a href="{{termino.reporte_segunda_toma.url}}" class="btn btn-primary" role="button" aria-pressed="true">Reporte de segunda toma de agua</a>
 
 <a href="{{termino.plantilla_fotografica.url}}" class="btn btn-primary" role="button" aria-pressed="true">Plantilla fotográfica</a>
 
 	<form action="." method="post" enctype="multipart/form-data">
-		
+		<h4>Actualización de documentación</h4>	
 		{%csrf_token%}
 		{{EdicionTerminoForm | bootstrap}}
 		<a href=""><input type="submit" value="Guardar cambios"></a>
@@ -22,7 +23,7 @@
 
 	{%else%}
 	<form action="." method="post" enctype="multipart/form-data">
-		<h4>Registra la documentación correspondiente de la visita al sitio de la escuela {{escuela.get_full_name}}</h4>
+		<h4>Registro de documentación de la escuela {{escuela.get_full_name}}</h4>
 		{%csrf_token%}
 		{{NuevoTerminoForm | bootstrap}}
 		<a href=""><input type="submit" value="Crear registro"></a>

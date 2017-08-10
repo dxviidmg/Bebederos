@@ -140,7 +140,7 @@ class DetailViewEscuela(View):
 
 		try:
 			segundaPrueba = SegundaPrueba.objects.get(escuela=escuela)
-		except segundaPrueba.DoesNotExist:
+		except SegundaPrueba.DoesNotExist:
 			segundaPrueba = None
 
 		try:

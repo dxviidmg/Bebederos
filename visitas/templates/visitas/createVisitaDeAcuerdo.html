@@ -4,15 +4,16 @@
 
 {%block content%}
 
+<h1>Visita de acuerdos</h1>
 	{%if visita%}
 
-<h4>Ve y edita la documentación correspondiente de la visita al sitio de la escuela {{escuela.get_full_name}}</h4>
+<h4>Consulta de documentación de la escuela {{escuela.get_full_name}}</h4>
 
 <a href="{{visita.acta_acuerdos.url}}" class="btn btn-primary" role="button" aria-pressed="true">Acta de acuerdos</a>
 <a href="{{visita.reporte_toma_agua.url}}" class="btn btn-primary" role="button" aria-pressed="true">Reporte de toma de muestra de agua</a>
 
-	<form action="." method="post" enctype="multipart/form-data">
-		
+	<h4>Actualización de documentación</h4>
+	<form action="." method="post" enctype="multipart/form-data">	
 		{%csrf_token%}
 		{{EdicionVisitaForm | bootstrap}}
 		<a href=""><input type="submit" value="Guardar cambios"></a>
@@ -20,8 +21,10 @@
 	</form>
 
 	{%else%}
+
+	<h4>Registro de documentación de la escuela {{escuela.get_full_name}}</h4>
+
 	<form action="." method="post" enctype="multipart/form-data">
-		<h4>Registra la documentación correspondiente de la visita de acuerdos de la escuela {{escuela.get_full_name}}</h4>
 		{%csrf_token%}
 		{{NuevaVisitaForm | bootstrap}}
 		<a href=""><input type="submit" value="Crear registro"></a>
