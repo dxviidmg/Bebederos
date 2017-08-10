@@ -14,7 +14,7 @@ class PrimerPrueba(models.Model):
 	resultados = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Resultados")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	laboratorio = models.ForeignKey(User, related_name="lab_primer_prueba")
-	aprobacion = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices)
+	aprobacion = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación")
 
 	def __str__(self):
 		return '{} para escuela'.format(self.escuela)
@@ -35,7 +35,7 @@ class SegundaPrueba(models.Model):
 	resultados = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Resultados")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	laboratorio = models.ForeignKey(User, related_name="lab_segunda_prueba")
-	aprobacion = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices)
+	aprobacion = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación")
 	def __str__(self):
 		return '{} para escuela'.format(self.escuela)
 

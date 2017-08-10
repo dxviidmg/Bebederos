@@ -112,7 +112,7 @@ class ViewTerminoDeTrabajo(View):
 
 		try:
 			termino = TerminoDeTrabajo.objects.get(escuela=escuela)
-			EdicionTerminoForm = InicioDeTrabajoEditForm(instance=termino)
+			EdicionTerminoForm = TerminoDeTrabajoEditForm(instance=termino)
 		except TerminoDeTrabajo.DoesNotExist:
 			termino = None
 			EdicionTerminoForm = None

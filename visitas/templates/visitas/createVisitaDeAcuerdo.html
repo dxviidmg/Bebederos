@@ -4,32 +4,34 @@
 
 {%block content%}
 
-<h1>Visita de acuerdos</h1>
+	<h1>Visita de acuerdos</h1>
+
 	{%if visita%}
 
-<h4>Consulta de documentación de la escuela {{escuela.get_full_name}}</h4>
+		<h4>Consulta de documentación de la escuela {{escuela.get_full_name}}</h4>
 
-<a href="{{visita.acta_acuerdos.url}}" class="btn btn-primary" role="button" aria-pressed="true">Acta de acuerdos</a>
-<a href="{{visita.reporte_toma_agua.url}}" class="btn btn-primary" role="button" aria-pressed="true">Reporte de toma de muestra de agua</a>
+		<a href="{{visita.acta_acuerdos.url}}" class="btn btn-primary" role="button" aria-pressed="true">Acta de acuerdos y ubicación del módulo</a>
+		<a href="{{visita.reporte_toma_agua.url}}" class="btn btn-primary" role="button" aria-pressed="true">Reporte de toma de muestra de agua</a>
 
-	<h4>Actualización de documentación</h4>
-	<form action="." method="post" enctype="multipart/form-data">	
-		{%csrf_token%}
-		{{EdicionVisitaForm | bootstrap}}
-		<a href=""><input type="submit" value="Guardar cambios"></a>
-		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
-	</form>
+		<h4>Actualización de documentación</h4>
+
+		<form action="." method="post" enctype="multipart/form-data">	
+			{%csrf_token%}
+			{{EdicionVisitaForm | bootstrap}}
+			<a href=""><input type="submit" value="Guardar cambios"></a>
+			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
+		</form>
 
 	{%else%}
 
-	<h4>Registro de documentación de la escuela {{escuela.get_full_name}}</h4>
+		<h4>Registro de documentación de la escuela {{escuela.get_full_name}}</h4>
 
-	<form action="." method="post" enctype="multipart/form-data">
-		{%csrf_token%}
-		{{NuevaVisitaForm | bootstrap}}
-		<a href=""><input type="submit" value="Crear registro"></a>
-		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
-	</form>
+		<form action="." method="post" enctype="multipart/form-data">
+			{%csrf_token%}
+			{{NuevaVisitaForm | bootstrap}}
+			<a href=""><input type="submit" value="Crear registro"></a>
+			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
+		</form>
 
 	{%endif%}
 
