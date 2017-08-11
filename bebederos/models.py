@@ -11,14 +11,14 @@ class Mueble(models.Model):
 
 	clave = models.CharField(max_length=10)
 	nivel_educativo = models.CharField(max_length=30, choices=nivel_educativo_choices)
-	cantidad_boquillas = models.IntegerField()
-	cantidad_boquillas_discapacidad = models.IntegerField()
+	cantidad_salidas_regulares = models.IntegerField()
+	cantidad_salidas_discapacidad = models.IntegerField()
 	cantidad_llenador_de_botellas = models.IntegerField()
 	alumnos_min = models.IntegerField(null=True, blank=True, verbose_name="Rango minimo de alumnos")
 	alumnos_max = models.IntegerField(null=True, blank=True, verbose_name="Rango maximo de alumnos")
 
 	def __str__(self):
-		return '{} para escuela {}'.format(self.clave, self.nivel_educativo)
+		return '{}'.format(self.clave)
 
 	class Meta:
 		ordering = ['clave']

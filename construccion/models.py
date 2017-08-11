@@ -5,11 +5,10 @@ from django.utils import timezone
 class InicioDeTrabajo(models.Model):
 	escuela = models.OneToOneField(User)
 	acta_inicio = models.FileField(upload_to='trabajos/inicio/acta/%Y/%m/%d/', verbose_name="Acta de inicio de trabajo")
-	hoja_cotizacion = models.FileField(upload_to='visitas/1/cotizacion/%Y/%m/%d/', verbose_name="Hoja de cotización")
 	sim = models.ForeignKey(User, related_name="sim_inicio_trabajo", null=True, blank=True)
 
 	def __str__(self):
-		return '{} para escuela'.format(self.escuela)
+		return '{}'.format(self.escuela)
 
 	class Meta:
 		ordering = ['escuela']
@@ -23,7 +22,7 @@ class InstalacionBebedero(models.Model):
 	sim = models.ForeignKey(User, related_name="sim_instalacion_sb",)
 
 	def __str__(self):
-		return '{} para escuela'.format(self.escuela)
+		return '{}'.format(self.escuela)
 
 	class Meta:
 		ordering = ['escuela']
@@ -36,8 +35,28 @@ class TerminoDeTrabajo(models.Model):
 	sim = models.ForeignKey(User, related_name="sim_termino_trabajo", null=True, blank=True)
 
 	def __str__(self):
-		return '{} para escuela'.format(self.escuela)
+		return '{}'.format(self.escuela)
 
 	class Meta:
 		ordering = ['escuela']
 		verbose_name_plural = 'Terminos de trabajo'
+
+class Bitacora(models.Model):
+	fase_choices = (
+		("Firme", "Firme"),
+		("Muro", "Muro"),
+		("Techumbre y puerta", "Techumbre y puerta"),
+		("Instalación de Mueble Bebedero", "Instalación de Mueble Bebedero")
+	)
+
+	escuela = models.ForeignKey(User)
+	fase = models.CharField(max_length=30, choices=fase_choices)
+	video = models.FileField(upload_to='instalaciones/bitacotra/video/%Y/%m/%d/', verbose_name="Evidencia audio visual")
+	ejecutora = models.ForeignKey(User, related_name="ejecutora_bitacora")
+
+	def __str__(self):
+		return 'Fase {} de {}'.format(self.fase ,self.escuela)
+
+	class Meta:
+		ordering = ['escuela']
+#		verbose_name_plural = 'Terminos de trabajo'	

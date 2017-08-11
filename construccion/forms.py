@@ -4,12 +4,12 @@ from .models import *
 class InicioDeTrabajoCreateForm(forms.ModelForm):
 	class Meta:
 		model = InicioDeTrabajo
-		fields = ('acta_inicio', 'hoja_cotizacion')
+		fields = ('acta_inicio',)
 
 class InicioDeTrabajoEditForm(forms.ModelForm):
 	class Meta:
 		model = InicioDeTrabajo
-		fields = ('acta_inicio', 'hoja_cotizacion')
+		fields = ('acta_inicio',)
 
 class InstalacionBebederoCreateForm(forms.ModelForm):
 	class Meta:
