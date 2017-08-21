@@ -1,0 +1,48 @@
+{%extends 'base.html'%}
+
+{% load bootstrap %}
+
+{%block content%}
+
+	<form action="." method="post" enctype="multipart/form-data">
+		<h4>Actualización de documentación</h4>	
+		{%csrf_token%}
+		{{NuevaEvidenciaForm | bootstrap}}
+		<a href=""><input type="submit" value="Registrar"></a>
+		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
+	</form>
+
+<div class="table-responsive">
+	<table class="table table-bordered">
+		<thead>
+			<th>Folio</th>
+			<th>Fase</th>
+			<th>Creación</th>
+			<th>Video</th>
+			<th>Ejecutora</th>
+		</thead>
+		<tbody>
+		
+		{% for evidencia in bitacora%}
+
+			<tr>
+				<td>{{evidencia.pk}}</td>
+				<td>{{evidencia.fase}}</td>
+				<td>{{evidencia.creacion}}</td>
+				<td>{{evidencia.video}}</td>
+				<td>{{evidencia.ejecutora}}</td>
+			</tr>
+
+		{%empty%}
+
+			<tr>
+				<td colspan="4"></td>
+			</tr>
+
+		{%endfor%}
+
+		</tbody>
+	</table>
+</div>
+
+{%endblock content%}

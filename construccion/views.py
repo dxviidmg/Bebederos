@@ -61,7 +61,7 @@ class ViewInstalacionBebedero(View):
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevaInstalacionForm = InstalacionBebederoCreateForm()
-
+		#evidencias = EvidenciaC
 		try:
 			instalacion = InstalacionBebedero.objects.get(escuela=escuela)
 			EdicionInstalacionForm = InstalacionBebederoEditForm(instance=instalacion)
@@ -148,4 +148,47 @@ class ViewTerminoDeTrabajo(View):
 			termino = None
 			EdicionTerminoForm = None
 
-		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)		
+		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)
+
+class ViewBitacora(View):
+#	@method_decorator(login_required)
+	def get(self, request, pk):
+		template_name = "construccion/createBitacora.html"
+		perfil = get_object_or_404(Perfil, pk=pk)
+		escuela = User.objects.get(perfil=perfil)
+
+		bitacora = EvidenciaConstruccion.objects.filter(escuela=escuela)
+		NuevaEvidenciaForm = EvidenciaConstruccionCreateForm()
+
+#		try:
+#			termino = TerminoDeTrabajo.objects.get(escuela=escuela)
+#			EdicionTerminoForm = TerminoDeTrabajoEditForm(instance=termino)
+#		except TerminoDeTrabajo.DoesNotExist:
+#			termino = None
+#			EdicionTerminoForm = None
+
+		context = {
+			'perfil': perfil,
+			'escuela': escuela,
+			'bitacora': bitacora,
+			'NuevaEvidenciaForm': NuevaEvidenciaForm,
+#			'NuevoTerminoForm': NuevoTerminoForm,
+#			'termino': termino,
+#			'EdicionTerminoForm': EdicionTerminoForm
+		}
+		return render(request, template_name, context)
+	def post(self, request, pk):
+		perfil = get_object_or_404(Perfil, pk=pk)
+		escuela = User.objects.get(perfil=perfil)
+
+		bitacora = EvidenciaConstruccion.objects.filter(escuela=escuela)
+		NuevaEvidenciaForm = EvidenciaConstruccionCreateForm(data=request.POST, files=request.FILES)
+		ejecutora = User.objects.get(pk=request.user.pk)
+
+		if NuevaEvidenciaForm.is_valid():
+			NuevaEvidencia = NuevaEvidenciaForm.save(commit=False)
+			NuevaEvidencia.escuela = escuela
+			NuevaEvidencia.ejecutora = ejecutora
+			NuevaEvidencia.save()
+
+		return redirect("construccion:ViewBitacora", pk=perfil.pk)		

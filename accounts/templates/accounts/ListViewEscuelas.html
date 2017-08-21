@@ -19,7 +19,7 @@
 			{%for perfil in perfiles%}
 			
 				<tr>
-					<td><a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">{{perfil.user.username}}</a>
+					<td><a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">{{perfil.user.username}}</a></td>
 					<td>{{perfil.tipo}} {{perfil.nivel_educativo}} {{perfil.user.get_full_name}}</td>
 					<td>{{perfil.status}} {%if perfil.UpdateStatus is None%}{%endif%}</td>
 					<td>¿?</td>

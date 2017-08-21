@@ -32,78 +32,78 @@
 		<table class="table table-bordered">
 			<tbody style="background-color: #BDBDBD;">
 				<tr>
-					<td colspan="6">Formalidades</td>
+					<td colspan="4">Formalidades</td>
 				</tr>
 				<tr style="background-color: #0080FF;">
-					<td colspan="3"><a href="{%url 'visitas:ViewVisitaAlSitio' perfil.pk%}">Visita al sitio</a></td>
+					<td colspan="2"><a href="{%url 'visitas:ViewVisitaAlSitio' perfil.pk%}">Visita al sitio</a></td>
 
 {%if visitaAlSitio%}
 
-					<td colspan="3"><a href="{%url 'visitas:ViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a></td>
+					<td colspan="2"><a href="{%url 'visitas:ViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a></td>
 				</tr>
 	{%if visitaDeAcuerdo%}			
 				<tr>
-					<td colspan="6">Pruebas de calidad de agua</td>
+					<td colspan="4">Pruebas de calidad de agua</td>
 				</tr>
 
 				<tr style="background-color: orange;">
-					<td colspan="6"><a href="{%url 'pruebas:ViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad</a></td>
+					<td colspan="4"><a href="{%url 'pruebas:ViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad</a></td>
 				</tr>
 		{%if primerPrueba.aprobacion == "En espera"%}	
 				<tr style="background-color: yellow;">
-					<td colspan="6">Status: Esperando resultados</td>
+					<td colspan="4">Status: Esperando resultados</td>
 				</tr>
 
 		{%elif primerPrueba.aprobacion == "No aprobado"%}
 				<tr style="background-color: red;">
-					<td colspan="6">Status: No aprobado</td>
+					<td colspan="4">Status: No aprobado</td>
 				</tr>
 		{%elif primerPrueba.aprobacion == "Aprobado"%}
 
 				<tr style="background-color: green;">
-					<td colspan="6">Status: Aprobado</td>
+					<td colspan="4">Status: Aprobado</td>
 				</tr>
 				<tr>
-					<td colspan="6">Trabajos</td>
+					<td colspan="4">Trabajos</td>
 				</tr>
 				<tr style="background-color: #FFFF00;">
-					<td colspan="2"><a href="{%url 'construccion:ViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajos</a></td>
+					<td colspan="1"><a href="{%url 'construccion:ViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajos</a></td>
 
 			{%if inicioDeTrabajo%}
 
-					<td colspan="2"><a href="{%url 'construccion:ViewInstalacionBebedero' perfil.pk%}">Instalación del sistema bebedero</a></td>
-
+					<td colspan="1"><a href="{%url 'construccion:ViewInstalacionBebedero' perfil.pk%}">Instalación de bebedero</a></td>
+					<td colspan="1"><a href="{%url 'construccion:ViewBitacora' perfil.pk%}">Bitacora</a></td>
 				{%if instalacionBebedero%}
-					<td colspan="2"><a href="{%url 'construccion:ViewTerminoDeTrabajo' perfil.pk%}">Termino de trabajos</a></td>
+					<td colspan="1"><a href="{%url 'construccion:ViewTerminoDeTrabajo' perfil.pk%}">Termino de trabajos</a></td>
 				</tr>
 					{%if terminoDeTrabajo%} 
 				<tr>
-					<td colspan="6">
+					<td colspan="4">
 						Pruebas de calidad de agua
 					</td>
 				</tr>
 				<tr style="background-color: orange;">
-					<td colspan="6"><a href="{%url 'pruebas:ViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad</a></td>
+					<td colspan="4"><a href="{%url 'pruebas:ViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad</a></td>
 				</tr>
 						{%if segundaPrueba.aprobacion == "En espera"%}
 						<tr style="background-color: yellow">
-							<td colspan="6">Esperando resultados</td>
+							<td colspan="4">Esperando resultados</td>
 						</tr>
 						{%elif segundaPrueba.aprobacion == "No aprobado"%}
 							<tr style="background-color: red">
-							<td colspan="6">No paso</td>
+							<td colspan="4">No paso</td>
 						</tr>
 						{%elif segundaPrueba.aprobacion == "Aprobado"%}
 						<tr style="background-color: green">
-							<td colspan="6">Aprobado</td>
+							<td colspan="4">Aprobado</td>
 						</tr>
 						<tr>
-							<td colspan="6">Entrega de bebedero</td>
+							<td colspan="4">Entrega de bebedero</td>
 						</tr>
 						<tr style="background-color: #00FF00">
-							<td colspan="3"><a href="{%url 'visitas:ViewEntregaDeBebedero' perfil.pk%}">Entrega de bebedero</a></td>
+							<td colspan="2"><a href="{%url 'visitas:ViewEntregaDeBebedero' perfil.pk%}">Entrega de bebedero</a></td>
 							{%if entregaDeBebedero%}
-							<td colspan="3"><a href="">Mantenimiento</a></td>
+							<td colspan="2"><a href="">Mantenimiento</a></td>
 							{%endif%}
 						</tr>
 						{%endif%}

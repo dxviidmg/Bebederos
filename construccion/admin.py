@@ -23,4 +23,4 @@ class BitacoraAdmin(admin.ModelAdmin):
     list_display = ['escuela']
     search_fields = ['escuela__get_full_name', 'escuela__username']
 
-admin.site.register(Bitacora, BitacoraAdmin)
+admin.site.register(EvidenciaConstruccion, BitacoraAdmin)
