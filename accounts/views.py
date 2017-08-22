@@ -68,7 +68,6 @@ class ListViewZonas(View):
 			print(zona)
 			ListMunicipiosPorZona.append({'zona': zona.nombre, 'municipios': Municipio.objects.filter(zona=zona)})
 
-			print(ListMunicipiosPorZona)
 #			municipios = Municipio.objects.filter(zona=zonas)
 #		print(municipios)
 		escuelasRegistradas = Perfil.objects.filter(tipo="Escuela", municipio=municipios)

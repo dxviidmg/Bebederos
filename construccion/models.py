@@ -65,8 +65,23 @@ class EvidenciaConstruccion(models.Model):
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 
 	def __str__(self):
-		return 'Fase {} de {}'.format(self.fase ,self.escuela)
+		return 'Fase {} de {}'.format(self.fase, self.escuela)
 
 	class Meta:
 		ordering = ['escuela']
-#		verbose_name_plural = 'Terminos de trabajo'	
+		verbose_name_plural = 'Evidencias de construcción'	
+
+class NotaDeBitacora(models.Model):
+	prioridad_choices = (
+		("Alta", "Alta"),
+		("Media", "Media"),
+		("Baja", "Baja"),
+	)
+	escuela = models.ForeignKey(User)
+	nota = models.TextField()
+	autor = models.ForeignKey(User, related_name="autor_nota")
+	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
+	prioridad = models.CharField(max_length=5, choices=prioridad_choices)
+	resuelto = models.BooleanField(default=False)
+	def __str__(self):
+		return '{}'.format(self.escuela)

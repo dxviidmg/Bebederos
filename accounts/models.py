@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from pruebasAgua.models import *
+from pruebasAgua.models import PrimerPrueba
+from construccion.models import EvidenciaConstruccion
 
 class Region(models.Model):
 	numero = models.IntegerField()
@@ -115,13 +116,40 @@ class Perfil(models.Model):
 		perfil = Perfil.objects.get(pk=self.pk)
 		escuela = User.objects.get(perfil=perfil)
 		primerPrueba = PrimerPrueba.objects.get(escuela=escuela)
-
+		
 		if primerPrueba.aprobacion == "Aprobado":
 			self.status = "Aceptado"
-			self.avance = 0
 		elif primerPrueba.aprobacion == "No aprobado":
 			self.status = "Rechazado"
-		self.save()
+			self.save()
+
+	def UpdateAvance(self):
+		perfil = Perfil.objects.get(pk=self.pk)
+		escuela = User.objects.get(perfil=perfil)
+
+		primerPrueba = PrimerPrueba.objects.get(escuela=escuela)
+		ultimaEvidencia = EvidenciaConstruccion.objects.filter(escuela=escuela).order_by('pk').last()
+
+		if primerPrueba.aprobacion == "Aprobado": 
+			if ultimaEvidencia == None:
+				self.avance = 0
+				self.save()
+			else:
+				if ultimaEvidencia.fase == "Firme" and ultimaEvidencia.aprobacion == "Aprobado":
+					self.avance = 25
+					self.save()
+				elif ultimaEvidencia.fase == "Muro" and ultimaEvidencia.aprobacion == "Aprobado":
+					self.avance = 50
+					self.save()					
+				elif ultimaEvidencia.fase == "Techumbre y puerta" and ultimaEvidencia.aprobacion == "Aprobado":
+					self.avance = 75
+					self.save()
+				elif ultimaEvidencia.fase == "Instalación de Mueble Bebedero" and ultimaEvidencia.aprobacion == "Aprobado":
+					self.avance = 100
+					self.save()
+#			if bitacora.fase == "Firme":
+#				self.avance == 25
+#				self.save()
 
 	def __str__(self):
 		return '{} {} {}'.format(self.tipo, self.user.first_name, self.user.last_name)

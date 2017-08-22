@@ -160,6 +160,7 @@ class ViewBitacora(View):
 		bitacora = EvidenciaConstruccion.objects.filter(escuela=escuela)
 		NuevaEvidenciaForm = EvidenciaConstruccionCreateForm()
 
+		notas = NotaDeBitacora.objects.filter(escuela=escuela)
 #		try:
 #			termino = TerminoDeTrabajo.objects.get(escuela=escuela)
 #			EdicionTerminoForm = TerminoDeTrabajoEditForm(instance=termino)
@@ -172,6 +173,7 @@ class ViewBitacora(View):
 			'escuela': escuela,
 			'bitacora': bitacora,
 			'NuevaEvidenciaForm': NuevaEvidenciaForm,
+			'notas': notas,
 #			'NuevoTerminoForm': NuevoTerminoForm,
 #			'termino': termino,
 #			'EdicionTerminoForm': EdicionTerminoForm

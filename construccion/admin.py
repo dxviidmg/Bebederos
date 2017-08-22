@@ -19,8 +19,15 @@ class TerminoDeTrabajoAdmin(admin.ModelAdmin):
 
 admin.site.register(TerminoDeTrabajo, TerminoDeTrabajoAdmin)
 
-class BitacoraAdmin(admin.ModelAdmin):
+class EvidenciaAdmin(admin.ModelAdmin):
     list_display = ['escuela']
     search_fields = ['escuela__get_full_name', 'escuela__username']
 
-admin.site.register(EvidenciaConstruccion, BitacoraAdmin)
+admin.site.register(EvidenciaConstruccion, EvidenciaAdmin)
+
+class NotaDeBitacoraAdmin(admin.ModelAdmin):
+    list_display = ['escuela']
+    search_fields = ['escuela__get_full_name', 'escuela__username']
+
+admin.site.register(NotaDeBitacora, NotaDeBitacoraAdmin)
+
