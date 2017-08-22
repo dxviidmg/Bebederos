@@ -21,8 +21,8 @@
 				<tr>
 					<td><a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">{{perfil.user.username}}</a></td>
 					<td>{{perfil.tipo}} {{perfil.nivel_educativo}} {{perfil.user.get_full_name}}</td>
-					<td>{{perfil.status}} {%if perfil.UpdateStatus is None%}{%endif%}</td>
-					<td>¿?</td>
+					<td>{{perfil.status}} {{perfil.UpdateStatus}}</td>
+					<td> {%if perfil.avance is not NULL%} {{perfil.avance}}%{%else%}No aplica {%endif%}</td>
 				</tr>
 
 			{%empty%}

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from bebederos.models import *
+from pruebasAgua.models import *
 
 class Region(models.Model):
 	numero = models.IntegerField()
@@ -64,12 +64,11 @@ class Municipio(models.Model):
 class Perfil(models.Model):
 	tipo_choices = (
 		("Administrador", "Administrador"),
-		("Residente", "Residente"),
 		("SIM", "SIM"),
 		("Ejecutora", "Ejecutora"),
 		("Escuela", "Escuela"),
 		("Laboratorio", "Laboratorio"),
-		("INIFED Estatal", "INIFED Estatal"),
+		("INIFED", "INIFED"),
 	)
 
 	nivel_choices = (
@@ -106,22 +105,21 @@ class Perfil(models.Model):
 	conexion = models.CharField(max_length=20, blank=True, null=True, choices=conexion_choices)
 	aulas_existentes = models.IntegerField(blank=True, null=True)
 	aulas_en_uso = models.IntegerField(blank=True, null=True)
-	status = models.CharField(max_length=20, default='Por definir')
+	status = models.CharField(max_length=20, blank=True, null=True)
+	avance = models.IntegerField(blank=True, null=True)
 
-	#Clave de constructora para escuela
-	clave = models.CharField(max_length=6, blank=True, null=True)
-
+	#Atributo exclusivo para Constructoras
 	representante_legal = models.CharField(max_length=100, blank=True, null=True)
 
 	def UpdateStatus(self):
 		perfil = Perfil.objects.get(pk=self.pk)
 		escuela = User.objects.get(perfil=perfil)
-		sistemabebedero = SistemaBebedero.objects.get(escuela=escuela)
-		dictamen = EvidenciaPrevia.objects.filter(sistemabebedero=sistemabebedero).last()
+		primerPrueba = PrimerPrueba.objects.get(escuela=escuela)
 
-		if dictamen.nombre == "Validación de la calidad del agua" and dictamen.aprobacion_imta == "Aprobado":
+		if primerPrueba.aprobacion == "Aprobado":
 			self.status = "Aceptado"
-		elif dictamen.nombre == "Validación de la calidad del agua" and dictamen.aprobacion_imta == "No aprobado":
+			self.avance = 0
+		elif primerPrueba.aprobacion == "No aprobado":
 			self.status = "Rechazado"
 		self.save()
 

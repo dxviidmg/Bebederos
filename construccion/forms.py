@@ -14,14 +14,14 @@ class InicioDeTrabajoEditForm(forms.ModelForm):
 class InstalacionBebederoCreateForm(forms.ModelForm):
 	class Meta:
 		model = InstalacionBebedero
-		#fields = ('reporte', 'plantilla_fotografica', 'recepcion_mueble_bebedero')
-		fields = ()
+		fields = ('reporte', 'plano_instalacion', 'memoria_calculo', 'trabajos_de_conexion', 'recepcion_mueble_bebedero')
+#		fields = ()
 
 class InstalacionBebederoEditForm(forms.ModelForm):
 	class Meta:
 		model = InstalacionBebedero
-		#fields = ('reporte', 'plantilla_fotografica', 'recepcion_mueble_bebedero')
-		fields = ()
+		fields = ('reporte', 'plano_instalacion', 'memoria_calculo', 'trabajos_de_conexion', 'recepcion_mueble_bebedero')
+#		fields = ()
 
 class TerminoDeTrabajoCreateForm(forms.ModelForm):
 	class Meta:
