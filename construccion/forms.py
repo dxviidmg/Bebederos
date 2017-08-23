@@ -36,4 +36,9 @@ class TerminoDeTrabajoEditForm(forms.ModelForm):
 class EvidenciaConstruccionCreateForm(forms.ModelForm):
 	class Meta:
 		model = EvidenciaConstruccion
-		fields = ('fase', 'video')		
+		fields = ('fase', 'video')
+
+class NotaDeBitacoraCreateForm(forms.ModelForm):
+	class Meta:
+		model = NotaDeBitacora
+		fields = ('nota', 'prioridad')

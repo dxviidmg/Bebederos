@@ -161,22 +161,14 @@ class ViewBitacora(View):
 		NuevaEvidenciaForm = EvidenciaConstruccionCreateForm()
 
 		notas = NotaDeBitacora.objects.filter(escuela=escuela)
-#		try:
-#			termino = TerminoDeTrabajo.objects.get(escuela=escuela)
-#			EdicionTerminoForm = TerminoDeTrabajoEditForm(instance=termino)
-#		except TerminoDeTrabajo.DoesNotExist:
-#			termino = None
-#			EdicionTerminoForm = None
-
+		NuevaNotaForm = NotaDeBitacoraCreateForm()
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
 			'bitacora': bitacora,
 			'NuevaEvidenciaForm': NuevaEvidenciaForm,
 			'notas': notas,
-#			'NuevoTerminoForm': NuevoTerminoForm,
-#			'termino': termino,
-#			'EdicionTerminoForm': EdicionTerminoForm
+			'NuevaNotaForm': NuevaNotaForm,
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -186,11 +178,19 @@ class ViewBitacora(View):
 		bitacora = EvidenciaConstruccion.objects.filter(escuela=escuela)
 		NuevaEvidenciaForm = EvidenciaConstruccionCreateForm(data=request.POST, files=request.FILES)
 		ejecutora = User.objects.get(pk=request.user.pk)
-
+		
+		NuevaNotaForm = NotaDeBitacoraCreateForm(data=request.POST)
+		autor = User.objects.get(pk=request.user.pk)
+		
 		if NuevaEvidenciaForm.is_valid():
 			NuevaEvidencia = NuevaEvidenciaForm.save(commit=False)
 			NuevaEvidencia.escuela = escuela
 			NuevaEvidencia.ejecutora = ejecutora
 			NuevaEvidencia.save()
 
-		return redirect("construccion:ViewBitacora", pk=perfil.pk)		
+		if NuevaNotaForm.is_valid():
+			NuevaNota = NuevaNotaForm.save(commit=False)
+			NuevaNota.escuela = escuela
+			NuevaNota.autor = autor
+			NuevaNota.save()
+		return redirect("construccion:ViewBitacora", pk=perfil.pk)
