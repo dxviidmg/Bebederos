@@ -35,7 +35,7 @@
 
 			{%if request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "INIFED"%}
 				<tr>
-					<td colspan="4" style="background-color: red;"><a href="">Incidencias</a></td>
+					<td colspan="4" style="background-color: red;"><a href="{%url 'incidencias:ViewIncidencias' perfil.pk%}">Incidencias</a>
 				</tr>
 				<tr>
 					<td colspan="4">Formalidades</td>

@@ -21,6 +21,8 @@ from accounts import urls as accountsUrls
 from visitas import urls as visitasUrls
 from construccion import urls as construccionUrls
 from pruebasAgua import urls as pruebasAguaUrls
+from incidencias import urls as incidenciasUrls
+
 #Images
 from django.conf import settings
 from django.conf.urls.static import static
@@ -31,6 +33,7 @@ urlpatterns = [
     url(r'^', include(visitasUrls, namespace="visitas")),
     url(r'^', include(construccionUrls, namespace="construccion")),
     url(r'^', include(pruebasAguaUrls, namespace="pruebas")),
+    url(r'^', include(incidenciasUrls, namespace="incidencias")),
 ]
 
 #Images
