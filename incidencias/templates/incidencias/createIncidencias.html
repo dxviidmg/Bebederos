@@ -4,29 +4,78 @@
 
 {%block content%}
 
+	<form action="." method="post" enctype="multipart/form-data">
+		<h4>Bitacora</h4>	
+		{%csrf_token%}
+		{{NuevaIncidenciaForm | bootstrap}}
+		<a href=""><input type="submit" value="Registrar"></a>
+		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
+	</form>
+
+<h1>Incidencias actuales</h1>
 <div class="table-responsive">
 	<table class="table table-bordered">
 		<thead>
 			<th>Folio</th>
-			<th>Fase</th>
+			<th>Etapa</th>
+			<th>Descripción</th>
+			<th>Status</th>
 			<th>Creación</th>
-			<th>Video</th>
-			<th>Ejecutora</th>
+			<th>Prioridad</th>
 		</thead>
 		<tbody>
 		
-		{% for incidencia in incidencias%}
+		{% for incidencia in incidenciasActuales%}
 
 			<tr>
 				<td>{{incidencia.pk}}</td>
-				<td>{{incidencia.fase}}</td>
+				<td>{{incidencia.etapa}}</td>
+				<td>{{incidencia.descripcion}}</td>
+				<td>{{incidencia.status}}</td>
 				<td>{{incidencia.creacion}}</td>
+				<td {%if incidencia.prioridad == "Baja"%}style="background-color: yellow" {%elif incidencia.prioridad == "Media"%}style="background-color: orange" {%elif incidencia.prioridad == "Alta"%}style="background-color: red"{%endif%}></td>
 			</tr>
 
 		{%empty%}
 
 			<tr>
-				<td colspan="4">Vacio</td>
+				<td colspan="6">No hay incidencias pendientes</td>
+			</tr>
+
+		{%endfor%}
+
+		</tbody>
+	</table>
+</div>
+
+<h1>Historial de Incidencias</h1>
+<div class="table-responsive">
+	<table class="table table-bordered">
+		<thead>
+			<th>Folio</th>
+			<th>Etapa</th>
+			<th>Descripción</th>
+			<th>Status</th>
+			<th>Creación</th>
+			<th>Prioridad</th>
+		</thead>
+		<tbody>
+		
+		{% for incidencia in historialIncidencias%}
+
+			<tr>
+				<td>{{incidencia.pk}}</td>
+				<td>{{incidencia.etapa}}</td>
+				<td>{{incidencia.descripcion}}</td>
+				<td>{{incidencia.status}}</td>
+				<td>{{incidencia.creacion}}</td>
+				<td {%if incidencia.prioridad == "Baja"%}style="background-color: yellow" {%elif incidencia.prioridad == "Media"%}style="background-color: orange" {%elif incidencia.prioridad == "Alta"%}style="background-color: red"{%endif%}></td>
+			</tr>
+
+		{%empty%}
+
+			<tr>
+				<td colspan="6">Historial vacio</td>
 			</tr>
 
 		{%endfor%}

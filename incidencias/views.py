@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from django.views.generic import View
 from accounts.models import Perfil
-
+from django.db.models import Q
+from .forms import *
 #Creación y edición de la visita de acuerdo
 class ViewIncidencias(View):
 #	@method_decorator(login_required)
@@ -10,39 +11,31 @@ class ViewIncidencias(View):
 		template_name = "incidencias/createIncidencias.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
-#		NuevoInicioForm = InicioDeTrabajoCreateForm()
+
+		NuevaIncidenciaForm = IncidenciaCreateForm()
+
 		incidencias = Incidencia.objects.filter(escuela=escuela)
-		print(incidencias)
+		incidenciasActuales = incidencias.filter(Q(status="En espera") | Q(status="Atendiendo"))
+		historialIncidencias = incidencias.filter(status="Solucionado")
 
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
-			'incidencias': incidencias,
-#			'NuevoInicioForm': NuevoInicioForm,
-#			'inicio': inicio,
-#			'EdicionInicioForm': EdicionInicioForm
+			'incidenciasActuales': incidenciasActuales,
+			'historialIncidencias': historialIncidencias,
+			'NuevaIncidenciaForm': NuevaIncidenciaForm,
 		}
 		return render(request, template_name, context)
-#	def post(self, request, pk):
-#		perfil = get_object_or_404(Perfil, pk=pk)
-#		escuela = User.objects.get(perfil=perfil)
-#		NuevoInicioForm = InicioDeTrabajoCreateForm(data=request.POST, files=request.FILES)
-#		sim = User.objects.get(pk=request.user.pk)
+	def post(self, request, pk):
+		perfil = get_object_or_404(Perfil, pk=pk)
+		escuela = User.objects.get(perfil=perfil)
+		NuevaIncidenciaForm = IncidenciaCreateForm(data=request.POST, files=request.FILES)
+		autor = User.objects.get(pk=request.user.pk)
 
-#		if NuevoInicioForm.is_valid():
-#			NuevoInicio = NuevoInicioForm.save(commit=False)
-#			NuevoInicio.escuela = escuela
-#			NuevoInicio.sim = sim
-#			NuevoInicio.save()
+		if NuevaIncidenciaForm.is_valid():
+			NuevaIncidencia = NuevaIncidenciaForm.save(commit=False)
+			NuevaIncidencia.escuela = escuela
+			NuevaIncidencia.autor = autor
+			NuevaIncidencia.save()
 
-#		try:
-#			inicio = InicioDeTrabajo.objects.get(escuela=escuela)
-#			EdicionInicioForm = InicioDeTrabajoEditForm(instance=inicio, data=request.POST, files=request.FILES)
-#			if EdicionInicioForm.is_valid():
-#				EdicionInicioForm.save()
-
-#		except InicioDeTrabajo.DoesNotExist:
-#			inicio = None
-#			EdicionInicioForm = None
-
-#		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)
+		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)
