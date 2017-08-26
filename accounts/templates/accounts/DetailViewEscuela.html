@@ -183,7 +183,7 @@
 
 			{%if request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "INIFED"%}
 
-							<td colspan="2"><a href="">Mantenimiento</a></td>
+							<td colspan="2"><a href="{%url 'mantenimiento:ViewMantenimientos' perfil.pk%}">Mantenimiento</a></td>
 			{%endif%}
 							{%endif%}
 

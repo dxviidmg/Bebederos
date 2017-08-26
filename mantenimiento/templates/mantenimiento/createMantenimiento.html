@@ -1,0 +1,45 @@
+{%extends 'base.html'%}
+
+{%load bootstrap%}
+
+{%block content%}
+
+	<form action="." method="post" enctype="multipart/form-data">
+		<h4>Registro de mantenimiento</h4>	
+		{%csrf_token%}
+		{{NuevoMantenimientoForm | bootstrap}}
+		<a href=""><input type="submit" value="Registrar"></a>
+		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
+	</form>
+
+<h1>Lista de mantenimientos</h1>
+<div class="table-responsive">
+	<table class="table table-bordered">
+		<thead>
+			<th>Mes y año</th>
+			<th>Carnet</th>
+			<th>Creación</th>
+		</thead>
+		<tbody>
+		
+		{% for mantenimiento in mantenimientos%}
+
+			<tr>
+				<td>{{mantenimiento.mes}} {{mantenimiento.año}}</td>
+				<td><a href="{{mantenimiento.carnet.url}}">Ver</a></td>
+				<td>{{mantenimiento.creacion}}</td>
+			</tr>
+
+		{%empty%}
+
+			<tr>
+				<td colspan="6">No hay mantenimientos pendientes</td>
+			</tr>
+
+		{%endfor%}
+
+		</tbody>
+	</table>
+</div>
+
+{%endblock content%}

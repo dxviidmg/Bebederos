@@ -20,7 +20,7 @@ class Incidencia(models.Model):
 		("Entrega del sistema bebedero", "Entrega del sistema bebedero"),
 		("Mantenimiento", "Mantenimiento"),
 	)
-	escuela = models.ForeignKey(User, related_name="escuela_incidencia")
+
 	autor = models.ForeignKey(User, related_name="autor")
 	descripcion = models.TextField()
 	status = models.CharField(default="En espera", max_length=30, choices=status_choices)

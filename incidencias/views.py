@@ -4,6 +4,7 @@ from django.views.generic import View
 from accounts.models import Perfil
 from django.db.models import Q
 from .forms import *
+
 #Creación y edición de la visita de acuerdo
 class ViewIncidencias(View):
 #	@method_decorator(login_required)
