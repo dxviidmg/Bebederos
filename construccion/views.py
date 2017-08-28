@@ -51,7 +51,7 @@ class ViewInicioDeTrabajo(View):
 			inicio = None
 			EdicionInicioForm = None
 
-		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)
+		return redirect("construccion:ViewInicioDeTrabajo", pk=perfil.pk)
 
 #Creación y edición de la instalación de un bebedero
 class ViewInstalacionBebedero(View):
@@ -100,7 +100,7 @@ class ViewInstalacionBebedero(View):
 			instalacion = None
 			EdicionInstalacionForm = None
 
-		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)
+		return redirect("construccion:ViewInstalacionBebedero", pk=perfil.pk)
 
 class ViewTerminoDeTrabajo(View):
 #	@method_decorator(login_required)
@@ -148,7 +148,7 @@ class ViewTerminoDeTrabajo(View):
 			termino = None
 			EdicionTerminoForm = None
 
-		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)
+		return redirect("construccion:ViewTerminoDeTrabajo", pk=perfil.pk)
 
 class ViewBitacora(View):
 #	@method_decorator(login_required)

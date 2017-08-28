@@ -39,4 +39,4 @@ class ViewIncidencias(View):
 			NuevaIncidencia.autor = autor
 			NuevaIncidencia.save()
 
-		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)
+		return redirect("incidencias:ViewIncidencias", pk=perfil.pk)

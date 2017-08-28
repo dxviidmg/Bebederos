@@ -5,9 +5,12 @@
 {%block content%}
 
 <h1>Entrega de Bebedero</h1>
+
+<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+
 	{%if entrega%}
 
-<h4>Consulta de documentación de la escuela {{escuela.get_full_name}}</h4>
+<h4>Consulta de documentación</h4>
 
 <a href="{{entrega.acta_entrega.url}}" class="btn btn-primary" role="button" aria-pressed="true">Acta de entrega</a>
 <a href="{{entrega.convenio_responsabilidades.url}}" class="btn btn-primary" role="button" aria-pressed="true">Convenio de asignación de responsabilidades</a>
@@ -20,7 +23,7 @@
 		{%csrf_token%}
 		{{EdicionEntregaForm | bootstrap}}
 		<a href=""><input type="submit" value="Guardar cambios"></a>
-		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
+		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Regresar"></a>
 	</form>
 
 	{%else%}

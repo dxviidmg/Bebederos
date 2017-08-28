@@ -22,12 +22,13 @@ class Incidencia(models.Model):
 	)
 
 	autor = models.ForeignKey(User, related_name="autor")
-	descripcion = models.TextField()
+	descripcion = models.TextField(verbose_name="Descripción")
 	status = models.CharField(default="En espera", max_length=30, choices=status_choices)
 	prioridad = models.CharField(choices=prioridad_choices, max_length=5)
 	etapa = models.CharField(choices=etapa_choices, max_length=100)
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
-
+	escuela = models.ForeignKey(User, related_name="escuela_incidencia", null=True, blank=True)
+	
 	def __str__(self):
 		return '{} para escuela'.format(self.escuela)
 

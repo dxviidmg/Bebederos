@@ -53,7 +53,7 @@ class ViewVisitaAlSitio(View):
 			visita = None
 			EdicionVisitaAlSitioForm = None
 
-		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)
+		return redirect("visitas:ViewVisitaAlSitio", pk=perfil.pk)
 
 #Creación y edición de la visita de acuerdo
 class ViewVisitaDeAcuerdo(View):
@@ -102,7 +102,7 @@ class ViewVisitaDeAcuerdo(View):
 			visita = None
 			EdicionVisitaAlSitioForm = None
 
-		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)
+		return redirect("visitas:ViewVisitaDeAcuerdo", pk=perfil.pk)
 
 #Creación y edición de la visita de acuerdo
 class ViewEntregaDeBebedero(View):

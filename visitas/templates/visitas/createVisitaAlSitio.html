@@ -6,9 +6,11 @@
 
 	<h1>Visita al sitio</h1>
 	
+	<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+
 	{%if visita%}
 
-		<h4>Consulta de documentación de la escuela {{escuela.get_full_name}}</h4>
+		<h4>Consulta de documentación</h4>
 
 		<a href="{{visita.acta_visita.url}}" class="btn btn-primary" role="button" aria-pressed="true">Constancia de visita</a>
 		<a href="{{visita.copia_INE.url}}" class="btn btn-primary" role="button" aria-pressed="true">Copia de INE</a>

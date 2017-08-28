@@ -6,9 +6,11 @@
 
 	<h1>Visita de acuerdos</h1>
 
+		<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+
 	{%if visita%}
 
-		<h4>Consulta de documentación de la escuela {{escuela.get_full_name}}</h4>
+		<h4>Consulta de documentación</h4>
 
 		<a href="{{visita.convenio_concertacion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Convenio de concertación de aplicación de recurso</a>
 
@@ -23,7 +25,7 @@
 			{%csrf_token%}
 			{{EdicionVisitaForm | bootstrap}}
 			<a href=""><input type="submit" value="Guardar cambios"></a>
-			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
+			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Regresar"></a>
 		</form>
 
 	{%else%}

@@ -50,7 +50,7 @@ class ViewPrimerPrueba(View):
 			prueba = None
 			EdicionPruebaForm = None
 
-		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)
+		return redirect("pruebas:ViewPrimerPrueba", pk=perfil.pk)
 
 class ViewSegundaPrueba(View):
 #	@method_decorator(login_required)
@@ -98,4 +98,4 @@ class ViewSegundaPrueba(View):
 			prueba = None
 			EdicionPruebaForm = None
 
-		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)
+		return redirect("pruebas:ViewSegundaPrueba", pk=perfil.pk)

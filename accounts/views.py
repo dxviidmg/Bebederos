@@ -16,8 +16,9 @@ class ViewProfile(View):
 			perfil = Perfil.objects.get(user=user)
 		except:
 			perfil = None
+	
 		context = {
-		'perfil': perfil,
+			'perfil': perfil,
 		}
 		return render(request,template_name, context)
 
@@ -32,7 +33,7 @@ class ListViewRegiones(View):
 		regiones = Region.objects.all()
 
 		context = {
-		'regiones': regiones,
+			'regiones': regiones,
 		}
 		return render(request,template_name, context)
 
@@ -61,21 +62,16 @@ class ListViewZonas(View):
 		entidad = Entidad.objects.get(slug=slug)
 		zonas = Zona.objects.filter(entidad=entidad)
 		municipios = Municipio.objects.filter(zona__in=zonas)
-#		print(municipios)
 
 		ListMunicipiosPorZona = []
 		for zona in zonas:
-			print(zona)
 			ListMunicipiosPorZona.append({'zona': zona.nombre, 'municipios': Municipio.objects.filter(zona=zona)})
 
-#			municipios = Municipio.objects.filter(zona=zonas)
-#		print(municipios)
 		escuelasRegistradas = Perfil.objects.filter(tipo="Escuela", municipio=municipios)
 		escuelasAceptadas = escuelasRegistradas.filter(status='Aceptado')
-#		print(escuelasAceptadas)
+
 		context = {
 			'entidad': entidad,
-#			'municipios': municipios,
 			'escuelasRegistradas': escuelasRegistradas,
 			'escuelasAceptadas': escuelasAceptadas, 
 			'ListMunicipiosPorZona': ListMunicipiosPorZona,
@@ -115,10 +111,7 @@ class DetailViewEscuela(View):
 			visitaDeAcuerdo = None
 
 		try:
-			primerPrueba = PrimerPrueba.objects.get(escuela=escuela)
-			if primerPrueba.aprobacion == "En espera":
-				print("No mames wey")
-				
+			primerPrueba = PrimerPrueba.objects.get(escuela=escuela)				
 		except PrimerPrueba.DoesNotExist:
 			primerPrueba = None
 
@@ -156,7 +149,6 @@ class DetailViewEscuela(View):
 			'instalacionBebedero': instalacionBebedero,
 			'terminoDeTrabajo': terminoDeTrabajo,
 			'segundaPrueba': segundaPrueba,
-			'entregaDeBebedero': entregaDeBebedero,
-			
+			'entregaDeBebedero': entregaDeBebedero,			
 		}
 		return render(request,template_name, context)
