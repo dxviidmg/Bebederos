@@ -23,12 +23,15 @@ class Partida(models.Model):
 	numero = models.IntegerField(verbose_name="número")
 
 	def __str__(self):
-		return 'Partida {} de la región {}'.format(self.numero, self.region)	
+		return '{} de región {}'.format(self.numero, self.region)	
+
+	class Meta:
+		ordering = ['region', 'numero']
 
 class Entidad(models.Model):
 	representante_inifed = models.ForeignKey(User, null=True, blank=True)
 	partida = models.ForeignKey(Partida)
-	nombre = models.CharField(max_length=30, verbose_name="número")
+	nombre = models.CharField(max_length=30)
 	slug = models.SlugField(null=True)
 	imagen = models.ImageField(upload_to='estados/%Y/%m/%d/', default='img_no_disponible.jpg')
 
@@ -36,20 +39,23 @@ class Entidad(models.Model):
 		return '{}'.format(self.nombre)
 
 	class Meta:
-		ordering = ['partida']
+		ordering = ['partida', 'nombre']
 		verbose_name_plural = "Entidades"
 
 	def get_absolute_url(self):
 		return reverse('accounts:ListViewMunicipios', kwargs={'numero': self.partida.numero, 'slug': self.slug})
 
 class Zona(models.Model):
-	sim = models.ForeignKey(User, null=True, blank=True)
+	sim = models.ForeignKey(User, null=True, blank=True, verbose_name="SIM")
 	entidad = models.ForeignKey(Entidad)
-	nombre = models.CharField(max_length=30)
-	color = models.CharField(max_length=30, default="#fff")
+	nombre = models.CharField(max_length=30, verbose_name="Nombre o número")
+	color = models.CharField(max_length=30)
 
 	def __str__(self):
-		return '{}, {}'.format(self.nombre, self.entidad)
+		return '{} de {}'.format(self.nombre, self.entidad)
+
+	class Meta:
+		ordering = ['entidad', 'nombre']
 
 class Municipio(models.Model):
 	zona = models.ForeignKey(Zona, null=True)
@@ -57,7 +63,7 @@ class Municipio(models.Model):
 	slug = models.SlugField(null=True)
 
 	def __str__(self):
-		return '{}, Zona {}'.format(self.nombre, self.zona)
+		return '{} de Zona {}'.format(self.nombre, self.zona)
 
 	class Meta:
 		ordering = ['nombre']
@@ -70,6 +76,8 @@ class Perfil(models.Model):
 		("Escuela", "Escuela"),
 		("Laboratorio", "Laboratorio"),
 		("INIFED", "INIFED"),
+		("IMTA", "IMTA"),
+		("ECA", "Residente Técnico de Calidad de Agua")
 	)
 
 	nivel_choices = (

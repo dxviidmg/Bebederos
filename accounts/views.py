@@ -126,6 +126,12 @@ class DetailViewEscuela(View):
 			instalacionBebedero = None
 
 		try:
+			bitacora = EvidenciaConstruccion.objects.filter(escuela=escuela, fase="Instalación de Mueble Bebedero", aprobacion="Aprobado")
+			print(bitacora)
+		except EvidenciaConstruccion.DoesNotExist:
+			bitacora = None
+
+		try:
 			terminoDeTrabajo = TerminoDeTrabajo.objects.get(escuela=escuela)
 		except TerminoDeTrabajo.DoesNotExist:
 			terminoDeTrabajo = None
@@ -147,6 +153,7 @@ class DetailViewEscuela(View):
 			'primerPrueba': primerPrueba,
 			'inicioDeTrabajo': inicioDeTrabajo,
 			'instalacionBebedero': instalacionBebedero,
+			'bitacora': bitacora,
 			'terminoDeTrabajo': terminoDeTrabajo,
 			'segundaPrueba': segundaPrueba,
 			'entregaDeBebedero': entregaDeBebedero,			

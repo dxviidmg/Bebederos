@@ -10,7 +10,7 @@ class VisitaAlSitio(models.Model):
 	sim = models.ForeignKey(User, related_name="sim_primera_visita", null=True, blank=True)
 
 	def __str__(self):
-		return '{} para escuela'.format(self.escuela)
+		return '{}'.format(self.escuela)
 
 	class Meta:
 		ordering = ['escuela']
@@ -26,11 +26,11 @@ class VisitaDeAcuerdo(models.Model):
 	sim = models.ForeignKey(User, related_name="sim_segunda_visita")
 
 	def __str__(self):
-		return '{} para escuela'.format(self.escuela)
+		return '{}'.format(self.escuela)
 
 	class Meta:
 		ordering = ['escuela']
-		verbose_name_plural = 'visitas de acuerdos'
+		verbose_name_plural = 'Visitas de acuerdo'
 
 class EntregaDeBebedero(models.Model):
 	escuela = models.OneToOneField(User)
@@ -42,8 +42,8 @@ class EntregaDeBebedero(models.Model):
 	sim = models.ForeignKey(User, related_name="sim_entrega_bebedero")
 
 	def __str__(self):
-		return '{} para escuela'.format(self.escuela)
+		return '{}'.format(self.escuela)
 
 	class Meta:
 		ordering = ['escuela']
-		verbose_name_plural = 'Entrega de bebederos'
+		verbose_name_plural = 'Entregas de bebedero'

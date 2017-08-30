@@ -3,16 +3,19 @@
 {%load bootstrap%}
 
 {%block content%}
+<h1>Mantenimiento</h1>
+
+	<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
 
 	<form action="." method="post" enctype="multipart/form-data">
-		<h4>Registro de mantenimiento</h4>	
+		<h4>Registro</h4>	
 		{%csrf_token%}
 		{{NuevoMantenimientoForm | bootstrap}}
 		<a href=""><input type="submit" value="Registrar"></a>
 		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Regresar"></a>
 	</form>
 
-<h1>Lista de mantenimientos</h1>
+<h3>Lista de mantenimientos</h3>
 <div class="table-responsive">
 	<table class="table table-bordered">
 		<thead>

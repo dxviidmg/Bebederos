@@ -25,6 +25,7 @@
 			<th>Creación</th>
 			<th>Video</th>
 			<th>Ejecutora</th>
+			<th>Aprobacion</th>
 		</thead>
 		<tbody>
 		
@@ -36,12 +37,13 @@
 				<td>{{evidencia.creacion}}</td>
 				<td><a href="{{evidencia.video.url}}">Ver</a></td>
 				<td>{{evidencia.ejecutora}}</td>
+				<td>{{evidencia.aprobacion}}</td>
 			</tr>
 
 		{%empty%}
 
 			<tr>
-				<td colspan="4"></td>
+				<td colspan="5"></td>
 			</tr>
 
 		{%endfor%}
@@ -58,7 +60,7 @@
 		<a href=""><input type="submit" value="Registrar"></a>
 	</form>
 
-<h4>Lista notas de bitacora</h4>
+<h4>Lista de notas de bitacora</h4>
 <div class="table-responsive">
 	<table class="table table-bordered">
 		<thead>

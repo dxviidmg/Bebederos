@@ -36,12 +36,6 @@ class ViewVisitaAlSitio(View):
 		NuevaVisitaForm = VisitaAlSitioCreateForm(data=request.POST, files=request.FILES)
 		sim = User.objects.get(pk=request.user.pk)
 
-		if NuevaVisitaForm.is_valid():
-			NuevaVisita = NuevaVisitaForm.save(commit=False)
-			NuevaVisita.escuela = escuela
-			NuevaVisita.sim = sim
-			NuevaVisita.save()
-
 		try:
 			visita = VisitaAlSitio.objects.get(escuela=escuela)
 			EdicionVisitaForm = VisitaAlSitioEditForm(instance=visita, data=request.POST, files=request.FILES)
@@ -52,6 +46,12 @@ class ViewVisitaAlSitio(View):
 		except VisitaAlSitio.DoesNotExist:
 			visita = None
 			EdicionVisitaAlSitioForm = None
+
+			if NuevaVisitaForm.is_valid():
+				NuevaVisita = NuevaVisitaForm.save(commit=False)
+				NuevaVisita.escuela = escuela
+				NuevaVisita.sim = sim
+				NuevaVisita.save()
 
 		return redirect("visitas:ViewVisitaAlSitio", pk=perfil.pk)
 
@@ -142,7 +142,7 @@ class ViewEntregaDeBebedero(View):
 
 		try:
 			entrega = EntregaDeBebedero.objects.get(escuela=escuela)
-			EdicionEntregaForm = EntregaDeBebebederoEditForm(instance=entrega, data=request.POST, files=request.FILES)
+			EdicionEntregaForm = EntregaDeBebederoEditForm(instance=entrega, data=request.POST, files=request.FILES)
 
 			if EdicionEntregaForm.is_valid():
 				EdicionEntregaForm.save()
@@ -151,4 +151,4 @@ class ViewEntregaDeBebedero(View):
 			entrega = None
 			EdicionEntregaForm = None
 
-		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)		
+		return redirect("visitas:ViewEntregaDeBebedero", pk=perfil.pk)		

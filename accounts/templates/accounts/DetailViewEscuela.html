@@ -5,7 +5,7 @@
 {%block content%}
 
 	<div>
-		<h1>Información general de la {{perfil.tipo}} {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h1>
+		<h1>Información de la {{perfil.tipo}} {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h1>
 
 		<h2>Status: {{perfil.status}}</h2>
 		<h3>Avance: {{perfil.avance}}%</h3>
@@ -24,7 +24,7 @@
 		<p>Aulas en uso: {{perfil.aulas_en_uso}}</p>
 	</div>
 	<div>
-		<h2>Cronologia general de la gestión, construcción, instalación y mantetimiento de un bebedero</h2>
+		<h2>Cronología general de la gestión, construcción, instalación y mantenimiento de un bebedero</h2>
 		
 		<br>
 		
@@ -99,6 +99,12 @@
 			{%if request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
 				<tr>
+					<td colspan="4">Asignación de componentes</td>
+				</tr>
+				<tr style="background-color: #48C9B0;">
+					<td colspan="4">Sistema bebedero</td>
+				</tr>
+				<tr>
 					<td colspan="4">Trabajos</td>
 				</tr>
 
@@ -119,13 +125,16 @@
 			
 			{%endif%}
 
+				{%if instalacionBebedero%}
+
+
 			{%if request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}	
 					<td colspan="1"><a href="{%url 'construccion:ViewBitacora' perfil.pk%}">Bitacora</a></td>
 
 			{%endif%}
 
-				{%if instalacionBebedero%}
 
+			{%if bitacora %}
 			{%if request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
 					<td colspan="1"><a href="{%url 'construccion:ViewTerminoDeTrabajo' perfil.pk%}">Termino de trabajos</a></td>
@@ -198,6 +207,7 @@
 			{%endif%}
 		{%endif%}				
 	{%endif%}
+{%endif%}
 {%endif%}
 
 			</tbody>

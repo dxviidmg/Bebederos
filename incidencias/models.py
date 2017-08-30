@@ -30,8 +30,7 @@ class Incidencia(models.Model):
 	escuela = models.ForeignKey(User, related_name="escuela_incidencia", null=True, blank=True)
 	
 	def __str__(self):
-		return '{} para escuela'.format(self.escuela)
+		return '{}'.format(self.escuela)
 
 	class Meta:
 		ordering = ['creacion']
-#		verbose_name_plural = 'Terminos de trabajo'

@@ -25,7 +25,7 @@ class Mantenimiento (models.Model):
 	año = models.IntegerField()
 
 	def __str__(self):
-		return '{} para escuela'.format(self.escuela)
+		return '{} {} {}'.format(self.escuela, self.mes, self.año)
 
 	class Meta:
 		ordering = ['creacion']

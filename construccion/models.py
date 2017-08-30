@@ -28,7 +28,7 @@ class InstalacionBebedero(models.Model):
 
 	class Meta:
 		ordering = ['escuela']
-		verbose_name_plural = 'Instalaciones de Sistemas bebedero'
+		verbose_name_plural = 'Instalaciones de Sistemas Bebedero'
 
 class TerminoDeTrabajo(models.Model):
 	escuela = models.OneToOneField(User)
@@ -69,7 +69,7 @@ class EvidenciaConstruccion(models.Model):
 
 	class Meta:
 		ordering = ['escuela']
-		verbose_name_plural = 'Evidencias de construcción'	
+		verbose_name_plural = 'Evidencias de construcción'
 
 class NotaDeBitacora(models.Model):
 	prioridad_choices = (
@@ -83,5 +83,10 @@ class NotaDeBitacora(models.Model):
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	prioridad = models.CharField(max_length=5, choices=prioridad_choices)
 	resuelto = models.BooleanField(default=False)
+
 	def __str__(self):
 		return '{}'.format(self.escuela)
+
+	class Meta:
+		ordering = ['escuela']
+		verbose_name_plural = 'Notas de bitacora'

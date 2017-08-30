@@ -8,7 +8,6 @@ class Mueble(models.Model):
 		("Secundaria", "Secundaria"),
 		("Media Superior", "Media Superior"),
 	)
-
 	clave = models.CharField(max_length=10)
 	nivel_educativo = models.CharField(max_length=30, choices=nivel_educativo_choices)
 	cantidad_salidas_regulares = models.IntegerField()
@@ -54,4 +53,4 @@ class SistemaBebedero(models.Model):
 	
 	class Meta:
 		ordering = ['escuela']
-		verbose_name_plural = 'Sistemas bebederos'
+		verbose_name_plural = 'Sistemas bebedero'
