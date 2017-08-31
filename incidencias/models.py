@@ -13,7 +13,7 @@ class Incidencia(models.Model):
 		("Media", "Media"),
 		("Alta", "Alta"),
 	)
-	etapa_choices = (
+	fase_choices = (
 		("Formalidades (Pre-construcción)", "Formalidades (Pre-construcción)"),
 		("Pruebas de calidad de agua", "Pruebas de calidad de agua"),
 		("Construcción e instalación de Sistema bebedero", "Construcción e instalación de Sistema bebedero"),
@@ -25,7 +25,7 @@ class Incidencia(models.Model):
 	descripcion = models.TextField(verbose_name="Descripción")
 	status = models.CharField(default="En espera", max_length=30, choices=status_choices)
 	prioridad = models.CharField(choices=prioridad_choices, max_length=5)
-	etapa = models.CharField(choices=etapa_choices, max_length=100)
+	fase = models.CharField(choices=fase_choices, max_length=100)
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	escuela = models.ForeignKey(User, related_name="escuela_incidencia", null=True, blank=True)
 	

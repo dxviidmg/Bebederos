@@ -39,7 +39,6 @@ class SegundaPrueba(models.Model):
 	constancia_recepcion = models.FileField(upload_to='pruebas/2/constancia/%Y/%m/%d/', verbose_name="Constancia de recepción de muestra de laboratorio")
 	video = models.FileField(upload_to='pruebas/2/video/%Y/%m/%d/', verbose_name="Video")
 	resultados = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', verbose_name="Resultados de muestreo")
-	dictamen_sistema_potabilizador = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', verbose_name="Dictamen del sistema potabilizador a utilizar", null=True, blank=True)
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	laboratorio = models.ForeignKey(User, related_name="lab_segunda_prueba")
 	aprobacion = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación")

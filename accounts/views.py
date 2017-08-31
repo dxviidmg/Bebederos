@@ -127,7 +127,6 @@ class DetailViewEscuela(View):
 
 		try:
 			bitacora = EvidenciaConstruccion.objects.filter(escuela=escuela, fase="Instalación de Mueble Bebedero", aprobacion="Aprobado")
-			print(bitacora)
 		except EvidenciaConstruccion.DoesNotExist:
 			bitacora = None
 

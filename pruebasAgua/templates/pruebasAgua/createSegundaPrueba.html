@@ -12,6 +12,29 @@
 
 		<h4>Consulta de documentación</h4>
 
+		{%if prueba.acta_segunda_prueba%}
+
+		<a href="{{prueba.acta_segunda_prueba.url}}" class="btn btn-primary" role="button" aria-pressed="true">Aacta de segunda prueba</a>
+
+		{%else%}
+		<p>No hay acta</p>
+		{%endif%}
+		{%if prueba.reporte_toma_agua%}
+		<a href="{{prueba.reporte_toma_agua.url}}" class="btn btn-primary" role="button" aria-pressed="true">Reporte de toma de agua</a>
+
+		{%else%}
+		<p>falta reporte de toma de agua</p>
+		{%endif%}
+
+		{%if prueba.dictamen_validacion%}
+		<a href="{{prueba.dictamen_validacion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Dictamen de validación</a>
+
+		{%else%}
+
+		<p>falta dictamen de valicación</p>
+
+		{%endif%}
+
 		<a href="{{prueba.constancia_recepcion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Constancia de recepción</a>
 
 		<a href="{{prueba.video.url}}" class="btn btn-primary" role="button" aria-pressed="true">Video</a>

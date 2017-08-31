@@ -69,17 +69,19 @@
 			<th>Nota (Minuta)</th>
 			<th>Revisión</th>
 			<th>Revisado</th>
+			<th>Prioridad</th>
 		</thead>
 		<tbody>
 		
 		{% for nota in notas%}
 
-			<tr {%if nota.prioridad == "Alta"%} style="background-color: red;" {%elif nota.prioridad == "Media"%} style="background-color: orange;" {%elif nota.prioridad == "Baja"%} style="background-color: yellow;" {%endif%}>
+			<tr>
 				<td>{{nota.pk}}</td>
 				<td>{{nota.autor}}</td>
 				<td>{{nota.nota}}</td>
 				<td>{{nota.creacion}}</td>
 				<td>{{nota.resuelto}}</td>
+				<td  {%if nota.prioridad == "Alta"%} style="background-color: red;" {%elif nota.prioridad == "Media"%} style="background-color: orange;" {%elif nota.prioridad == "Baja"%} style="background-color: yellow;" {%endif%}></td>
 			</tr>
 
 		{%empty%}

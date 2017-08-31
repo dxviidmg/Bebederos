@@ -12,12 +12,40 @@
 
 		<h4>Consulta de documentación</h4>
 
+		{%if prueba.reporte_toma_agua%}
+
+		<a href="{{prueba.reporte_toma_agua.url}}" class="btn btn-primary" role="button" aria-pressed="true">Reporte de toma de agua</a>
+
+		{%else%}
+		<p>falta reporte de toma de agua</p>
+		{%endif%}
+
+		{%if prueba.dictamen_validacion%}
+		<a href="{{prueba.dictamen_validacion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Dictamen de validación</a>
+
+		{%else%}
+
+		<p>falta dictamen de valicación</p>
+
+		{%endif%}
+
 		<a href="{{prueba.constancia_recepcion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Constancia de recepción</a>
 
 		<a href="{{prueba.video.url}}" class="btn btn-primary" role="button" aria-pressed="true">Video</a>
 
 		<a href="{{prueba.resultados.url}}" class="btn btn-primary" role="button" aria-pressed="true">Resultados</a>
 
+		{%if prueba.dictamen_sistema_potabilizador%}
+
+		<a href="{{prueba.dictamen_sistema_potabilizador.url}}" class="btn btn-primary" role="button" aria-pressed="true">Dictamen del sistema potabilizador</a>
+
+		{%else%}
+
+		<p>falta Dictamen del sistema potabilizador</p>
+
+		{%endif%}
+
+		
 		<form action="." method="post" enctype="multipart/form-data">
 			<h4>Realice la aprobación</h4>
 			{%csrf_token%}

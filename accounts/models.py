@@ -6,6 +6,7 @@ from construccion.models import EvidenciaConstruccion
 
 class Region(models.Model):
 	numero = models.IntegerField()
+	nombre = models.CharField(max_length=20, null=True, blank=True)
 	color = models.CharField(max_length=10)
 
 	def __str__(self):
