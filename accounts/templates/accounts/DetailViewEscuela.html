@@ -9,6 +9,8 @@
 
 		<h2>Status: {{perfil.status}}</h2>
 		<h3>Avance: {{perfil.avance}}%</h3>
+
+		<p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">Regresar</a></p>
 		<p>CCT: {{escuela.username}}</p>
 		<p>Turno: {{perfil.turno}}</p>
 		<p>Director: {{perfil.director}}</p>
@@ -33,7 +35,7 @@
 		<table class="table table-bordered">
 			<tbody style="background-color: #BDBDBD;">
 
-			{%if request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
+			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 				<tr>
 					<td colspan="4" style="background-color: red;"><a href="{%url 'incidencias:ViewIncidencias' perfil.pk%}">Incidencias</a>
 				</tr>
@@ -47,13 +49,13 @@
 
 {%if visitaAlSitio%}
 
-			{%if request.user.perfil.tipo == "SIM"  or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
+			{%if request.user.perfil.tipo == "SI"  or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 					<td colspan="2"><a href="{%url 'visitas:ViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a></td>
 				</tr>
 			{%endif%}
 	{%if visitaDeAcuerdo%}	
 
-			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SIM"  or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True or request.user.is_staff == True%}		
+			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI"  or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True or request.user.is_staff == True%}		
 				<tr>
 					<td colspan="4">Pruebas de calidad de agua</td>
 				</tr>
@@ -69,7 +71,7 @@
 		
 		{%if primerPrueba.aprobacion == "En espera"%}
 
-			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
+			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
 				<tr style="background-color: yellow;">
 					<td colspan="4">Status: Esperando resultados</td>
@@ -79,7 +81,7 @@
 
 		{%elif primerPrueba.aprobacion == "No aprobado"%}
 
-			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "INIFED"  or request.user.is_staff == True%}
+			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED"  or request.user.is_staff == True%}
 				<tr style="background-color: red;">
 					<td colspan="4">Status: No aprobado</td>
 				</tr>
@@ -88,7 +90,7 @@
 
 		{%elif primerPrueba.aprobacion == "Aprobado"%}
 
-			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "INIFED"  or request.user.is_staff == True%}
+			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED"  or request.user.is_staff == True%}
 
 				<tr style="background-color: green;">
 					<td colspan="4">Status: Aprobado</td>
@@ -96,7 +98,7 @@
 			
 			{%endif%}
 
-			{%if request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
+			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
 				<tr>
 					<td colspan="4">Asignación de componentes</td>
@@ -110,7 +112,7 @@
 
 			{%endif%}
 
-			{%if request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}	
+			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}	
 
 				<tr style="background-color: #FFFF00;">
 					<td colspan="1"><a href="{%url 'construccion:ViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajos</a></td>
@@ -119,7 +121,7 @@
 
 			{%if inicioDeTrabajo%}
 
-			{%if request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "INIFED"  or request.user.is_staff == True%}
+			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED"  or request.user.is_staff == True%}
 
 					<td colspan="1"><a href="{%url 'construccion:ViewInstalacionBebedero' perfil.pk%}">Instalación de bebedero</a></td>
 			
@@ -128,14 +130,14 @@
 				{%if instalacionBebedero%}
 
 
-			{%if request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}	
+			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}	
 					<td colspan="1"><a href="{%url 'construccion:ViewBitacora' perfil.pk%}">Bitacora</a></td>
 
 			{%endif%}
 
 
 			{%if bitacora %}
-			{%if request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
+			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
 					<td colspan="1"><a href="{%url 'construccion:ViewTerminoDeTrabajo' perfil.pk%}">Termino de trabajos</a></td>
 				</tr>
@@ -144,7 +146,7 @@
 
 					{%if terminoDeTrabajo%} 
 
-			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
+			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
 				<tr>
 					<td colspan="4">
@@ -161,7 +163,7 @@
 				</tr>
 						{%if segundaPrueba.aprobacion == "En espera"%}
 
-			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
+			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
 						<tr style="background-color: yellow">
 							<td colspan="4">Esperando resultados</td>
@@ -170,7 +172,7 @@
 			{%endif%}
 						{%elif segundaPrueba.aprobacion == "No aprobado"%}
 
-			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
+			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 						<tr style="background-color: red">
 							<td colspan="4">No paso</td>
 						</tr>
@@ -178,12 +180,12 @@
 			{%endif%}
 						{%elif segundaPrueba.aprobacion == "Aprobado"%}
 
-			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
+			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 						<tr style="background-color: green">
 							<td colspan="4">Aprobado</td>
 						</tr>
 			{%endif%}
-			{%if request.user.perfil.tipo == "SIM"  or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
+			{%if request.user.perfil.tipo == "SI"  or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
 						<tr>
 							<td colspan="4">Entrega de bebedero</td>
@@ -194,7 +196,7 @@
 			{%endif%}
 							{%if entregaDeBebedero%}
 
-			{%if request.user.perfil.tipo == "SIM" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
+			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
 							<td colspan="2"><a href="{%url 'mantenimiento:ViewMantenimientos' perfil.pk%}">Mantenimiento</a></td>
 			{%endif%}

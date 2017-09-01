@@ -62,7 +62,9 @@ class ListViewZonas(View):
 		entidad = Entidad.objects.get(slug=slug)
 		zonas = Zona.objects.filter(entidad=entidad)
 		municipios = Municipio.objects.filter(zona__in=zonas)
-
+		partida = Partida.objects.get(entidad=entidad)
+		region = Region.objects.get(partida=partida)
+		print(region)
 		ListMunicipiosPorZona = []
 		for zona in zonas:
 			ListMunicipiosPorZona.append({'zona': zona.nombre, 'municipios': Municipio.objects.filter(zona=zona)})
@@ -75,6 +77,7 @@ class ListViewZonas(View):
 			'escuelasRegistradas': escuelasRegistradas,
 			'escuelasAceptadas': escuelasAceptadas, 
 			'ListMunicipiosPorZona': ListMunicipiosPorZona,
+			'region': region
 		}
 		return render(request,template_name, context)
 
@@ -85,11 +88,14 @@ class ListViewEscuelas(View):
 		municipio = Municipio.objects.get(pk=pk)
 		perfiles = Perfil.objects.filter(municipio=municipio).order_by('status')
 		escuelasAceptadas = perfiles.filter(status="Aceptado")
+		zona = Zona.objects.get(municipio=municipio)
+		entidad = Entidad.objects.get(zona=zona)
 
 		context = {
 			'municipio': municipio,
 			'perfiles': perfiles,
 			'escuelasAceptadas': escuelasAceptadas,
+			'entidad': entidad,
 		}
 		return render(request,template_name, context)
 
@@ -99,7 +105,7 @@ class DetailViewEscuela(View):
 		user = User.objects.get(pk=request.user.pk)
 		perfil = Perfil.objects.get(pk=pk)
 		escuela = User.objects.get(perfil=perfil)
-
+		municipio = Municipio.objects.get(perfil=perfil)
 		try:
 			visitaAlSitio = VisitaAlSitio.objects.get(escuela=escuela)
 		except VisitaAlSitio.DoesNotExist:
@@ -126,7 +132,7 @@ class DetailViewEscuela(View):
 			instalacionBebedero = None
 
 		try:
-			bitacora = EvidenciaConstruccion.objects.filter(escuela=escuela, fase="Instalación de Mueble Bebedero", aprobacion="Aprobado")
+			bitacora = EvidenciaConstruccion.objects.filter(escuela=escuela, fase="Instalación de Mueble Bebedero", aprobacion_SI="Aprobado")
 		except EvidenciaConstruccion.DoesNotExist:
 			bitacora = None
 
@@ -155,6 +161,7 @@ class DetailViewEscuela(View):
 			'bitacora': bitacora,
 			'terminoDeTrabajo': terminoDeTrabajo,
 			'segundaPrueba': segundaPrueba,
-			'entregaDeBebedero': entregaDeBebedero,			
+			'entregaDeBebedero': entregaDeBebedero,
+			'municipio': municipio	
 		}
 		return render(request,template_name, context)

@@ -19,9 +19,10 @@ class VisitaAlSitio(models.Model):
 class VisitaDeAcuerdo(models.Model):
 	escuela = models.OneToOneField(User)
 	convenio_concertacion = models.FileField(upload_to='visitas/2/concertacion/%Y/%m/%d/', verbose_name="Convenio de concertación de aplicación de recurso", null=True, blank=True)
-	cedula_identificacion = models.FileField(upload_to='visitas/2/cedula/%Y/%m/%d/', verbose_name="Cédula de identificación basica", null=True, blank=True)
+	cedula_identificacion = models.FileField(upload_to='visitas/2/identificacion/%Y/%m/%d/', verbose_name="Cédula de identificación basica", null=True, blank=True)
 	acta_acuerdos = models.FileField(upload_to='visitas/2/acta/%Y/%m/%d/', verbose_name="Acta de acuerdos y ubicación del módulo")
-	constancia_integracion_comite = models.FileField(upload_to='visitas/2/cedula/%Y/%m/%d/', verbose_name="Constancia de Integración de Comité", null=True, blank=True)
+	constancia_integracion_comite = models.FileField(upload_to='visitas/2/comite/%Y/%m/%d/', verbose_name="Constancia de Integración de Comité", null=True, blank=True)
+	acta_inicio_reportes = models.FileField(upload_to='visitas/2/reportes/%Y/%m/%d/', verbose_name="Acta de inicio de reportes", null=True, blank=True)
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	sim = models.ForeignKey(User, related_name="sim_segunda_visita")
 

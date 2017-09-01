@@ -37,4 +37,4 @@ class ViewMantenimientos(View):
 			NuevoMantenimiento.sim = sim
 			NuevoMantenimiento.save()
 
-		return redirect("accounts:DetailViewEscuela", pk=perfil.pk)
+		return redirect("mantenimiento:ViewMantenimientos", pk=perfil.pk)

@@ -25,7 +25,8 @@
 			<th>Creación</th>
 			<th>Video</th>
 			<th>Ejecutora</th>
-			<th>Aprobacion</th>
+			<th>Aprobación de Superintendente</th>
+			<th>Aprobación de Residente Técnico de INIFED</th>
 		</thead>
 		<tbody>
 		
@@ -37,7 +38,8 @@
 				<td>{{evidencia.creacion}}</td>
 				<td><a href="{{evidencia.video.url}}">Ver</a></td>
 				<td>{{evidencia.ejecutora}}</td>
-				<td>{{evidencia.aprobacion}}</td>
+				<td>{{evidencia.aprobacion_SI}}</td>
+				<td>{{evidencia.aprobacion_Residente}}</td>
 			</tr>
 
 		{%empty%}

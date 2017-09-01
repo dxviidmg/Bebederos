@@ -61,7 +61,8 @@ class EvidenciaConstruccion(models.Model):
 	fase = models.CharField(max_length=30, choices=fase_choices)
 	video = models.FileField(upload_to='instalaciones/bitacotra/video/%Y/%m/%d/', verbose_name="Evidencia audio visual")
 	ejecutora = models.ForeignKey(User, related_name="ejecutora_bitacora")
-	aprobacion = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación")
+	aprobacion_SI = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación de SI")
+	aprobacion_Residente = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación de residente")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 
 	def __str__(self):

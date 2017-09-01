@@ -6,8 +6,8 @@ from construccion.models import EvidenciaConstruccion
 
 class Region(models.Model):
 	numero = models.IntegerField()
-	nombre = models.CharField(max_length=20, null=True, blank=True)
 	color = models.CharField(max_length=10)
+	nombre = models.CharField(max_length=20, null=True, blank=True)
 
 	def __str__(self):
 		return '{}'.format(self.numero)
@@ -72,11 +72,12 @@ class Municipio(models.Model):
 class Perfil(models.Model):
 	tipo_choices = (
 		("Administrador", "Administrador"),
-		("SIM", "SIM"),
+		("SI", "Superintendente"),
 		("Ejecutora", "Ejecutora"),
 		("Escuela", "Escuela"),
 		("Laboratorio", "Laboratorio"),
-		("INIFED", "INIFED"),
+		("RTINIFED", "Residente Técnico de INIFED"),
+		("Coor_Estatal", "Coordinador Estatal de INIFED"),
 		("IMTA", "IMTA"),
 		("ECA", "Residente Técnico de Calidad de Agua")
 	)
@@ -144,16 +145,16 @@ class Perfil(models.Model):
 				self.avance = 0
 				self.save()
 			else:
-				if ultimaEvidencia.fase == "Firme" and ultimaEvidencia.aprobacion == "Aprobado":
+				if ultimaEvidencia.fase == "Firme" and ultimaEvidencia.aprobacion_SI == "Aprobado":
 					self.avance = 25
 					self.save()
-				elif ultimaEvidencia.fase == "Muro" and ultimaEvidencia.aprobacion == "Aprobado":
+				elif ultimaEvidencia.fase == "Muro" and ultimaEvidencia.aprobacion_SI == "Aprobado":
 					self.avance = 50
 					self.save()					
-				elif ultimaEvidencia.fase == "Techumbre y puerta" and ultimaEvidencia.aprobacion == "Aprobado":
+				elif ultimaEvidencia.fase == "Techumbre y puerta" and ultimaEvidencia.aprobacion_SI == "Aprobado":
 					self.avance = 75
 					self.save()
-				elif ultimaEvidencia.fase == "Instalación de Mueble Bebedero" and ultimaEvidencia.aprobacion == "Aprobado":
+				elif ultimaEvidencia.fase == "Instalación de Mueble Bebedero" and ultimaEvidencia.aprobacion_SI == "Aprobado":
 					self.avance = 100
 					self.save()
 #			if bitacora.fase == "Firme":

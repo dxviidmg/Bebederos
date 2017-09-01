@@ -20,9 +20,9 @@ class TerminoDeTrabajoAdmin(admin.ModelAdmin):
 admin.site.register(TerminoDeTrabajo, TerminoDeTrabajoAdmin)
 
 class EvidenciaAdmin(admin.ModelAdmin):
-    list_display = ['escuela']
+    list_display = ['escuela', 'fase', 'aprobacion_SI', 'aprobacion_Residente']
     search_fields = ['escuela__get_full_name', 'escuela__username']
-
+    list_filter = ['fase', 'aprobacion_SI', 'aprobacion_Residente']
 admin.site.register(EvidenciaConstruccion, EvidenciaAdmin)
 
 class NotaDeBitacoraAdmin(admin.ModelAdmin):

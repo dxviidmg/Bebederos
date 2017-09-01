@@ -1,8 +1,9 @@
 from django.contrib import admin
 from .models import *
 
+#Partidas
 class MantenimientoAdmin(admin.ModelAdmin):
-    list_display = ['escuela', 'mes', 'año', 'sim']
-    search_fields = ['escuela__get_full_name', 'escuela__username']
+    list_display = ['escuela', 'mes', 'año']
+    search_fields = ['escuela']
     list_filter = ['mes', 'año']
 admin.site.register(Mantenimiento, MantenimientoAdmin)
