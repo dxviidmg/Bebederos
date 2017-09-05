@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+
+{%load bootstrap%}
+
+{%block content%}
+
+
+		<form action="." method="post" enctype="multipart/form-data">
+			<h4>Realice la aprobación</h4>
+			{%csrf_token%}
+			{{BebederoForm | bootstrap}}
+			<a href=""><input type="submit" value="Guardar cambios"></a>
+			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Regresar"></a>
+		</form>
+
+{%endblock content%}

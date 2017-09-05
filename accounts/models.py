@@ -62,6 +62,8 @@ class Zona(models.Model):
 class Municipio(models.Model):
 	zona = models.ForeignKey(Zona, null=True)
 	nombre = models.CharField(max_length=30)
+	escuelas_registradas = models.IntegerField(default=0)
+	escuelas_aceptadas = models.IntegerField(default=0)
 	slug = models.SlugField(null=True)
 
 	def __str__(self):
