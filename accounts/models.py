@@ -33,8 +33,9 @@ class Entidad(models.Model):
 	representante_inifed = models.ForeignKey(User, null=True, blank=True)
 	partida = models.ForeignKey(Partida)
 	nombre = models.CharField(max_length=30)
-	slug = models.SlugField(null=True)
+	escuelas_asignadas = models.IntegerField(default=0)
 	imagen = models.ImageField(upload_to='estados/%Y/%m/%d/', default='img_no_disponible.jpg')
+	slug = models.SlugField(null=True)
 
 	def __str__(self):
 		return '{}'.format(self.nombre)
@@ -79,7 +80,8 @@ class Perfil(models.Model):
 		("RTINIFED", "Residente Técnico de INIFED"),
 		("Coor_Estatal", "Coordinador Estatal de INIFED"),
 		("IMTA", "IMTA"),
-		("ECA", "Residente Técnico de Calidad de Agua")
+		("ECA", "Residente Técnico de Calidad de Agua"),
+		("Demo", "Demo")
 	)
 
 	nivel_choices = (

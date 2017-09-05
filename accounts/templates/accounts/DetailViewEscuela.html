@@ -25,12 +25,17 @@
 		<p>Aulas existentes: {{perfil.aulas_existentes}}</p>
 		<p>Aulas en uso: {{perfil.aulas_en_uso}}</p>
 	</div>
-	<div>
-		<h2>Cronología general de la gestión, construcción, instalación y mantenimiento de un bebedero</h2>
 		
-		<br>
-		
-	</div>
+
+
+
+
+
+{%if request.user.perfil.tipo != "Demo"%}
+<h2>Cronología general de la gestión, construcción, instalación y mantenimiento de un bebedero</h2>
+{%endif%}
+
+
 	<div class="table-responsive text-center">
 		<table class="table table-bordered">
 			<tbody style="background-color: #BDBDBD;">
@@ -215,5 +220,51 @@
 			</tbody>
 		</table>
 	</div>
+
+{%if request.user.perfil.tipo == "Demo"%}
+
+<table class="table text-center">
+	<tbody>
+	<thead>
+		<th>Expediente</th>
+	</thead>
+		<tr>
+			<td>
+				<a href="{%url 'incidencias:ViewIncidencias' perfil.pk%}">Incidencias</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="{%url 'visitas:ViewVisitaAlSitio' perfil.pk%}">Visita al sitio</a><br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<a href="{%url 'visitas:ViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="{%url 'pruebas:ViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad</a>	</td>
+		</tr>
+		<tr>
+			<td><a href="{%url 'construccion:ViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajos</a></td>
+		</tr>
+		<tr>
+			<td><a href="{%url 'construccion:ViewBitacora' perfil.pk%}">Bitacora</a></td>
+		</tr>
+		<tr>
+			<td><a href="{%url 'pruebas:ViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad</a></td>
+		</tr>
+		<tr>
+			<td><a href="{%url 'visitas:ViewEntregaDeBebedero' perfil.pk%}">Entrega de bebedero</a></td>
+		</tr>
+		<tr>
+			<td><a href="{%url 'mantenimiento:ViewMantenimientos' perfil.pk%}">Mantenimiento</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+{%endif%}
 
 {%endblock content%}

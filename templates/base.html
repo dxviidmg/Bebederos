@@ -7,20 +7,12 @@
 
 		<link rel="stylesheet" type="text/css" href="{%static 'css/font-awesome.min.css'%}">
 
-    <link rel="stylesheet" type="text/css" href="{%static 'css/estilo.css'%}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/estilos.css'%}">
 
-
-    <style type="text/css">
-      .content{
-      min-height: 83%;
-      padding-top: 40px;
-      bottom: 0;
-    }
-    </style>
 	</head>
 	<body>
 
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded navbar-inverse bg-inverse navbar fixed-top">
+<nav class="navbar navbar-toggleable-md fixed-top" style="background-color: #44B036;">
 
 {%if request.user.is_authenticated%}
 
@@ -29,7 +21,7 @@
   </button>
 
   {%endif%}
-  <a class="navbar-brand" href="#">Seguimiento de bebederos v3.2</a>
+  <a class="navbar-brand" href="#" style="color: white;">TEASIB 3.2</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
@@ -66,11 +58,11 @@
   </div>
 </nav>
   
-  {%if not request.user.is_authenticated%}
-  <div class="container" style="padding-top: 30px;">
-    <img style="width: 100%" src="{%static 'img/Header.png'%}">
+
+  <div class="container container-header">
+    <img style="width: 100%" src="{%static 'img/header.png'%}">
   </div>
-  {%endif%}
+  
 	<div class="container content">
   
       {%block content%}
