@@ -37,234 +37,295 @@
 
 
 	<div class="table-responsive text-center">
-		<table class="table table-bordered">
+		<table class="table">
 			<tbody style="background-color: #BDBDBD;">
 
+			<!-- if de quienes pueden ver los enlcaces de Incidencias y Visita al sitio -->
 			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
-				<tr>
-					<td colspan="4" style="background-color: red;"><a href="{%url 'incidencias:ViewIncidencias' perfil.pk%}">Incidencias</a>
-				</tr>
-				<tr>
-					<td colspan="4">Formalidades</td>
-				</tr>
-				<tr style="background-color: #0080FF;">
-					<td colspan="2"><a href="{%url 'visitas:ViewVisitaAlSitio' perfil.pk%}">Visita al sitio</a></td>
 
+			<tr>
+				<td colspan="4" style="background-color: red;"><a href="{%url 'incidencias:ViewIncidencias' perfil.pk%}">Incidencias</a>
+			</tr>
+			<tr>
+				<td colspan="4">Formalidades</td>
+			</tr>
+			<tr style="background-color: #0080FF;">
+				<td colspan="2"><a href="{%url 'visitas:ViewVisitaAlSitio' perfil.pk%}">Visita al sitio</a></td>
+
+			<!-- Endif de quienes pueden ver los enlaces Incidencias y Visita al sitio -->
 			{%endif%}
 
-{%if visitaAlSitio%}
+	{%if visitaAlSitio%}
 
+			<!-- if de quienes puedes ver el enlace de la Visita de acuerdos -->
 			{%if request.user.perfil.tipo == "SI"  or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
-					<td colspan="2"><a href="{%url 'visitas:ViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a></td>
-				</tr>
-			{%endif%}
-	{%if visitaDeAcuerdo%}	
 
+				<td colspan="2"><a href="{%url 'visitas:ViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a></td>
+			</tr>
+
+			<!-- if de quienes puedes ver el enlace de la Visita de acuerdos -->
+			{%endif%}
+
+			{%if visitaDeAcuerdo%}	
+
+			<!-- if de quienes puedes ver los enlaces y resultados de la Primer Prueba de Calidad de Agua -->
 			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI"  or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True or request.user.is_staff == True%}		
-				<tr>
-					<td colspan="4">Pruebas de calidad de agua</td>
-				</tr>
-
 			
-				<tr style="background-color: orange;">
-					<td colspan="4">
-						<a href="{%url 'pruebas:ViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad</a>
-					</td>
-				</tr>
+			<tr>
+				<td colspan="4">Pruebas de calidad de agua</td>
+			</tr>
 
+			<tr style="background-color: orange;">
+				<td colspan="4"><a href="{%url 'pruebas:ViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad</a>
+				</td>
+			</tr>
+			<!-- Endif de quienes puedes ver los enlaces y resultados de la Primer Prueba de Calidad de Agua -->
 			{%endif%}
-		
-		{%if primerPrueba.aprobacion == "En espera"%}
 
+			{%if primerPrueba.aprobacion == "En espera"%}
+
+			<!-- if de quienes puedes ver el aviso de Esperando Resultados de la Primer Prueba de Calidad de Agua -->
 			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
-				<tr style="background-color: yellow;">
-					<td colspan="4">Status: Esperando resultados</td>
-				</tr>
-
-			{%endif%}
-
-		{%elif primerPrueba.aprobacion == "No aprobado"%}
-
-			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED"  or request.user.is_staff == True%}
-				<tr style="background-color: red;">
-					<td colspan="4">Status: No aprobado</td>
-				</tr>
-
-			{%endif%}
-
-		{%elif primerPrueba.aprobacion == "Aprobado"%}
-
-			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED"  or request.user.is_staff == True%}
-
-				<tr style="background-color: green;">
-					<td colspan="4">Status: Aprobado</td>
-				</tr>
+			<tr style="background-color: yellow;">
+				<td colspan="4">Status: Esperando resultados</td>
+			</tr>
 			
+			<!-- Endif de quienes puedes ver el aviso de Esperando Resultados de la Primer Prueba de Calidad de Agua -->
 			{%endif%}
 
+			{%elif primerPrueba.aprobacion == "No aprobado"%}
+
+			<!-- if de quienes puedes ver el aviso de No Aprobado de la Primer Prueba de Calidad de Agua -->
+			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED"  or request.user.is_staff == True%}
+
+			<tr style="background-color: red;">
+				<td colspan="4">Status: No aprobado</td>
+			</tr>
+
+			<!-- Endif de quienes puedes ver el aviso de No aprobado de la Primer Prueba de Calidad de Agua -->
+			{%endif%}
+
+			{%elif primerPrueba.aprobacion == "Aprobado"%}
+
+			<!-- if de quienes puedes ver el aviso de Aprobadp de la Primer Prueba de Calidad de Agua -->
+			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED"  or request.user.is_staff == True%}
+
+			<tr style="background-color: green;">
+				<td colspan="4">Status: Aprobado</td>
+			</tr>
+
+			<!-- Endif de quienes puedes ver el aviso de Aprobado de la Primer Prueba de Calidad de Agua -->
+			{%endif%}
+
+			<!-- if de quienes puedes ver los enlaces de Asignación de componentes, y avisos de sistema bebedero, trabajos -->
 			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
-				<tr>
-					<td colspan="4">Asignación de componentes</td>
-				</tr>
-				<tr style="background-color: #48C9B0;">
-					<td colspan="4"><a href="{%url 'bebederos:ViewBebederos' perfil.pk%}">Sistema bebedero</a></td>
-				</tr>
-				<tr>
-					<td colspan="4">Trabajos</td>
-				</tr>
-
+			<tr>
+				<td colspan="4">Asignación de componentes</td>
+			</tr>
+			<tr style="background-color: #48C9B0;">
+				<td colspan="4"><a href="{%url 'bebederos:ViewBebederos' perfil.pk%}">Sistema bebedero</a></td>
+			</tr>
+			<tr>
+				<td colspan="4">Trabajos</td>
+			</tr>
+			
+			<!-- if de quienes puedes ver los enlaces de Asignación de componentes, y avisos de sistema bebedero, trabajos -->
 			{%endif%}
 
-			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}	
+			<!-- if de quienes puedes ver el enlace de Inicio de trabajos -->
+			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
+			<tr style="background-color: #FFFF00;">
+				<td colspan="1"><a href="{%url 'construccion:ViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajos</a>
+				</td>
 
-				<tr style="background-color: #FFFF00;">
-					<td colspan="1"><a href="{%url 'construccion:ViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajos</a></td>
-
+			<!-- Endif de quienes puedes ver el enlace de Inicio de trabajos -->
 			{%endif%}
 
-			{%if inicioDeTrabajo%}
+				{%if inicioDeTrabajo%}
 
+			<!-- if de quienes puedes ver el enlace de Instalación de bebedero -->
 			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED"  or request.user.is_staff == True%}
 
-					<td colspan="1"><a href="{%url 'construccion:ViewInstalacionBebedero' perfil.pk%}">Instalación de bebedero</a></td>
+				<td colspan="1"><a href="{%url 'construccion:ViewInstalacionBebedero' perfil.pk%}">Instalación de bebedero</a></td>
 			
+			<!-- Endif de quienes puedes ver el enlace de Instalación de bebedero -->
 			{%endif%}
 
-				{%if instalacionBebedero%}
+					{%if instalacionBebedero%}
 
-
+			<!-- if de quienes puedes ver el enlace de Bitacora -->
 			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}	
-					<td colspan="1"><a href="{%url 'construccion:ViewBitacora' perfil.pk%}">Bitacora</a></td>
+				<td colspan="1"><a href="{%url 'construccion:ViewBitacora' perfil.pk%}">Bitacora</a></td>
 
+			<!-- Endif de quienes puedes ver el enlace de Bitacora -->
 			{%endif%}
 
+						{%if bitacora %}
 
-			{%if bitacora %}
+			<!-- if de quienes puedes ver el enlace de Termino de trabajos -->
 			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
-					<td colspan="1"><a href="{%url 'construccion:ViewTerminoDeTrabajo' perfil.pk%}">Termino de trabajos</a></td>
-				</tr>
+				<td colspan="1"><a href="{%url 'construccion:ViewTerminoDeTrabajo' perfil.pk%}">Termino de trabajos</a></td>
+			</tr>
 
+			<!-- Endif de quienes puedes ver el enlace de Termino de trabajos -->
 			{%endif%}
 
-					{%if terminoDeTrabajo%} 
+							{%if terminoDeTrabajo%} 
 
+			<!-- if de quienes puedes ver el enlace y los avisos la Segunda Prueba de Calidad de Agua -->
 			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
-				<tr>
-					<td colspan="4">
-						Pruebas de calidad de agua
-					</td>
-				</tr>
+			<tr>
+				<td colspan="4">Pruebas de calidad de agua
+				</td>
+			</tr>
 
-				<tr style="background-color: orange;">
-					<td colspan="4"><a href="{%url 'pruebas:ViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad</a>
-					</td>
+			<tr style="background-color: orange;">
+				<td colspan="4"><a href="{%url 'pruebas:ViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad</a></td>
 
+			<!-- if de quienes puedes ver el enlace y los avisos la Segunda Prueba de Calidad de Agua -->
 			{%endif%}
 
-				</tr>
-						{%if segundaPrueba.aprobacion == "En espera"%}
+			</tr>
 
+								{%if segundaPrueba.aprobacion == "En espera"%}
+
+			<!-- if de quienes puedes el aviso de Esperando resultados de la Segunda Prueba de Calidad de Agua -->
 			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
-						<tr style="background-color: yellow">
-							<td colspan="4">Esperando resultados</td>
-						</tr>
+			<tr style="background-color: yellow">
+				<td colspan="4">Esperando resultados</td>
+			</tr>
 
+			<!-- if de quienes puedes el aviso de Esperando Resultados de la Segunda Prueba de Calidad de Agua -->
 			{%endif%}
-						{%elif segundaPrueba.aprobacion == "No aprobado"%}
 
+								{%elif segundaPrueba.aprobacion == "No aprobado"%}
+
+			<!-- if de quienes puedes el aviso de No Aprobado de la Segunda Prueba de Calidad de Agua -->
 			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
-						<tr style="background-color: red">
-							<td colspan="4">No paso</td>
-						</tr>
 
+			<tr style="background-color: red">
+				<td colspan="4">No aprobado</td>
+			</tr>
+
+			<!-- Endif de quienes puedes el aviso de No Aprobado de la Segunda Prueba de Calidad de Agua -->
 			{%endif%}
-						{%elif segundaPrueba.aprobacion == "Aprobado"%}
 
+								{%elif segundaPrueba.aprobacion == "Aprobado"%}
+
+			<!-- if de quienes puedes el aviso de Aprobado de la Segunda Prueba de Calidad de Agua -->
 			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
-						<tr style="background-color: green">
-							<td colspan="4">Aprobado</td>
-						</tr>
+
+			<tr style="background-color: green">
+				<td colspan="4">Aprobado</td>
+			</tr>
+
+			<!-- Endif de quienes puedes el aviso de Aprobado de la Segunda Prueba de Calidad de Agua -->
 			{%endif%}
+
+			<!-- if de quienes puedes ver el enlace de Entrega de Bebedero -->
 			{%if request.user.perfil.tipo == "SI"  or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
-						<tr>
-							<td colspan="4">Entrega de bebedero</td>
-						</tr>
-						<tr style="background-color: #00FF00">
-							<td colspan="2"><a href="{%url 'visitas:ViewEntregaDeBebedero' perfil.pk%}">Entrega de bebedero</a></td>
+			<tr>
+				<td colspan="4">Entrega de bebedero</td>
+			</tr>
+			<tr style="background-color: #00FF00">
+				<td colspan="2"><a href="{%url 'visitas:ViewEntregaDeBebedero' perfil.pk%}">Entrega de bebedero</a></td>
 
+			<!-- Endif de quienes puedes ver el enlace de Entrega de Bebedero -->
 			{%endif%}
-							{%if entregaDeBebedero%}
 
+									{%if entregaDeBebedero%}
+
+			<!-- if de quienes puedes ver el enlace de Mantenimientos -->
 			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
-							<td colspan="2"><a href="{%url 'mantenimiento:ViewMantenimientos' perfil.pk%}">Mantenimiento</a></td>
+				<td colspan="2"><a href="{%url 'mantenimiento:ViewMantenimientos' perfil.pk%}">Mantenimiento</a></td>
+			
+			<!-- Endif de quienes puedes ver el enlace de Mantenimientos -->
 			{%endif%}
+
+			</tr>
+			<!-- Endif de entregaDeBebedero -->
+									{%endif%}
+
+			<!-- Endif de segundaPrueba -->
+								{%endif%}
+
+		<!-- Endif de terminoDeTrabajos -->
 							{%endif%}
 
-						</tr>
+		<!-- Endif de  bitacora-->
 						{%endif%}
+
+		<!-- Endif de instalacionBebedero -->
 					{%endif%}
-				{%endif%}
+
+		<!-- Endif de inicioDeTrabajo -->
+				{%endif%}			
+
+		<!-- Endif de primerPrueba -->
 			{%endif%}
-		{%endif%}				
+
+		<!-- Endif de visitaDeAcuerdos -->
+		{%endif%}
+
+	<!-- Endif de visitaAlSitio -->
 	{%endif%}
-{%endif%}
-{%endif%}
 
 			</tbody>
 		</table>
 	</div>
 
-{%if request.user.perfil.tipo == "Demo"%}
+	<!-- CRONOLOGÍA PARA EL DEMO -->
+	{%if request.user.perfil.tipo == "Demo"%}
 
-<table class="table text-center">
-	<tbody>
-	<thead>
-		<th>Expediente</th>
-	</thead>
-		<tr>
-			<td>
-				<a href="{%url 'incidencias:ViewIncidencias' perfil.pk%}">Incidencias</a>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="">Visita al sitio (enlace no disponible para demo)</a><br>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<a href="{%url 'visitas:ViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a>
-			</td>
-		</tr>
-		<tr>
-			<td><a href="{%url 'pruebas:ViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad</a>	</td>
-		</tr>
-		<tr>
-			<td><a href="">Inicio de trabajos (enlace no disponible para demo)</a></td>
-		</tr>
-		<tr>
-			<td><a href="{%url 'construccion:ViewBitacora' perfil.pk%}">Bitacora</a></td>
-		</tr>
-		<tr>
-			<td><a href="">Segunda prueba de calidad (enlace no disponible para demo)</a></td>
-		</tr>
-		<tr>
-			<td><a href="{%url 'visitas:ViewEntregaDeBebedero' perfil.pk%}">Entrega de bebedero</a></td>
-		</tr>
-		<tr>
-			<td><a href="{%url 'mantenimiento:ViewMantenimientos' perfil.pk%}">Mantenimiento</a>
-			</td>
-		</tr>
-	</tbody>
-</table>
+		<table class="table text-center">
+			<tbody>
+			<thead>
+				<th>Expediente</th>
+			</thead>
+				<tr>
+					<td>
+						<a href="{%url 'incidencias:ViewIncidencias' perfil.pk%}">Incidencias</a>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="">Visita al sitio (enlace no disponible para demo)</a><br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="{%url 'visitas:ViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a>
+					</td>
+				</tr>
+				<tr>
+					<td><a href="{%url 'pruebas:ViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad</a>	</td>
+				</tr>
+				<tr>
+					<td><a href="">Inicio de trabajos (enlace no disponible para demo)</a></td>
+				</tr>
+				<tr>
+					<td><a href="{%url 'construccion:ViewBitacora' perfil.pk%}">Bitacora</a></td>
+				</tr>
+				<tr>
+					<td><a href="">Segunda prueba de calidad (enlace no disponible para demo)</a></td>
+				</tr>
+				<tr>
+					<td><a href="{%url 'visitas:ViewEntregaDeBebedero' perfil.pk%}">Entrega de bebedero</a></td>
+				</tr>
+				<tr>
+					<td><a href="{%url 'mantenimiento:ViewMantenimientos' perfil.pk%}">Mantenimiento</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 
-{%endif%}
+	{%endif%}
 
 {%endblock content%}

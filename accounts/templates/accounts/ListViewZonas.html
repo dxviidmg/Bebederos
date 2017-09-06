@@ -25,7 +25,7 @@
 						<td>
 							{%for municipio in MunicipiosPorZona.municipios%}
 
-						<p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">{{municipio.nombre}}</a></p>
+						<a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">{{municipio.nombre}}</a> 
 	
 							{%empty%}
 

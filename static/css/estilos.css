@@ -56,10 +56,17 @@ a:hover {
   background-color: #27971B;
 }
 
-table {
-  background-color: #EEEEEE;
-  border-style: solid;
+td, tr, th {
+  border-style: solid 1px;
 }
-th, td, tr {
-  border-style: solid;
+
+thead{
+  background-color: #44B036;
+}
+tbody {
+  background-color: #eeeeee
+}
+
+.mynav {
+
 }
