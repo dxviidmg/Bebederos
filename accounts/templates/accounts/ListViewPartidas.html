@@ -2,45 +2,62 @@
 
 {%block content%}
 
-	<h1>Lista de partidas de la region {{region}}</h1>
+	<h1>Lista de partidas de la region {{region}}: {{region.nombre}}</h1>
 
 	<p><a href="{%url 'accounts:ListViewRegiones'%}">Regresar</a></p>
-	<div class="row justify-content-center" >
 
+	<div class="row justify-content-center" >
 		<div class="table-responsive text-center">
 			<table class="table">
 				<thead>
-					<th>Partida</th>
-					<th>Entidad</th>
+					<tr>
+						<th rowspan="2">Partida</th>
+						<th rowspan=2>Entidad</th>
+						<th colspan="3">Escuelas</th>
+					</tr>
+					<tr>
+						<th>Asignadas</th>
+						<th>Registradas</th>
+						<th>Aceptadas</th>
+					</tr>
 				</thead>
 				<tbody>
 
-					{%for EntidadesPorPartida in ListEntidadesPorPartida%}
+	{%for EntidadesPorPartida in ListEntidadesPorPartida%}
 
-					<tr>
-						<td>
-							{{EntidadesPorPartida.partida}}
+		{%for entidad in EntidadesPorPartida.entidades%}			
+					<tr>	
+						
+						
+						{%if forloop.first%}
+						<td rowspan=" {{EntidadesPorPartida.entidades|length }}">
+						{{EntidadesPorPartida.partida}}
 						</td>
-						<td>
-							{%for entidad in EntidadesPorPartida.entidades%}
+						{%endif%}
 
-						<p><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">{{entidad}}</a></p>
-	
-							{%empty%}
+							
+						<td><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">{{entidad}}</a></td>
+		
+						<td>{{entidad.escuelas_asignadas}}</td>
+						<td>Por definir</td>
+						<td>Por definir</td>
+						</tr>
 
-							<p>La partida {{EntidadesPorPartida.partida}} no tiene entidades registradas</p>
+		{%empty%}
 
-							{%endfor%}
-						</td>
-					</tr>
+						<td colspan="3">La partida {{EntidadesPorPartida.partida}} no tiene entidades registradas</td>
 
-					{%empty%}
+		{%endfor%}
+
+					
+
+	{%empty%}
 
 					<tr>
 						<td colspan="2">No hay partidas registradas</td>
 					</tr>
 
-					{%endfor%}
+	{%endfor%}
 
 				</tbody>
 			</table>

@@ -47,8 +47,9 @@ class ListViewPartidas(View):
 		ListEntidadesPorPartida = []
 
 		for partida in partidas:
+
 			ListEntidadesPorPartida.append({'partida': partida.numero, 'entidades': Entidad.objects.filter(partida=partida)})
-		
+			
 		context = {
 			'region': region,
 			'ListEntidadesPorPartida': ListEntidadesPorPartida,

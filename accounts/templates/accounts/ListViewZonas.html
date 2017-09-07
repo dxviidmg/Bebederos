@@ -11,28 +11,44 @@
 		<div class="table-responsive text-center">
 			<table class="table">
 				<thead>
-					<th>Zona</th>
-					<th>Municipio</th>
+				<tr>
+					<th rowspan="2">Zona</th>
+					<th rowspan="2">Municipio</th>
+					<th colspan="2">Escuelas</th>
+				</tr>
+				<tr>
+					<th>Registradas</th>
+					<th>Aceptadas</th>
+				</tr>
 				</thead>
 				<tbody>
 
 					{%for MunicipiosPorZona in ListMunicipiosPorZona%}
 
-					<tr>
-						<td>
-							{{MunicipiosPorZona.zona}}
-						</td>
-						<td>
 							{%for municipio in MunicipiosPorZona.municipios%}
 
+					<tr>
+
+
+
+						{%if forloop.first%}
+						<td rowspan=" {{MunicipiosPorZona.municipios|length }}">
+						{{MunicipiosPorZona.zona}}
+						</td>
+						{%endif%}
+
+						<td>
+
 						<a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">{{municipio.nombre}}</a> 
-	
+						</td>
+						<td>Por definir</td>
+						<td>Por definir</td>
 							{%empty%}
 
 							<p>La zona {{MunicipiosPorZona.partida}} no tiene municipios registrados</p>
 
 							{%endfor%}
-						</td>
+						
 					</tr>
 
 					{%empty%}

@@ -22,7 +22,7 @@ class Region(models.Model):
 class Partida(models.Model):
 	region = models.ForeignKey(Region, verbose_name="Región")
 	numero = models.IntegerField(verbose_name="número")
-
+	cantidad_entidades = models.IntegerField(default=1)
 	def __str__(self):
 		return '{} de región {}'.format(self.numero, self.region)	
 
