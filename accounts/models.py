@@ -34,8 +34,27 @@ class Entidad(models.Model):
 	partida = models.ForeignKey(Partida)
 	nombre = models.CharField(max_length=30)
 	escuelas_asignadas = models.IntegerField(default=0)
+	escuelas_registradas = models.IntegerField(default=0)
+	escuelas_aceptadas = models.IntegerField(default=0)
+	escuelas_pendientes = models.IntegerField(default=0)
+	escuelas_rechazadas = models.IntegerField(default=0)
 	imagen = models.ImageField(upload_to='estados/%Y/%m/%d/', default='img_no_disponible.jpg')
 	slug = models.SlugField(null=True)
+
+	def EscuelasCount(self):
+		entidad = Entidad.objects.get(pk=self.pk)
+		zonas = Zona.objects.filter(entidad=entidad)
+		municipios = Municipio.objects.filter(zona__in=zonas)
+		escuelas_registradas_count = Perfil.objects.filter(municipio__in=municipios).count()
+		escuelas_aceptadas_count = Perfil.objects.filter(municipio__in=municipios, status="Aceptado").count()
+		escuelas_pendientes_count = Perfil.objects.filter(municipio__in=municipios, status__isnull=True).count()
+		escuelas_rechazadas_count = Perfil.objects.filter(municipio__in=municipios, status="Rechazado").count()
+	
+		self.escuelas_registradas = escuelas_registradas_count
+		self.escuelas_aceptadas = escuelas_aceptadas_count
+		self.escuelas_pendientes = escuelas_pendientes_count
+		self.escuelas_rechazadas = escuelas_rechazadas_count
+		self.save()
 
 	def __str__(self):
 		return '{}'.format(self.nombre)
@@ -64,13 +83,33 @@ class Municipio(models.Model):
 	nombre = models.CharField(max_length=30)
 	escuelas_registradas = models.IntegerField(default=0)
 	escuelas_aceptadas = models.IntegerField(default=0)
+	escuelas_pendientes = models.IntegerField(default=0)
+	escuelas_rechazadas = models.IntegerField(default=0)
 	slug = models.SlugField(null=True)
+
+	def EscuelasCount(self):
+		municipio = Municipio.objects.get(pk=self.pk)
+		escuelas_registradas_count = Perfil.objects.filter(municipio=municipio).count()
+		escuelas_aceptadas_count = Perfil.objects.filter(municipio=municipio, status="Aceptado").count()
+		escuelas_pendientes_count = Perfil.objects.filter(municipio=municipio, status__isnull=True).count()
+		escuelas_rechazadas_count = Perfil.objects.filter(municipio=municipio, status="Rechazado").count()
+
+		print(escuelas_pendientes_count)
+		print(escuelas_registradas_count)
+
+		self.escuelas_registradas = escuelas_registradas_count
+		self.escuelas_aceptadas = escuelas_aceptadas_count
+		self.escuelas_pendientes = escuelas_pendientes_count
+		self.escuelas_rechazadas = escuelas_rechazadas_count
+
+		self.save()
 
 	def __str__(self):
 		return '{} de Zona {}'.format(self.nombre, self.zona)
 
 	class Meta:
 		ordering = ['nombre']
+
 
 class Perfil(models.Model):
 	tipo_choices = (

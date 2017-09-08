@@ -56,8 +56,8 @@ a:hover {
   background-color: #27971B;
 }
 
-td, tr, table, {
-  border-style: solid;
+td, tr, table, thead {
+  border-style: solid black 1px;
 }
 
 thead{
@@ -65,4 +65,8 @@ thead{
 }
 tbody {
   background-color: #eeeeee;
+}
+
+th {
+  border-style: none;
 }

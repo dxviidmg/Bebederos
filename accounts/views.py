@@ -65,7 +65,7 @@ class ListViewZonas(View):
 		municipios = Municipio.objects.filter(zona__in=zonas)
 		partida = Partida.objects.get(entidad=entidad)
 		region = Region.objects.get(partida=partida)
-		print(region)
+	
 		ListMunicipiosPorZona = []
 		for zona in zonas:
 			ListMunicipiosPorZona.append({'zona': zona.nombre, 'municipios': Municipio.objects.filter(zona=zona)})

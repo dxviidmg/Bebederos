@@ -4,36 +4,133 @@
 
 {%block content%}
 
-	<div>
-		<h1>Información de la {{perfil.tipo}} {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h1>
+<p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">Regresar</a></p>
 
-		<h2>Status: {{perfil.status}}</h2>
-		<h3>Avance: {{perfil.avance}}%</h3>
-
-		<p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">Regresar</a></p>
-		<p>CCT: {{escuela.username}}</p>
-		<p>Turno: {{perfil.turno}}</p>
-		<p>Director: {{perfil.director}}</p>
-		{%if perfil.foto_director%}
-		<p>Foto del director: <a href="{{perfil.foto_director.url}}">Ver</a></p>
-		{%endif%}
-		<p>Cantidad de alumnos: {{perfil.plantilla_escolar}}</p>
-		<p>Telefono: {{perfil.telefono}}</p>
-		<p>Domicilio: {{perfil.domicilio}}</p>
-		<p>Referencias: {{perfil.referencias}}</p>
-		
-		<p>Aulas existentes: {{perfil.aulas_existentes}}</p>
-		<p>Aulas en uso: {{perfil.aulas_en_uso}}</p>
-	</div>
-		
+	
 
 
+<div>
+<h3>Opción 3</h3>
+<h4>Información general</h4>
+<div class="table-responsive text-center">
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="4">Resumen</th>
+			</tr>
+			<tr>
+				<th>CCT</th>
+				<th>Nombre de la escuela</th>
+				<th>Status</th>
+				<th>Avance</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+			<td>{{escuela.username}}</td>
+				<td>
+					{{perfil.tipo}} {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"
+						
+				</td>
+				<td>
+					{{perfil.status}}
+				</td>
+				<td>
+					{%if perfil.avance%}{{perfil.avance}}%{%endif%}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
 
+
+<div class="table-responsive text-center">
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="4">Información detallada</th>
+			</tr>
+			<tr>
+				<th>CCT</th>
+				<th>Nombre de la escuela</th>
+				<th>Status</th>
+				<th>Avance</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+			<td>{{escuela.username}}</td>
+				<td>
+					{{perfil.tipo}} {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"
+						
+				</td>
+				<td>
+					{{perfil.status}}
+				</td>
+				<td>
+					{%if perfil.avance%}{{perfil.avance}}%{%endif%}
+				</td>
+			</tr>
+		</tbody>
+		<thead>
+						<tr>
+				<th>Turno</th>
+				<th>Matricula</th>
+				<th>Director</th>
+				<th>Foto</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{{perfil.turno}}</td>
+				<td>{{perfil.plantilla_escolar}}</td>
+				<td>{{perfil.director}}</td>
+				<td><a href="{{perfil.foto_director.url}}">Ver</a></td>
+			</tr>
+		</tbody>
+				<thead>
+						<tr>
+				<th>Telefono</th>
+				<th>Mail</th>
+				<th>Domicilio</th>
+				<th>Referencias</th>
+			</tr>
+		</thead>
+				<tbody>
+			<tr>
+				<td>{{perfil.telefono}}</td>
+				<td>{{escuela.email}}</td>
+				<td>{{perfil.domicilio}}</td>
+				<td>{{perfil.referencias}}</td>
+			</tr>
+		</tbody>
+
+						<thead>
+						<tr>
+				<th>Aulas existentes</th>
+				<th>Aulas en uso</th>
+				<th>Tipo de Conexión</th>
+
+			</tr>
+		</thead>
+
+						<tbody>
+			<tr>
+				<td>{{perfil.aulas_existentes}}</td>
+				<td>{{perfil.aulas_en_uso}}</td>
+				<td>{{perfil.conexion}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+</div>
 
 
 {%if request.user.perfil.tipo != "Demo"%}
 <h2>Cronología general de la gestión, construcción, instalación y mantenimiento de un bebedero</h2>
 {%endif%}
+
 
 
 	<div class="table-responsive text-center">
