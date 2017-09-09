@@ -56,17 +56,10 @@ a:hover {
   background-color: #27971B;
 }
 
-td, tr, table, thead {
-  border-style: solid black 1px;
-}
-
 thead{
   background-color: #44B036;
 }
 tbody {
-  background-color: #eeeeee;
+  background-color: #eeeee1;
 }
 
-th {
-  border-style: none;
-}

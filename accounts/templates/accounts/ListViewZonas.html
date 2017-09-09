@@ -13,7 +13,7 @@
 	<div class="row justify-content-center" >
 
 		<div class="table-responsive text-center">
-			<table class="table">
+			<table class="table table-bordered">
 				<thead>
 				<tr>
 					<th style="vertical-align: middle;"
@@ -53,8 +53,8 @@
 						<td>{{municipio.escuelas_rechazadas}}</td>						
 							{%empty%}
 
-							<p>La zona {{MunicipiosPorZona.partida}} no tiene municipios registrados</p>
-
+							<td>{{MunicipiosPorZona.zona}}</td>
+							<td colspan="5">No tiene municipios registrados</td>
 							{%endfor%}
 						
 					</tr>
@@ -62,7 +62,7 @@
 					{%empty%}
 
 					<tr>
-						<td colspan="2">No hay partidas registradas</td>
+						<td colspan="6">No hay partidas registradas</td>
 					</tr>
 
 					{%endfor%}

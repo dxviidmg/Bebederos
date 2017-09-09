@@ -107,6 +107,11 @@ class DetailViewEscuela(View):
 		perfil = Perfil.objects.get(pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		municipio = Municipio.objects.get(perfil=perfil)
+		zona = Zona.objects.get(municipio=municipio)
+		entidad = Entidad.objects.get(zona=zona)
+		partida = Partida.objects.get(entidad=entidad)
+		region = Region.objects.get(partida=partida)
+
 		try:
 			visitaAlSitio = VisitaAlSitio.objects.get(escuela=escuela)
 		except VisitaAlSitio.DoesNotExist:
@@ -151,6 +156,7 @@ class DetailViewEscuela(View):
 			entregaDeBebedero = EntregaDeBebedero.objects.get(escuela=escuela)
 		except EntregaDeBebedero.DoesNotExist:
 			entregaDeBebedero = None
+
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
@@ -163,6 +169,9 @@ class DetailViewEscuela(View):
 			'terminoDeTrabajo': terminoDeTrabajo,
 			'segundaPrueba': segundaPrueba,
 			'entregaDeBebedero': entregaDeBebedero,
-			'municipio': municipio	
+			'municipio': municipio,
+			'zona': zona,
+			'entidad': entidad,
+			'region': region,
 		}
 		return render(request,template_name, context)

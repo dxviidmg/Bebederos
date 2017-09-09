@@ -4,127 +4,93 @@
 
 {%block content%}
 
+<h4>Información general</h4>
+
 <p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">Regresar</a></p>
 
-	
-
-
-<div>
-<h3>Opción 3</h3>
-<h4>Información general</h4>
 <div class="table-responsive text-center">
-	<table class="table">
+	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th colspan="4">Resumen</th>
-			</tr>
-			<tr>
-				<th>CCT</th>
-				<th>Nombre de la escuela</th>
-				<th>Status</th>
-				<th>Avance</th>
+				<th colspan="3">CCT</th>
+				<th colspan="3">Nombre de la escuela</th>
+				<th colspan="3">Status</th>
+				<th colspan="3">Avance</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-			<td>{{escuela.username}}</td>
-				<td>
-					{{perfil.tipo}} {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"
-						
-				</td>
-				<td>
-					{{perfil.status}}
-				</td>
-				<td>
-					{%if perfil.avance%}{{perfil.avance}}%{%endif%}
-				</td>
+				<td colspan="3">{{escuela.username}}</td>
+				<td colspan="3">{{perfil.tipo}} {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</td>
+				<td colspan="3">{{perfil.status}}</td>
+				<td colspan="3">{%if perfil.avance%}{{perfil.avance}}%{%endif%}</td>
+			</tr>
+		</tbody>
+		<thead>
+			<tr>
+				<th colspan="3">Turno</th>
+				<th colspan="3">Matricula</th>
+				<th colspan="3">Director</th>
+				<th colspan="3">Foto</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td colspan="3">{{perfil.turno}}</td>
+				<td colspan="3">{{perfil.plantilla_escolar}}</td>
+				<td colspan="3">{{perfil.director}}</td>
+				<td colspan="3">{%if perfil.foto_director%}<a href="{{perfil.foto_director.url}}">Ver</a>{%else%}Nota: Subir foto del Director{%endif%}</td>
+			</tr>
+		</tbody>
+		<thead>
+			<tr>
+				<th colspan="3">Telefono</th>
+				<th colspan="3">Mail</th>
+				<th colspan="3">Domicilio</th>
+				<th colspan="3">Referencias</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td colspan="3">{{perfil.telefono}}</td>
+				<td colspan="3">{{escuela.email}}</td>
+				<td colspan="3">{{perfil.domicilio}}</td>
+				<td colspan="3">{{perfil.referencias}}</td>
+			</tr>
+		</tbody>
+		<thead>
+			<tr>
+				<th colspan="3">Municipio</th>
+				<th colspan="3">Zona</th>
+				<th colspan="3">Partida/Estado</th>
+				<th colspan="3">Región</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td colspan="3">{{perfil.municipio.nombre}}</td>
+				<td colspan="3">{{zona.nombre}}</td>
+				<td colspan="3">{{entidad}}</td>
+				<td colspan="3">{{region}}</td>
+			</tr>
+		</tbody>
+		<thead>
+			<tr>
+				<th colspan="4">Aulas existentes</th>
+				<th colspan="4">Aulas en uso</th>
+				<th colspan="4">Tipo de Conexión</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td colspan="4">{{perfil.aulas_existentes}}</td>
+				<td colspan="4">{{perfil.aulas_en_uso}}</td>
+				<td colspan="4">{{perfil.conexion}}</td>
 			</tr>
 		</tbody>
 	</table>
 </div>
 
-
-<div class="table-responsive text-center">
-	<table class="table">
-		<thead>
-			<tr>
-				<th colspan="4">Información detallada</th>
-			</tr>
-			<tr>
-				<th>CCT</th>
-				<th>Nombre de la escuela</th>
-				<th>Status</th>
-				<th>Avance</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-			<td>{{escuela.username}}</td>
-				<td>
-					{{perfil.tipo}} {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"
-						
-				</td>
-				<td>
-					{{perfil.status}}
-				</td>
-				<td>
-					{%if perfil.avance%}{{perfil.avance}}%{%endif%}
-				</td>
-			</tr>
-		</tbody>
-		<thead>
-						<tr>
-				<th>Turno</th>
-				<th>Matricula</th>
-				<th>Director</th>
-				<th>Foto</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>{{perfil.turno}}</td>
-				<td>{{perfil.plantilla_escolar}}</td>
-				<td>{{perfil.director}}</td>
-				<td><a href="{{perfil.foto_director.url}}">Ver</a></td>
-			</tr>
-		</tbody>
-				<thead>
-						<tr>
-				<th>Telefono</th>
-				<th>Mail</th>
-				<th>Domicilio</th>
-				<th>Referencias</th>
-			</tr>
-		</thead>
-				<tbody>
-			<tr>
-				<td>{{perfil.telefono}}</td>
-				<td>{{escuela.email}}</td>
-				<td>{{perfil.domicilio}}</td>
-				<td>{{perfil.referencias}}</td>
-			</tr>
-		</tbody>
-
-						<thead>
-						<tr>
-				<th>Aulas existentes</th>
-				<th>Aulas en uso</th>
-				<th>Tipo de Conexión</th>
-
-			</tr>
-		</thead>
-
-						<tbody>
-			<tr>
-				<td>{{perfil.aulas_existentes}}</td>
-				<td>{{perfil.aulas_en_uso}}</td>
-				<td>{{perfil.conexion}}</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-
-</div>
 
 
 {%if request.user.perfil.tipo != "Demo"%}
@@ -141,12 +107,9 @@
 			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
 			<tr>
-				<td colspan="4" style="background-color: red;"><a href="{%url 'incidencias:ViewIncidencias' perfil.pk%}">Incidencias</a>
+				<td colspan="4" style="background-color: #86FE00;"><a href="{%url 'incidencias:ViewIncidencias' perfil.pk%}">Incidencias</a>
 			</tr>
-			<tr>
-				<td colspan="4">Formalidades</td>
-			</tr>
-			<tr style="background-color: #0080FF;">
+			<tr style="background-color: #00E387;">
 				<td colspan="2"><a href="{%url 'visitas:ViewVisitaAlSitio' perfil.pk%}">Visita al sitio</a></td>
 
 			<!-- Endif de quienes pueden ver los enlaces Incidencias y Visita al sitio -->
@@ -167,12 +130,8 @@
 
 			<!-- if de quienes puedes ver los enlaces y resultados de la Primer Prueba de Calidad de Agua -->
 			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI"  or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True or request.user.is_staff == True%}		
-			
-			<tr>
-				<td colspan="4">Pruebas de calidad de agua</td>
-			</tr>
 
-			<tr style="background-color: orange;">
+			<tr style="background-color: #35D4EA;">
 				<td colspan="4"><a href="{%url 'pruebas:ViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad</a>
 				</td>
 			</tr>
@@ -218,14 +177,8 @@
 			<!-- if de quienes puedes ver los enlaces de Asignación de componentes, y avisos de sistema bebedero, trabajos -->
 			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
-			<tr>
-				<td colspan="4">Asignación de componentes</td>
-			</tr>
-			<tr style="background-color: #48C9B0;">
-				<td colspan="4"><a href="{%url 'bebederos:ViewBebederos' perfil.pk%}">Sistema bebedero</a></td>
-			</tr>
-			<tr>
-				<td colspan="4">Trabajos</td>
+			<tr style="background-color: #64AFF2;">
+				<td colspan="4"><a href="{%url 'bebederos:ViewBebederos' perfil.pk%}"> Asignación de componentesSistema bebedero</a></td>
 			</tr>
 			
 			<!-- if de quienes puedes ver los enlaces de Asignación de componentes, y avisos de sistema bebedero, trabajos -->
@@ -233,7 +186,7 @@
 
 			<!-- if de quienes puedes ver el enlace de Inicio de trabajos -->
 			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
-			<tr style="background-color: #FFFF00;">
+			<tr style="background-color: #385398;">
 				<td colspan="1"><a href="{%url 'construccion:ViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajos</a>
 				</td>
 
@@ -275,12 +228,7 @@
 			<!-- if de quienes puedes ver el enlace y los avisos la Segunda Prueba de Calidad de Agua -->
 			{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
-			<tr>
-				<td colspan="4">Pruebas de calidad de agua
-				</td>
-			</tr>
-
-			<tr style="background-color: orange;">
+			<tr style="background-color: #A700B0;">
 				<td colspan="4"><a href="{%url 'pruebas:ViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad</a></td>
 
 			<!-- if de quienes puedes ver el enlace y los avisos la Segunda Prueba de Calidad de Agua -->
@@ -327,10 +275,7 @@
 			<!-- if de quienes puedes ver el enlace de Entrega de Bebedero -->
 			{%if request.user.perfil.tipo == "SI"  or request.user.perfil.tipo == "INIFED" or request.user.is_staff == True%}
 
-			<tr>
-				<td colspan="4">Entrega de bebedero</td>
-			</tr>
-			<tr style="background-color: #00FF00">
+			<tr style="background-color: #CC0055">
 				<td colspan="2"><a href="{%url 'visitas:ViewEntregaDeBebedero' perfil.pk%}">Entrega de bebedero</a></td>
 
 			<!-- Endif de quienes puedes ver el enlace de Entrega de Bebedero -->

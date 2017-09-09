@@ -8,7 +8,7 @@
 
 	<div class="row justify-content-center" >
 		<div class="table-responsive text-center">
-			<table class="table">
+			<table class="table table-bordered">
 				<thead>
 					<tr>
 						<th style="vertical-align: middle;" rowspan="2">Partida</th>
@@ -23,7 +23,7 @@
 						<th>Rechazadas</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="table-hover">
 
 	{%for EntidadesPorPartida in ListEntidadesPorPartida%}
 
@@ -58,7 +58,7 @@
 	{%empty%}
 
 					<tr>
-						<td colspan="2">No hay partidas registradas</td>
+						<td colspan="7">No hay partidas registradas</td>
 					</tr>
 
 	{%endfor%}

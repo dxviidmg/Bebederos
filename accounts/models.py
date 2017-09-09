@@ -94,9 +94,6 @@ class Municipio(models.Model):
 		escuelas_pendientes_count = Perfil.objects.filter(municipio=municipio, status__isnull=True).count()
 		escuelas_rechazadas_count = Perfil.objects.filter(municipio=municipio, status="Rechazado").count()
 
-		print(escuelas_pendientes_count)
-		print(escuelas_registradas_count)
-
 		self.escuelas_registradas = escuelas_registradas_count
 		self.escuelas_aceptadas = escuelas_aceptadas_count
 		self.escuelas_pendientes = escuelas_pendientes_count
