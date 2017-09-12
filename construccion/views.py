@@ -32,12 +32,12 @@ class ViewInicioDeTrabajo(View):
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevoInicioForm = InicioDeTrabajoCreateForm(data=request.POST, files=request.FILES)
-		sim = User.objects.get(pk=request.user.pk)
+		si = User.objects.get(pk=request.user.pk)
 
 		if NuevoInicioForm.is_valid():
 			NuevoInicio = NuevoInicioForm.save(commit=False)
 			NuevoInicio.escuela = escuela
-			NuevoInicio.sim = sim
+			NuevoInicio.si = si
 			NuevoInicio.save()
 
 		try:
@@ -81,12 +81,12 @@ class ViewInstalacionBebedero(View):
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevaInstalacionForm = InstalacionBebederoCreateForm(data=request.POST, files=request.FILES)
-		sim = User.objects.get(pk=request.user.pk)
+		si = User.objects.get(pk=request.user.pk)
 
 		if NuevaInstalacionForm.is_valid():
 			NuevaInstalacion = NuevaInstalacionForm.save(commit=False)
 			NuevaInstalacion.escuela = escuela
-			NuevaInstalacion.sim = sim
+			NuevaInstalacion.si = si
 			NuevaInstalacion.save()
 
 		try:
@@ -129,12 +129,12 @@ class ViewTerminoDeTrabajo(View):
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevoTerminoForm = TerminoDeTrabajoCreateForm(data=request.POST, files=request.FILES)
-		sim = User.objects.get(pk=request.user.pk)
+		si = User.objects.get(pk=request.user.pk)
 
 		if NuevoTerminoForm.is_valid():
 			NuevoTermino = NuevoTerminoForm.save(commit=False)
 			NuevoTermino.escuela = escuela
-			NuevoTermino.sim = sim
+			NuevoTermino.si = si
 			NuevoTermino.save()
 
 		try:

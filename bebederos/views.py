@@ -13,7 +13,6 @@ class ViewBebederos(View):
 		escuela = User.objects.get(perfil=perfil)
 
 		sistemaBebedero = SistemaBebedero.objects.get(escuela=escuela)
-		print(sistemaBebedero)
 
 		BebederoForm = BebederoCreateOrEditForm(instance=sistemaBebedero)
 

@@ -45,15 +45,15 @@
 						<td>{{entidad.escuelas_aceptadas}}</td>
 						<td>{{entidad.escuelas_pendientes}}</td>
 						<td>{{entidad.escuelas_rechazadas}}</td>
-						</tr>
+					</tr>
 
 		{%empty%}
-
-						<td colspan="3">La partida {{EntidadesPorPartida.partida}} no tiene entidades registradas</td>
+					<tr>
+						<td colspan="1">{{EntidadesPorPartida.partida}}</td>
+						<td colspan="6">No tiene entidades registradas</td>
+					</tr>
 
 		{%endfor%}
-
-					
 
 	{%empty%}
 

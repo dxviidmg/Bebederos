@@ -29,12 +29,12 @@ class ViewMantenimientos(View):
 		escuela = User.objects.get(perfil=perfil)
 
 		NuevoMantenimientoForm = MantenimientoCreateForm(data=request.POST, files=request.FILES)
-		sim = User.objects.get(pk=request.user.pk)
+		si = User.objects.get(pk=request.user.pk)
 
 		if NuevoMantenimientoForm.is_valid():
 			NuevoMantenimiento = NuevoMantenimientoForm.save(commit=False)
 			NuevoMantenimiento.escuela = escuela
-			NuevoMantenimiento.sim = sim
+			NuevoMantenimiento.si = si
 			NuevoMantenimiento.save()
 
 		return redirect("mantenimiento:ViewMantenimientos", pk=perfil.pk)

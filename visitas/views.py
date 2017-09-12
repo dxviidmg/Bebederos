@@ -34,7 +34,7 @@ class ViewVisitaAlSitio(View):
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevaVisitaForm = VisitaAlSitioCreateForm(data=request.POST, files=request.FILES)
-		sim = User.objects.get(pk=request.user.pk)
+		si = User.objects.get(pk=request.user.pk)
 
 		try:
 			visita = VisitaAlSitio.objects.get(escuela=escuela)
@@ -50,7 +50,7 @@ class ViewVisitaAlSitio(View):
 			if NuevaVisitaForm.is_valid():
 				NuevaVisita = NuevaVisitaForm.save(commit=False)
 				NuevaVisita.escuela = escuela
-				NuevaVisita.sim = sim
+				NuevaVisita.si = si
 				NuevaVisita.save()
 
 		return redirect("visitas:ViewVisitaAlSitio", pk=perfil.pk)
@@ -83,12 +83,12 @@ class ViewVisitaDeAcuerdo(View):
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevaVisitaForm = VisitaDeAcuerdoCreateForm(data=request.POST, files=request.FILES)
-		sim = User.objects.get(pk=request.user.pk)
+		si = User.objects.get(pk=request.user.pk)
 
 		if NuevaVisitaForm.is_valid():
 			NuevaVisita = NuevaVisitaForm.save(commit=False)
 			NuevaVisita.escuela = escuela
-			NuevaVisita.sim = sim
+			NuevaVisita.si = si
 			NuevaVisita.save()
 
 		try:
@@ -132,12 +132,12 @@ class ViewEntregaDeBebedero(View):
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevaEntregaForm=EntregaDeBebederoCreateForm(data=request.POST, files=request.FILES)
-		sim = User.objects.get(pk=request.user.pk)
+		si = User.objects.get(pk=request.user.pk)
 
 		if NuevaEntregaForm.is_valid():
 			NuevaEntrega = NuevaEntregaForm.save(commit=False)
 			NuevaEntrega.escuela = escuela
-			NuevaEntrega.sim = sim
+			NuevaEntrega.si = si
 			NuevaEntrega.save()
 
 		try:

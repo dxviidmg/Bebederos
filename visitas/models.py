@@ -7,7 +7,7 @@ class VisitaAlSitio(models.Model):
 	acta_visita = models.FileField(upload_to='visitas/1/acta/%Y/%m/%d/', verbose_name="Acta de visita", null=True, blank=True)
 	copia_INE = models.FileField(upload_to='visitas/1/INE/%Y/%m/%d/', verbose_name="Copia de INE", null=True, blank=True)
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
-	sim = models.ForeignKey(User, related_name="sim_primera_visita", null=True, blank=True)
+	si = models.ForeignKey(User, related_name="si_primera_visita", null=True, blank=True)
 
 	def __str__(self):
 		return '{}'.format(self.escuela)
@@ -24,7 +24,7 @@ class VisitaDeAcuerdo(models.Model):
 	constancia_integracion_comite = models.FileField(upload_to='visitas/2/comite/%Y/%m/%d/', verbose_name="Constancia de Integración de Comité", null=True, blank=True)
 	acta_inicio_reportes = models.FileField(upload_to='visitas/2/reportes/%Y/%m/%d/', verbose_name="Acta de inicio de reportes", null=True, blank=True)
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
-	sim = models.ForeignKey(User, related_name="sim_segunda_visita")
+	si = models.ForeignKey(User, related_name="si_segunda_visita", null=True, blank=True)
 
 	def __str__(self):
 		return '{}'.format(self.escuela)
@@ -40,7 +40,7 @@ class EntregaDeBebedero(models.Model):
 	constancia_entrega_llaves = models.FileField(upload_to='visitas/3/llaves/%Y/%m/%d/', verbose_name="Constancia de entrega de llaves")
 	video = models.FileField(upload_to='visitas/3/video/%Y/%m/%d/', verbose_name="Video de entrega de trabajos oficial al plantel y su correcto funcionamiento")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
-	sim = models.ForeignKey(User, related_name="sim_entrega_bebedero")
+	si = models.ForeignKey(User, related_name="si_entrega_bebedero", null=True, blank=True)
 
 	def __str__(self):
 		return '{}'.format(self.escuela)

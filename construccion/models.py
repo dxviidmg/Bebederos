@@ -5,7 +5,7 @@ from django.utils import timezone
 class InicioDeTrabajo(models.Model):
 	escuela = models.OneToOneField(User)
 	acta_inicio = models.FileField(upload_to='trabajos/inicio/acta/%Y/%m/%d/', verbose_name="Acta de inicio de trabajo")
-	sim = models.ForeignKey(User, related_name="sim_inicio_trabajo", null=True, blank=True)
+	si = models.ForeignKey(User, related_name="si_inicio_trabajo", null=True, blank=True, verbose_name="Superintendente")
 
 	def __str__(self):
 		return '{}'.format(self.escuela)
@@ -21,7 +21,7 @@ class InstalacionBebedero(models.Model):
 	memoria_calculo = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Memorias de calculo", null=True, blank=True)
 	trabajos_de_conexion = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Trabajos de conexión", null=True, blank=True)
 	recepcion_mueble_bebedero = models.FileField(upload_to='instalaciones/recepcion/%Y/%m/%d/', verbose_name="Recepción del mueble bebedero y sus componentes")
-	sim = models.ForeignKey(User, related_name="sim_instalacion_sb",)
+	si = models.ForeignKey(User, related_name="sim_instalacion_sb", verbose_name="Superintendente", null=True, blank=True)
 
 	def __str__(self):
 		return '{}'.format(self.escuela)
@@ -34,7 +34,7 @@ class TerminoDeTrabajo(models.Model):
 	escuela = models.OneToOneField(User)
 	reporte_segunda_toma = models.FileField(upload_to='visitas/2/reporte_de_toma/%Y/%m/%d/', verbose_name="Reporte de segunda toma de muestra")
 	plantilla_fotografica = models.FileField(upload_to='instalaciones/plantilla/%Y/%m/%d/', verbose_name="Plantilla fotográfica de su instalación y funcionamiento")
-	sim = models.ForeignKey(User, related_name="sim_termino_trabajo", null=True, blank=True)
+	si = models.ForeignKey(User, related_name="sim_termino_trabajo", null=True, blank=True, verbose_name="Superintendente")
 
 	def __str__(self):
 		return '{}'.format(self.escuela)

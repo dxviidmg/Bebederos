@@ -20,6 +20,7 @@ class Region(models.Model):
 		return reverse('accounts:ListViewPartidas', kwargs={'numero': self.numero})
 
 class Partida(models.Model):
+	si = models.ForeignKey(User, null=True, blank=True, verbose_name="Superintendente")
 	region = models.ForeignKey(Region, verbose_name="Región")
 	numero = models.IntegerField(verbose_name="número")
 	cantidad_entidades = models.IntegerField(default=1)
@@ -30,7 +31,8 @@ class Partida(models.Model):
 		ordering = ['region', 'numero']
 
 class Entidad(models.Model):
-	representante_inifed = models.ForeignKey(User, null=True, blank=True)
+	coordinador_estatal = models.ForeignKey(User, null=True, blank=True, verbose_name="Coordinador Estatal", related_name="coordinador_estatal")
+	residente_tecnico = models.ForeignKey(User, null=True, blank=True, verbose_name="Residente Técnico", related_name="residente_tecnico")
 	partida = models.ForeignKey(Partida)
 	nombre = models.CharField(max_length=30)
 	escuelas_asignadas = models.IntegerField(default=0)
@@ -67,7 +69,6 @@ class Entidad(models.Model):
 		return reverse('accounts:ListViewMunicipios', kwargs={'numero': self.partida.numero, 'slug': self.slug})
 
 class Zona(models.Model):
-	sim = models.ForeignKey(User, null=True, blank=True, verbose_name="SIM")
 	entidad = models.ForeignKey(Entidad)
 	nombre = models.CharField(max_length=30, verbose_name="Nombre o número")
 	color = models.CharField(max_length=30)
@@ -115,11 +116,11 @@ class Perfil(models.Model):
 		("Ejecutora", "Ejecutora"),
 		("Escuela", "Escuela"),
 		("Laboratorio", "Laboratorio"),
-		("RTINIFED", "Residente Técnico de INIFED"),
 		("Coor_Estatal", "Coordinador Estatal de INIFED"),
+		("RTINIFED", "Residente Técnico de INIFED"),
 		("IMTA", "IMTA"),
-		("ECA", "Residente Técnico de Calidad de Agua"),
-		("Demo", "Demo")
+		("ECA", "Encargado de Calidad de Agua"), #PILAR
+		("EMB", "Encargado de Mueble Bebedero"), #RAÚL
 	)
 
 	nivel_choices = (
@@ -197,9 +198,6 @@ class Perfil(models.Model):
 				elif ultimaEvidencia.fase == "Instalación de Mueble Bebedero" and ultimaEvidencia.aprobacion_SI == "Aprobado":
 					self.avance = 100
 					self.save()
-#			if bitacora.fase == "Firme":
-#				self.avance == 25
-#				self.save()
 
 	def __str__(self):
 		return '{} {} {}'.format(self.tipo, self.user.first_name, self.user.last_name)

@@ -23,7 +23,7 @@ class Mantenimiento (models.Model):
 	)
 
 	carnet = models.FileField()
-	sim = models.ForeignKey(User, related_name="sim")
+	si = models.ForeignKey(User, related_name="sim")
 	escuela = models.ForeignKey(User, related_name="escuela_mtto")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	mes = models.CharField(choices=Mes_CHOICES, max_length=10)

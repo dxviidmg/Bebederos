@@ -4,7 +4,7 @@ from .models import *
 from visitas.models import *
 from construccion.models import *
 from pruebasAgua.models import *
-#from bebederos.models import SistemaBebedero
+from bebederos.models import SistemaBebedero
 
 class ViewProfile(View):
 #	@method_decorator(login_required)
@@ -128,6 +128,11 @@ class DetailViewEscuela(View):
 			primerPrueba = None
 
 		try:
+			sistemaBebedero = SistemaBebedero.objects.get(escuela=escuela)			
+		except SistemaBebedero.DoesNotExist:
+			sistemaBebedero = None	
+
+		try:
 			inicioDeTrabajo = InicioDeTrabajo.objects.get(escuela=escuela)
 		except InicioDeTrabajo.DoesNotExist:
 			inicioDeTrabajo = None
@@ -162,6 +167,7 @@ class DetailViewEscuela(View):
 			'escuela': escuela,
 			'visitaAlSitio': visitaAlSitio,
 			'visitaDeAcuerdo': visitaDeAcuerdo,
+			'sistemaBebedero': sistemaBebedero,
 			'primerPrueba': primerPrueba,
 			'inicioDeTrabajo': inicioDeTrabajo,
 			'instalacionBebedero': instalacionBebedero,

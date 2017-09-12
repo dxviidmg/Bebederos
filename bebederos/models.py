@@ -41,7 +41,7 @@ class SistemaBebedero(models.Model):
 	)
 	identificador_mb = models.CharField(max_length=20, null=True, blank=True, verbose_name="Identificador de mueble bebedero")
 	escuela = models.OneToOneField(User, related_name="escuela")
-	constructora = models.ForeignKey(User, related_name="constructora")
+	ejecutora = models.ForeignKey(User, related_name="Ejecutora", null=True, blank=True)
 	mueble = models.ForeignKey(Mueble, related_name="mueble")
 	sistema_de_potabilizacion = models.ForeignKey(SistemaPotabilizacion, null=True, blank=True)
 	identificador_sp = models.CharField(max_length=20, null=True, blank=True, verbose_name="Identificador de sistema de potabilización")
