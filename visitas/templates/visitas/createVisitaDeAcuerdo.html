@@ -14,11 +14,19 @@
 
 		<a href="{{visita.convenio_concertacion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Convenio de concertación de aplicación de recurso</a>
 
+		{%if visita.cedula_identificacion%}
 		<a href="{{visita.cedula_identificacion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Cedula de Identificación</a>
-
+		{%else%}
+		falta cedula
+		{%endif%}
 		<a href="{{visita.acta_acuerdos.url}}" class="btn btn-primary" role="button" aria-pressed="true">Acta de acuerdos y ubicación del módulo</a>
-		<a href="{{visita.constancia_integracion_comite.url}}" class="btn btn-primary" role="button" aria-pressed="true">Constancia de Integración de comite</a>
 
+		{%if visita.constancia_integracion_comite%}
+
+		<a href="{{visita.constancia_integracion_comite.url}}" class="btn btn-primary" role="button" aria-pressed="true">Constancia de Integración de comite</a>
+		{%else%}
+		falta constancia
+		{%endif%}
 		<h4>Actualización de documentación</h4>
 
 		<form action="." method="post" enctype="multipart/form-data">	

@@ -4,7 +4,7 @@
 
 {%block content%}
 
-<h4>Información general</h4>
+<h4>Información de la institución</h4>
 
 <p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">Regresar</a></p>
 
@@ -138,73 +138,107 @@
     justify-content: center;
     
     border: solid black 0.5px;
-    background-color: #eeeee1;
+    background-color: #374CE6;
     color: black;
 	}
 
 .thumbnail:hover {
 	color: #848484;
+}
+
+.thumbnail-inprogress {
+background-color: #DFF336;
+color: black;
+}
+
+.thumbnail-inprogress:hover {
+background-color: #D2E532 ;
+color: black;
+}
+
+.thumbnail-available {
+background-color: #44B036;
+color: white;
+}
+
+.thumbnail-available:hover {
+background-color: #197D0E;
+color: white;
+}
+
+.thumbnail-prueba-en-espera {
+background-color: yellow;
+color: black;
+}
+
+.thumbnail-prueba-aprobado {
+background-color: green;
+color: black;
+}
+
+.thumbnail-prueba-no-aprobado {
+background-color: red;
+color: black;
+}
 </style>
 
-
-	<div class="row">
-  
-      <div class="col-md-3 col-sm-4 col-xs-6">
-        <div class="dummy"></div>
-        <a style="background-color: #44B036;" class="thumbnail" href="{%url 'incidencias:ViewIncidencias' perfil.pk%}">Incidencias</a>
-      </div>
-      <div class="col-md-3 col-sm-4 col-xs-6">
-        <div class="dummy"></div>
-       
-
-        <a style="background-color: #44B036;" class="thumbnail" href="{%url 'visitas:ViewVisitaAlSitio' perfil.pk%}">Visita al sitio</a>
-
-      </div>
-      <div class="col-md-3 col-sm-4 col-xs-6">
-        <div class="dummy"></div>
-        <a {%if visitaAlSitio%} style="background-color: #44B036;" {%endif %}class="thumbnail" href="{%url 'visitas:ViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a>
-
-	   </div>
-       <div class="col-md-3 col-sm-4 col-xs-6">
-        <div class="dummy"></div>
-        <a {%if visitaDeAcuerdo%} style="background-color: #44B036;" {%endif%} class="thumbnail" href="{%url 'pruebas:ViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad <br>Status: {{primerPrueba.aprobacion}}</a>
-	   </div>
-       <div class="col-md-3 col-sm-4 col-xs-6">
-        <div class="dummy"></div>
-        <a {%if primerPrueba%} style="background-color: #44B036;" {%endif%} class="thumbnail" href="{%url 'bebederos:ViewBebederos' perfil.pk%}"> Asignación de componentes del Sistema bebedero</a>
-      </div>
-      <div class="col-md-3 col-sm-4 col-xs-6">
-        <div class="dummy"></div>
-        <a {%if sistemaBebedero%} style="background-color: #44B036;" {%endif%} class="thumbnail" href="{%url 'construccion:ViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajos</a>
-      </div>
-      <div class="col-md-3 col-sm-4 col-xs-6">
-        <div class="dummy"></div>
-        <a {%if inicioDeTrabajo%} style="background-color: #44B036;" {%endif%} class="thumbnail" href="{%url 'construccion:ViewInstalacionBebedero' perfil.pk%}">Instalación de bebedero</a>
-	   </div>
-       <div class="col-md-3 col-sm-4 col-xs-6">
-        <div class="dummy"></div>
-        <a {%if instalacionBebedero%} style="background-color: #44B036;" {%endif%} class="thumbnail" href="{%url 'construccion:ViewBitacora' perfil.pk%}">Bitacora</a>
-	   </div>
-
-
-       <div class="col-md-3 col-sm-4 col-xs-6">
-        <div class="dummy"></div>
-        <a {%if bitacora%} style="background-color: #44B036;" {%endif%} class="thumbnail" href="{%url 'construccion:ViewTerminoDeTrabajo' perfil.pk%}">Termino de trabajos</a>
-      </div>
-      <div class="col-md-3 col-sm-4 col-xs-6">
-        <div class="dummy"></div>
-        <a {%if terminoDeTrabajo%} style="background-color: #44B036;" {%endif%} class="thumbnail" href="{%url 'pruebas:ViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad<br>Status: {{segundaPrueba.aprobacion}}</a>
-      </div>
-      <div class="col-md-3 col-sm-4 col-xs-6">
-        <div class="dummy"></div>
-        <a {%if segundaPrueba%} style="background-color: #44B036;" {%endif%} class="thumbnail" href="{%url 'visitas:ViewEntregaDeBebedero' perfil.pk%}">Entrega de bebedero</a>
-	   </div>
-       <div class="col-md-3 col-sm-4 col-xs-6">
-        <div class="dummy"></div>
-        <a {%if entregaDeBebedero%} style="background-color: #44B036;" {%endif%} class="thumbnail" href="{%url 'mantenimiento:ViewMantenimientos' perfil.pk%}">Mantenimiento</a>
-	   </div>
-
-      
-  	</div>
+<div class="row">
+	<div class="col-md-2 col-sm-4 col-xs-6">
+		<div class="dummy"></div>
+		<a class="thumbnail container" href="{%url 'incidencias:ViewIncidencias' perfil.pk%}">Incidencias</a>
+	</div>
+	<div class="col-md-2 col-sm-4 col-xs-6">
+		<div class="dummy"></div>
+		<a class="thumbnail container" href="{%url 'visitas:ViewVisitaAlSitio' perfil.pk%}">Visita al sitio</a>
+	</div>
+	<div class="col-md-2 col-sm-4 col-xs-6">
+		<div class="dummy"></div>
+		<a class="thumbnail container" href="{%url 'visitas:ViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a>
+	</div>
+	<div class="col-md-2 col-sm-4 col-xs-6">
+		<div class="dummy"></div>
+		<a class="thumbnail container" href="{%url 'pruebas:ViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad <br>Status: {{primerPrueba.aprobacion}}</a>
+	</div>
+	<div class="col-md-2 col-sm-4 col-xs-6">
+	<div class="dummy"></div>
+		<div class=" thumbnail container" {%if primerPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif primerPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif primerPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%endif%}>Resultados {{primerPrueba.aprobacion}}</div>
+	</div>
+	<div class="col-md-2 col-sm-4 col-xs-6">
+		<div class="dummy"></div>
+		<a class="thumbnail container" href="{%url 'bebederos:ViewBebederos' perfil.pk%}"> Asignación de componentes del Sistema bebedero</a>
+	</div>
+	<div class="col-md-2 col-sm-4 col-xs-6">
+		<div class="dummy"></div>
+		<a class="thumbnail container" href="{%url 'construccion:ViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajos</a>
+	</div>
+	<div class="col-md-2 col-sm-4 col-xs-6">
+		<div class="dummy"></div>
+		<a class="thumbnail container" href="{%url 'construccion:ViewInstalacionBebedero' perfil.pk%}">Instalación de bebedero</a>
+	</div>
+	<div class="col-md-2 col-sm-4 col-xs-6">
+		<div class="dummy"></div>
+		<a class="thumbnail container" href="{%url 'construccion:ViewBitacora' perfil.pk%}">Bitacora</a>
+	</div>
+	<div class="col-md-2 col-sm-4 col-xs-6">
+		<div class="dummy"></div>
+		<a class="thumbnail container" href="{%url 'construccion:ViewTerminoDeTrabajo' perfil.pk%}">Termino de trabajos</a>
+	</div>
+	<div class="col-md-2 col-sm-4 col-xs-6">
+		<div class="dummy"></div>
+		<a class="thumbnail container" href="{%url 'pruebas:ViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad<br>Status: {{segundaPrueba.aprobacion}}</a>
+	</div>
+	 <div class="col-md-2 col-sm-4 col-xs-6">
+		<div class="dummy"></div>
+		<div class=" thumbnail container" {%if primerPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif primerPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif primerPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%endif%}>Resultados 2da prueba  {{segundaPrueba.aprobacion}}</div>
+	</div>
+	<div class="col-md-2 col-sm-4 col-xs-6">
+		<div class="dummy"></div>
+		<a class="thumbnail container" href="{%url 'visitas:ViewEntregaDeBebedero' perfil.pk%}">Entrega de bebedero</a>
+	</div>
+	<div class="col-md-2 col-sm-4 col-xs-6">
+		<div class="dummy"></div>
+		<a class="thumbnail container" href="{%url 'mantenimiento:ViewMantenimientos' perfil.pk%}">Mantenimiento</a>
+	</div>
+</div>
 
 {%endblock content%}

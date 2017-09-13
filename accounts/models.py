@@ -144,8 +144,8 @@ class Perfil(models.Model):
 	user = models.OneToOneField(User)
 	tipo = models.CharField(max_length=30, choices=tipo_choices)
 	telefono = models.CharField(max_length=10, blank=True, null=True, verbose_name="Teléfono")
-	domicilio = models.CharField(max_length=100, blank=True, null=True)
-	referencias = models.CharField(max_length=200, blank=True, null=True)
+
+
 
 	#Atributos exclusivos de escuelas
 	municipio = models.ForeignKey(Municipio, null=True, blank=True)	
@@ -159,7 +159,9 @@ class Perfil(models.Model):
 	aulas_en_uso = models.IntegerField(blank=True, null=True)
 	status = models.CharField(max_length=20, blank=True, null=True)
 	avance = models.IntegerField(blank=True, null=True)
-
+	domicilio = models.CharField(max_length=100, blank=True, null=True)
+	referencias = models.CharField(max_length=200, blank=True, null=True)
+	
 	#Atributo exclusivo para Constructoras
 	representante_legal = models.CharField(max_length=100, blank=True, null=True)
 

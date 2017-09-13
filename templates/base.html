@@ -12,14 +12,28 @@
 
     <link rel="stylesheet" type="text/css" href="{%static 'css/estilos.css'%}">
 	</head>
+
+  <style type="text/css">
+
+.navbar-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgb(255,255,255);
+}
+  </style>
 	<body>
 
-<nav class=" mynav navbar navbar-toggleable-md fixed-top" style="  background-color: #44B036;
-  border-bottom: solid 1px;">
+
+
+
+
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top" style="background-color: #44B036;">
 
 {%if request.user.is_authenticated%}
 
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+  <button style="border-color: white;" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -73,6 +87,8 @@
 	
 	</div>
 
+        
+        <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
         <script type="text/javascript" src="{%static 'js/jquery.js'%}"></script>
         <script type="text/javascript" src="{%static 'js/bootstrap.min.js'%}"></script>
         

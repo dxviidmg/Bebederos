@@ -2,22 +2,25 @@
 
 {%block content%}
 	
-	<h3>Bienvenido(a): {{request.user.get_full_name}}</h3>
-
-	<p>Tipo: {{perfil.tipo}}</p>
+	<div class="row">
+		<div class="col-12">
+			<h3>Bienvenido(a): {{request.user.get_full_name}}</h3>
+		</div>
+	</div>
 
 	{%if perfil.tipo == "Escuela"%}
 
 	<p>Director: {{perfil.director}}</p>
 	<p>Cantidad de alumnos: {{perfil.cantidad_de_alumnos}}</p>
-	
+	<p>Teléfono: {{perfil.teléfono}}</p>
+	<p>Domicilio: {{perfil.domicilio}}</p>
 	{%elif perfil.tipo == "Constructora"%}
 
 	<p>{{perfil.representante_legal}}</p>
-
+<p>Teléfono: {{perfil.teléfono}}</p>
+	<p>Domicilio: {{perfil.domicilio}}</p>
 	{%endif%}
 
-	<p>Teléfono: {{perfil.teléfono}}</p>
-	<p>Domicilio: {{perfil.domicilio}}</p>
+	
 	
 {%endblock content%}
