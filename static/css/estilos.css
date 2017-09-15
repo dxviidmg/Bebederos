@@ -1,3 +1,4 @@
+/*General*/
 html {
   height: 100%;
 }
@@ -6,8 +7,27 @@ body{
   padding-top: 80px;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 h1, h2, h3, h4 {
   text-align: center;
+}
+
+/*Base*/
+.content{
+  min-height: 83%;
+  padding-top: 40px;
+  bottom: 0;
+}
+
+.container-header {
+  border-style: solid;
+  border-width: 1;
+  -webkit-box-shadow: 10px 5px 0px -2px rgba(0,0,0,0.52);
+  -moz-box-shadow: 10px 5px 0px -2px rgba(0,0,0,0.52);
+  box-shadow: 10px 5px 0px -2px rgba(0,0,0,0.52);
 }
 
 .nav-link {
@@ -18,35 +38,12 @@ h1, h2, h3, h4 {
   color: white;
 }
 
-table, th {
-  text-align: center;
-}
-
 .fa-file-word-o {
   color: #0060ac;
   background-color: white;
 }
 
-a:hover {
-	text-decoration: none;
-
-}
-
-.content{
-      min-height: 83%;
-      padding-top: 40px;
-      bottom: 0;
-}
-
-.container-header {
-
-  border-style: solid;
-  border-width: 1;
-  -webkit-box-shadow: 10px 5px 0px -2px rgba(0,0,0,0.52);
-  -moz-box-shadow: 10px 5px 0px -2px rgba(0,0,0,0.52);
-  box-shadow: 10px 5px 0px -2px rgba(0,0,0,0.52);
-}
-
+/*Botones de archivos*/
 .btn-primary {
   background-color: #44B036;
   border-color: #143410;
@@ -55,14 +52,3 @@ a:hover {
 .btn-primary:hover {
   background-color: #27971B;
 }
-
-thead{
-  background-color: #44B036;
-}
-tbody {
-  background-color: #eeeee1;
-}
-
-
-
-

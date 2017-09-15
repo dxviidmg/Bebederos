@@ -10,16 +10,16 @@
 	<p>Escuelas asignadas: {{entidad.escuelas_asignadas}}</p>
 	<p>Escuelas registradas: {{entidad.escuelas_registradas}}</p>
 	<p>Escuelas aceptadas: {{entidad.escuelas_aceptadas}}</p>
+	<p>Escuelas pendientes: {{entidad.escuelas_pendientes}}</p>
+	<p>Escuelas rechazadas: {{entidad.escuelas_rechazadas}}</p>
 	<div class="row justify-content-center" >
 
 		<div class="table-responsive text-center">
 			<table class="table table-bordered">
 				<thead>
 				<tr>
-					<th style="vertical-align: middle;"
-					rowspan="2">Zona</th>
-					<th style="vertical-align: middle;"
-					rowspan="2">Municipio</th>
+					<th rowspan="2">Zona</th>
+					<th rowspan="2">Municipio</th>
 					<th colspan="4">Escuelas</th>
 				</tr>
 				<tr>
@@ -33,29 +33,29 @@
 
 					{%for MunicipiosPorZona in ListMunicipiosPorZona%}
 
-							{%for municipio in MunicipiosPorZona.municipios%}
+						{%for municipio in MunicipiosPorZona.municipios%}
 
 					<tr>
 
-						{%if forloop.first%}
-						<td rowspan=" {{MunicipiosPorZona.municipios|length}}" style="vertical-align: middle;">
-						{{MunicipiosPorZona.zona}}
+							{%if forloop.first%}
+						
+						<td rowspan=" {{MunicipiosPorZona.municipios|length}}">{{MunicipiosPorZona.zona}}
 						</td>
-						{%endif%}
 
-						<td>
+							{%endif%}
 
-						<a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">{{municipio.nombre}}</a> 
+						<td><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">{{municipio.nombre}}</a> 
 						</td>
 						<td>{{municipio.escuelas_registradas}} {%if municipio.EscuelasCount %}{%endif%}</td>
 						<td>{{municipio.escuelas_aceptadas}}</td>
 						<td>{{municipio.escuelas_pendientes}}</td>
 						<td>{{municipio.escuelas_rechazadas}}</td>						
-							{%empty%}
+						{%empty%}
 
 							<td>{{MunicipiosPorZona.zona}}</td>
 							<td colspan="5">No tiene municipios registrados</td>
-							{%endfor%}
+						
+						{%endfor%}
 						
 					</tr>
 

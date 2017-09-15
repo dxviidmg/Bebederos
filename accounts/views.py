@@ -5,7 +5,7 @@ from visitas.models import *
 from construccion.models import *
 from pruebasAgua.models import *
 from bebederos.models import SistemaBebedero
-
+from mantenimiento.models import Mantenimiento
 class ViewProfile(View):
 #	@method_decorator(login_required)
 	def get(self, request):
@@ -88,14 +88,12 @@ class ListViewEscuelas(View):
 		template_name = "accounts/ListViewEscuelas.html"
 		municipio = Municipio.objects.get(pk=pk)
 		perfiles = Perfil.objects.filter(municipio=municipio).order_by('status')
-		escuelasAceptadas = perfiles.filter(status="Aceptado")
 		zona = Zona.objects.get(municipio=municipio)
 		entidad = Entidad.objects.get(zona=zona)
 
 		context = {
 			'municipio': municipio,
 			'perfiles': perfiles,
-			'escuelasAceptadas': escuelasAceptadas,
 			'entidad': entidad,
 		}
 		return render(request,template_name, context)
@@ -143,9 +141,11 @@ class DetailViewEscuela(View):
 			instalacionBebedero = None
 
 		try:
-			bitacora = EvidenciaConstruccion.objects.filter(escuela=escuela, fase="Instalación de Mueble Bebedero", aprobacion_SI="Aprobado")
+			evidenciasConstruccion = EvidenciaConstruccion.objects.filter(escuela=escuela)
+			evidenciaFinal = evidenciasConstruccion.filter(fase="Instalación de Mueble Bebedero")
 		except EvidenciaConstruccion.DoesNotExist:
-			bitacora = None
+			evidenciasConstruccion = None
+			evidenciaFinal = None
 
 		try:
 			terminoDeTrabajo = TerminoDeTrabajo.objects.get(escuela=escuela)
@@ -162,6 +162,12 @@ class DetailViewEscuela(View):
 		except EntregaDeBebedero.DoesNotExist:
 			entregaDeBebedero = None
 
+		try:
+			mantenimientos = Mantenimiento.objects.filter(escuela=escuela)
+			print(mantenimientos)
+		except Mantenimiento.DoesNotExist:
+			mantenimientos = None
+
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
@@ -171,10 +177,12 @@ class DetailViewEscuela(View):
 			'primerPrueba': primerPrueba,
 			'inicioDeTrabajo': inicioDeTrabajo,
 			'instalacionBebedero': instalacionBebedero,
-			'bitacora': bitacora,
+			'evidenciasConstruccion': evidenciasConstruccion,
+			'evidenciaFinal': evidenciaFinal,
 			'terminoDeTrabajo': terminoDeTrabajo,
 			'segundaPrueba': segundaPrueba,
 			'entregaDeBebedero': entregaDeBebedero,
+			'mantenimientos': mantenimientos,
 			'municipio': municipio,
 			'zona': zona,
 			'entidad': entidad,

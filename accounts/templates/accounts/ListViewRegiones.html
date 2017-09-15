@@ -2,70 +2,65 @@
 
 {%block content%}
 
-	<style type="text/css">
-.square-box{
-    position: relative;
-    width: 70%;
-    overflow: hidden;
+  <style type="text/css">
+    .square-box{
+      position: relative;
+      width: 70%;
+      overflow: hidden;
       display: table;
-  margin: 0 auto;
-}
-.square-box:before{
-    content: "";
-    display: block;
-    padding-top: 100%;
-}
-.square-content{
-    position:  absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    color: white;
-}
-.square-content div {
-   display: table;
-   width: 100%;
-   height: 100%;
-}
-.square-content span {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-    color: white;
-    font-size: 4em;
-}
-</style>
+      margin: 0 auto;
+    }
+    .square-box:before{
+      content: "";
+      display: block;
+      padding-top: 100%;
+    }
+    .square-content{
+      position:  absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      color: white;
+    }
+    .square-content div {
+      display: table;
+      width: 100%;
+      height: 100%;
+    }
+    .square-content span {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      color: white;
+      font-size: 4em;
+    }
+  </style>
 
+  <h1>Regiones</h1>
+  <div class="row justify-content-center" >
 
-	<h1>Regiones</h1>
+  {%for region in regiones%}
 
-	<div class="row justify-content-center" >
+    <div class="col-sm-4 col-md-4" style="margin-bottom: 5%;">
 
-		{%for region in regiones%}
-
-		<div class="col-sm-4 col-md-4" style="margin-bottom: 5%;">
-			
-<a href="{{region.get_absolute_url}}"><div class='square-box' style="background-color: {{region.color}}">
-    <div class='square-content'>
-      <div>
-        <span>{{region}}</span>
+      <a href="{{region.get_absolute_url}}"><div class='square-box' style="background-color: {{region.color}}">
+        <div class='square-content'>
+          <div>
+            <span>{{region}}</span>
+          </div>
+        </div>
       </div>
-    </div>
-</div>
-</a>
+      </a>
       <h3>{{region.nombre}}</h3>
-		</div>
+    </div>
 
-			
-		{%empty%}
+  {%empty%}
 
-			<h3>Aún no se han registrado regiones</h3>
+    <h3>Aún no se han registrado regiones</h3>
 
-		{%endfor%}
+  {%endfor%}
 
-	</div>
-
-
+  </div>
 
 {%endblock content%}

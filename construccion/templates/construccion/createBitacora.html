@@ -4,7 +4,9 @@
 
 {%block content%}
 
-<h1>Inicio de trabajo</h1>
+<h1>Bitacora</h1>
+
+<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Regresar"></a>
 
 	<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
 
