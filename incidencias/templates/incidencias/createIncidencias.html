@@ -5,13 +5,16 @@
 {%block content%}
 	
 	<h1>Incidencias</h1>
+
+	<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
+
 	<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
 	<form action="." method="post" enctype="multipart/form-data">
 		<h4>Registro</h4>	
 		{%csrf_token%}
 		{{NuevaIncidenciaForm | bootstrap}}
 		<a href=""><input type="submit" value="Registrar"></a>
-		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Regresar"></a>
+		
 	</form>
 
 <h4>Actuales</h4>
@@ -67,7 +70,7 @@
 
 			<tr>
 				<td>{{incidencia.pk}}</td>
-				<td>{{incidencia.etapa}}</td>
+				<td>{{incidencia.fase}}</td>
 				<td>{{incidencia.descripcion}}</td>
 				<td>{{incidencia.status}}</td>
 				<td>{{incidencia.creacion}}</td>
@@ -77,7 +80,7 @@
 		{%empty%}
 
 			<tr>
-				<td colspan="6">Historial vacio</td>
+				<td colspan="6">Sin registro</td>
 			</tr>
 
 		{%endfor%}

@@ -4,48 +4,100 @@
 
 {%block content%}
 
-	<h1>Visita de acuerdos</h1>
-
-		<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+	<div class="row">
+		<div class="col-12">
+			<h1>Visita de acuerdos</h1>
+			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
+			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+		</div>
+	</div>
 
 	{%if visita%}
 
-		<h4>Consulta de documentación</h4>
+	<div class="row">
+		<div class="col-12">
+			<h4>Consulta de documentación</h4>
+		</div>
+	</div>
 
-		<a href="{{visita.convenio_concertacion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Convenio de concertación de aplicación de recurso</a>
+	<div class="row justify-content-center text-center">
+		<div class="col-md-5">
 
-		{%if visita.cedula_identificacion%}
-		<a href="{{visita.cedula_identificacion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Cedula de Identificación</a>
-		{%else%}
-		falta cedula
-		{%endif%}
-		<a href="{{visita.acta_acuerdos.url}}" class="btn btn-primary" role="button" aria-pressed="true">Acta de acuerdos y ubicación del módulo</a>
+	{%if visita.convenio_concertacion%}
 
-		{%if visita.constancia_integracion_comite%}
-
-		<a href="{{visita.constancia_integracion_comite.url}}" class="btn btn-primary" role="button" aria-pressed="true">Constancia de Integración de comite</a>
-		{%else%}
-		falta constancia
-		{%endif%}
-		<h4>Actualización de documentación</h4>
-
-		<form action="." method="post" enctype="multipart/form-data">	
-			{%csrf_token%}
-			{{EdicionVisitaForm | bootstrap}}
-			<a href=""><input type="submit" value="Guardar cambios"></a>
-			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Regresar"></a>
-		</form>
+			<a href="{{visita.convenio_concertacion.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Convenio de concertación</a>
 
 	{%else%}
 
-		<h4>Registro de documentación de la escuela {{escuela.get_full_name}}</h4>
+			<p>Pendiente a subir</p>
 
-		<form action="." method="post" enctype="multipart/form-data">
-			{%csrf_token%}
-			{{NuevaVisitaForm | bootstrap}}
-			<a href=""><input type="submit" value="Crear registro"></a>
-			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
-		</form>
+	{%endif%}
+
+		</div>
+		<div class="col-md-5">
+
+	{%if visita.cedula_identificacion%}
+
+			<a href="{{visita.cedula_identificacion.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Cedula de Identificación</a>
+
+	{%else%}
+
+			<p>Pendiente a subir</p>
+
+	{%endif%}
+		</div>
+
+		<div class="col-md-5">
+
+	{%if visita.acta_acuerdos%}
+
+			<a href="{{visita.acta_acuerdos.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Acta de acuerdos</a>
+
+	{%else%}
+
+			<p>Pendiente a subir</p>
+	
+	{%endif%}
+
+		</div>
+
+		<div class="col-md-5">
+	
+	{%if visita.constancia_integracion_comite%}
+
+			<a href="{{visita.constancia_integracion_comite.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Constancia de iyntegración de comite</a>
+
+	{%else%}
+
+			<p>Pendiente a subir</p>
+
+	{%endif%}
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<form action="." method="post" enctype="multipart/form-data">
+				<h4>Actualización de documentación</h4>
+				{%csrf_token%}
+				{{EdicionVisitaForm | bootstrap}}
+				<a href=""><input type="submit" value="Guardar cambios"></a>
+			</form>
+		</div>
+	</div>
+	
+	{%else%}
+
+	<div class="row">
+		<div class="col-12">
+			<h4>Registro de documentación</h4>
+			<form action="." method="post" enctype="multipart/form-data">
+				{%csrf_token%}
+				{{NuevaVisitaForm | bootstrap}}
+				<a href=""><input type="submit" value="Crear registro"></a>
+			</form>
+		</div>
+	</div>
 
 	{%endif%}
 

@@ -47,8 +47,13 @@ h1, h2, h3, h4 {
 .btn-primary {
   background-color: #44B036;
   border-color: #143410;
+  width: 100%;
 }
 
 .btn-primary:hover {
   background-color: #27971B;
+}
+
+.espacio {
+  padding-bottom: 100px;
 }
