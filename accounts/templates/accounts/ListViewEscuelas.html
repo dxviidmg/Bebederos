@@ -6,38 +6,38 @@
 	
 	<p><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">Regresar</a></p>
 	
-<h3>Información</h3>
-<div class="row justify-content-center">
-	<div class="table-responsive">
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th rowspan="2">Región</th>
-				<th rowspan="2">Partida</th>
-				<th rowspan="2">Zona</th>
-				<th colspan="4">Escuelas</th>
-			</tr>
-			<tr>
-				<th>Registradas</th>
-				<th>Aceptadas</th>
-				<th>Pendientes</th>
-				<th>Rechazadas</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>{{entidad.partida.region}}</td>
-				<td>{{entidad.partida.numero}}</td>
-				<td>{{municipio.zona.nombre}}</td>
-				<td>{{municipio.escuelas_registradas}}</td>
-				<td>{{municipio.escuelas_aceptadas}}</td>
-				<td>{{municipio.escuelas_pendientes}}</td>
-				<td>{{municipio.escuelas_rechazadas}}</td>
-			</tr>
-		</tbody>
-	</table>
+	<h3>Información</h3>
+	<div class="row justify-content-center">
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th rowspan="2">Región</th>
+						<th rowspan="2">Partida</th>
+						<th rowspan="2">Zona</th>
+						<th colspan="4">Escuelas</th>
+					</tr>
+					<tr>
+						<th>Registradas</th>
+						<th>Aceptadas</th>
+						<th>Pendientes</th>
+						<th>Rechazadas</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{entidad.partida.region}}</td>
+						<td>{{entidad.partida.numero}}</td>
+						<td>{{municipio.zona.nombre}}</td>
+						<td>{{municipio.escuelas_registradas}}</td>
+						<td>{{municipio.escuelas_aceptadas}}</td>
+						<td>{{municipio.escuelas_pendientes}}</td>
+						<td>{{municipio.escuelas_rechazadas}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-</div>
 
 	<h3>Lista de escuelas</h3>
 

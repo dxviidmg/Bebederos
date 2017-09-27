@@ -7,7 +7,7 @@ from construccion.models import EvidenciaConstruccion
 class Region(models.Model):
 	numero = models.IntegerField()
 	color = models.CharField(max_length=10)
-	nombre = models.CharField(max_length=20, null=True, blank=True)
+	nombre = models.CharField(max_length=20, default="Default")
 
 	def __str__(self):
 		return '{}'.format(self.numero)
@@ -23,7 +23,7 @@ class Partida(models.Model):
 	si = models.ForeignKey(User, null=True, blank=True, verbose_name="Superintendente")
 	region = models.ForeignKey(Region, verbose_name="Región")
 	numero = models.IntegerField(verbose_name="número")
-	cantidad_entidades = models.IntegerField(default=1)
+
 	def __str__(self):
 		return '{} de región {}'.format(self.numero, self.region)	
 
@@ -99,7 +99,6 @@ class Municipio(models.Model):
 		self.escuelas_aceptadas = escuelas_aceptadas_count
 		self.escuelas_pendientes = escuelas_pendientes_count
 		self.escuelas_rechazadas = escuelas_rechazadas_count
-
 		self.save()
 
 	def __str__(self):
@@ -107,7 +106,6 @@ class Municipio(models.Model):
 
 	class Meta:
 		ordering = ['nombre']
-
 
 class Perfil(models.Model):
 	tipo_choices = (
@@ -144,8 +142,6 @@ class Perfil(models.Model):
 	user = models.OneToOneField(User)
 	tipo = models.CharField(max_length=30, choices=tipo_choices)
 	telefono = models.CharField(max_length=10, blank=True, null=True, verbose_name="Teléfono")
-
-
 
 	#Atributos exclusivos de escuelas
 	municipio = models.ForeignKey(Municipio, null=True, blank=True)	

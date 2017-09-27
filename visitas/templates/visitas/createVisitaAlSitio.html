@@ -5,13 +5,13 @@
 {%block content%}
 
 	<div class="row">
-		<div class="col-12">
-			
+		<div class="col-12">		
 			<h1>Visita al sitio</h1>
 			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
 			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
 		</div>
 	</div>
+	
 	{%if visita%}
 	
 	<div class="row">

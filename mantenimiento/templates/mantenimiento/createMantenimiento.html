@@ -3,50 +3,63 @@
 {%load bootstrap%}
 
 {%block content%}
-<h1>Mantenimiento</h1>
 
-	<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+	<div class="row">
+		<div class="col-12">
+			<h1>Mantenimientos</h1>
+			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
+			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+		</div>
+	</div>
 
-	<form action="." method="post" enctype="multipart/form-data">
-		<h4>Registro</h4>	
-		{%csrf_token%}
-		{{NuevoMantenimientoForm | bootstrap}}
-		<a href=""><input type="submit" value="Registrar"></a>
-		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Regresar"></a>
-	</form>
+	<div class="row">
+		<div class="col-12">
+			<form action="." method="post" enctype="multipart/form-data">
+				<h4>Registro</h4>	
+				{%csrf_token%}
+				{{NuevoMantenimientoForm | bootstrap}}
+				<a href=""><input type="submit" value="Registrar"></a>
+			</form>
+		</div>
+	</div>
 
-<h3>Lista de mantenimientos</h3>
-<div class="table-responsive">
-	<table class="table table-bordered">
-		<thead>
-			<th>Mes y año</th>
-			<th>Carnet</th>
-			<th>Tipo</th>
-			<th>Descripcion</th>
-			<th>Creación</th>
-		</thead>
-		<tbody>
-		
-		{% for mantenimiento in mantenimientos%}
+	<div class="row">
+		<div class="col-12">
+			<h3>Lista de mantenimientos</h3>
+			<div class="table-responsive">
+				<table class="table table-bordered">
+					<thead>
+						<th>Mes y año</th>
+						<th>Volumen</th>
+						<th>Carnet</th>
+						<th>Tipo</th>
+						<th>Descripción</th>
+						<th>Creación</th>
+					</thead>
+					<tbody>
+					
+					{% for mantenimiento in mantenimientos%}
 
-			<tr>
-				<td>{{mantenimiento.mes}} {{mantenimiento.año}}</td>
-				<td><a href="{{mantenimiento.carnet.url}}">Ver</a></td>
-				<td>{{mantenimiento.tipo}}</td>
-				<td> {%if mantenimiento.descripcion%}{{mantenimiento.descripcion}}{%endif%}</td>
-				<td>{{mantenimiento.creacion}}</td>
-			</tr>
+						<tr>
+							<td>{{mantenimiento.mes}} {{mantenimiento.año}}</td>
+							<td>{{mantenimiento.volumen}}</td>
+							<td><a href="{{mantenimiento.carnet.url}}">Ver</a></td>
+							<td>{{mantenimiento.tipo}}</td>
+							<td> {%if mantenimiento.descripcion%}{{mantenimiento.descripcion}}{%endif%}</td>
+							<td>{{mantenimiento.creacion}}</td>
+						</tr>
 
-		{%empty%}
+					{%empty%}
 
-			<tr>
-				<td colspan="5">Sin registro</td>
-			</tr>
+						<tr>
+							<td colspan="5">Sin registro</td>
+						</tr>
 
-		{%endfor%}
+					{%endfor%}
 
-		</tbody>
-	</table>
-</div>
-
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 {%endblock content%}

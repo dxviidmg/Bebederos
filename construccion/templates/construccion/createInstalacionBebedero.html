@@ -4,44 +4,89 @@
 
 {%block content%}
 	
-	<h1>Instalación de Bebedero</h1>
+	<div class="row">
+		<div class="col-12">	
+	
+			<h1>Instalación de Bebedero</h1>
+			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
+			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+		</div>
+	</div>
+
 	{%if instalacion%}
 
-<h4>Consulta de documentación de la escuela {{escuela.get_full_name}}</h4>
+	<div class="row">
+		<div class="col-12">
+			<h4>Consulta de documentación</h4>
+		</div>
+	</div>
+	
+	<div class="row justify-content-center ">
+	<div class="col-md-5">
 
-<a href="{{instalacion.reporte.url}}" class="btn btn-primary" role="button" aria-pressed="true">Reporte de instalacion</a>
+	<a href="{{instalacion.reporte.url}}" class="btn btn-primary" role="button" aria-pressed="true">Reporte de instalacion</a>
+	</div>
+		<div class="col-md-5">
+	
+		{%if instalacion.plano_instalacion%}
+	
+			<a href="{{instalacion.plano_instalacion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Plano de Instalación</a>
 
-{%if instalacion.plano_instalacion%}
-<a href="{{instalacion.plano_instalacion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Plano de Instalación</a>
-{%endif%}
+		{%endif%}
 
-{%if instalacion.memoria_calculo%}
-<a href="{{instalacion.memoria_calculo.url}}" class="btn btn-primary" role="button" aria-pressed="true">Memoria de calculo</a>
-{%endif%}
+		</div>
+		<div class="col-md-5">
+	
+		{%if instalacion.memoria_calculo%}
+		
+			<a href="{{instalacion.memoria_calculo.url}}" class="btn btn-primary" role="button" aria-pressed="true">Memoria de calculo</a>
 
-{%if instalacion.trabajos_de_conexion%}
-<a href="{{instalacion.trabajos_de_conexion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Trabajos de conexión</a>
-{%endif%}
+		{%endif%}
+	
+		</div>
+		<div class="col-md-5">
+	
+		{%if instalacion.trabajos_de_conexion%}
+	
+			<a href="{{instalacion.trabajos_de_conexion.url}}" class="btn btn-primary" role="button" aria-pressed="true">Trabajos de conexión</a>
+		
+		{%endif%}
+		
+		</div>
+		<div class="col-md-5">
+	
+		{%if instalacion.recepcion_mueble_bebedero%}
+			
+			<a href="{{instalacion.recepcion_mueble_bebedero.url}}" class="btn btn-primary" role="button" aria-pressed="true">Recepción de mueble bebedero</a>
 
-{%if instalacion.recepcion_mueble_bebedero%}
-<a href="{{instalacion.recepcion_mueble_bebedero.url}}" class="btn btn-primary" role="button" aria-pressed="true">Recepción de mueble bebedero</a>
-{%endif%}
-	<form action="." method="post" enctype="multipart/form-data">
-		<h4>Actualización de documentación</h4>	
-		{%csrf_token%}
-		{{EdicionInstalacionForm | bootstrap}}
-		<a href=""><input type="submit" value="Guardar cambios"></a>
-		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Regresar"></a>
-	</form>
+		{%endif%}
+	
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-12">
+			<form action="." method="post" enctype="multipart/form-data">
+			<h4>Actualización de documentación</h4>
+			{%csrf_token%}
+			{{EdicionInstalacionForm | bootstrap}}
+			<a href=""><input type="submit" value="Guardar cambios"></a>
+			</form>
+		</div>
+	</div>
 
 	{%else%}
-	<form action="." method="post" enctype="multipart/form-data">
-		<h4>Registro de documentación de la escuela {{escuela.get_full_name}}</h4>
-		{%csrf_token%}
-		{{NuevaInstalacionForm | bootstrap}}
-		<a href=""><input type="submit" value="Crear registro"></a>
-		<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
-	</form>
+
+	<div class="row">
+		<div class="col-12">
+			<form action="." method="post" enctype="multipart/form-data">
+			<h4>Registro de documentación</h4>
+			{%csrf_token%}
+			{{NuevaInstalacionForm | bootstrap}}
+			<a href=""><input type="submit" value="Crear registro"></a>
+			</form>
+		</div>
+	</div>
 
 	{%endif%}
 

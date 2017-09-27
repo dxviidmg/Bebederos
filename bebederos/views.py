@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
 from .models import *
 from accounts.models import Perfil
@@ -11,24 +11,35 @@ class ViewBebederos(View):
 		template_name = "bebederos/createBebedero.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
+		NuevoBebederoForm = BebederoCreateForm()
 
-		sistemaBebedero = SistemaBebedero.objects.get(escuela=escuela)
-
-		BebederoForm = BebederoCreateOrEditForm(instance=sistemaBebedero)
-
-#		try:
-#			inicio = InicioDeTrabajo.objects.get(escuela=escuela)
-#			EdicionInicioForm = InicioDeTrabajoEditForm(instance=inicio)
-#		except InicioDeTrabajo.DoesNotExist:
-#			inicio = None
-#			EdicionInicioForm = None
+		try:
+			sistemaBebedero = SistemaBebedero.objects.get(escuela=escuela)
+			EdicionBebederoForm = BebederoEditForm(instance=sistemaBebedero)
+		except SistemaBebedero.DoesNotExist:
+			sistemaBebedero = None
+			EdicionBebederoForm = None
 
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
-			'BebederoForm': BebederoForm,
-#			'NuevoInicioForm': NuevoInicioForm,
-#			'inicio': inicio,
-#			'EdicionInicioForm': EdicionInicioForm
+			'sistemaBebedero': sistemaBebedero,
+			'EdicionBebederoForm': EdicionBebederoForm,
+			'NuevoBebederoForm': NuevoBebederoForm,
 		}
 		return render(request, template_name, context)
+
+	def post(self, request, pk):
+		perfil = get_object_or_404(Perfil, pk=pk)
+		escuela = User.objects.get(perfil=perfil)
+
+		NuevoBebederoForm = BebederoCreateForm(data=request.POST, files=request.FILES)
+		si = User.objects.get(pk=request.user.pk)
+
+		if NuevoBebederoForm.is_valid():
+			NuevoBebedero = NuevoBebederoForm.save(commit=False)
+			NuevoBebedero.escuela = escuela
+			NuevoBebedero.si = si
+			NuevoBebedero.save()
+
+		return redirect("bebederos:ViewBebederos", pk=perfil.pk)		

@@ -28,9 +28,9 @@ class Mantenimiento (models.Model):
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	mes = models.CharField(choices=Mes_CHOICES, max_length=10)
 	año = models.IntegerField()
-	volumen = models.IntegerField(default=0, verbose_name="Volumen indicado en medidor")
+	volumen = models.IntegerField(verbose_name="Volumen indicado en medidor")
 	tipo = models.CharField(max_length=20, default="Preventivo", choices=tipo_choices)
-	descripcion = models.TextField(null=True, blank=True)
+	descripcion = models.TextField(null=True, blank=True, verbose_name="Descripción")
 
 	def __str__(self):
 		return '{} {} {}'.format(self.escuela, self.mes, self.año)

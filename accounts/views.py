@@ -142,7 +142,7 @@ class DetailViewEscuela(View):
 
 		try:
 			evidenciasConstruccion = EvidenciaConstruccion.objects.filter(escuela=escuela)
-			evidenciaFinal = evidenciasConstruccion.filter(fase="Instalación de Mueble Bebedero")
+			evidenciaFinal = evidenciasConstruccion.filter(fase="Instalación de Mueble Bebedero", aprobacion_SI = "Aprobado")
 		except EvidenciaConstruccion.DoesNotExist:
 			evidenciasConstruccion = None
 			evidenciaFinal = None
@@ -164,7 +164,6 @@ class DetailViewEscuela(View):
 
 		try:
 			mantenimientos = Mantenimiento.objects.filter(escuela=escuela)
-			print(mantenimientos)
 		except Mantenimiento.DoesNotExist:
 			mantenimientos = None
 

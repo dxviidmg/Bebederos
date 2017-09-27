@@ -4,13 +4,32 @@
 
 {%block content%}
 
+	<div class="row">
+		<div class="col-12">
+			<h1>Sistema Bebedero</h1>
+			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
+			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+		</div>
+	</div>
+
+
+{%if sistemaBebedero%}
+		<form action="." method="post" enctype="multipart/form-data">
+			<h4>Asignación de componentes y especificaciones</h4>
+			{%csrf_token%}
+			{{EdicionBebederoForm | bootstrap}}
+			<a href=""><input type="submit" value="Guardar cambios"></a>
+		</form>
+
+{%else%}
 
 		<form action="." method="post" enctype="multipart/form-data">
 			<h4>Asigne especificaciones del Sistema bebedero</h4>
 			{%csrf_token%}
-			{{BebederoForm | bootstrap}}
-			<a href=""><input type="submit" value="Guardar cambios"></a>
-			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Regresar"></a>
+			{{NuevoBebederoForm | bootstrap}}
+			<a href=""><input type="submit" value="Crear registro"></a>
 		</form>
 
+
+{%endif%}
 {%endblock content%}
