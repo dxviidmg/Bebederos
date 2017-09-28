@@ -4,6 +4,7 @@ from django.views.generic import View
 from accounts.models import Perfil
 from django.db.models import Q
 from .forms import *
+from django.contrib.auth.models import User
 
 #Creación y edición de la visita de acuerdo
 class ViewIncidencias(View):
@@ -38,5 +39,34 @@ class ViewIncidencias(View):
 			NuevaIncidencia.escuela = escuela
 			NuevaIncidencia.autor = autor
 			NuevaIncidencia.save()
+
+		return redirect("incidencias:ViewIncidencias", pk=perfil.pk)
+
+class UpdateViewIncidencia(View):
+#	@method_decorator(login_required)
+	def get(self, request, pk):
+		template_name = "incidencias/updateIncidencia.html"
+		incidencia = get_object_or_404(Incidencia, pk=pk)
+		EdicionIncidenciaForm = IncidenciaEditForm(instance=incidencia)
+		escuela = User.objects.get(escuela_incidencia=incidencia)
+		perfil = Perfil.objects.get(user_id=escuela)
+
+		context = {
+			'incidencia': incidencia,
+			'EdicionIncidenciaForm': EdicionIncidenciaForm,
+			'escuela': escuela,
+			'perfil': perfil,
+		}
+		return render(request, template_name, context)
+	def post(self, request, pk):
+		incidencia = get_object_or_404(Incidencia, pk=pk)
+		EdicionIncidenciaForm = IncidenciaEditForm(instance=incidencia)
+		escuela = User.objects.get(escuela_incidencia=incidencia)
+		perfil = Perfil.objects.get(user_id=escuela)
+
+
+		EdicionIncidenciaForm=IncidenciaEditForm(instance=incidencia, data=request.POST)
+		if EdicionIncidenciaForm.is_valid:
+			EdicionIncidenciaForm.save()
 
 		return redirect("incidencias:ViewIncidencias", pk=perfil.pk)

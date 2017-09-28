@@ -39,11 +39,12 @@ class SistemaBebedero(models.Model):
 		("A","A"),
 		("B","B"),
 	)
-	identificador_mb = models.CharField(max_length=20, verbose_name="Identificador de mueble bebedero")
+	no_serie = models.CharField(max_length=100, verbose_name="No. Serie", null=True, blank=True)
 	escuela = models.OneToOneField(User, related_name="escuela")
 	ejecutora = models.ForeignKey(User, related_name="ejecutora", null=True, blank=True)
 	mueble = models.ForeignKey(Mueble, related_name="mueble")
 	sistema_de_potabilizacion = models.ForeignKey(SistemaPotabilizacion, related_name="sistema_potabilizacion")
+	linea_ensamblaje = models.CharField(max_length=5, default="1")
 	identificador_sp = models.CharField(max_length=20, null=True, blank=True, verbose_name="Identificador de sistema de potabilización")
 	qr_sp = models.FileField(upload_to='codigos/sp/%Y/%m/%d/', verbose_name="Codigo QR de sistema de potabilización", null=True, blank=True)	
 	modulo = models.CharField(max_length=1, default="A", choices=modulo_choices)

@@ -35,6 +35,7 @@ class Entidad(models.Model):
 	residente_tecnico = models.ForeignKey(User, null=True, blank=True, verbose_name="Residente Técnico", related_name="residente_tecnico")
 	partida = models.ForeignKey(Partida)
 	nombre = models.CharField(max_length=30)
+	abreviatura = models.CharField(max_length=4)
 	escuelas_asignadas = models.IntegerField(default=0)
 	escuelas_registradas = models.IntegerField(default=0)
 	escuelas_aceptadas = models.IntegerField(default=0)

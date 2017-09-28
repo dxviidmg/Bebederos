@@ -65,7 +65,7 @@
 	
 	{%if visita.constancia_integracion_comite%}
 
-			<a href="{{visita.constancia_integracion_comite.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Constancia de iyntegración de comite</a>
+			<a href="{{visita.constancia_integracion_comite.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Constancia de integración de comite</a>
 
 	{%else%}
 
@@ -73,16 +73,6 @@
 
 	{%endif%}
 
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-12">
-			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Actualización de documentación</h4>
-				{%csrf_token%}
-				{{EdicionVisitaForm | bootstrap}}
-				<a href=""><input type="submit" value="Guardar cambios"></a>
-			</form>
 		</div>
 	</div>
 	

@@ -26,6 +26,7 @@ class Incidencia(models.Model):
 	status = models.CharField(default="En espera", max_length=30, choices=status_choices)
 	prioridad = models.CharField(choices=prioridad_choices, max_length=5)
 	fase = models.CharField(choices=fase_choices, max_length=100)
+	solucion = models.TextField(verbose_name="Solución", null=True, blank=True)
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	escuela = models.ForeignKey(User, related_name="escuela_incidencia", null=True, blank=True)
 	

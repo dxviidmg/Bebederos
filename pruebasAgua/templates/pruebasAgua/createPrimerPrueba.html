@@ -18,105 +18,119 @@
 		<div class="col-12">
 			<h4>Consulta de documentación</h4>
 		</div>
-	</div>
+	
 
 	<div class="row justify-content-center text-center">
 		<div class="col-md-5">
 
-	{%if prueba.reporte_toma_agua%}
+		{%if prueba.reporte_toma_agua%}
 
 			<a href="{{prueba.reporte_toma_agua.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Reporte de toma de agua</a>
 
-	{%else%}
-		
-		<p>Pendiente a subir</p>
-	
-	{%endif%}
-
-		</div>
-		<div class="col-md-5">
-
-	{%if prueba.dictamen_validacion%}
-
-			<a href="{{prueba.dictamen_validacion.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Dictamen de Validación</a>
-
-	{%else%}
-
-			<p>Pendiente a subir</p>
-
-	{%endif%}
-		</div>
-
-		<div class="col-md-5">
-
-	{%if prueba.constancia_recepcion.url%}
-
-			<a href="{{prueba.constancia_recepcion.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Constancia de recepción</a>
-
-	{%else%}
-
-			<p>Pendiente a subir</p>
-	
-	{%endif%}
+		{%endif%}
 
 		</div>
 
 		<div class="col-md-5">
 	
-	{%if prueba.video%}
+		{%if prueba.video%}
 
 			<a href="{{prueba.video.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Video</a>
 
-	{%else%}
-
-			<p>Pendiente a subir</p>
-
-	{%endif%}
+		{%endif%}
 
 		</div>
 		<div class="col-md-5">
-	{%if prueba.resultados%}
 
-			<a href="{{prueba.resultados.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Resultados</a>
+		{%if prueba.resultados_laboratorio%}
 
-	{%else%}
+			<a href="{{prueba.resultados_laboratorio.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Resultados del Laboratorio</a>
 
-			<p>Pendiente a subir</p>
+		{%endif%}
+		
+		</div>
+		<div class="col-md-5">
 
-	{%endif%}
+		{%if prueba.resultados_inifed%}
+
+			<a href="{{prueba.resultados_inifed.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Resultados para INIFED</a>
+
+		{%endif%}
 
 		</div>
-
 		<div class="col-md-5">
-	{%if prueba.dictamen_sistema_potabilizador%}
+
+		{%if prueba.sugerencias_sp%}
+
+			<a href="{{prueba.sugerencias_sp.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Sugerencia de sistema potabilizador</a>
+
+		{%endif%}
+
+		</div>
+		<div class="col-md-5">
+
+		{%if prueba.dictamen_sistema_potabilizador%}
 
 			<a href="{{prueba.dictamen_sistema_potabilizador.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Dictamen de sistema potabilizador</a>
 
-	{%else%}
-
-			<p>Pendiente a subir</p>
-
-	{%endif%}
+		{%endif%}
 
 		</div>
 	</div>
+
+
+	
+
+		{%if prueba.reporte_toma_agua and not prueba.resultados_laboratorio%}
+	
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Realice la aprobación</h4>
+				<h4>Registro de documentación de analísis (LAB)</h4>
 				{%csrf_token%}
-				{{EdicionPruebaForm | bootstrap}}
+				{{EdicionPruebaForm1 | bootstrap}}
 				<a href=""><input type="submit" value="Guardar cambios"></a>
 			</form>
 		</div>
 	</div>
+	
+		{%endif%}
 
+		{%if prueba.resultados_laboratorio and not prueba.resultados_inifed%}
+	
+	<div class="row">
+		<div class="col-12">
+			<form action="." method="post" enctype="multipart/form-data">
+				<h4>Registro de documentación de sugerencia de Sistema potabilizador (ECA)</h4>
+				{%csrf_token%}
+				{{EdicionPruebaForm2 | bootstrap}}
+				<a href=""><input type="submit" value="Guardar cambios"></a>
+			</form>
+		</div>
+	</div>
+	
+		{%endif%}
+
+		{%if prueba.resultados_inifed and prueba.aprobacion == "En espera"%}
+	
+	<div class="row">
+		<div class="col-12">
+			<form action="." method="post" enctype="multipart/form-data">
+				<h4>Confirmación de Sistema potabilizador (INIFED)</h4>
+				{%csrf_token%}
+				{{EdicionPruebaForm3 | bootstrap}}
+				<a href=""><input type="submit" value="Guardar cambios"></a>
+			</form>
+		</div>
+	</div>
+	
+		{%endif%}
 	{%else%}
 	
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Registro de documentación de la escuela {{escuela.get_full_name}}</h4>
+				<h4>Registro de documentación de la toma de agua (SI)</h4>
 				{%csrf_token%}
 				{{NuevaPruebaForm | bootstrap}}
 				<a href=""><input type="submit" value="Crear registro"></a>

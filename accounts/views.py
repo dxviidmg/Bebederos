@@ -111,11 +111,6 @@ class DetailViewEscuela(View):
 		region = Region.objects.get(partida=partida)
 
 		try:
-			visitaAlSitio = VisitaAlSitio.objects.get(escuela=escuela)
-		except VisitaAlSitio.DoesNotExist:
-			visitaAlSitio = None
-
-		try:
 			visitaDeAcuerdo = VisitaDeAcuerdo.objects.get(escuela=escuela)
 		except VisitaDeAcuerdo.DoesNotExist:
 			visitaDeAcuerdo = None
@@ -170,7 +165,6 @@ class DetailViewEscuela(View):
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
-			'visitaAlSitio': visitaAlSitio,
 			'visitaDeAcuerdo': visitaDeAcuerdo,
 			'sistemaBebedero': sistemaBebedero,
 			'primerPrueba': primerPrueba,

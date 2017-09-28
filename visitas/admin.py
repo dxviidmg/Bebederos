@@ -1,12 +1,6 @@
 from django.contrib import admin
 from .models import *
 
-class VisitaAlSitioAdmin(admin.ModelAdmin):
-    list_display = ['escuela']
-    search_fields = ['escuela__get_full_name', 'escuela__username']
-
-admin.site.register(VisitaAlSitio, VisitaAlSitioAdmin)
-
 class VisitaDeAcuerdoAdmin(admin.ModelAdmin):
     list_display = ['escuela']
     search_fields = ['escuela__get_full_name', 'escuela__username']

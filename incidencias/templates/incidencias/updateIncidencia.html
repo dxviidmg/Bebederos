@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+
+{%load bootstrap%}
+
+{%block content%}
+			
+
+	<div class="row">
+		<div class="col-12">
+			<h1>Incidencias</h1>
+			<a href="{%url 'incidencias:ViewIncidencias' incidencia.escuela.perfil.pk%}">Regresar</a>
+			<h3>Escuela {{incidencia.escuela.perfil.nivel_educativo}} "{{incidencia.escuela.get_full_name}}"</h3>
+		</div>
+	</div>
+			<h4>Actualización de Incidencia</h4>
+			<p>Folio: {{incidencia.pk}}</p>
+			<p>Descripcíon: {{incidencia.descripcion}}</p>
+			<p>Fase: {{incidencia.fase}}</p>
+			<p>Prioridad: {{incidencia.prioridad}}</p>
+
+			<form action="." method="post" enctype="multipart/form-data">
+				{%csrf_token%}
+				{{EdicionIncidenciaForm | bootstrap}}
+				<a href=""><input type="submit" value="Guardar cambios"></a>		
+			</form>
+
+{%endblock content%}

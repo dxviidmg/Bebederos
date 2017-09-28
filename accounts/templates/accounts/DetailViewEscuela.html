@@ -211,21 +211,15 @@ color: white;
 </style>
 
 <div class="row">
-	<div class="col-md-3 col-sm-4">
+	<div class="col-md-4 col-sm-4">
 		<div class="dummy"></div>
 		<a class="thumbnail thumbnail-available container" href="{%url 'incidencias:ViewIncidencias' perfil.pk%}">Incidencias</a>
 	</div>
-	<div class="col-md-2 col-sm-4">
-		<div class="dummy"></div>
-		<a {%if visitaAlSitio%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:ViewVisitaAlSitio' perfil.pk%}">Visita al sitio</a>
-	</div>
 
-	{%if visitaAlSitio%}
 	<div class="col-md-2 col-sm-4">
 		<div class="dummy"></div>
 		<a {%if visitaDeAcuerdo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:ViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a>
 	</div>
-	{%endif%}
 
 	{%if visitaDeAcuerdo%}
 	<div class="col-md-2 col-sm-6">
@@ -235,7 +229,7 @@ color: white;
 	{%endif%}
 
 	{%if primerPrueba%}
-	<div class="col-md-3 col-sm-6">
+	<div class="col-md-4 col-sm-6">
 		<div class="dummy"></div>
 		<div {%if primerPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif primerPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif primerPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%endif%}>Veredicto de Prueba de Calidad de Agua: {{primerPrueba.aprobacion}}</div>
 	</div>
