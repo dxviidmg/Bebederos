@@ -64,17 +64,6 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="col-12">
-			<form action="." method="post" enctype="multipart/form-data">
-			<h4>Actualización de documentación</h4>
-			{%csrf_token%}
-			{{EdicionInstalacionForm | bootstrap}}
-			<a href=""><input type="submit" value="Guardar cambios"></a>
-			</form>
-		</div>
-	</div>
-
 	{%else%}
 
 	<div class="row">

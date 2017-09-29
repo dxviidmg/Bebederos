@@ -52,17 +52,14 @@ class ViewEntregaDeBebedero(View):
 
 		try:
 			entrega = EntregaDeBebedero.objects.get(escuela=escuela)
-			EdicionEntregaForm=EntregaDeBebederoEditForm(instance=entrega)
 		except EntregaDeBebedero.DoesNotExist:
 			entrega = None
-			EdicionEntregaForm = None
 
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
 			'NuevaEntregaForm': NuevaEntregaForm,
 			'entrega': entrega,
-			'EdicionEntregaForm': EdicionEntregaForm
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -76,16 +73,5 @@ class ViewEntregaDeBebedero(View):
 			NuevaEntrega.escuela = escuela
 			NuevaEntrega.si = si
 			NuevaEntrega.save()
-
-		try:
-			entrega = EntregaDeBebedero.objects.get(escuela=escuela)
-			EdicionEntregaForm = EntregaDeBebederoEditForm(instance=entrega, data=request.POST, files=request.FILES)
-
-			if EdicionEntregaForm.is_valid():
-				EdicionEntregaForm.save()
-
-		except EntregaDeBebedero.DoesNotExist:
-			entrega = None
-			EdicionEntregaForm = None
 
 		return redirect("visitas:ViewEntregaDeBebedero", pk=perfil.pk)		

@@ -17,11 +17,11 @@ class InicioDeTrabajo(models.Model):
 class InstalacionBebedero(models.Model):
 	escuela = models.OneToOneField(User)
 	reporte = models.FileField(upload_to='instalaciones/reporte/%Y/%m/%d/', verbose_name="Reporte de instalación")
-	plano_instalacion = models.FileField(upload_to='instalaciones/planos/%Y/%m/%d/', verbose_name="Plano de Instalaciones", null=True, blank=True)
-	memoria_calculo = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Memorias de calculo", null=True, blank=True)
-	trabajos_de_conexion = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Trabajos de conexión", null=True, blank=True)
+	plano_instalacion = models.FileField(upload_to='instalaciones/planos/%Y/%m/%d/', verbose_name="Plano de Instalaciones")
+	memoria_calculo = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Memorias de calculo")
+	trabajos_de_conexion = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Trabajos de conexión")
 	recepcion_mueble_bebedero = models.FileField(upload_to='instalaciones/recepcion/%Y/%m/%d/', verbose_name="Recepción del mueble bebedero y sus componentes")
-	si = models.ForeignKey(User, related_name="sim_instalacion_sb", verbose_name="Superintendente", null=True, blank=True)
+	si = models.ForeignKey(User, related_name="sim_instalacion_sb", verbose_name="Superintendente")
 
 	def __str__(self):
 		return '{}'.format(self.escuela)

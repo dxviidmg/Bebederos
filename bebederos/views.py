@@ -31,15 +31,15 @@ class ViewBebederos(View):
 				cantidadCeros = 4-len(str(countSB))
 				serie = cantidadCeros*"0" + str(countSB)
 				hoy = datetime.today().strftime('%d%m%y')
-				no_serie = str(entidad.abreviatura) + str(sistemaBebedero.mueble) + str(sistemaBebedero.sistema_de_potabilizacion) + str(serie) + str(hoy) + "T304" + str(sistemaBebedero.linea_ensamblaje) + str(escuela.username)
-				print(no_serie)
+				identificador = str(entidad.abreviatura) + str(sistemaBebedero.mueble) + str(sistemaBebedero.sistema_de_potabilizacion) + str(serie) + str(hoy) + "T304" + str(sistemaBebedero.linea_ensamblaje) + str(escuela.username)
+				print(identificador)
 
 		except SistemaBebedero.DoesNotExist:
 			sistemaBebedero = None
 			EdicionBebederoForm = None
 			GeneraNSBebederoForm = None
 
-
+		print(sistemaBebedero)
 
 		context = {
 			'perfil': perfil,
@@ -79,19 +79,18 @@ class ViewBebederos(View):
 					zona = Zona.objects.get(municipio=municipio)
 					entidad = Entidad.objects.get(zona=zona)
 					countSB = SistemaBebedero.objects.all().count()
-					countSB = SistemaBebedero.objects.all().count()
 					sistemaBebedero = SistemaBebedero.objects.get(escuela=escuela)
 
 					GeneraNSBebederoForm = BebederoGeneraNSForm(instance=sistemaBebedero)
 					cantidadCeros = 4-len(str(countSB))
 					serie = cantidadCeros*"0" + str(countSB)
 					hoy = datetime.today().strftime('%d%m%y')
-					no_serie = str(entidad.abreviatura) + str(sistemaBebedero.mueble) + str(sistemaBebedero.sistema_de_potabilizacion) + str(serie) + str(hoy) + "T304" + str(sistemaBebedero.linea_ensamblaje) + str(escuela.username)
+					identificador = str(entidad.abreviatura) + str(sistemaBebedero.mueble) + str(sistemaBebedero.sistema_de_potabilizacion) + str(serie) + str(hoy) + "T304" + str(sistemaBebedero.linea_ensamblaje) + str(escuela.username)
 
 
 
 					GeneraNSBebedero = GeneraNSBebederoForm.save(commit=False)
-					GeneraNSBebedero.no_serie = no_serie
+					GeneraNSBebedero.identificador = identificador
 					GeneraNSBebedero.save()	
 		except SistemaBebedero.DoesNotExist:
 			bebedero = None

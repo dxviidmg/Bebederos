@@ -39,7 +39,7 @@ class SistemaBebedero(models.Model):
 		("A","A"),
 		("B","B"),
 	)
-	no_serie = models.CharField(max_length=100, verbose_name="No. Serie", null=True, blank=True)
+	identificador = models.CharField(max_length=100, null=True, blank=True)
 	escuela = models.OneToOneField(User, related_name="escuela")
 	ejecutora = models.ForeignKey(User, related_name="ejecutora", null=True, blank=True)
 	mueble = models.ForeignKey(Mueble, related_name="mueble")

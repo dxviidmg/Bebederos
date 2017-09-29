@@ -12,8 +12,3 @@ class EntregaDeBebederoCreateForm(forms.ModelForm):
 		model = EntregaDeBebedero
 		fields = ('acta_entrega', 'convenio_responsabilidades', 'constancia_entrega_llaves', 'video')
 		#fields = ()
-
-class EntregaDeBebederoEditForm(forms.ModelForm):
-	class Meta:
-		model = EntregaDeBebedero
-		fields = ('acta_entrega', 'convenio_responsabilidades', 'constancia_entrega_llaves', 'video')	

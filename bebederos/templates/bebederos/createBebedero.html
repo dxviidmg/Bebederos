@@ -36,7 +36,14 @@
 
 {%endif%}
 
-
-
-{%if bebedero.%}
+{%if sistemaBebedero.identificador%}
+	<p>{{sistemaBebedero.identificador}}</p>
+{%else%}
+		<form action="." method="post" enctype="multipart/form-data">
+			<h4>Asigne especificaciones del Sistema bebedero</h4>
+			{%csrf_token%}
+			{{GeneraNSBebederoForm | bootstrap}}
+			<a href=""><input type="submit" value="Generar Key"></a>
+		</form>
+{%endif%}
 {%endblock content%}

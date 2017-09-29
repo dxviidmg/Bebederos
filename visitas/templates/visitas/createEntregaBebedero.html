@@ -35,27 +35,15 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="col-12">
-			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Actualización de documentación</h4>
-				{%csrf_token%}
-				{{EdicionEntregaForm | bootstrap}}
-				<a href=""><input type="submit" value="Guardar cambios"></a>
-			</form>
-		</div>
-	</div>
-
 	{%else%}
 	
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Registro de documentación de la escuela {{escuela.get_full_name}}</h4>
+				<h4>Registro de documentación</h4>
 				{%csrf_token%}
 				{{NuevaEntregaForm | bootstrap}}
 				<a href=""><input type="submit" value="Crear registro"></a>
-				<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}"><input class="" type="button" value="Cancelar"></a>
 			</form>
 		</div>
 	</div>

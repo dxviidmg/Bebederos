@@ -15,17 +15,14 @@ class ViewInicioDeTrabajo(View):
 
 		try:
 			inicio = InicioDeTrabajo.objects.get(escuela=escuela)
-			EdicionInicioForm = InicioDeTrabajoEditForm(instance=inicio)
 		except InicioDeTrabajo.DoesNotExist:
 			inicio = None
-			EdicionInicioForm = None
 
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
 			'NuevoInicioForm': NuevoInicioForm,
 			'inicio': inicio,
-			'EdicionInicioForm': EdicionInicioForm
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -40,17 +37,6 @@ class ViewInicioDeTrabajo(View):
 			NuevoInicio.si = si
 			NuevoInicio.save()
 
-		try:
-			inicio = InicioDeTrabajo.objects.get(escuela=escuela)
-			EdicionInicioForm = InicioDeTrabajoEditForm(instance=inicio, data=request.POST, files=request.FILES)
-
-			if EdicionInicioForm.is_valid():
-				EdicionInicioForm.save()
-
-		except InicioDeTrabajo.DoesNotExist:
-			inicio = None
-			EdicionInicioForm = None
-
 		return redirect("construccion:ViewInicioDeTrabajo", pk=perfil.pk)
 
 #Creación y edición de la instalación de un bebedero
@@ -64,17 +50,14 @@ class ViewInstalacionBebedero(View):
 		#evidencias = EvidenciaC
 		try:
 			instalacion = InstalacionBebedero.objects.get(escuela=escuela)
-			EdicionInstalacionForm = InstalacionBebederoEditForm(instance=instalacion)
 		except InstalacionBebedero.DoesNotExist:
 			instalacion = None
-			EdicionInstalacionForm = None
 
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
 			'NuevaInstalacionForm': NuevaInstalacionForm,
 			'instalacion': instalacion,
-			'EdicionInstalacionForm': EdicionInstalacionForm
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -89,17 +72,6 @@ class ViewInstalacionBebedero(View):
 			NuevaInstalacion.si = si
 			NuevaInstalacion.save()
 
-		try:
-			instalacion = InstalacionBebedero.objects.get(escuela=escuela)
-			EdicionInstalacionForm = InstalacionBebederoEditForm(instance=instalacion, data=request.POST, files=request.FILES)
-
-			if EdicionInstalacionForm.is_valid():
-				EdicionInstalacionForm.save()
-
-		except InstalacionBebedero.DoesNotExist:
-			instalacion = None
-			EdicionInstalacionForm = None
-
 		return redirect("construccion:ViewInstalacionBebedero", pk=perfil.pk)
 
 class ViewTerminoDeTrabajo(View):
@@ -112,17 +84,14 @@ class ViewTerminoDeTrabajo(View):
 
 		try:
 			termino = TerminoDeTrabajo.objects.get(escuela=escuela)
-			EdicionTerminoForm = TerminoDeTrabajoEditForm(instance=termino)
 		except TerminoDeTrabajo.DoesNotExist:
 			termino = None
-			EdicionTerminoForm = None
 
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
 			'NuevoTerminoForm': NuevoTerminoForm,
 			'termino': termino,
-			'EdicionTerminoForm': EdicionTerminoForm
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -136,17 +105,6 @@ class ViewTerminoDeTrabajo(View):
 			NuevoTermino.escuela = escuela
 			NuevoTermino.si = si
 			NuevoTermino.save()
-
-		try:
-			termino = TerminoDeTrabajo.objects.get(escuela=escuela)
-			EdicionTerminoForm = TerminoDeTrabajoEditForm(instance=termino, data=request.POST, files=request.FILES)
-
-			if EdicionTerminoForm.is_valid():
-				EdicionTerminoForm.save()
-
-		except TerminoDeTrabajo.DoesNotExist:
-			termino = None
-			EdicionTerminoForm = None
 
 		return redirect("construccion:ViewTerminoDeTrabajo", pk=perfil.pk)
 
