@@ -15,12 +15,17 @@ class InstalacionBebederoCreateForm(forms.ModelForm):
 class TerminoDeTrabajoCreateForm(forms.ModelForm):
 	class Meta:
 		model = TerminoDeTrabajo
-		fields = ('reporte_segunda_toma', 'plantilla_fotografica')
+		fields = ('acta_termino',)
 
 class EvidenciaConstruccionCreateForm(forms.ModelForm):
 	class Meta:
 		model = EvidenciaConstruccion
 		fields = ('fase', 'video')
+
+class EvidenciaConstruccionEditForm(forms.ModelForm):
+	class Meta:
+		model = EvidenciaConstruccion
+		fields = ('aprobacion_SI',)
 
 class NotaDeBitacoraCreateForm(forms.ModelForm):
 	class Meta:

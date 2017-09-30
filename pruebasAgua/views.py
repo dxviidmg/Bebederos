@@ -19,7 +19,10 @@ class ViewPrimerPrueba(View):
 			EdicionPruebaForm3 = PrimerPruebaUpdateForm3(instance=prueba)
 		except PrimerPrueba.DoesNotExist:
 			prueba = None
-		
+			EdicionPruebaForm1 = None
+			EdicionPruebaForm2 = None
+			EdicionPruebaForm3 = None
+
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
@@ -61,6 +64,7 @@ class ViewPrimerPrueba(View):
 			prueba = None
 			EdicionPruebaForm1 = None
 			EdicionPruebaForm2 = None
+			EdicionPruebaForm3 = None
 
 		return redirect("pruebas:ViewPrimerPrueba", pk=perfil.pk)
 
@@ -74,17 +78,26 @@ class ViewSegundaPrueba(View):
 
 		try:
 			prueba = SegundaPrueba.objects.get(escuela=escuela)
-			EdicionPruebaForm = SegundaPruebaEditForm(instance=prueba)
+			EdicionPruebaForm0 = SegundaPruebaCreateForm(instance=prueba)
+			EdicionPruebaForm1 = SegundaPruebaUpdateForm1(instance=prueba)
+			EdicionPruebaForm2 = SegundaPruebaUpdateForm2(instance=prueba)
+			EdicionPruebaForm3 = SegundaPruebaUpdateForm3(instance=prueba)			
 		except SegundaPrueba.DoesNotExist:
 			prueba = None
-			EdicionPruebaForm = None
+			EdicionPruebaForm0 = None
+			EdicionPruebaForm1 = None
+			EdicionPruebaForm2 = None
+			EdicionPruebaForm3 = None
 
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
 			'NuevaPruebaForm': NuevaPruebaForm,
 			'prueba': prueba,
-			'EdicionPruebaForm': EdicionPruebaForm
+			'EdicionPruebaForm0': EdicionPruebaForm0,
+			'EdicionPruebaForm1': EdicionPruebaForm1,
+			'EdicionPruebaForm2': EdicionPruebaForm2,
+			'EdicionPruebaForm3': EdicionPruebaForm3
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -101,13 +114,21 @@ class ViewSegundaPrueba(View):
 
 		try:
 			prueba = SegundaPrueba.objects.get(escuela=escuela)
-			EdicionPruebaForm = SegundaPruebaEditForm(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm1 = SegundaPruebaUpdateForm1(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm2 = SegundaPruebaUpdateForm2(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm3 = SegundaPruebaUpdateForm3(instance=prueba, data=request.POST, files=request.FILES)
+			
+			if EdicionPruebaForm1.is_valid():
+				EdicionPruebaForm1.save()
 
-			if EdicionPruebaForm.is_valid():
-				EdicionPruebaForm.save()
+			if EdicionPruebaForm2.is_valid():
+				EdicionPruebaForm2.save()
 
+			if EdicionPruebaForm3.is_valid():
+				EdicionPruebaForm3.save()
 		except SegundaPrueba.DoesNotExist:
 			prueba = None
-			EdicionPruebaForm = None
-
+			EdicionPruebaForm1 = None
+			EdicionPruebaForm2 = None
+			EdicionPruebaForm3 = None
 		return redirect("pruebas:ViewSegundaPrueba", pk=perfil.pk)

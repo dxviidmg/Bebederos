@@ -17,14 +17,17 @@ class ViewVisitaDeAcuerdo(View):
 
 		try:
 			visita = VisitaDeAcuerdo.objects.get(escuela=escuela)
+			CompleteNuevaVisitaForm = VisitaDeAcuerdoEditForm(instance=visita)
 		except VisitaDeAcuerdo.DoesNotExist:
 			visita = None
+			CompleteNuevaVisitaForm = None
 
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
 			'NuevaVisitaForm': NuevaVisitaForm,
 			'visita': visita,
+			'CompleteNuevaVisitaForm': CompleteNuevaVisitaForm,
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -38,6 +41,16 @@ class ViewVisitaDeAcuerdo(View):
 			NuevaVisita.escuela = escuela
 			NuevaVisita.si = si
 			NuevaVisita.save()
+
+		try:
+			visita = VisitaDeAcuerdo.objects.get(escuela=escuela)
+			CompleteNuevaVisitaForm = VisitaDeAcuerdoEditForm(instance=visita, data=request.POST, files=request.FILES)
+			if CompleteNuevaVisitaForm.is_valid():
+				CompleteNuevaVisitaForm.save()
+	
+		except VisitaDeAcuerdo.DoesNotExist:
+			visita = None
+			CompleteNuevaVisitaForm = None
 
 		return redirect("visitas:ViewVisitaDeAcuerdo", pk=perfil.pk)
 

@@ -152,3 +152,33 @@ class ViewBitacora(View):
 			NuevaNota.autor = autor
 			NuevaNota.save()
 		return redirect("construccion:ViewBitacora", pk=perfil.pk)
+
+
+
+class UpdateViewEvidencia(View):
+#	@method_decorator(login_required)
+	def get(self, request, pk):
+		template_name = "construccion/updateEvidencia.html"
+		evidencia = get_object_or_404(EvidenciaConstruccion, pk=pk)
+		EdicionEvidenciaForm = EvidenciaConstruccionEditForm(instance=evidencia)
+		escuela = User.objects.get(escuela_evidencia=evidencia)
+		perfil = Perfil.objects.get(user_id=escuela)
+
+		context = {
+			'evidencia': evidencia,
+			'EdicionEvidenciaForm': EdicionEvidenciaForm,
+			'escuela': escuela,
+			'perfil': perfil,
+		}
+		return render(request, template_name, context)
+#	def post(self, request, pk):
+#		incidencia = get_object_or_404(Incidencia, pk=pk)
+#		EdicionIncidenciaForm = IncidenciaEditForm(instance=incidencia)
+#		escuela = User.objects.get(escuela_incidencia=incidencia)
+#		perfil = Perfil.objects.get(user_id=escuela)
+
+#		EdicionIncidenciaForm=IncidenciaEditForm(instance=incidencia, data=request.POST)
+#		if EdicionIncidenciaForm.is_valid:
+#			EdicionIncidenciaForm.save()
+
+#		return redirect("incidencias:ViewIncidencias", pk=perfil.pk)		

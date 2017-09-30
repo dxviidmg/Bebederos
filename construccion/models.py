@@ -18,7 +18,7 @@ class InstalacionBebedero(models.Model):
 	escuela = models.OneToOneField(User)
 	reporte = models.FileField(upload_to='instalaciones/reporte/%Y/%m/%d/', verbose_name="Reporte de instalación")
 	plano_instalacion = models.FileField(upload_to='instalaciones/planos/%Y/%m/%d/', verbose_name="Plano de Instalaciones")
-	memoria_calculo = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Memorias de calculo")
+	memoria_calculo = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Memorias de cálculo")
 	trabajos_de_conexion = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Trabajos de conexión")
 	recepcion_mueble_bebedero = models.FileField(upload_to='instalaciones/recepcion/%Y/%m/%d/', verbose_name="Recepción del mueble bebedero y sus componentes")
 	si = models.ForeignKey(User, related_name="sim_instalacion_sb", verbose_name="Superintendente")
@@ -32,9 +32,9 @@ class InstalacionBebedero(models.Model):
 
 class TerminoDeTrabajo(models.Model):
 	escuela = models.OneToOneField(User)
-	reporte_segunda_toma = models.FileField(upload_to='visitas/2/reporte_de_toma/%Y/%m/%d/', verbose_name="Reporte de segunda toma de muestra")
-	plantilla_fotografica = models.FileField(upload_to='instalaciones/plantilla/%Y/%m/%d/', verbose_name="Plantilla fotográfica de su instalación y funcionamiento")
-	si = models.ForeignKey(User, related_name="sim_termino_trabajo", null=True, blank=True, verbose_name="Superintendente")
+	acta_termino = models.FileField(upload_to='trabajos/inicio/acta/%Y/%m/%d/', verbose_name="Acta de termino de trabajo", default="default.pdf")
+	video = models.FileField(upload_to='instalaciones/plantilla/%Y/%m/%d/', verbose_name="Evidencia audiovisual", default="default.pdf")
+	si = models.ForeignKey(User, related_name="sim_termino_trabajo", null=True, blank=True, verbose_name="Superintendente",)
 
 	def __str__(self):
 		return '{}'.format(self.escuela)
@@ -57,12 +57,11 @@ class EvidenciaConstruccion(models.Model):
 		("No aprobado", "No aprobado"),
 	)
 
-	escuela = models.ForeignKey(User)
+	escuela = models.ForeignKey(User, related_name="escuela_evidencia")
 	fase = models.CharField(max_length=30, choices=fase_choices)
-	video = models.FileField(upload_to='instalaciones/bitacotra/video/%Y/%m/%d/', verbose_name="Evidencia audio visual")
+	video = models.FileField(upload_to='instalaciones/bitacora/video/%Y/%m/%d/', verbose_name="Evidencia audio visual")
 	ejecutora = models.ForeignKey(User, related_name="ejecutora_bitacora")
 	aprobacion_SI = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación de SI")
-	aprobacion_Residente = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación de residente")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 
 	def __str__(self):

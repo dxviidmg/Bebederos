@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+
+{%load bootstrap%}
+
+{%block content%}
+	<div class="row">
+		<div class="col-12">
+			<h1>Incidencias</h1>
+			<a href="{%url 'construccion:ViewBitacora' evidencia.escuela.perfil.pk%}">Regresar</a>
+			<h3>Escuela {{evidencia.escuela.perfil.nivel_educativo}} "{{evidencia.escuela.get_full_name}}"</h3>
+
+			<h4>Revisión de Evidencia de construcción</h4>
+			<p>Fase: {{evidencia.fase}}</p>
+			<p>Video: <a href="{{evidencia.video}}">Ver video</a></p>
+			<p>Fase: {{evidencia.fase}}</p>
+			<p>Ejecutora: {{evidencia.ejecutora}}</p>
+			<p>Creación: {{evidencia.creacion}}</p>
+
+			<form action="." method="post" enctype="multipart/form-data">
+				{%csrf_token%}
+				{{EdicionEvidenciaForm | bootstrap}}
+				<a href=""><input type="submit" value="Guardar cambios"></a>		
+			</form>
+		</div>
+	</div>
+
+{%endblock content%}

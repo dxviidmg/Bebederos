@@ -4,10 +4,17 @@ from django.utils import timezone
 
 class VisitaDeAcuerdo(models.Model):
 	escuela = models.OneToOneField(User)
+	#SI
 	convenio_concertacion = models.FileField(upload_to='visitas/2/concertacion/%Y/%m/%d/', verbose_name="Convenio de concertación de aplicación de recurso")
-	cedula_identificacion = models.FileField(upload_to='visitas/2/identificacion/%Y/%m/%d/', verbose_name="Cédula de identificación basica")
+	cedula_identificacion = models.FileField(upload_to='visitas/2/identificacion/%Y/%m/%d/', verbose_name="Cédula de identificación básica")
 	acta_acuerdos = models.FileField(upload_to='visitas/2/acta/%Y/%m/%d/', verbose_name="Acta de acuerdos y ubicación del módulo")
 	constancia_integracion_comite = models.FileField(upload_to='visitas/2/comite/%Y/%m/%d/', verbose_name="Constancia de Integración de Comité")
+	#Ejecutora
+	plano_instalacion_electrica = models.FileField(upload_to='visitas/2/acta/%Y/%m/%d/', verbose_name="Plano de instalación electrica", null=True, blank=True)
+	plano_instalacion_hidraulica = models.FileField(upload_to='visitas/2/acta/%Y/%m/%d/', verbose_name="Plano de instalación hidraulica", null=True, blank=True)
+	plano_instalacion_sanitaria = models.FileField(upload_to='visitas/2/acta/%Y/%m/%d/', verbose_name="Plano de instalación sanitaria", null=True, blank=True)
+	estimacion = models.FileField(upload_to='visitas/2/acta/%Y/%m/%d/', verbose_name="Estimación", null=True, blank=True)
+
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	si = models.ForeignKey(User, related_name="si_visita_acuerdo")
 
@@ -20,9 +27,8 @@ class VisitaDeAcuerdo(models.Model):
 
 class EntregaDeBebedero(models.Model):
 	escuela = models.OneToOneField(User)
-	acta_entrega = models.FileField(upload_to='visitas/3/acta/%Y/%m/%d/', verbose_name="Acta de entrega de trabajos")
+	acta_funcionamiento = models.FileField(upload_to='visitas/3/acta/%Y/%m/%d/', verbose_name="Acta de inicio de funcionamiento")
 	convenio_responsabilidades = models.FileField(upload_to='visitas/3/responsabilidades/%Y/%m/%d/', verbose_name="Convenio de asignación de responsabilidades")
-	constancia_entrega_llaves = models.FileField(upload_to='visitas/3/llaves/%Y/%m/%d/', verbose_name="Constancia de entrega de llaves")
 	video = models.FileField(upload_to='visitas/3/video/%Y/%m/%d/', verbose_name="Video de entrega de trabajos oficial al plantel y su correcto funcionamiento")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	si = models.ForeignKey(User, related_name="si_entrega_bebedero", null=True, blank=True)

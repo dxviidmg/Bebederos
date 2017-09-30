@@ -10,8 +10,7 @@
 			<h1>Incidencias</h1>
 			<a href="{%url 'incidencias:ViewIncidencias' incidencia.escuela.perfil.pk%}">Regresar</a>
 			<h3>Escuela {{incidencia.escuela.perfil.nivel_educativo}} "{{incidencia.escuela.get_full_name}}"</h3>
-		</div>
-	</div>
+
 			<h4>Actualización de Incidencia</h4>
 			<p>Folio: {{incidencia.pk}}</p>
 			<p>Descripcíon: {{incidencia.descripcion}}</p>
@@ -23,5 +22,6 @@
 				{{EdicionIncidenciaForm | bootstrap}}
 				<a href=""><input type="submit" value="Guardar cambios"></a>		
 			</form>
-
+		</div>
+	</div>
 {%endblock content%}

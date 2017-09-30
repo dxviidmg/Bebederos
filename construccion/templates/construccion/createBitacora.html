@@ -29,10 +29,9 @@
 						<th>Folio</th>
 						<th>Fase</th>
 						<th>Creación</th>
-						<th>Video</th>
 						<th>Ejecutora</th>
 						<th>Aprobación de Superintendente</th>
-						<th>Aprobación de Residente Técnico de INIFED</th>
+						<th>Acciones</th>
 					</thead>
 					<tbody>
 					
@@ -42,10 +41,9 @@
 							<td>{{evidencia.pk}}</td>
 							<td>{{evidencia.fase}}</td>
 							<td>{{evidencia.creacion}}</td>
-							<td><a href="{{evidencia.video.url}}">Ver</a></td>
 							<td>{{evidencia.ejecutora}}</td>
 							<td>{{evidencia.aprobacion_SI}}</td>
-							<td>{{evidencia.aprobacion_Residente}}</td>
+							<td><a href="{%url 'construccion:UpdateViewEvidencia' evidencia.pk%}">Revisar</a></td>
 						</tr>
 
 					{%empty%}
