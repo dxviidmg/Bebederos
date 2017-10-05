@@ -12,8 +12,6 @@
 		</div>
 	</div>
 
-
-{%if sistemaBebedero%}
 		<form action="." method="post" enctype="multipart/form-data">
 			<h4>Asignación de componentes y especificaciones</h4>
 			{%csrf_token%}
@@ -21,29 +19,20 @@
 			<a href=""><input type="submit" value="Guardar cambios"></a>
 		</form>
 
+<p>Entidad: {{entidad.abreviatura}}</p>
+<p>Mueble: {{sistemaBebedero.mueble}}</p>
+<p>SP: {{sistemaBebedero.sistema_de_potabilizacion}}</p>
+<p>Linea ensablambaje: {{sistemaBebedero.linea_ensamblaje}}</p>
+<p>{{sistemaBebedero.identificador}}</p>
+
+{%if entidad.abreviatura and sistemaBebedero.mueble and sistemaBebedero.sistema_de_potabilizacion and sistemaBebedero.linea_ensamblaje%}
 
 
-
-{%else%}
 
 		<form action="." method="post" enctype="multipart/form-data">
-			<h4>Asigne especificaciones del Sistema bebedero</h4>
-			{%csrf_token%}
-			{{NuevoBebederoForm | bootstrap}}
-			<a href=""><input type="submit" value="Crear registro"></a>
-		</form>
-
-
-{%endif%}
-
-{%if sistemaBebedero.identificador%}
-	<p>{{sistemaBebedero.identificador}}</p>
-{%else%}
-		<form action="." method="post" enctype="multipart/form-data">
-			<h4>Asigne especificaciones del Sistema bebedero</h4>
 			{%csrf_token%}
 			{{GeneraNSBebederoForm | bootstrap}}
-			<a href=""><input type="submit" value="Generar Key"></a>
+			<a href=""><input type="submit" value="Generar identificador" name="generate"></a>
 		</form>
 {%endif%}
 {%endblock content%}

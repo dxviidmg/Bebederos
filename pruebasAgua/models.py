@@ -11,19 +11,18 @@ class PrimerPrueba(models.Model):
 	escuela = models.OneToOneField(User)
 
 	#Fase de Toma de Agua / SI
-	acta_primer_prueba = models.FileField(upload_to='pruebas/2/acta_de_segunda_prueba/%Y/%m/%d/', verbose_name="Acta de primer prueba de calidad de agua")
 	reporte_toma_agua = models.FileField(upload_to='pruebas/1/reporte_de_toma/%Y/%m/%d/', verbose_name="Reporte de toma de muestra")
-	video = models.FileField(upload_to='pruebas/1/video/%Y/%m/%d/', verbose_name="Video de toma de agua")
+	foto_toma_agua = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Evidencia fotográfica de toma de agua")
 
 	#Fase de analisis / LAB
 	resultados_laboratorio = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis de laboratorio", null=True, blank=True)
+	foto_recepcion = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Evidencia fotográfica de recepción de muestra", null=True, blank=True)
 
 	#Fase de Sugerencias / ECA(Pilar)
-	resultados_inifed = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis para INIFED", null=True, blank=True)
-	sugerencias_sp = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Sugerencia de Sistema Potabilizador", null=True, blank=True)
+	resultados_IMTA = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis con propuesta de sistema potabilizador para visto bueno de IMTA", null=True, blank=True)
 
-	#Fase de confirmación de INIFED
-	dictamen_sistema_potabilizador = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Dictamen del sistema potabilizador a utilizar", null=True, blank=True)
+	#Fase de confirmación de IMTA
+	dictamen_sistema_potabilizador = models.FileField(upload_to='pruebas/1/dictamen/%Y/%m/%d/', verbose_name="Dictamen del sistema potabilizador a utilizar", null=True, blank=True)
 	aprobacion = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación")
 
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
@@ -46,18 +45,18 @@ class SegundaPrueba(models.Model):
 	escuela = models.OneToOneField(User)
 
 	#Fase de Toma de Agua / SI
-	acta_segunda_prueba = models.FileField(upload_to='pruebas/2/acta_de_segunda_prueba/%Y/%m/%d/', verbose_name="Acta de segunda prueba de calidad de agua")
 	reporte_toma_agua = models.FileField(upload_to='pruebas/2/reporte_de_toma/%Y/%m/%d/', verbose_name="Reporte de toma de muestra")
-	video = models.FileField(upload_to='pruebas/2/video/%Y/%m/%d/', verbose_name="Video")
+	foto_toma_agua = models.FileField(upload_to='pruebas/2/video/%Y/%m/%d/', verbose_name="Evidencia fotográfica de toma de agua")
 
 	#Fase de analisis / LAB
 	resultados_laboratorio = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis de laboratorio", null=True, blank=True)
+	foto_recepcion = models.FileField(upload_to='pruebas/2/fotos/%Y/%m/%d/', verbose_name="Evidencia fotografica de recepción de muestra", null=True, blank=True)
 
 	#Fase de Sugerencias / ECA(Pilar)
-	resultados_inifed = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis para INIFED", null=True, blank=True)
-	aprobacion_interna = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', null=True, blank=True)
+	resultados_IMTA = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis para IMTA", null=True, blank=True)
+	aprobacion_interna = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', null=True, blank=True, verbose_name="Aprobación interna")
 
-	#Fase de confirmación de INIFED
+	#Fase de confirmación de IMTA
 	dictamen_validacion = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', verbose_name="Dictamen de validación", null=True, blank=True)
 	aprobacion = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación")
 

@@ -1,0 +1,47 @@
+{%extends 'base.html'%}
+
+{%load bootstrap%}
+
+{%block content%}
+
+	<div class="row">
+		<div class="col-12">
+			<h1>Entrega de Bebedero</h1>
+			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
+			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+		</div>
+	</div>
+
+	{%if funcionamiento%}
+
+	<div class="row">
+		<div class="col-12">
+			<h4>Consulta de documentación</h4>
+		</div>
+	</div>
+
+	<div class="row justify-content-center text-center">
+		<div class="col-md-5">
+			<a href="{{funcionamiento.acta_funcionamiento.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Acta de inicio de funcionamiento</a>
+		</div>
+		<div class="col-md-5">
+			<a href="{{funcionamiento.video.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Video de entrega de trabajos</a>
+		</div>
+	</div>
+
+	{%else%}
+	
+	<div class="row">
+		<div class="col-12">
+			<form action="." method="post" enctype="multipart/form-data">
+				<h4>Registro de documentación</h4>
+				{%csrf_token%}
+				{{NuevoFuncionamientoForm | bootstrap}}
+				<a href=""><input type="submit" value="Crear registro"></a>
+			</form>
+		</div>
+	</div>
+	
+	{%endif%}
+
+{%endblock content%}

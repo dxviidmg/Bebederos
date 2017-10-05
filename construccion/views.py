@@ -5,10 +5,10 @@ from django.contrib.auth.models import User
 from .forms import *
 
 #Creación y edición de la visita de acuerdo
-class ViewInicioDeTrabajo(View):
+class CRViewInicioDeTrabajo(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
-		template_name = "construccion/createInicioDeTrabajo.html"
+		template_name = "construccion/CRInicioDeTrabajo.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevoInicioForm = InicioDeTrabajoCreateForm()
@@ -37,47 +37,12 @@ class ViewInicioDeTrabajo(View):
 			NuevoInicio.si = si
 			NuevoInicio.save()
 
-		return redirect("construccion:ViewInicioDeTrabajo", pk=perfil.pk)
+		return redirect("construccion:CRViewInicioDeTrabajo", pk=perfil.pk)
 
-#Creación y edición de la instalación de un bebedero
-class ViewInstalacionBebedero(View):
+class CRViewTerminoDeTrabajo(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
-		template_name = "construccion/createInstalacionBebedero.html"
-		perfil = get_object_or_404(Perfil, pk=pk)
-		escuela = User.objects.get(perfil=perfil)
-		NuevaInstalacionForm = InstalacionBebederoCreateForm()
-		#evidencias = EvidenciaC
-		try:
-			instalacion = InstalacionBebedero.objects.get(escuela=escuela)
-		except InstalacionBebedero.DoesNotExist:
-			instalacion = None
-
-		context = {
-			'perfil': perfil,
-			'escuela': escuela,
-			'NuevaInstalacionForm': NuevaInstalacionForm,
-			'instalacion': instalacion,
-		}
-		return render(request, template_name, context)
-	def post(self, request, pk):
-		perfil = get_object_or_404(Perfil, pk=pk)
-		escuela = User.objects.get(perfil=perfil)
-		NuevaInstalacionForm = InstalacionBebederoCreateForm(data=request.POST, files=request.FILES)
-		si = User.objects.get(pk=request.user.pk)
-
-		if NuevaInstalacionForm.is_valid():
-			NuevaInstalacion = NuevaInstalacionForm.save(commit=False)
-			NuevaInstalacion.escuela = escuela
-			NuevaInstalacion.si = si
-			NuevaInstalacion.save()
-
-		return redirect("construccion:ViewInstalacionBebedero", pk=perfil.pk)
-
-class ViewTerminoDeTrabajo(View):
-#	@method_decorator(login_required)
-	def get(self, request, pk):
-		template_name = "construccion/createTerminoDeTrabajo.html"
+		template_name = "construccion/CRTerminoDeTrabajo.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevoTerminoForm = TerminoDeTrabajoCreateForm()
@@ -108,25 +73,33 @@ class ViewTerminoDeTrabajo(View):
 
 		return redirect("construccion:ViewTerminoDeTrabajo", pk=perfil.pk)
 
-class ViewBitacora(View):
+class CRViewEvidencias(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
-		template_name = "construccion/createBitacora.html"
+		template_name = "construccion/CREvidencias.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 
-		bitacora = EvidenciaConstruccion.objects.filter(escuela=escuela)
+		evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela)
+		evidenciaFinal = evidencias.filter(fase="Instalación de Mueble Bebedero", aprobacion_SI="Aprobado")
+
 		NuevaEvidenciaForm = EvidenciaConstruccionCreateForm()
 
-		notas = NotaDeBitacora.objects.filter(escuela=escuela)
-		NuevaNotaForm = NotaDeBitacoraCreateForm()
+		NuevaInstalacionForm = InstalacionBebederoCreateForm()
+		
+		try:
+			instalacion = InstalacionBebedero.objects.get(escuela=escuela)
+		except InstalacionBebedero.DoesNotExist:
+			instalacion = None
+
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
-			'bitacora': bitacora,
+			'evidencias': evidencias,
 			'NuevaEvidenciaForm': NuevaEvidenciaForm,
-			'notas': notas,
-			'NuevaNotaForm': NuevaNotaForm,
+			'NuevaInstalacionForm': NuevaInstalacionForm,
+			'instalacion': instalacion,
+			'evidenciaFinal': evidenciaFinal,
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -137,21 +110,22 @@ class ViewBitacora(View):
 		NuevaEvidenciaForm = EvidenciaConstruccionCreateForm(data=request.POST, files=request.FILES)
 		ejecutora = User.objects.get(pk=request.user.pk)
 		
-		NuevaNotaForm = NotaDeBitacoraCreateForm(data=request.POST)
-		autor = User.objects.get(pk=request.user.pk)
-		
 		if NuevaEvidenciaForm.is_valid():
 			NuevaEvidencia = NuevaEvidenciaForm.save(commit=False)
 			NuevaEvidencia.escuela = escuela
 			NuevaEvidencia.ejecutora = ejecutora
 			NuevaEvidencia.save()
 
-		if NuevaNotaForm.is_valid():
-			NuevaNota = NuevaNotaForm.save(commit=False)
-			NuevaNota.escuela = escuela
-			NuevaNota.autor = autor
-			NuevaNota.save()
-		return redirect("construccion:ViewBitacora", pk=perfil.pk)
+		NuevaInstalacionForm = InstalacionBebederoCreateForm(data=request.POST, files=request.FILES)
+		si = User.objects.get(pk=request.user.pk)
+
+		if NuevaInstalacionForm.is_valid():
+			NuevaInstalacion = NuevaInstalacionForm.save(commit=False)
+			NuevaInstalacion.escuela = escuela
+			NuevaInstalacion.si = si
+			NuevaInstalacion.save()
+			
+		return redirect("construccion:CRViewEvidencias", pk=perfil.pk)
 
 
 
@@ -171,14 +145,14 @@ class UpdateViewEvidencia(View):
 			'perfil': perfil,
 		}
 		return render(request, template_name, context)
-#	def post(self, request, pk):
-#		incidencia = get_object_or_404(Incidencia, pk=pk)
-#		EdicionIncidenciaForm = IncidenciaEditForm(instance=incidencia)
-#		escuela = User.objects.get(escuela_incidencia=incidencia)
-#		perfil = Perfil.objects.get(user_id=escuela)
+	def post(self, request, pk):
+		evidencia = get_object_or_404(EvidenciaConstruccion, pk=pk)
 
-#		EdicionIncidenciaForm=IncidenciaEditForm(instance=incidencia, data=request.POST)
-#		if EdicionIncidenciaForm.is_valid:
-#			EdicionIncidenciaForm.save()
+		escuela = User.objects.get(escuela_evidencia=evidencia)
+		perfil = Perfil.objects.get(user_id=escuela)
 
-#		return redirect("incidencias:ViewIncidencias", pk=perfil.pk)		
+		EdicionEvidenciaForm=EvidenciaConstruccionEditForm(instance=evidencia, data=request.POST)
+		if EdicionEvidenciaForm.is_valid:
+			EdicionEvidenciaForm.save()
+
+		return redirect("construccion:CRViewEvidencias", pk=perfil.pk)

@@ -7,10 +7,10 @@ from .forms import *
 from django.contrib.auth.models import User
 
 #Creación y edición de la visita de acuerdo
-class ViewVisitaDeAcuerdo(View):
+class CRViewVisitaDeAcuerdo(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
-		template_name = "visitas/createVisitaDeAcuerdo.html"
+		template_name = "visitas/CRVisitaDeAcuerdo.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevaVisitaForm=VisitaDeAcuerdoCreateForm()
@@ -52,39 +52,39 @@ class ViewVisitaDeAcuerdo(View):
 			visita = None
 			CompleteNuevaVisitaForm = None
 
-		return redirect("visitas:ViewVisitaDeAcuerdo", pk=perfil.pk)
+		return redirect("visitas:CRViewVisitaDeAcuerdo", pk=perfil.pk)
 
-#Creación y edición de la visita de acuerdo
-class ViewEntregaDeBebedero(View):
+#Creación y edición de inicio de funcionamiento
+class CRViewInicioFuncionamiento(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
-		template_name = "visitas/createEntregaBebedero.html"
+		template_name = "visitas/CRVInicioFuncionamiento.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
-		NuevaEntregaForm=EntregaDeBebederoCreateForm()
+		NuevoFuncionamientoForm=InicioFuncionamientoCreateForm()
 
 		try:
-			entrega = EntregaDeBebedero.objects.get(escuela=escuela)
-		except EntregaDeBebedero.DoesNotExist:
-			entrega = None
+			funcionamiento = InicioFuncionamiento.objects.get(escuela=escuela)
+		except InicioFuncionamiento.DoesNotExist:
+			funcionamiento = None
 
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
-			'NuevaEntregaForm': NuevaEntregaForm,
-			'entrega': entrega,
+			'NuevoFuncionamientoForm': NuevoFuncionamientoForm,
+			'funcionamiento': funcionamiento,
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
-		NuevaEntregaForm=EntregaDeBebederoCreateForm(data=request.POST, files=request.FILES)
+		NuevoFuncionamientoForm=InicioFuncionamientoCreateForm(data=request.POST, files=request.FILES)
 		si = User.objects.get(pk=request.user.pk)
 
-		if NuevaEntregaForm.is_valid():
-			NuevaEntrega = NuevaEntregaForm.save(commit=False)
-			NuevaEntrega.escuela = escuela
-			NuevaEntrega.si = si
-			NuevaEntrega.save()
+		if NuevoFuncionamientoForm.is_valid():
+			NuevoFuncionamiento = NuevoFuncionamientoForm.save(commit=False)
+			NuevoFuncionamiento.escuela = escuela
+			NuevoFuncionamiento.si = si
+			NuevoFuncionamiento.save()
 
-		return redirect("visitas:ViewEntregaDeBebedero", pk=perfil.pk)		
+		return redirect("visitas:CRViewInicioFuncionamiento", pk=perfil.pk)		

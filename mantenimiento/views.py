@@ -6,16 +6,15 @@ from .models import *
 from .forms import *
 
 #Creación y edición de la visita de acuerdo
-class ViewMantenimientos(View):
+class CRViewMantenimientos(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "mantenimiento/createMantenimiento.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
+		mantenimientos = Mantenimiento.objects.filter(escuela=escuela)
 
 		NuevoMantenimientoForm = MantenimientoCreateForm()
-
-		mantenimientos = Mantenimiento.objects.filter(escuela=escuela)
 
 		context = {
 			'perfil': perfil,
@@ -37,4 +36,4 @@ class ViewMantenimientos(View):
 			NuevoMantenimiento.si = si
 			NuevoMantenimiento.save()
 
-		return redirect("mantenimiento:ViewMantenimientos", pk=perfil.pk)
+		return redirect("mantenimiento:CRViewMantenimientos", pk=perfil.pk)

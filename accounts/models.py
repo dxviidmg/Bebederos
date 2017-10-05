@@ -1,3 +1,6 @@
+import qrcode
+from io import StringIO
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -153,15 +156,14 @@ class Perfil(models.Model):
 	turno = models.CharField(max_length=20, blank=True, null=True, choices=turno_choices)
 	plantilla_escolar = models.IntegerField(blank=True, null=True)
 	conexion = models.CharField(max_length=20, blank=True, null=True, choices=conexion_choices)
-	aulas_existentes = models.IntegerField(blank=True, null=True)
-	aulas_en_uso = models.IntegerField(blank=True, null=True)
 	status = models.CharField(max_length=20, blank=True, null=True)
 	avance = models.IntegerField(blank=True, null=True)
-	domicilio = models.CharField(max_length=100, blank=True, null=True)
+	domicilio = models.CharField(max_length=300, blank=True, null=True)
+	localidad = models.CharField(max_length=30, blank=True, null=True)
 	referencias = models.CharField(max_length=200, blank=True, null=True)
 	SSID = models.CharField(max_length=20, null=True, blank=True)
 	clave_SSID = models.CharField(max_length=20, null=True, blank=True)
-
+	qrcode = models.ImageField(upload_to='fotos/qr/%Y/%m/%d/', null=True, blank=True, verbose_name="Código QR")
 	#Atributo exclusivo para Constructoras
 	representante_legal = models.CharField(max_length=100, blank=True, null=True)
 
@@ -207,6 +209,25 @@ class Perfil(models.Model):
 	class Meta:
 		ordering = ['user']
 		verbose_name_plural = "Perfiles"
+
+	def generate_qrcode(self):
+		qr = qrcode.QRCode(
+			version=1,
+			error_correction=qrcode.constants.ERROR_CORRECT_L,
+			box_size=6,
+			border=0,
+		)
+		qr.add_data(self.get_absolute_url())
+		qr.make(fit=True)
+
+		img = qr.make_image()
+
+		buffer = StringIO.StringIO()
+		img.save(buffer)
+		filename = 'events-%s.png' % (self.id)
+		filebuffer = InMemoryUploadedFile(
+			buffer, None, filename, 'image/png', buffer.len, None)
+		self.qrcode.save(filename, filebuffer)
 
 #Muestra nombre completo	
 def get_full_name(self):

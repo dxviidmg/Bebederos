@@ -7,9 +7,9 @@ class VisitaDeAcuerdoAdmin(admin.ModelAdmin):
 
 admin.site.register(VisitaDeAcuerdo, VisitaDeAcuerdoAdmin)
 
-class EntregaDeBebederoAdmin(admin.ModelAdmin):
+class InicioFuncionamientoAdmin(admin.ModelAdmin):
     list_display = ['escuela']
     search_fields = ['escuela__get_full_name', 'escuela__username']
 
-admin.site.register(EntregaDeBebedero, EntregaDeBebederoAdmin)
+admin.site.register(InicioFuncionamiento, InicioFuncionamientoAdmin)
 

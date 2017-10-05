@@ -39,16 +39,18 @@ class SistemaBebedero(models.Model):
 		("A","A"),
 		("B","B"),
 	)
+
+	linea_ensamblaje_choices = [(str(i), i) for i in range(1,7)]
+
 	identificador = models.CharField(max_length=100, null=True, blank=True)
 	escuela = models.OneToOneField(User, related_name="escuela")
-	ejecutora = models.ForeignKey(User, related_name="ejecutora", null=True, blank=True)
 	mueble = models.ForeignKey(Mueble, related_name="mueble")
-	sistema_de_potabilizacion = models.ForeignKey(SistemaPotabilizacion, related_name="sistema_potabilizacion")
-	linea_ensamblaje = models.CharField(max_length=5, default="1")
+	sistema_de_potabilizacion = models.ForeignKey(SistemaPotabilizacion, related_name="sistema_potabilizacion",  null=True, blank=True)
 	identificador_sp = models.CharField(max_length=20, null=True, blank=True, verbose_name="Identificador de sistema de potabilización")
-	qr_sp = models.FileField(upload_to='codigos/sp/%Y/%m/%d/', verbose_name="Codigo QR de sistema de potabilización", null=True, blank=True)	
+	secuencia_sp = models.CharField(max_length=30, null=True, blank=True, verbose_name="Secuencia de componentes en el sistema de potabilización")
+	linea_ensamblaje = models.CharField(max_length=5, choices=linea_ensamblaje_choices, null=True, blank=True)
 	modulo = models.CharField(max_length=1, default="A", choices=modulo_choices)
-
+	ejecutora = models.OneToOneField(User, related_name="ejecutora", null=True, blank=True)
 	def __str__(self):
 		return 'Bebedero {} para escuela {}'.format(self.mueble, self.escuela)
 	

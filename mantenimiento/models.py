@@ -22,7 +22,7 @@ class Mantenimiento (models.Model):
 		('Correctivo' , 'Correctivo'),
 	)
 
-	carnet = models.FileField()
+	carnet = models.FileField(verbose_name="Carnet actualizado")
 	si = models.ForeignKey(User, related_name="sim")
 	escuela = models.ForeignKey(User, related_name="escuela_mtto")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")

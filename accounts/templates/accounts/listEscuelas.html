@@ -1,0 +1,80 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+	<h1>{{municipio.nombre}}</h1>
+	
+	<p><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">Regresar</a></p>
+	
+	<h3>Información</h3>
+	<div class="row justify-content-center">
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th rowspan="2">Región</th>
+						<th rowspan="2">Partida</th>
+						<th rowspan="2">Zona</th>
+						<th colspan="4">Escuelas</th>
+					</tr>
+					<tr>
+						<th>Registradas</th>
+						<th>Aceptadas</th>
+						<th>Pendientes</th>
+						<th>Rechazadas</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{entidad.partida.region}}</td>
+						<td>{{entidad.partida.numero}}</td>
+						<td>{{municipio.zona.nombre}}</td>
+						<td>{{municipio.escuelas_registradas}}</td>
+						<td>{{municipio.escuelas_aceptadas}}</td>
+						<td>{{municipio.escuelas_pendientes}}</td>
+						<td>{{municipio.escuelas_rechazadas}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<a href="{%url 'accounts:CreateViewEscuela' municipio.pk%}">Crear escuela</a>
+	<h3>Lista de escuelas</h3>
+
+	<div class="row justify-content-center">
+		<div class="table-responsive text-center">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>CCT</th>
+						<th>Nombre</th>
+						<th>Status</th>
+						<th>Avance</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				{%for perfil in perfiles%}
+				
+					<tr>
+						<td><a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">{{perfil.user.username}}</a></td>
+						<td>{{perfil.tipo}} {{perfil.nivel_educativo}} {{perfil.user.get_full_name}}</td>
+						<td>{%if perfil.status is not None%} {{perfil.status}} {%else%}Pendiente {%endif%}{%if perfil.UpdateStatus is None%}{%endif%}</td>
+						<td> {%if perfil.avance is not NULL%} {{perfil.avance}}% {%endif%} {%if perfil.UpdateAvance%}{%endif%}</td>
+					</tr>
+
+				{%empty%}
+				
+					<tr>
+						<td colspan="4">No hay escuelas registradas</td>
+					</tr>
+
+				{%endfor%}
+				
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+{%endblock content%}

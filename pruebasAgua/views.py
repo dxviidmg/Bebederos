@@ -4,10 +4,10 @@ from accounts.models import Perfil
 from django.contrib.auth.models import User
 from .forms import *
 
-class ViewPrimerPrueba(View):
+class CRUViewPrimerPrueba(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
-		template_name = "pruebasAgua/createPrimerPrueba.html"
+		template_name = "pruebasAgua/CRUPrimerPrueba.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevaPruebaForm = PrimerPruebaCreateForm()
@@ -66,12 +66,12 @@ class ViewPrimerPrueba(View):
 			EdicionPruebaForm2 = None
 			EdicionPruebaForm3 = None
 
-		return redirect("pruebas:ViewPrimerPrueba", pk=perfil.pk)
+		return redirect("pruebas:CRUViewPrimerPrueba", pk=perfil.pk)
 
-class ViewSegundaPrueba(View):
+class CRUViewSegundaPrueba(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
-		template_name = "pruebasAgua/createSegundaPrueba.html"
+		template_name = "pruebasAgua/CRUSegundaPrueba.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevaPruebaForm = SegundaPruebaCreateForm()
@@ -131,4 +131,4 @@ class ViewSegundaPrueba(View):
 			EdicionPruebaForm1 = None
 			EdicionPruebaForm2 = None
 			EdicionPruebaForm3 = None
-		return redirect("pruebas:ViewSegundaPrueba", pk=perfil.pk)
+		return redirect("pruebas:CRUViewSegundaPrueba", pk=perfil.pk)

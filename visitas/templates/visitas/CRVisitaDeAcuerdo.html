@@ -1,0 +1,164 @@
+{%extends 'base.html'%}
+
+{% load bootstrap %}
+
+{%block content%}
+
+	<div class="row">
+		<div class="col-12">
+			<h1>Visita de acuerdos</h1>
+			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
+			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+		</div>
+	</div>
+
+	{%if visita%}
+
+	<div class="row">
+		<div class="col-12">
+			<h4>Consulta de documentación</h4>
+		</div>
+	</div>
+
+	<div class="row justify-content-center text-center">
+
+	{%if visita.convenio_concertacion%}
+
+		<div class="col-md-5">
+
+			<a href="{{visita.convenio_concertacion.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Convenio de concertación</a>
+
+		</div>
+
+	{%endif%}
+
+	{%if visita.cedula_identificacion%}
+
+		<div class="col-md-5">
+
+			<a href="{{visita.cedula_identificacion.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Cedula de Identificación</a>
+
+		</div>
+
+	{%endif%}
+
+	{%if visita.acta_acuerdos%}
+		<div class="col-md-5">
+
+			<a href="{{visita.acta_acuerdos.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Acta de acuerdos</a>
+	
+		</div>
+	{%endif%}
+
+	{%if visita.constancia_integracion_comite%}
+	
+		<div class="col-md-5">
+	
+			<a href="{{visita.constancia_integracion_comite.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Constancia de integración de comite</a>
+
+		</div>
+	
+	{%endif%}
+
+	{%if visita.plano_conjunto%}
+	
+		<div class="col-md-5">
+	
+			<a href="{{visita.plano_conjunto.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Plano de conjunto</a>
+
+		</div>
+	
+	{%endif%}
+
+	{%if visita.distribucion_planta%}
+	
+		<div class="col-md-5">
+	
+			<a href="{{visita.distribucion_planta.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Distribución en planta</a>
+
+		</div>
+	
+	{%endif%}
+
+	{%if visita.memoria_calculo%}
+	
+		<div class="col-md-5">
+	
+			<a href="{{visita.memoria_calculo.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Memoria de calculo</a>
+
+		</div>
+	
+	{%endif%}
+
+	{%if visita.plano_instalacion_electrica%}
+	
+		<div class="col-md-5">
+	
+			<a href="{{visita.plano_instalacion_electrica.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Plano de Instalación Eléctrica</a>
+
+		</div>
+	
+	{%endif%}
+
+	{%if visita.plano_instalacion_hidraulica%}
+	
+		<div class="col-md-5">
+	
+			<a href="{{visita.plano_instalacion_hidraulica.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Plano de Instalación Hidráulica</a>
+
+		</div>
+	
+	{%endif%}
+
+	{%if visita.plano_instalacion_sanitaria%}
+	
+		<div class="col-md-5">
+	
+			<a href="{{visita.plano_instalacion_sanitaria.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Plano de Instalación Sanitaria</a>
+
+		</div>
+	
+	{%endif%}
+
+	{%if visita.estimacion%}
+	
+		<div class="col-md-5">
+	
+			<a href="{{visita.estimacion.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Estimación</a>
+
+		</div>
+	
+	{%endif%}	
+	</div>
+
+	{%if visita.constancia_integracion_comite and not visita.plano_instalacion_electrica%}
+
+	<div class="row">
+		<div class="col-12">
+			<h4>Registro de planos y estimación</h4>
+			<form action="." method="post" enctype="multipart/form-data">
+				{%csrf_token%}
+				{{CompleteNuevaVisitaForm | bootstrap}}
+				<a href=""><input type="submit" value="Crear registro"></a>
+			</form>
+		</div>
+	</div>
+	
+	{%endif%}
+
+	{%else%}
+
+	<div class="row">
+		<div class="col-12">
+			<h4>Registro de documentación</h4>
+			<form action="." method="post" enctype="multipart/form-data">
+				{%csrf_token%}
+				{{NuevaVisitaForm | bootstrap}}
+				<a href=""><input type="submit" value="Crear registro"></a>
+			</form>
+		</div>
+	</div>
+
+	{%endif%}
+
+{%endblock content%}
