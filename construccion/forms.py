@@ -9,7 +9,7 @@ class InicioDeTrabajoCreateForm(forms.ModelForm):
 class InstalacionBebederoCreateForm(forms.ModelForm):
 	class Meta:
 		model = InstalacionBebedero
-		fields = ('reporte', 'trabajos_de_conexion', 'recepcion_mueble_bebedero')
+		fields = ('recepcion_mueble_bebedero', 'reporte',)
 #		fields = ()
 
 class EvidenciaConstruccionCreateForm(forms.ModelForm):

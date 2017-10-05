@@ -27,7 +27,23 @@ class PrimerPrueba(models.Model):
 
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	laboratorio = models.ForeignKey(User, related_name="lab_primer_prueba")
-
+	
+	#Parametros
+	color_verdadero = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Color verdadero (U Pt-Co)")
+	turbiedad = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Turbiedad (UTN o equivalente)")
+	ph = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="pH (unidades de pH)")
+	conductividad_electrica = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Conductividad eléctrica (µS/cm)")
+	coliformes_fecales = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Coliformes fecales (unidades)")
+	coliformes_totales = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Coliformes totales (Unidades)") 
+	arsenico = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Arsénico")
+	hierro = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Hierro")
+	manganesio = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Manganeso")
+	plomo = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Plomo")
+	floururos = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Fluoruros")
+	nitratos = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Nitratos")
+	sulfatos = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Sulfatos")
+	dureza_total = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Dureza total (CaCO3)")
+	solidos_disueltos  = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Sólidos disueltos totales")
 
 	def __str__(self):
 		return '{}'.format(self.escuela)
@@ -62,6 +78,26 @@ class SegundaPrueba(models.Model):
 
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	laboratorio = models.ForeignKey(User, related_name="lab_segunda_prueba")
+
+	#Parametros
+
+	#Parametros
+	color_verdadero = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Color verdadero (U Pt-Co)")
+	turbiedad = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Turbiedad (UTN o equivalente)")
+	ph = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="pH (unidades de pH)")
+	conductividad_electrica = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Conductividad eléctrica (µS/cm)")
+	coliformes_fecales = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Coliformes fecales (unidades)")
+	coliformes_totales = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Coliformes totales (Unidades)") 
+	arsenico = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Arsénico")
+	hierro = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Hierro")
+	manganesio = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Manganeso")
+	plomo = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Plomo")
+	floururos = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Fluoruros")
+	nitratos = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Nitratos")
+	sulfatos = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Sulfatos")
+	dureza_total = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Dureza total (CaCO3)")
+	solidos_disueltos  = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Sólidos disueltos totales")
+
 	
 	def __str__(self):
 		return '{}'.format(self.escuela)

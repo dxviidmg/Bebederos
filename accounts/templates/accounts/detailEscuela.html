@@ -113,6 +113,7 @@
 						<th>Coordinador Estatal</th>
 						<th>Residente Técnico</th>
 						<th>Superintendente</th>
+						<th>Ejecutora</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -120,11 +121,13 @@
 						<td style="background-color: #44B036; font-weight: bold;" >Nombre</td>
 						<td>{{perfil.municipio.zona.entidad.coordinador_estatal.get_full_name}}</td><td>{{perfil.municipio.zona.entidad.residente_tecnico.get_full_name}}</td>
 						<td>{{perfil.municipio.zona.entidad.partida.si.get_full_name}}</td>
+						<td>{{sistemaBebedero.ejecutora}}</td>
 					</tr>
 					<tr>
 						<td style="background-color: #44B036; font-weight: bold;">Teléfono</td>
 						<td>{{perfil.municipio.zona.entidad.coordinador_estatal.perfil.telefono}}</td><td>{{perfil.municipio.zona.entidad.residente_tecnico.perfil.telefono}}</td>
 						<td>{{perfil.municipio.zona.entidad.partida.si.perfil.telefono}}</td>
+						<td>{{sistemaBebedero.ejecutora.perfil.telefono}}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -291,12 +294,12 @@ color: white;
 		{%if segundaPrueba.aprobacion == "Aprobado"%}
 	<div class="col-md-3 col-sm-6">
 		<div class="dummy"></div>
-		<a {%if InicioFuncionamiento%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewInicioFuncionamiento' perfil.pk%}"> Inicio de funcionamiento</a>
+		<a {%if funcionamiento%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewInicioFuncionamiento' perfil.pk%}"> Inicio de funcionamiento</a>
 	</div>
 	{%endif%}
 
 
-	{%if inicioFuncionamiento%}
+	{%if funcionamiento%}
 	<div class="col-md-3 col-sm-6">
 		<div class="dummy"></div>
 		<a {%if mantenimientos.count == 24%} class="thumbnail thumbnail-available container"{%elif mantenimientos.count > 0 and mantenimientos.count < 24%} class="thumbnail thumbnail-prueba-en-espera container" {%elif mantenimientos.count == 0%} class="thumbnail container"{%endif%} href="{%url 'mantenimiento:CRViewMantenimientos' perfil.pk%}">Mantenimientos <br> {%if mantenimientos.count != 0%}Cantidad: {{mantenimientos.count}}{%endif%}</a>

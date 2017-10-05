@@ -20,6 +20,7 @@ class Mantenimiento (models.Model):
 	tipo_choices =  (
 		('Preventivo' , 'Preventivo'),
 		('Correctivo' , 'Correctivo'),
+		('Acta de entrega' , 'Acta de entrega (Mes 24)'),
 	)
 
 	carnet = models.FileField(verbose_name="Carnet actualizado")

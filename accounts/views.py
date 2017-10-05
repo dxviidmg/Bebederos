@@ -159,7 +159,7 @@ class DetailViewEscuela(View):
 			'evidenciasConstruccion': evidenciasConstruccion,
 			'evidenciaFinal': evidenciaFinal,
 			'segundaPrueba': segundaPrueba,
-			'InicioFuncionamiento': InicioFuncionamiento,
+			'funcionamiento': funcionamiento,
 			'mantenimientos': mantenimientos,
 			'municipio': municipio,
 			'zona': zona,

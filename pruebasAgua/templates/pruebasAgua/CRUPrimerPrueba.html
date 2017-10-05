@@ -103,7 +103,27 @@
 			<form action="." method="post" enctype="multipart/form-data">
 				<h4>Registro de documentación de sugerencia de Sistema potabilizador (ECA)</h4>
 				{%csrf_token%}
-				{{EdicionPruebaForm2 | bootstrap}}
+				<div class="row">
+					<div class="col-md-3">
+						<h5>Fisicos y organoelectricos</h5>
+						{{EdicionPruebaForm4 | bootstrap}}
+						</div>
+					<div class="col-md-3">
+						<h5>Bacteriologicos</h5>
+						{{EdicionPruebaForm5 | bootstrap}}
+					</div>
+					<div class="col-md-3">
+						<h5>Arsenico y metales</h5>
+						{{EdicionPruebaForm6 | bootstrap}}
+					</div>
+					<div class="col-md-3">
+						<h5>Iones y compuestos inorganicos</h5>
+						{{EdicionPruebaForm7 | bootstrap}}
+					</div>
+					<div class="col-12">
+						{{EdicionPruebaForm2 | bootstrap}}
+					</div>
+				</div>
 				<a href=""><input type="submit" value="Guardar cambios"></a>
 			</form>
 		</div>

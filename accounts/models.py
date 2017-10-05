@@ -36,6 +36,7 @@ class Partida(models.Model):
 class Entidad(models.Model):
 	coordinador_estatal = models.ForeignKey(User, null=True, blank=True, verbose_name="Coordinador Estatal", related_name="coordinador_estatal")
 	residente_tecnico = models.ForeignKey(User, null=True, blank=True, verbose_name="Residente Técnico", related_name="residente_tecnico")
+	laboratorio = models.ForeignKey(User, null=True, blank=True, verbose_name="Residente Técnico", related_name="laboratorio")
 	partida = models.ForeignKey(Partida)
 	nombre = models.CharField(max_length=30)
 	abreviatura = models.CharField(max_length=4)

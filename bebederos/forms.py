@@ -10,7 +10,7 @@ class BebederoCreateForm(forms.ModelForm):
 class BebederoEditForm(forms.ModelForm):
 	class Meta:
 		model = SistemaBebedero
-		fields = ('sistema_de_potabilizacion', 'identificador_sp', 'secuencia_sp', 'modulo', 'linea_ensamblaje')
+		fields = ('sistema_de_potabilizacion', 'identificador_sp', 'componentes_sp', 'linea_ensamblaje')
 
 class BebederoGeneraNSForm(forms.ModelForm):
 	class Meta:

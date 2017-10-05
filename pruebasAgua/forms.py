@@ -39,6 +39,53 @@ class PrimerPruebaUpdateForm3(forms.ModelForm):
 		super(PrimerPruebaUpdateForm3, self).__init__(*args, **kwargs)
 		self.fields['dictamen_sistema_potabilizador'].required = True
 
+class PrimerPruebaUpdateForm4(forms.ModelForm):
+	class Meta:
+		model = PrimerPrueba
+		fields = ('color_verdadero', 'turbiedad', 'ph', 'conductividad_electrica',)
+#		fields = ()
+	def __init__(self, *args, **kwargs):
+		super(PrimerPruebaUpdateForm4, self).__init__(*args, **kwargs)
+		self.fields['color_verdadero'].required = True
+		self.fields['turbiedad'].required = True
+		self.fields['ph'].required = True
+		self.fields['conductividad_electrica'].required = True
+
+class PrimerPruebaUpdateForm5(forms.ModelForm):
+	class Meta:
+		model = PrimerPrueba
+		fields = ('coliformes_fecales', 'coliformes_totales',)
+#		fields = ()
+	def __init__(self, *args, **kwargs):
+		super(PrimerPruebaUpdateForm5, self).__init__(*args, **kwargs)
+		self.fields['coliformes_fecales'].required = True
+		self.fields['coliformes_totales'].required = True
+
+class PrimerPruebaUpdateForm6(forms.ModelForm):
+	class Meta:
+		model = PrimerPrueba
+		fields = ('arsenico', 'hierro', 'manganesio', 'plomo',)
+#		fields = ()
+	def __init__(self, *args, **kwargs):
+		super(PrimerPruebaUpdateForm6, self).__init__(*args, **kwargs)
+		self.fields['arsenico'].required = True
+		self.fields['hierro'].required = True
+		self.fields['manganesio'].required = True
+		self.fields['plomo'].required = True
+
+class PrimerPruebaUpdateForm7(forms.ModelForm):
+	class Meta:
+		model = PrimerPrueba
+		fields = (	'floururos', 'nitratos', 'sulfatos', 'dureza_total','solidos_disueltos',)
+#		fields = ()
+	def __init__(self, *args, **kwargs):
+		super(PrimerPruebaUpdateForm7, self).__init__(*args, **kwargs)
+		self.fields['floururos'].required = True
+		self.fields['nitratos'].required = True
+		self.fields['sulfatos'].required = True
+		self.fields['dureza_total'].required = True
+		self.fields['solidos_disueltos'].required = True
+
 """Segunda Prueba de Calidad de Agua"""
 class SegundaPruebaCreateForm(forms.ModelForm):
 	class Meta:
@@ -74,4 +121,51 @@ class SegundaPruebaUpdateForm3(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(SegundaPruebaUpdateForm3, self).__init__(*args, **kwargs)
 		self.fields['dictamen_validacion'].required = True
-		self.fields['aprobacion'].required = True	
+		self.fields['aprobacion'].required = True
+
+class SegundaPruebaUpdateForm4(forms.ModelForm):
+	class Meta:
+		model = SegundaPrueba
+		fields = ('color_verdadero', 'turbiedad', 'ph', 'conductividad_electrica',)
+#		fields = ()
+	def __init__(self, *args, **kwargs):
+		super(SegundaPruebaUpdateForm4, self).__init__(*args, **kwargs)
+		self.fields['color_verdadero'].required = True
+		self.fields['turbiedad'].required = True
+		self.fields['ph'].required = True
+		self.fields['conductividad_electrica'].required = True
+
+class SegundaPruebaUpdateForm5(forms.ModelForm):
+	class Meta:
+		model = SegundaPrueba
+		fields = ('coliformes_fecales', 'coliformes_totales',)
+#		fields = ()
+	def __init__(self, *args, **kwargs):
+		super(SegundaPruebaUpdateForm5, self).__init__(*args, **kwargs)
+		self.fields['coliformes_fecales'].required = True
+		self.fields['coliformes_totales'].required = True
+
+class SegundaPruebaUpdateForm6(forms.ModelForm):
+	class Meta:
+		model = SegundaPrueba
+		fields = ('arsenico', 'hierro', 'manganesio', 'plomo',)
+#		fields = ()
+	def __init__(self, *args, **kwargs):
+		super(SegundaPruebaUpdateForm6, self).__init__(*args, **kwargs)
+		self.fields['arsenico'].required = True
+		self.fields['hierro'].required = True
+		self.fields['manganesio'].required = True
+		self.fields['plomo'].required = True
+
+class SegundaPruebaUpdateForm7(forms.ModelForm):
+	class Meta:
+		model = SegundaPrueba
+		fields = (	'floururos', 'nitratos', 'sulfatos', 'dureza_total','solidos_disueltos',)
+#		fields = ()
+	def __init__(self, *args, **kwargs):
+		super(SegundaPruebaUpdateForm7, self).__init__(*args, **kwargs)
+		self.fields['floururos'].required = True
+		self.fields['nitratos'].required = True
+		self.fields['sulfatos'].required = True
+		self.fields['dureza_total'].required = True
+		self.fields['solidos_disueltos'].required = True
