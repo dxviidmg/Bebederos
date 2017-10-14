@@ -8,7 +8,11 @@
 	{%if entidad.EscuelasCount%}{%endif%}
 
 		<a href="{%url 'accounts:ListViewPartidas' region.numero%}">Regresar</a>
-
+		<br>
+		<a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.pk%}">Avance de escuelas</a>
+		<br>
+		<a href="{% url 'pruebas:ExportPruebasPorEscuelasCSV' entidad.pk%}">Exportar todas las pruebas por escuela</a>
+		<br>
 	<h3>Información</h3>
 
 	<div class="row justify-content-center">

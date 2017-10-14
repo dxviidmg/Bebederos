@@ -8,6 +8,9 @@ from bebederos.models import *
 from mantenimiento.models import Mantenimiento
 from .forms import *
 from bebederos.forms import BebederoCreateForm
+from django.contrib import messages
+
+import qrcode
 
 class ViewProfile(View):
 #	@method_decorator(login_required)
@@ -71,7 +74,7 @@ class ListViewZonas(View):
 		ListMunicipiosPorZona = []
 		for zona in zonas:
 			ListMunicipiosPorZona.append({'zona': zona.nombre, 'municipios': Municipio.objects.filter(zona=zona)})
-
+		
 		context = {
 			'entidad': entidad,
 			'ListMunicipiosPorZona': ListMunicipiosPorZona,
@@ -148,7 +151,7 @@ class DetailViewEscuela(View):
 			mantenimientos = Mantenimiento.objects.filter(escuela=escuela)
 		except Mantenimiento.DoesNotExist:
 			mantenimientos = None
-
+		
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
@@ -179,6 +182,20 @@ class CreateViewEscuela(View):
 		NuevaEscuelaPerfilForm = EscuelaPerfilCreateForm()	
 		NuevoBebederoForm = BebederoCreateForm()
 
+		#Img rq code
+		qr = qrcode.QRCode(
+			version=1,
+			error_correction=qrcode.constants.ERROR_CORRECT_L,
+			box_size=10,
+			border=4,
+		)
+		qr.add_data('Some data')
+		qr.make(fit=True)
+
+		img = qr.make_image(fill_color="black", back_color="white")
+		print(qr)
+		print(img)
+
 		context = {
 			'municipio': municipio,
 			'NuevaEscuelaUserForm': NuevaEscuelaUserForm,
@@ -197,9 +214,8 @@ class CreateViewEscuela(View):
 
 		if NuevaEscuelaUserForm.is_valid():
 			NuevaEscuelaUser = NuevaEscuelaUserForm.save(commit=False)
+			NuevoEscuelaUser.set_password('generica')
 			NuevaEscuelaUser.save()
-
-			print(NuevaEscuelaUserForm.cleaned_data['username'])
 
 		if NuevaEscuelaPerfilForm.is_valid():
 			NuevaEscuelaPerfil = NuevaEscuelaPerfilForm.save(commit=False)
@@ -229,7 +245,7 @@ class UpdateViewEscuela(View):
 			'escuela': escuela,
 			'EdicionEscuelaUserForm': EdicionEscuelaUserForm,
 			'EdicionEscuelaPerfilForm': EdicionEscuelaPerfilForm,
-			}
+		}
 		return render(request,template_name, context)
 
 	def post(self, request, pk):
@@ -241,8 +257,100 @@ class UpdateViewEscuela(View):
 
 		if EdicionEscuelaUserForm.is_valid:
 			EdicionEscuelaUserForm.save()
+			messages.success(request, "Actualización exitosa")
 
 		if EdicionEscuelaPerfilForm.is_valid:
 			EdicionEscuelaPerfilForm.save()
 
 		return redirect("accounts:UpdateViewEscuela", pk=perfil.pk)
+
+class DetailViewMapa(View):
+	def get(self, request, pk):
+		template_name = "accounts/detailMapa.html"
+		perfil = Perfil.objects.get(pk=pk)
+		escuela = User.objects.get(perfil=perfil)
+		
+		context = {
+			'perfil': perfil,
+			'escuela': escuela,
+		}
+		return render(request,template_name, context)
+
+class SearchViewEscuelas(View):
+#	@method_decorator(login_required)
+	def get(self, request):
+		template_name = "accounts/searchEscuelas.html"
+		query = request.GET.get("query")
+
+		if query:
+			escuelas = User.objects.filter(username__contains=query)
+			print(escuelas)
+	
+		else:
+			escuelas = []
+	
+		context = {
+			'escuelas': escuelas,
+		}
+		return render(request,template_name, context)
+
+class ListViewAvanceEscuelas(View):
+#	@method_decorator(login_required)
+	def get(self, request, pk):
+		template_name = "accounts/listAvanceEscuelas.html"
+#		municipio = Municipio.objects.get(pk=pk)
+#		perfiles = Perfil.objects.filter(municipio=municipio).order_by('status')
+#		zona = Zona.objects.get(municipio=municipio)
+		entidad = Entidad.objects.get(pk=pk)
+		zonas = Zona.objects.filter(entidad=entidad)
+		municipios = Municipio.objects.filter(zona__in=zonas)
+		perfilesEscuelas = Perfil.objects.filter(municipio__in=municipios)
+		escuelas = User.objects.filter(perfil__in=perfilesEscuelas)
+		AvancePorEscuelas = []
+
+		for escuela in escuelas:
+			try:
+				primerPrueba = PrimerPrueba.objects.get(escuela=escuela)
+			except PrimerPrueba.DoesNotExist:
+				primerPrueba = None
+
+			try:
+				inicioDeTrabajo = InicioDeTrabajo.objects.filter(escuela=escuela)
+			except InicioDeTrabajo.DoesNotExist:
+				inicioDeTrabajo = None
+
+			try:
+				visitaDeAcuerdo = VisitaDeAcuerdo.objects.get(escuela=escuela)
+			except VisitaDeAcuerdo.DoesNotExist:
+				visitaDeAcuerdo = None
+
+			try:
+				sistemaBebedero = SistemaBebedero.objects.get(escuela=escuela)
+			except SistemaBebedero.DoesNotExist:
+				sistemaBebedero = None
+
+			try:
+				evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela)
+			except EvidenciaConstruccion.DoesNotExist:
+				evidencias = None
+
+			try:
+				segundaPrueba = SegundaPrueba.objects.get(escuela=escuela)
+			except SegundaPrueba.DoesNotExist:
+				segundaPrueba = None
+
+			try:
+				mantenimientos = Mantenimiento.objects.filter(escuela=escuela)
+			except Mantenimiento.DoesNotExist:
+				mantenimientos = None
+
+			data = {'escuela' : escuela, 'primerPrueba': primerPrueba, 'inicioDeTrabajo': inicioDeTrabajo, 'visitaDeAcuerdo': visitaDeAcuerdo, 'sistemaBebedero': sistemaBebedero, 'evidencias': evidencias, 'segundaPrueba': segundaPrueba, 'mantenimientos': mantenimientos}
+			AvancePorEscuelas.append(data)
+
+		context = {
+			'AvancePorEscuelas': AvancePorEscuelas,
+#			'municipio': municipio,
+#			'perfiles': perfiles,
+			'entidad': entidad,
+		}
+		return render(request,template_name, context)

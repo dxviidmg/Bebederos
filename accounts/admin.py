@@ -66,3 +66,4 @@ class PerfilAdmin(admin.ModelAdmin):
     list_filter = ['tipo', 'nivel_educativo', 'status']
 
 admin.site.register(Perfil, PerfilAdmin)
+

@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+	<div class="row justify-content-center">
+		<div class="col-12">
+			<h4>Plantillas de documentación</h4>		
+
+			<div class="table responsive">
+				
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Fase</th>
+							<th>Nombre</th>		<th>Archivo</th>			
+						</tr>
+					</thead>
+					<tbody>
+			{%for plantilla in plantillas%}
+						<tr>
+							<td>{{plantilla.fase}}</td>
+							<td>{{plantilla.nombre}}</td>
+							<td><a href="{{plantilla.archivo.url}}">Descargar</a></td>
+						</tr>
+			{%empty%}
+						<tr>
+							<td rowspan="3">Lista de documentos vacia</td>
+						</tr>
+			{%endfor%}
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+{%endblock content%}

@@ -5,6 +5,7 @@ from accounts.models import Perfil
 from django.db.models import Q
 from .forms import *
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 #Creación y consulta de incidencias
 class CRViewIncidencias(View):
@@ -39,6 +40,7 @@ class CRViewIncidencias(View):
 			NuevaIncidencia.escuela = escuela
 			NuevaIncidencia.autor = autor
 			NuevaIncidencia.save()
+			messages.success(request, "Registro exitoso")
 
 		return redirect("incidencias:CRViewIncidencias", pk=perfil.pk)
 
@@ -66,5 +68,6 @@ class UpdateViewIncidencia(View):
 		EdicionIncidenciaForm=IncidenciaEditForm(instance=incidencia, data=request.POST)
 		if EdicionIncidenciaForm.is_valid:
 			EdicionIncidenciaForm.save()
+			messages.success(request, "Actualización exitosa")
 
-		return redirect("incidencias:CRViewIncidencias", pk=perfil.pk)
+		return redirect("incidencias:UpdateViewIncidencia", pk=incidencia.pk)

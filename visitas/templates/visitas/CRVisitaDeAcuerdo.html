@@ -131,21 +131,6 @@
 	{%endif%}	
 	</div>
 
-	{%if visita.constancia_integracion_comite and not visita.plano_instalacion_electrica%}
-
-	<div class="row">
-		<div class="col-12">
-			<h4>Registro de planos y estimación</h4>
-			<form action="." method="post" enctype="multipart/form-data">
-				{%csrf_token%}
-				{{CompleteNuevaVisitaForm | bootstrap}}
-				<a href=""><input type="submit" value="Crear registro"></a>
-			</form>
-		</div>
-	</div>
-	
-	{%endif%}
-
 	{%else%}
 
 	<div class="row">

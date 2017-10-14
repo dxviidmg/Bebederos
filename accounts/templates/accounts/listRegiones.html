@@ -1,63 +1,68 @@
 {%extends 'base.html'%}
 
 {%block content%}
-
+  
   <style type="text/css">
     .square-box{
-      position: relative;
-      width: 70%;
-      overflow: hidden;
-      display: table;
-      margin: 0 auto;
+    position: relative;
+    width: 75%;
+    overflow: hidden;
+    display: table;
+    margin: 0 auto;
     }
     .square-box:before{
-      content: "";
-      display: block;
-      padding-top: 100%;
+    content: "";
+    display: block;
+    padding-top: 100%;
     }
     .square-content{
-      position:  absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      color: white;
+    position:  absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: white;
     }
     .square-content div {
-      display: table;
-      width: 100%;
-      height: 100%;
+    display: table;
+    width: 100%;
+    height: 100%;
     }
     .square-content span {
-      display: table-cell;
-      text-align: center;
-      vertical-align: middle;
-      color: white;
-      font-size: 4em;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    font-size: 4em;
     }
   </style>
 
-  <h1>Regiones</h1>
+  
   <div class="row justify-content-center" >
+    <div class="col-12">
+        <h1>Regiones</h1>
+    </div>
 
-  {%for region in regiones%}
+    {%for region in regiones%}
 
-    <div class="col-sm-4 col-md-4" style="margin-bottom: 5%;">
+    <div class="col-sm-4 col-md-4">
 
       <a href="{{region.get_absolute_url}}"><div class='square-box' style="background-color: {{region.color}}">
         <div class='square-content'>
-          <div>
+         <div>
             <span>{{region}}</span>
           </div>
         </div>
       </div>
       </a>
-      <h3>{{region.nombre}}</h3>
+    <h3>{{region.nombre}}</h3>
     </div>
 
   {%empty%}
 
-    <h3>Aún no se han registrado regiones</h3>
+    <div class="col-12">
+      <h3>Aún no se han registrado regiones</h3>
+    </div>
 
   {%endfor%}
 

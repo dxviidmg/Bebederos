@@ -24,6 +24,7 @@ from pruebasAgua import urls as pruebasAguaUrls
 from incidencias import urls as incidenciasUrls
 from mantenimiento import urls as mantenimientoUrls
 from bebederos import urls as bebederosUrls
+from plantillas import urls as plantillasUrls
 #Images
 from django.conf import settings
 from django.conf.urls.static import static
@@ -37,6 +38,7 @@ urlpatterns = [
     url(r'^', include(incidenciasUrls, namespace="incidencias")),
     url(r'^', include(mantenimientoUrls, namespace="mantenimiento")),
     url(r'^', include(bebederosUrls, namespace="bebederos")),
+    url(r'^', include(plantillasUrls, namespace="plantillas")),    
 ]
 
 #Images

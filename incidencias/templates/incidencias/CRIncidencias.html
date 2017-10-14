@@ -4,9 +4,15 @@
 
 {%block content%}
 	
-
 	<div class="row">
 		<div class="col-12">
+
+		{% for message in messages %}
+	
+			<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+
+		{% endfor %}
+
 			<h1>Bitacora de Incidencias</h1>
 			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
 			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>

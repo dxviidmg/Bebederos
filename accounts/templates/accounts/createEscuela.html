@@ -9,7 +9,7 @@
 
 		<p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">Regresar</a></p>
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Registro de escuela en {{municipio.nombre}}, {{municipio.zona.entidad}}</h4>	
+				<h4>Registro de escuela en {{municipio.nombre}}, {{municipio.zona.entidad}}</h4>
 				{%csrf_token%}
 				{{NuevaEscuelaUserForm | bootstrap}}
 				{{NuevaEscuelaPerfilForm | bootstrap}}

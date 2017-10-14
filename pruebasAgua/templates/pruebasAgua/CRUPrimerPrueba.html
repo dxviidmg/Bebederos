@@ -4,8 +4,40 @@
 
 {%block content%}
 
+<style type="text/css">
+	.fa-times{
+		color: red;
+	}
+	.fa-check{
+		color: green;
+	}
+	.padding-top-icon-1{
+		padding-top: 63;
+	}
+
+	.padding-top-icon-2{
+		padding-top: 55;
+	}
+
+	.padding-top-icon-3{
+		padding-top: 82;
+	}
+	.padding-top-parametro-1{
+		padding-top: 63;
+	}
+
+	.padding-top-parametro-2{
+		padding-top: 49;
+	}
+
+	.padding-top-parametro-3{
+		padding-top: 79;
+	}
+</style>
+{%if prueba.DeleteSB%}{{prueba.DeleteSB}}{%endif%}
 	<div class="row">
-		<div class="col-12">	
+		<div class="col-12">
+			
 			<h1>Primera prueba de calidad de agua</h1>
 			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
 			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
@@ -40,20 +72,31 @@
 		{%endif%}
 
 		</div>
+
 		<div class="col-md-5">
 
-		{%if prueba.resultados_laboratorio%}
+		{%if prueba.hoja_campo%}
 
-			<a href="{{prueba.resultados_laboratorio.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Resultados del Laboratorio</a>
+			<a href="{{prueba.hoja_campo.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Hoja de campo</a>
 
 		{%endif%}
 		
 		</div>
 		<div class="col-md-5">
 
-		{%if prueba.foto_recepcion%}
+		{%if prueba.cadena_custodia%}
 
-			<a href="{{prueba.foto_recepcion.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Evidencia fotografica de recepción</a>
+			<a href="{{prueba.cadena_custodia.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Cadena de custodia</a>
+
+		{%endif%}
+		
+		</div>
+
+		<div class="col-md-5">
+
+		{%if prueba.resultados_laboratorio%}
+
+			<a href="{{prueba.resultados_laboratorio.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Resultados del Laboratorio</a>
 
 		{%endif%}
 		
@@ -78,9 +121,6 @@
 		</div>
 	</div>
 
-
-	
-
 		{%if prueba.reporte_toma_agua and not prueba.resultados_laboratorio%}
 	
 	<div class="row">
@@ -89,6 +129,30 @@
 				<h4>Registro de documentación de analísis (LAB)</h4>
 				{%csrf_token%}
 				{{EdicionPruebaForm1 | bootstrap}}
+
+				<div class="row">
+					<div class="col-md-12">
+						<h4>Información y parámetros de análisis</h4>
+						{{EdicionPruebaForm2 | bootstrap}}
+					</div>
+					<div class="col-12 col-sm-12 col-md-3">
+						<h5>Fisicos y organoelectricos</h5>
+						{{EdicionPruebaForm3 | bootstrap}}
+					</div>
+					<div class="col-12 col-sm-12 col-md-3">
+						<h5>Fisicos y organoelectricos</h5>
+						{{EdicionPruebaForm4 | bootstrap}}
+					</div>
+					<div class="col-12 col-sm-12 col-md-3">
+						<h5>Arsenico y metales</h5>
+						{{EdicionPruebaForm5 | bootstrap}}
+					</div>
+					<div class="col-12 col-sm-12 col-md-3">
+						<h5>Iones y compuestos inorganicos</h5>
+						{{EdicionPruebaForm6 | bootstrap}}
+					</div>
+				</div>
+
 				<a href=""><input type="submit" value="Guardar cambios"></a>
 			</form>
 		</div>
@@ -96,34 +160,233 @@
 	
 		{%endif%}
 
-		{%if prueba.resultados_laboratorio and prueba.aprobacion == "En espera"%}
+		{%if prueba.no_registro and prueba.aprobacion == "En espera"%}
 	
+
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Registro de documentación de sugerencia de Sistema potabilizador (ECA)</h4>
+				<h4>Registro de documentación de analísis (eca2)</h4>
 				{%csrf_token%}
+				{{EdicionPruebaForm1 | bootstrap}}
+
 				<div class="row">
-					<div class="col-md-3">
-						<h5>Fisicos y organoelectricos</h5>
-						{{EdicionPruebaForm4 | bootstrap}}
-						</div>
-					<div class="col-md-3">
-						<h5>Bacteriologicos</h5>
-						{{EdicionPruebaForm5 | bootstrap}}
-					</div>
-					<div class="col-md-3">
-						<h5>Arsenico y metales</h5>
-						{{EdicionPruebaForm6 | bootstrap}}
-					</div>
-					<div class="col-md-3">
-						<h5>Iones y compuestos inorganicos</h5>
-						{{EdicionPruebaForm7 | bootstrap}}
-					</div>
-					<div class="col-12">
+					<div class="col-md-12">
+						<h4>Información y parámetros de análisis</h4>
 						{{EdicionPruebaForm2 | bootstrap}}
 					</div>
+					<div class="col-12 col-sm-6 col-md-6">
+						<h5>Fisicos y organoelectricos</h5>
+						{{EdicionPruebaForm3 | bootstrap}}
+						<h5>Bacteriologicos</h5>
+						{{EdicionPruebaForm4 | bootstrap}}
+						<h5>Arsenico y metales</h5>
+						{{EdicionPruebaForm5 | bootstrap}}
+						<h5>Iones y compuestos inorganicos</h5>
+						{{EdicionPruebaForm6 | bootstrap}}
+					</div>
+					<div class="hidden-xs-down col-sm-4 col-md-3" style="font-size: 25px;">
+							<div>
+								<h5>LMP</h5>
+							</div>
+						<div style="padding-top: 30px;" >
+						{%if prueba.color_verdadero is not null%}
+						20
+						{%endif%}
+						</div>
+						<div class="padding-top-parametro-2">
+						{%if prueba.turbiedad  is not null%}
+						5
+						{%endif%}
+						</div>
+						<div class="padding-top-parametro-2">
+						{%if prueba.ph  is not null%}
+						6.5-8.5
+						{%endif%}
+						</div>
+						<div class="padding-top-parametro-2">
+						{%if prueba.conductividad_electrica  is not null%}
+						No regulada
+						{%endif%}
+						</div>
+						<div class="padding-top-parametro-3">
+						{%if prueba.coliformes_fecales  is not null%}
+						Ausencia
+						{%endif%}
+						</div>
+						<div class="padding-top-parametro-2">
+						{%if prueba.coliformes_totales is not null%}
+						Ausencia
+						{%endif%}
+						</div>
+						<div class="padding-top-parametro-3">
+						{%if prueba.arsenico  is not null%}
+						0.025
+						{%endif%}
+						</div>
+						<div class="padding-top-parametro-2">
+						{%if prueba.hierro is not null%}
+						0.30
+						{%endif%}
+						</div>
+						<div class="padding-top-parametro-2">
+						{%if prueba.manganeso is not null%}
+						0.15
+						{%endif%}
+						</div>
+						<div class="padding-top-parametro-2">
+						{%if prueba.plomo is not null%}
+						0.01
+						{%endif%}
+						</div>
+						<div class="padding-top-parametro-3">
+						{%if prueba.floururos is not null%}
+						1.50
+						{%endif%}
+						</div>
+						<div class="padding-top-parametro-2">
+						{%if prueba.nitratos is not null%}
+						10
+						{%endif%}
+						</div>
+						<div class="padding-top-parametro-2">
+						{%if prueba.sulfatos is not null%}
+						400
+						{%endif%}
+						</div>
+						<div class="padding-top-parametro-2">
+						{%if prueba.dureza_total is not null%}
+						500
+						{%endif%}
+						</div>
+						<div class="padding-top-parametro-2">
+						{%if prueba.solidos_disueltos is not null%}
+						1000
+						{%endif%}
+						</div>
+					</div>
+					<div class="hidden-xs-down col-sm-2 col-md-3">
+						<div>
+							<h5>P < LMP</h5>
+						</div>
+						<div style="padding-top: 30px;">
+						{%if prueba.color_verdadero <= 20%}
+						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
+						{%elif prueba.color_verdadero > 20%}
+						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
+						{%endif%}
+						</div>
+						<div class="padding-top-icon-2">
+						{%if prueba.turbiedad <= 5%}
+						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
+						{%elif prueba.turbiedad > 5%}
+						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
+						{%endif%}
+						</div>
+						<div class="padding-top-icon-2">
+						{%if prueba.ph <= 8.5 and prueba.ph >= 6.5%}
+						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
+						{%elif prueba.ph > 8.5 or prueba.ph < 6.5%}
+						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
+						{%endif%}
+						</div>
+						<div class="padding-top-icon-2">
+						{%if prueba.conductividad_electrica <= 8.5%}
+						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
+						{%elif prueba.conductividad_electrica > 8.5%}
+						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
+						{%endif%}
+						</div>
+						<div class="padding-top-icon-3">
+						{%if prueba.coliformes_fecales == 0%}
+						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
+						{%elif prueba.coliformes_fecales > 0%}
+						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
+						{%endif%}
+						</div>
+						<div class="padding-top-icon-2">
+						{%if prueba.coliformes_totales == 0%}
+						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
+						{%elif prueba.coliformes_totales > 0%}
+						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
+						{%endif%}
+						</div>
+						<div class="padding-top-icon-3">
+						{%if prueba.arsenico <= 0.025%}
+						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
+						{%elif prueba.arsenico > 0.025%}
+						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
+						{%endif%}
+						</div>
+						<div class="padding-top-icon-2">
+						{%if prueba.hierro <= 0.3%}
+						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
+						{%elif prueba.hierro > 0.3%}
+						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
+						{%endif%}
+						</div>
+						<div class="padding-top-icon-2">
+						{%if prueba.manganeso <= 0.15%}
+						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
+						{%elif prueba.manganeso > 0.15%}
+						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
+						{%endif%}
+						</div>
+						<div class="padding-top-icon-2">
+						{%if prueba.plomo <= 0.01%}
+						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
+						{%elif prueba.plomo > 0.01%}
+						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
+						{%endif%}
+						</div>
+						<div class="padding-top-icon-3">
+						{%if prueba.floururos <= 1.5%}
+						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
+						{%elif prueba.floururos > 1.5%}
+						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
+						{%endif%}
+						</div>
+						<div class="padding-top-icon-2">
+						{%if prueba.nitratos <= 10%}
+						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
+						{%elif prueba.nitratos > 10%}
+						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
+						{%endif%}
+						</div>
+						<div class="padding-top-icon-2">
+						{%if prueba.sulfatos <= 400%}
+						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
+						{%elif prueba.sulfatos > 400%}
+						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
+						{%endif%}
+						</div>
+						<div class="padding-top-icon-2">
+						{%if prueba.dureza_total <= 500%}
+						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
+						{%elif prueba.dureza_total > 500%}
+						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
+						{%endif%}
+						</div>
+						<div class="padding-top-icon-2">
+						{%if prueba.solidos_disueltos <= 1000%}
+						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
+						{%elif prueba.solidos_disueltos > 1000%}
+						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
+						{%endif%}
+						</div>
+					</div>
 				</div>
+
+				<a href=""><input type="submit" value="Guardar cambios"></a>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<form action="." method="post" enctype="multipart/form-data">
+			<h2>Sugerencia de SP (ECA)</h2>
+				{%csrf_token%}			
+				{{EdicionPruebaForm7 | bootstrap}}
 				<a href=""><input type="submit" value="Guardar cambios"></a>
 			</form>
 		</div>
@@ -132,13 +395,14 @@
 		{%endif%}
 
 		{%if prueba.resultados_IMTA and prueba.aprobacion == "En espera"%}
-	
+		
+
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
 				<h4>Confirmación de Sistema potabilizador (IMTA)</h4>
 				{%csrf_token%}
-				{{EdicionPruebaForm3 | bootstrap}}
+				{{EdicionPruebaForm8 | bootstrap}}
 				<a href=""><input type="submit" value="Guardar cambios"></a>
 			</form>
 		</div>

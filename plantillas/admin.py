@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+class PlantillaAdmin(admin.ModelAdmin):
+    list_display = ['nombre',]
+    search_fields = ['nombre',]
+    list_filter = ['nombre']
+admin.site.register(Plantilla, PlantillaAdmin)

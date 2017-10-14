@@ -1,0 +1,51 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+	<h1>Avance de escuelas de {{entidad.nombre}}</h1>
+	
+	<p><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">Regresar</a></p>
+
+	<div class="table-responsive">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>C. C. T</th>
+					<th>Nombre</th>
+					<th>Municipio</th>
+					<th>Primer prueba</th>
+					<th>Status de primer prueba</th>
+					<th>Inicio de trabajo</th>
+					<th>Visita de acuerdos</th>
+					<th>Manufactura terminada</th>
+					<th>Construccion</th>
+					<th>Etapa de construccion</th>
+					<th>Segunda prueba</th>
+					<th>Status de segunda prueba</th>	
+					<th>Mantenimientos</th>
+				</tr>
+			</thead>
+			<tbody>
+	{%for avanceEscuela in AvancePorEscuelas%}
+				<tr>
+					<td>{{avanceEscuela.escuela.username}}</td>
+					<td>{{avanceEscuela.escuela.get_full_name}}</td>
+					<td>{{avanceEscuela.escuela.perfil.municipio.nombre}}</td>
+					<td>{%if avanceEscuela.primerPrueba%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					<td>{{avanceEscuela.primerPrueba.aprobacion}}</td>
+					<td>{%if avanceEscuela.inicioDeTrabajo%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					<td>{%if avanceEscuela.visitaDeAcuerdo%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					<td>{%if avanceEscuela.sistemaBebedero.asignacion%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					<td>{%if avanceEscuela.evidencias%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					<td>{%if avanceEscuela.escuela.perfil.avance == 100%}Finalizada{%elif avanceEscuela.escuela.perfil.avance != 100%}En proceso o revisión{%endif%}</td>
+					<td>{%if avanceEscuela.segundaPrueba%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					<td>{{avanceEscuela.segundaPrueba.aprobacion}}</td>
+					<td>{%if avanceEscuela.mantenimientos%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+				</tr>
+
+	{%endfor%}
+			</tbody>
+		</table>
+	</div>
+
+{%endblock content%}

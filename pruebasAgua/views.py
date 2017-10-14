@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
-from accounts.models import Perfil
+from accounts.models import *
 from django.contrib.auth.models import User
 from .forms import *
+from django.http import HttpResponse
+import csv
 
 class CRUViewPrimerPrueba(View):
 #	@method_decorator(login_required)
@@ -21,6 +23,7 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm5 = PrimerPruebaUpdateForm5(instance=prueba)
 			EdicionPruebaForm6 = PrimerPruebaUpdateForm6(instance=prueba)
 			EdicionPruebaForm7 = PrimerPruebaUpdateForm7(instance=prueba)
+			EdicionPruebaForm8 = PrimerPruebaUpdateForm8(instance=prueba)
 
 		except PrimerPrueba.DoesNotExist:
 			prueba = None
@@ -31,6 +34,7 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm5 = None
 			EdicionPruebaForm6 = None
 			EdicionPruebaForm7 = None
+			EdicionPruebaForm8 = None
 
 		context = {
 			'perfil': perfil,
@@ -39,11 +43,13 @@ class CRUViewPrimerPrueba(View):
 			'prueba': prueba,
 			'EdicionPruebaForm1': EdicionPruebaForm1,
 			'EdicionPruebaForm2': EdicionPruebaForm2,
+			'EdicionPruebaForm8': EdicionPruebaForm8,
 			'EdicionPruebaForm3': EdicionPruebaForm3,
 			'EdicionPruebaForm4': EdicionPruebaForm4,
 			'EdicionPruebaForm5': EdicionPruebaForm5,
 			'EdicionPruebaForm6': EdicionPruebaForm6,
 			'EdicionPruebaForm7': EdicionPruebaForm7,
+			'EdicionPruebaForm8': EdicionPruebaForm8,			
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -67,6 +73,7 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm5 = PrimerPruebaUpdateForm5(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm6 = PrimerPruebaUpdateForm6(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm7 = PrimerPruebaUpdateForm7(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm8 = PrimerPruebaUpdateForm8(instance=prueba, data=request.POST, files=request.FILES)
 
 			if EdicionPruebaForm1.is_valid():
 				EdicionPruebaForm1.save()
@@ -89,6 +96,9 @@ class CRUViewPrimerPrueba(View):
 			if EdicionPruebaForm7.is_valid():
 				EdicionPruebaForm7.save()
 
+			if EdicionPruebaForm8.is_valid():
+				EdicionPruebaForm8.save()
+
 		except PrimerPrueba.DoesNotExist:
 			prueba = None
 			EdicionPruebaForm1 = None
@@ -98,6 +108,7 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm5 = None
 			EdicionPruebaForm6 = None
 			EdicionPruebaForm7 = None
+			EdicionPruebaForm8 = None
 
 		return redirect("pruebas:CRUViewPrimerPrueba", pk=perfil.pk)
 
@@ -115,11 +126,11 @@ class CRUViewSegundaPrueba(View):
 			EdicionPruebaForm1 = SegundaPruebaUpdateForm1(instance=prueba)
 			EdicionPruebaForm2 = SegundaPruebaUpdateForm2(instance=prueba)
 			EdicionPruebaForm3 = SegundaPruebaUpdateForm3(instance=prueba)
-			EdicionPruebaForm4 = PrimerPruebaUpdateForm4(instance=prueba)
-			EdicionPruebaForm5 = PrimerPruebaUpdateForm5(instance=prueba)
-			EdicionPruebaForm6 = PrimerPruebaUpdateForm6(instance=prueba)
-			EdicionPruebaForm7 = PrimerPruebaUpdateForm7(instance=prueba)
-
+			EdicionPruebaForm4 = SegundaPruebaUpdateForm4(instance=prueba)
+			EdicionPruebaForm5 = SegundaPruebaUpdateForm5(instance=prueba)
+			EdicionPruebaForm6 = SegundaPruebaUpdateForm6(instance=prueba)
+			EdicionPruebaForm7 = SegundaPruebaUpdateForm7(instance=prueba)
+			EdicionPruebaForm8 = SegundaPruebaUpdateForm8(instance=prueba)
 		except SegundaPrueba.DoesNotExist:
 			prueba = None
 			EdicionPruebaForm0 = None
@@ -130,7 +141,8 @@ class CRUViewSegundaPrueba(View):
 			EdicionPruebaForm5 = None
 			EdicionPruebaForm6 = None
 			EdicionPruebaForm7 = None
-
+			EdicionPruebaForm8 = None
+			
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
@@ -144,6 +156,7 @@ class CRUViewSegundaPrueba(View):
 			'EdicionPruebaForm5': EdicionPruebaForm5,
 			'EdicionPruebaForm6': EdicionPruebaForm6,
 			'EdicionPruebaForm7': EdicionPruebaForm7,
+			'EdicionPruebaForm8': EdicionPruebaForm8,
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -163,10 +176,11 @@ class CRUViewSegundaPrueba(View):
 			EdicionPruebaForm1 = SegundaPruebaUpdateForm1(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm2 = SegundaPruebaUpdateForm2(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm3 = SegundaPruebaUpdateForm3(instance=prueba, data=request.POST, files=request.FILES)
-			EdicionPruebaForm4 = PrimerPruebaUpdateForm4(instance=prueba, data=request.POST, files=request.FILES)
-			EdicionPruebaForm5 = PrimerPruebaUpdateForm5(instance=prueba, data=request.POST, files=request.FILES)
-			EdicionPruebaForm6 = PrimerPruebaUpdateForm6(instance=prueba, data=request.POST, files=request.FILES)
-			EdicionPruebaForm7 = PrimerPruebaUpdateForm7(instance=prueba, data=request.POST, files=request.FILES)			
+			EdicionPruebaForm4 = SegundaPruebaUpdateForm4(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm5 = SegundaPruebaUpdateForm5(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm6 = SegundaPruebaUpdateForm6(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm7 = SegundaPruebaUpdateForm7(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm8 = SegundaPruebaUpdateForm8(instance=prueba, data=request.POST, files=request.FILES)
 
 			if EdicionPruebaForm1.is_valid():
 				EdicionPruebaForm1.save()
@@ -189,6 +203,9 @@ class CRUViewSegundaPrueba(View):
 			if EdicionPruebaForm7.is_valid():
 				EdicionPruebaForm7.save()
 
+			if EdicionPruebaForm8.is_valid():
+				EdicionPruebaForm8.save()
+
 		except SegundaPrueba.DoesNotExist:
 			prueba = None
 			EdicionPruebaForm1 = None
@@ -198,5 +215,22 @@ class CRUViewSegundaPrueba(View):
 			EdicionPruebaForm5 = None
 			EdicionPruebaForm6 = None
 			EdicionPruebaForm7 = None
+			EdicionPruebaForm8 = None
 
 		return redirect("pruebas:CRUViewSegundaPrueba", pk=perfil.pk)
+
+def ExportPruebasPorEscuelasCSV(request, pk):
+	response = HttpResponse(content_type='text/csv')
+	response['Content-Disposition'] = 'attachment; filename="PruebasPorEscuela.csv"'
+	writer = csv.writer(response)
+	writer.writerow(['Laboratorio', 'No. de registro','C. C. T.','Nombre del plantel', 'Municipio', 'Localidad', 'Domicilio', 'Nivel Educativo', 'Plantilla escolar', 'Boquillas regulares', 'Boquilla para discapacitados', 'Llave de llenado para botella', 'Total de salidas', 'Tipo de bebedero', 'Fecha de muestreo', 'Fecha de reporte de análisis', 'Color verdadero (U PT-Co)', 'Turbiedad (UTN o equivalente)', 'pH (unidades de pH)', 'Conductividad eléctrica (µS/cm)', 'Coliformes fecales (Unidades)', 'Coliformes totales (Unidades)', 'Arsénico', 'Hierro', 'Manganeso', 'Plomo', 'Floururos', 'Nitratos', 'Sulfatos', 'Dureza total (CaCO3)', 'Sólidos disueltos totales', 'Equipo de potabilización (validado por IMTA)', 'Fecha de muestreo', 'Fecha de reporte de análisis', 'Color verdadero (U Pt-Co)', 'Turbiedad (UTN o equivalente)', 'pH (unidades de pH)', 'Conductividad eléctrica (µS/cm)', 'Coliformes fecales (Unidades)', 'Coliformes totales (Unidades)', 'Arsénico', 'Hierro', 'Manganeso', 'Plomo', 'Floururos', 'Nitratos', 'Sulfatos', 'Dureza total (CaCO3)', 'Sólidos disueltos totales'])
+
+	entidad = get_object_or_404(Entidad, pk=pk)
+	zonas = Zona.objects.filter(entidad=entidad)
+	municipios=Municipio.objects.filter(zona__in=zonas)
+	perfiles = Perfil.objects.filter(municipio__in=municipios)
+	users = User.objects.filter(perfil__in=perfiles).values_list('escuela_primer_prueba__laboratorio__first_name', 'escuela_primer_prueba__no_registro', 'username', 'first_name','perfil__municipio__nombre', 'perfil__localidad', 'perfil__domicilio', 'perfil__nivel_educativo', 'perfil__plantilla_escolar', 'escuela__mueble__salidas_regulares', 'escuela__mueble__salidas_discapacidad', 'escuela__mueble__llenador_botellas', 'escuela__mueble__total_salidas', 'escuela__mueble__modelo', 'escuela_primer_prueba__creacion', 'escuela_primer_prueba__creacion_reporte_analisis', 'escuela_primer_prueba__color_verdadero', 'escuela_primer_prueba__turbiedad', 'escuela_primer_prueba__ph', 'escuela_primer_prueba__conductividad_electrica', 'escuela_primer_prueba__coliformes_fecales', 'escuela_primer_prueba__coliformes_totales', 'escuela_primer_prueba__arsenico',  'escuela_primer_prueba__hierro',  'escuela_primer_prueba__manganeso', 'escuela_primer_prueba__plomo', 'escuela_primer_prueba__floururos', 'escuela_primer_prueba__nitratos', 'escuela_primer_prueba__sulfatos', 'escuela_primer_prueba__dureza_total','escuela_primer_prueba__solidos_disueltos', 'escuela__sistema_potabilizacion__tipo', 'escuela_segunda_prueba__creacion', 'escuela_segunda_prueba__creacion_reporte_analisis', 'escuela_segunda_prueba__color_verdadero', 'escuela_segunda_prueba__turbiedad', 'escuela_segunda_prueba__ph', 'escuela_segunda_prueba__conductividad_electrica', 'escuela_segunda_prueba__coliformes_fecales', 'escuela_segunda_prueba__coliformes_totales', 'escuela_segunda_prueba__arsenico',  'escuela_segunda_prueba__hierro',  'escuela_segunda_prueba__manganeso', 'escuela_segunda_prueba__plomo', 'escuela_segunda_prueba__floururos', 'escuela_segunda_prueba__nitratos', 'escuela_segunda_prueba__sulfatos', 'escuela_segunda_prueba__dureza_total','escuela_segunda_prueba__solidos_disueltos',)
+	for user in users:
+		writer.writerow(user)
+
+	return response

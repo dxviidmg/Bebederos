@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'incidencias',
     'mantenimiento',
     'bootstrapform',
+    'geoposition',
+    'plantillas'
 ]
 
 MIDDLEWARE = [
@@ -139,3 +141,8 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 
+GEOPOSITION_GOOGLE_MAPS_API_KEY = 'AIzaSyBZDksCoJKcLZjKlsBLzodI8miwc2iQqMg'
+
+GEOPOSITION_MARKER_OPTIONS = {
+    'cursor': 'move'
+}

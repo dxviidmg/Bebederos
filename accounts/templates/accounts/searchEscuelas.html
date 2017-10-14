@@ -1,0 +1,40 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+	<h4 class="text-center">Buscar solicitudes</h4>
+
+	<form method="GET" action="">
+		<input type="text" name="query" placeholder="C. C. T." value="{{request.GET.query}}">
+		<input type="submit" value="Buscar">
+	</form>
+	<br>
+	<div class="table-responsive">
+		<table class="table table-bordered">
+			<thead>
+				<th>C. C. T.</th>
+				<th>Nombre</th>
+				<th>Opciones</th>
+			</thead>
+			<tbody>
+	
+	{%for escuela in escuelas%}
+	
+				<tr>
+					<td>{{escuela.username}}</td>
+					<td>{{escuela.get_full_name}}</td>
+					<td><a href="{%url 'accounts:DetailViewEscuela' escuela.perfil.pk%}">Ver detalle</a></td>
+				</tr>
+
+			{%empty%}
+
+				<tr>
+					<td colspan="6">Lista de escuelas vacia</td>
+				</tr>
+
+			{%endfor%}
+
+			</tbody>
+		</table>
+	</div>
+{%endblock content%}

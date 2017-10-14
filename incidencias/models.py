@@ -14,10 +14,12 @@ class Incidencia(models.Model):
 		("Alta", "Alta"),
 	)
 	fase_choices = (
-		("Formalidades (Pre-construcción)", "Formalidades (Pre-construcción)"),
-		("Pruebas de calidad de agua", "Pruebas de calidad de agua"),
+		("Primer prueba de calidad de agua", "Primer prueba de calidad de agua"),
+		("Inicio de trabajo", "Inicio de trabajo"),	
+		("Visita de acuerdos", "Visita de acuerdos"),
 		("Construcción e instalación de Sistema bebedero", "Construcción e instalación de Sistema bebedero"),
-		("Entrega del sistema bebedero", "Entrega del sistema bebedero"),
+		("Segunda prueba de calidad de agua", "Segunda prueba de calidad de agua"),	
+		("Inicio de funcionamiento", "Inicio de funcionamiento"),
 		("Mantenimiento", "Mantenimiento"),
 	)
 

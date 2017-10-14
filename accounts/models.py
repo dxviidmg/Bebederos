@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from pruebasAgua.models import PrimerPrueba
 from construccion.models import EvidenciaConstruccion
+from geoposition.fields import GeopositionField
 
 class Region(models.Model):
 	numero = models.IntegerField()
@@ -114,16 +115,19 @@ class Municipio(models.Model):
 
 class Perfil(models.Model):
 	tipo_choices = (
-		("Administrador", "Administrador"),
+		("Administrador", "Administrador"), #Yo
+		("CEO", "CEO"), #Carlos, Beto
 		("SI", "Superintendente"),
 		("Ejecutora", "Ejecutora"),
 		("Escuela", "Escuela"),
 		("Laboratorio", "Laboratorio"),
+		("INIFED", "INIFED"), #INIFED Federal
 		("Coor_Estatal", "Coordinador Estatal de INIFED"),
 		("RTINIFED", "Residente Técnico de INIFED"),
 		("IMTA", "IMTA"),
-		("ECA", "Encargado de Calidad de Agua"), #PILAR
-		("EMB", "Encargado de Mueble Bebedero"), #RAÚL
+		("ECA", "Encargado de Calidad de Agua"), #Pilar
+		("EMB", "Encargado de Mueble Bebedero"), #RaúL, Héctor
+
 	)
 
 	nivel_choices = (
@@ -167,7 +171,8 @@ class Perfil(models.Model):
 	qrcode = models.ImageField(upload_to='fotos/qr/%Y/%m/%d/', null=True, blank=True, verbose_name="Código QR")
 	#Atributo exclusivo para Constructoras
 	representante_legal = models.CharField(max_length=100, blank=True, null=True)
-
+	coordenadas = GeopositionField(null=True, blank=True)
+	
 	def UpdateStatus(self):
 		perfil = Perfil.objects.get(pk=self.pk)
 		escuela = User.objects.get(perfil=perfil)

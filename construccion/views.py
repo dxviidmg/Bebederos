@@ -3,6 +3,7 @@ from django.views.generic import View
 from accounts.models import Perfil
 from django.contrib.auth.models import User
 from .forms import *
+from django.contrib import messages
 
 #Creación y edición de la visita de acuerdo
 class CRViewInicioDeTrabajo(View):
@@ -84,7 +85,6 @@ class CRViewEvidencias(View):
 		evidenciaFinal = evidencias.filter(fase="Instalación de Mueble Bebedero", aprobacion_SI="Aprobado")
 
 		NuevaEvidenciaForm = EvidenciaConstruccionCreateForm()
-
 		NuevaInstalacionForm = InstalacionBebederoCreateForm()
 		
 		try:
@@ -106,7 +106,6 @@ class CRViewEvidencias(View):
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 
-		bitacora = EvidenciaConstruccion.objects.filter(escuela=escuela)
 		NuevaEvidenciaForm = EvidenciaConstruccionCreateForm(data=request.POST, files=request.FILES)
 		ejecutora = User.objects.get(pk=request.user.pk)
 		
@@ -115,7 +114,8 @@ class CRViewEvidencias(View):
 			NuevaEvidencia.escuela = escuela
 			NuevaEvidencia.ejecutora = ejecutora
 			NuevaEvidencia.save()
-
+			messages.success(request, "Actualización exitosa")			
+	
 		NuevaInstalacionForm = InstalacionBebederoCreateForm(data=request.POST, files=request.FILES)
 		si = User.objects.get(pk=request.user.pk)
 
@@ -124,7 +124,8 @@ class CRViewEvidencias(View):
 			NuevaInstalacion.escuela = escuela
 			NuevaInstalacion.si = si
 			NuevaInstalacion.save()
-			
+			messages.success(request, "Actualización exitosa")
+
 		return redirect("construccion:CRViewEvidencias", pk=perfil.pk)
 
 

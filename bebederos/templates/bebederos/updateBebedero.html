@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+
+{%load bootstrap%}
+
+{%block content%}
+
+	<div class="row">
+		<div class="col-12">
+			<h1>Sistema Bebedero</h1>
+			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
+			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+
+			<form action="." method="post" enctype="multipart/form-data">
+				<h4>Asignación de componentes y especificaciones</h4>
+				{%csrf_token%}
+				<p>ECA</p>
+				{{EdicionBebederoForm1 | bootstrap}}
+				<p>Taller</p>
+				{{EdicionBebederoForm2 | bootstrap}}
+				<a href=""><input type="submit" value="Guardar cambios"></a>
+			</form>
+
+		{%if entidad.abreviatura and sistemaBebedero.mueble and sistemaBebedero.sistema_potabilizacion and sistemaBebedero.linea_ensamblaje%}
+		<p>Numero de trazabilidad: {{sistemaBebedero.no_trazabilidad}}</p>
+		<p><a href="{%url 'bebederos:ExportComprobanteTrazabilidadPDF' sistemaBebedero.pk%}">Imprimir guia de trazabilidad</a></p>
+
+			<form action="." method="post" enctype="multipart/form-data">
+				{%csrf_token%}
+				{{EdicionBebederoForm3 | bootstrap}}
+				<a href=""><input type="submit" value="Guardar cambios"></a>
+			</form>
+
+		{%endif%}
+
+		</div>
+	</div>
+
+{%endblock content%}
