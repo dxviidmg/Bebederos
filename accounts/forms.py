@@ -13,7 +13,7 @@ class EscuelaUserCreateForm(forms.ModelForm):
 class EscuelaPerfilCreateForm(forms.ModelForm):
 	class Meta:
 		model = Perfil
-		fields = ('nivel_educativo', 'plantilla_escolar', 'domicilio', 'localidad')
+		fields = ('nivel_educativo', 'plantilla_escolar', 'domicilio', 'localidad', 'coordenadas')
 		
 class EscuelaUserUpdateForm(forms.ModelForm):
 	class Meta:

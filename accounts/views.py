@@ -298,9 +298,6 @@ class ListViewAvanceEscuelas(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "accounts/listAvanceEscuelas.html"
-#		municipio = Municipio.objects.get(pk=pk)
-#		perfiles = Perfil.objects.filter(municipio=municipio).order_by('status')
-#		zona = Zona.objects.get(municipio=municipio)
 		entidad = Entidad.objects.get(pk=pk)
 		zonas = Zona.objects.filter(entidad=entidad)
 		municipios = Municipio.objects.filter(zona__in=zonas)
@@ -349,8 +346,6 @@ class ListViewAvanceEscuelas(View):
 
 		context = {
 			'AvancePorEscuelas': AvancePorEscuelas,
-#			'municipio': municipio,
-#			'perfiles': perfiles,
 			'entidad': entidad,
 		}
 		return render(request,template_name, context)

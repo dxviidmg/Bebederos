@@ -22,6 +22,9 @@
 
 		{%if entidad.abreviatura and sistemaBebedero.mueble and sistemaBebedero.sistema_potabilizacion and sistemaBebedero.linea_ensamblaje%}
 		<p>Numero de trazabilidad: {{sistemaBebedero.no_trazabilidad}}</p>
+
+		{%if sistemaBebedero.asignacion is False%}
+
 		<p><a href="{%url 'bebederos:ExportComprobanteTrazabilidadPDF' sistemaBebedero.pk%}">Imprimir guia de trazabilidad</a></p>
 
 			<form action="." method="post" enctype="multipart/form-data">
@@ -30,6 +33,7 @@
 				<a href=""><input type="submit" value="Guardar cambios"></a>
 			</form>
 
+		{%endif%}
 		{%endif%}
 
 		</div>

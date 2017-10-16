@@ -18,8 +18,8 @@
 					<th>Inicio de trabajo</th>
 					<th>Visita de acuerdos</th>
 					<th>Manufactura terminada</th>
-					<th>Construccion</th>
-					<th>Etapa de construccion</th>
+					<th>Construcción</th>
+					<th>Etapa de construcción</th>
 					<th>Segunda prueba</th>
 					<th>Status de segunda prueba</th>	
 					<th>Mantenimientos</th>
@@ -28,7 +28,9 @@
 			<tbody>
 	{%for avanceEscuela in AvancePorEscuelas%}
 				<tr>
-					<td>{{avanceEscuela.escuela.username}}</td>
+					<td>
+					<a href="{%url 'accounts:DetailViewEscuela' avanceEscuela.escuela.perfil.pk%}">{{avanceEscuela.escuela.username}}</a>
+					</td>
 					<td>{{avanceEscuela.escuela.get_full_name}}</td>
 					<td>{{avanceEscuela.escuela.perfil.municipio.nombre}}</td>
 					<td>{%if avanceEscuela.primerPrueba%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>

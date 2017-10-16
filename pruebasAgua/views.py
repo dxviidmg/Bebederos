@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from .forms import *
 from django.http import HttpResponse
 import csv
+from django_modalview.generic.base import ModalTemplateView
 
 class CRUViewPrimerPrueba(View):
 #	@method_decorator(login_required)
@@ -25,6 +26,22 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm7 = PrimerPruebaUpdateForm7(instance=prueba)
 			EdicionPruebaForm8 = PrimerPruebaUpdateForm8(instance=prueba)
 
+			color_verdadero = prueba.color_verdadero
+			turbiedad = prueba.turbiedad
+			ph = prueba.ph
+			conductividad_electrica = prueba.conductividad_electrica
+			coliformes_fecales = prueba.coliformes_fecales
+			coliformes_totales = prueba.coliformes_totales
+			arsenico = prueba.arsenico
+			hierro = prueba.hierro
+			manganeso = prueba.manganeso
+			plomo = prueba.plomo
+			floururos = prueba.floururos
+			nitratos = prueba.nitratos
+			sulfatos = prueba.sulfatos
+			dureza_total = prueba.dureza_total
+			solidos_disueltos  = prueba.solidos_disueltos
+
 		except PrimerPrueba.DoesNotExist:
 			prueba = None
 			EdicionPruebaForm1 = None
@@ -35,6 +52,16 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm6 = None
 			EdicionPruebaForm7 = None
 			EdicionPruebaForm8 = None
+
+		if manganeso is not None:
+			if manganeso > 0.165 or plomo > 0.011 or floururos > 1.265:
+				sistemaPotabilizadorCalculado = "Robusto"
+			elif arsenico > 0.0275 or hierro > 0.2 or nitratos > 11 or sulfatos > 440:
+				sistemaPotabilizadorCalculado = "Intermedio"
+			else:
+				 sistemaPotabilizadorCalculado = "Basico"
+		else:
+			sistemaPotabilizadorCalculado = None		 
 
 		context = {
 			'perfil': perfil,
@@ -49,7 +76,8 @@ class CRUViewPrimerPrueba(View):
 			'EdicionPruebaForm5': EdicionPruebaForm5,
 			'EdicionPruebaForm6': EdicionPruebaForm6,
 			'EdicionPruebaForm7': EdicionPruebaForm7,
-			'EdicionPruebaForm8': EdicionPruebaForm8,			
+			'EdicionPruebaForm8': EdicionPruebaForm8,
+			'sistemaPotabilizadorCalculado': sistemaPotabilizadorCalculado,
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -234,3 +262,12 @@ def ExportPruebasPorEscuelasCSV(request, pk):
 		writer.writerow(user)
 
 	return response
+
+def CalculateViewSistemaPotabilizador(request, pk):
+	template_name = "pruebasAgua/calculateSistemaPotabilizador.html"
+	primerPrueba = get_object_or_404(PrimerPrueba, pk=pk)
+	
+	context = {
+		'primerPrueba': primerPrueba
+	}
+	return render(request)

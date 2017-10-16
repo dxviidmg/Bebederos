@@ -35,6 +35,7 @@ class PrimerPruebaUpdateForm3(forms.ModelForm):
 	class Meta:
 		model = PrimerPrueba
 		fields = ('color_verdadero', 'turbiedad', 'ph', 'conductividad_electrica')
+
 	def __init__(self, *args, **kwargs):
 		super(PrimerPruebaUpdateForm3, self).__init__(*args, **kwargs)
 		self.fields['color_verdadero'].required = True

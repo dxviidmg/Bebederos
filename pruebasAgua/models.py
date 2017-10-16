@@ -5,6 +5,7 @@ from bebederos.models import *
 
 class PrimerPrueba(models.Model):
 	aprobacion_choices = (
+		("En espera", "En espera"),
 		("Aprobado", "Aprobado"),
 		("No aprobado", "No aprobado"),
 	)

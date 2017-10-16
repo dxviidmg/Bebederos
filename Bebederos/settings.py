@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'mantenimiento',
     'bootstrapform',
     'geoposition',
-    'plantillas'
+    'plantillas',
 ]
 
 MIDDLEWARE = [
