@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<h1>Entidades</h1>
+<div class="table-responsive">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Estado</th>
+			</tr>
+		</thead>
+		<tbody>
+	
+	{%for entidad in entidades%}
+	
+			<tr>
+				
+				<td><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">{{entidad}}</a></td>
+			</tr>
+	{%empty%}
+
+			<tr>
+				
+				<td>No hay entidades asignadas</td>
+			</tr>
+
+	{%endfor%}
+		</tbody>
+	</table>
+</div>
+{%endblock content%}

@@ -14,6 +14,9 @@ urlpatterns = [
 #	url(r'^reset-password/done/$', password_reset_done, {'template_name': 'accounts/reset_password_done.html'}, name='password_reset_done'),
 #	url(r'^reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', password_reset_confirm, {'template_name': 'accounts/reset_password_confirm.html', 'post_reset_redirect': 'accounts:password_reset_complete'}, name='password_reset_confirm'),
 #	url(r'^reset-password/complete/$', password_reset_complete,{'template_name': 'accounts/reset_password_complete.html'}, name='password_reset_complete'),
+	url(r'^region/estado/zona/$', views.ListViewZonas.as_view(), name="ListViewZonas2"),
+	url(r'^escuelas/por_ejecutora/$', views.ListViewEscuelas.as_view(), name="ListViewEscuelasPorEjecutora"),
+	url(r'^regiones/estados/$', views.ListViewEntidades.as_view(), name="ListViewEntidades"),
 
 	url(r'^escuelas/search/$',views.SearchViewEscuelas.as_view(), name='SearchViewEscuelas'),
 	url(r'^region/estado/municipio/escuela/mapa/(?P<pk>[-\w]+)/$', views.DetailViewMapa.as_view(), name="DetailViewMapa"),

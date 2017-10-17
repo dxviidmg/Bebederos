@@ -5,7 +5,9 @@ class ListViewPlantillas(View):
 #	@method_decorator(login_required)
 	def get(self, request):
 		template_name = "plantillas/listPlantillas.html"	
-		plantillas = Plantilla.objects.all()
+		user = User.objects.get(pk=request.user.pk)
+		perfil = Perfil.objects.get(user=user)
+		plantillas = Plantilla.objects.filter(tipo_usuario=perfil.tipo)
 		context = {
 			'plantillas': plantillas,
 		}

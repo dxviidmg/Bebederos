@@ -2,8 +2,9 @@
 
 {%block content%}
 
+	{%if request.user.perfil.tipo != "Ejecutora"%}
 	<h1>{{municipio.nombre}}</h1>
-	
+
 	<p><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">Regresar</a></p>
 	
 	<h3>Información</h3>
@@ -40,6 +41,8 @@
 	</div>
 
 	<a href="{%url 'accounts:CreateViewEscuela' municipio.pk%}">Crear escuela</a>
+
+	{%endif%}
 	<h3>Lista de escuelas</h3>
 
 	<div class="row justify-content-center">

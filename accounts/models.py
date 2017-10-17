@@ -35,9 +35,9 @@ class Partida(models.Model):
 		ordering = ['region', 'numero']
 
 class Entidad(models.Model):
-	coordinador_estatal = models.ForeignKey(User, null=True, blank=True, verbose_name="Coordinador Estatal", related_name="coordinador_estatal")
-	residente_tecnico = models.ForeignKey(User, null=True, blank=True, verbose_name="Residente Técnico", related_name="residente_tecnico")
-	laboratorio = models.ForeignKey(User, null=True, blank=True, verbose_name="Residente Técnico", related_name="laboratorio")
+	coordinador_estatal = models.OneToOneField(User, null=True, blank=True, verbose_name="Coordinador Estatal", related_name="coordinador_estatal")
+	residente_tecnico = models.OneToOneField(User, null=True, blank=True, verbose_name="Residente Técnico", related_name="residente_tecnico")
+	laboratorio = models.ForeignKey(User, null=True, blank=True, verbose_name="Laboratorio", related_name="laboratorio")
 	partida = models.ForeignKey(Partida)
 	nombre = models.CharField(max_length=30)
 	abreviatura = models.CharField(max_length=4)
@@ -75,6 +75,7 @@ class Entidad(models.Model):
 		return reverse('accounts:ListViewMunicipios', kwargs={'numero': self.partida.numero, 'slug': self.slug})
 
 class Zona(models.Model):
+	superintendente = models.OneToOneField(User, null=True, blank=True, related_name="superintendente")
 	entidad = models.ForeignKey(Entidad)
 	nombre = models.CharField(max_length=30, verbose_name="Nombre o número")
 	color = models.CharField(max_length=30)
@@ -122,7 +123,7 @@ class Perfil(models.Model):
 		("Escuela", "Escuela"),
 		("Laboratorio", "Laboratorio"),
 		("INIFED", "INIFED"), #INIFED Federal
-		("Coor_Estatal", "Coordinador Estatal de INIFED"),
+		("CEstatal", "Coordinador Estatal de INIFED"),
 		("RTINIFED", "Residente Técnico de INIFED"),
 		("IMTA", "IMTA"),
 		("ECA", "Encargado de Calidad de Agua"), #Pilar

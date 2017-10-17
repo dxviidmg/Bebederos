@@ -47,10 +47,6 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
   </style>
 	<body>
 
-
-
-
-
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top" style="background-color: #44B036; border-bottom: solid 1px;">
 
 {%if request.user.is_authenticated%}
@@ -76,16 +72,42 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
       <li class="nav-item">
         <a class="nav-link" href="{%url 'accounts:DetailViewEscuela' request.user.perfil.pk%}">Expediente</a>
       </li>
+
+      {%elif request.user.perfil.tipo == "Laboratorio"%}
+      <li class="nav-item">
+        <a class="nav-link" href="{%url 'accounts:ListViewEntidades'%}">Entidades</a>
+      </li>
+
+      {%elif request.user.perfil.tipo == "CEstatal"%}
+      <li class="nav-item">
+        <a class="nav-link" href="{%url 'accounts:ListViewZonas' request.user.coordinador_estatal.slug%}">{{request.user.coordinador_estatal.nombre}}</a>
+      </li>
+
+      {%elif request.user.perfil.tipo == "RTINIFED"%}
+      <li class="nav-item">
+        <a class="nav-link" href="{%url 'accounts:ListViewZonas' request.user.residente_tecnico.slug%}">{{request.user.residente_tecnico.nombre}}</a>
+      </li>
       
+      {%elif request.user.perfil.tipo == "SI"%}
+      <li class="nav-item">
+        <a class="nav-link" href="{%url 'accounts:ListViewZonas2'%}">Mi zona</a>
+      </li>
+
+      {%elif request.user.perfil.tipo == "Ejecutora"%}
+      <li class="nav-item">
+        <a class="nav-link" href="{%url 'accounts:ListViewEscuelasPorEjecutora'%}">Mis obras</a>
+      </li>
       {%else%}
-      
+
       <li class="nav-item">
         <a class="nav-link" href="{%url 'accounts:ListViewRegiones'%}">Regiones</a>
       </li>
+
+      {%endif%}
+
       <li class="nav-item">
         <a class="nav-link" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
       </li>
-      {%endif%}
 
       <li class="nav-item">
         <a class="nav-link" href="{%url 'plantillas:ListViewPlantillas'%}">Plantillas</a>
@@ -105,7 +127,10 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
   </div>
   
 	<div class="container content">
-  
+
+      {%block title%}
+      {%endblock title%}
+
       {%block content%}
       {%endblock content%}
 	

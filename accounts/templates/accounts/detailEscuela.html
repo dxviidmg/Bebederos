@@ -71,10 +71,8 @@
 		}
 	</style>
 
-
-
 	<div class="row">
-		<div class="col-12">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 			<h1>{{perfil.tipo}} {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h1>
 
 			<p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">Regresar</a></p>
@@ -83,229 +81,228 @@
 			<h3>Información de la institución</h3>
 
 			<!--Tabla de Información de la escuela-->
-			<div class="row justify-content-center">
-				<div class="table-responsive text-center">
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th colspan="15">CCT</th>
-								<th colspan="15">Nombre de la escuela</th>
-								<th colspan="15">Status</th>
-								<th colspan="15">Avance</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td colspan="15">{{escuela.username}}</td>
-								<td colspan="15">{{perfil.tipo}} {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</td>
-								<td colspan="15">{%if perfil.status%}{{perfil.status}}{%else%}Pendiente{%endif%}</td>
-								<td colspan="15">{%if perfil.avance%}{{perfil.avance}}%{%endif%}</td>
-							</tr>
-						</tbody>
-						<thead>
-							<tr>
-								<th colspan="15">Turno</th>
-								<th colspan="15">Matricula</th>
-								<th colspan="15">Director</th>
-								<th colspan="15">Foto</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td colspan="15">{%if perfil.turno%}{{perfil.turno}}{%endif%}</td>
-								<td colspan="15">{{perfil.plantilla_escolar}}</td>
-								<td colspan="15">{%if perfil.director%}{{perfil.director}}{%endif%}</td>
-								<td colspan="15">{%if perfil.foto_director%}<a href="{{perfil.foto_director.url}}">Ver</a>{%endif%}</td>
-							</tr>
-						</tbody>
-						<thead>
-							<tr>
-								<th colspan="12">Telefono</th>
-								<th colspan="12">Mail</th>
-								<th colspan="12">Domicilio</th>
-								<th colspan="12">Referencias</th>
-								<th colspan="12">Foto de la entrada</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td colspan="12">{%if perfil.telefono%}{{perfil.telefono}}{%endif%}</td>
-								<td colspan="12">{{escuela.email}}</td>
-								<td colspan="12">{{perfil.domicilio}}</td>
-								<td colspan="12">{%if perfil.referencias%}{{perfil.referencias}}{%endif%}</td>
+			<div class="table-responsive text-center">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th colspan="15">CCT</th>
+							<th colspan="15">Nombre de la escuela</th>
+							<th colspan="15">Status</th>
+							<th colspan="15">Avance</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="15">{{escuela.username}}</td>
+							<td colspan="15">{{perfil.tipo}} {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</td>
+							<td colspan="15">{%if perfil.status%}{{perfil.status}}{%else%}Pendiente{%endif%}</td>
+							<td colspan="15">{%if perfil.avance%}{{perfil.avance}}%{%endif%}</td>
+						</tr>
+					</tbody>
+					<thead>
+						<tr>
+							<th colspan="15">Turno</th>
+							<th colspan="15">Matricula</th>
+							<th colspan="15">Director</th>
+							<th colspan="15">Foto</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td colspan="15">{%if perfil.turno%}{{perfil.turno}}{%endif%}</td>
+						<td colspan="15">{{perfil.plantilla_escolar}}</td>
+						<td colspan="15">{%if perfil.director%}{{perfil.director}}{%endif%}</td>
+						<td colspan="15">{%if perfil.foto_director%}<a href="{{perfil.foto_director.url}}">Ver</a>{%endif%}</td>
+						</tr>
+					</tbody>
+					<thead>
+						<tr>
+							<th colspan="12">Telefono</th>
+							<th colspan="12">Mail</th>
+							<th colspan="12">Domicilio</th>
+							<th colspan="12">Referencias</th>
+							<th colspan="12">Foto de la entrada</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="12">{%if perfil.telefono%}{{perfil.telefono}}{%endif%}</td>
+							<td colspan="12">{{escuela.email}}</td>
+							<td colspan="12">{{perfil.domicilio}}</td>
+							<td colspan="12">{%if perfil.referencias%}{{perfil.referencias}}{%endif%}</td>
 							<td colspan="12">{%if foto_escuela%}<a href="{{perfil.foto_escuela.url}}">Ver</a>{%endif%}</td>
-							</tr>
-						</tbody>
-						<thead>
-							<tr>
-								<th colspan="12">Municipio</th>
-								<th colspan="12">Zona</th>
-								<th colspan="12">Estado</th>
-								<th colspan="12">Partida</th>
-								<th colspan="12">Región</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td colspan="12">{{perfil.municipio.nombre}}</td>
-								<td colspan="12">{{zona.nombre}}</td>
-								<td colspan="12">{{entidad}}</td>
-								<td colspan="12">{{entidad.partida.numero}}</td>
-								<td colspan="12">{{region}}</td>
-							</tr>
-						</tbody>
-						<thead>
-							<tr>
-								<th colspan="12">Coordenadas</th>
-								<th colspan="12">Geolocalización</th>
-								<th colspan="12">Tipo de conexión</th>
-								<th colspan="12">Nombre de SSID (red WiFi)</th>
-								<th colspan="12">Contraseña de SSID</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td colspan="12">{%if perfil.coordenadas%}{{perfil.coordenadas}}{%endif%}</td>
-								<td colspan="12">{%if perfil.coordenadas%}<a href="{%url 'accounts:DetailViewMapa' perfil.pk%}" target="_blank">Ver mapa</a>{%endif%}</td>
-								<td colspan="12">{%if perfil.conexion%}{{perfil.conexion}}{%endif%}</td>
-								<td colspan="12">{%if perfil.SSID%}{{perfil.SSID}}{%endif%}</td>
-								<td colspan="20">{%if perfil.clave_SSID%}{{perfil.clave_SSID}}{%endif%}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+						</tr>
+					</tbody>
+					<thead>
+						<tr>
+							<th colspan="12">Municipio</th>
+							<th colspan="12">Zona</th>
+							<th colspan="12">Estado</th>
+							<th colspan="12">Partida</th>
+							<th colspan="12">Región</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="12">{{perfil.municipio.nombre}}</td>
+							<td colspan="12">{{zona.nombre}}</td>
+							<td colspan="12">{{entidad}}</td>
+							<td colspan="12">{{entidad.partida.numero}}</td>
+							<td colspan="12">{{region}}</td>
+						</tr>
+					</tbody>
+					<thead>
+						<tr>
+							<th colspan="12">Coordenadas</th>
+							<th colspan="12">Geolocalización</th>
+							<th colspan="12">Tipo de conexión</th>
+							<th colspan="12">Nombre de SSID (red WiFi)</th>
+							<th colspan="12">Contraseña de SSID</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="12">{%if perfil.coordenadas%}{{perfil.coordenadas}}{%endif%}</td>
+							<td colspan="12">{%if perfil.coordenadas%}<a href="{%url 'accounts:DetailViewMapa' perfil.pk%}" target="_blank">Ver mapa</a>{%endif%}</td>
+							<td colspan="12">{%if perfil.conexion%}{{perfil.conexion}}{%endif%}</td>
+							<td colspan="12">{%if perfil.SSID%}{{perfil.SSID}}{%endif%}</td>
+							<td colspan="20">{%if perfil.clave_SSID%}{{perfil.clave_SSID}}{%endif%}</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 
 			<!-- Tabla de Contactos-->
 			<h2>Contactos</h2>
 
-			<div class="row justify-content-center">
-				<div class="table-responsive text-center">
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th>Cargo</th>
-								<th>Coordinador Estatal</th>
-								<th>Residente Técnico</th>
-								<th>Superintendente</th>
-								<th>Ejecutora</th>
+			<div class="table-responsive text-center">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Cargo</th>
+							<th>Coordinador Estatal</th>
+							<th>Residente Técnico</th>
+							<th>Superintendente</th>
+							<th>Ejecutora</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="titulo-tabla">Nombre</td>
+							<td>{{perfil.municipio.zona.entidad.coordinador_estatal.get_full_name}}</td><td>{{perfil.municipio.zona.entidad.residente_tecnico.get_full_name}}</td>
+							<td>{{perfil.municipio.zona.superintendente.get_full_name}}</td>
+							<td>{{sistemaBebedero.ejecutora}}</td>
 							</tr>
-						</thead>
-						<tbody>
 							<tr>
-								<td class="titulo-tabla">Nombre</td>
-								<td>{{perfil.municipio.zona.entidad.coordinador_estatal.get_full_name}}</td><td>{{perfil.municipio.zona.entidad.residente_tecnico.get_full_name}}</td>
-								<td>{{perfil.municipio.zona.entidad.partida.si.get_full_name}}</td>
-								<td>{{sistemaBebedero.ejecutora}}</td>
-							</tr>
-							<tr>
-								<td class="titulo-tabla" ">Teléfono</td>
-								<td>{{perfil.municipio.zona.entidad.coordinador_estatal.perfil.telefono}}</td><td>{{perfil.municipio.zona.entidad.residente_tecnico.perfil.telefono}}</td>
-								<td>{{perfil.municipio.zona.entidad.partida.si.perfil.telefono}}</td>
-								<td>{{sistemaBebedero.ejecutora.perfil.telefono}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-
-			<h2>Cronología general de la gestión, construcción, instalación y mantenimiento de un sistema bebedero</h2>
-
-			<div class="row">
-
-				<div class="col-md-3 col-sm-6">
-					<div class="dummy"></div>
-					<a class="thumbnail thumbnail-available container" href="{%url 'incidencias:CRViewIncidencias' perfil.pk%}">Bitacora de Incidencias</a>
-				</div>
-				<div class="col-md-3 col-sm-6">
-					<div class="dummy"></div>
-					<a {%if primerPrueba%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad</a>
-				</div>
-
-				{%if primerPrueba%}
-				<div class="col-md-3 col-sm-6">
-					<div class="dummy"></div>
-					<div {%if primerPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif primerPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif primerPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%endif%}>Veredicto de Prueba de Calidad de Agua: {{primerPrueba.aprobacion}}</div>
-				</div>			
-				{%endif%}
-
-				{%if primerPrueba.aprobacion == "Aprobado"%}
-				<div class="col-md-3 col-sm-4">
-					<div class="dummy"></div>
-					<a {%if inicioDeTrabajo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajo</a>
-				</div>
-				{%endif%}
-
-				{%if inicioDeTrabajo%}
-				<div class="col-md-3 col-sm-6">
-					<div class="dummy"></div>
-					<a {%if visitaDeAcuerdo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a>
-				</div>
-				{%endif%}
-
-				{%if visitaDeAcuerdo%}
-				<div class="col-md-3 col-sm-4">
-					<div class="dummy"></div>
-					<a {%if sistemaBebedero.no_trazabilidad%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'bebederos:UpdateViewBebedero' perfil.pk%}"> Asignación de componentes del Sistema bebedero</a>
-				</div>
-				{%endif%}
-
-				{%if sistemaBebedero.no_trazabilidad%}
-				<div class="col-md-3 col-sm-6">
-					<div class="dummy"></div>
-					<a {%if evidenciasConstruccion%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewEvidencias' perfil.pk%}">Evidencias de construccíón e Instalación de Mueble Bebedero</a>
-				</div>
-				{%endif%}
-
-				{%if evidencias%}
-				<div class="col-md-3 col-sm-4">
-					<div class="dummy"></div>
-					<a {%if instalacionBebedero%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:ViewInstalacionBebedero' perfil.pk%}">Instalación de bebedero</a>
-				</div>
-				{%endif%}
-				
-				{%if evidenciasConstruccion%}
-				<div class="col-md-3 col-sm-6">
-					<div class="dummy"></div>
-					<div {%if evidenciaFinal%} class="thumbnail thumbnail-prueba-aprobado container" {%else%} class="thumbnail thumbnail-prueba-en-espera" {%endif%}>{%if evidenciaFinal%}Construcción finalizada{%else%}En proceso de construción o revisión{%endif%}</div>
-				</div>
-				{%endif%}
-
-				{%if evidenciaFinal%}
-				<div class="col-md-3 col-sm-3">
-					<div class="dummy"></div>
-					<a {%if segundaPrueba%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad</a>
-				</div>
-				{%endif%}
-
-				{%if segundaPrueba%}
-				<div class="col-md-3 col-sm-6">
-					<div class="dummy"></div>
-					<div {%if segundaPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif segundaPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif segundaPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%endif%}>Veredicto de Prueba de Calidad de Agua: {{segundaPrueba.aprobacion}}</div>
-				</div>
-				{%endif%}
-
-				{%if segundaPrueba.aprobacion == "Aprobado"%}
-				<div class="col-md-3 col-sm-6">
-					<div class="dummy"></div>
-					<a {%if funcionamiento%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewInicioFuncionamiento' perfil.pk%}"> Inicio de funcionamiento</a>
-				</div>
-				{%endif%}
-
-				{%if funcionamiento%}
-				<div class="col-md-3 col-sm-6">
-					<div class="dummy"></div>
-					<a {%if mantenimientos.count == 24%} class="thumbnail thumbnail-available container"{%elif mantenimientos.count > 0 and mantenimientos.count < 24%} class="thumbnail thumbnail-prueba-en-espera container" {%elif mantenimientos.count == 0%} class="thumbnail container"{%endif%} href="{%url 'mantenimiento:CRViewMantenimientos' perfil.pk%}">Mantenimientos <br> {%if mantenimientos.count != 0%}Cantidad: {{mantenimientos.count}}{%endif%}</a>
-				</div>
-				{%endif%}
-
+							<td class="titulo-tabla" ">Teléfono</td>
+							<td>{{perfil.municipio.zona.entidad.coordinador_estatal.perfil.telefono}}</td><td>{{perfil.municipio.zona.entidad.residente_tecnico.perfil.telefono}}</td>
+							<td>{{perfil.municipio.zona.superintendente.perfil.telefono}}</td>
+							<td>{{sistemaBebedero.ejecutora.perfil.telefono}}</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
+
+	<!--Tabla de cronologia-->
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+			<h2>Cronología general de la gestión, construcción, instalación y mantenimiento de un sistema bebedero</h2>
+		</div>
+
+		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<a class="thumbnail thumbnail-available container" href="{%url 'incidencias:CRViewIncidencias' perfil.pk%}">Bitacora de Incidencias</a>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<a {%if primerPrueba%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad</a>
+		</div>
+
+		{%if primerPrueba%}
+		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<div {%if primerPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif primerPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif primerPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%endif%}>Veredicto de Prueba de Calidad de Agua: {{primerPrueba.aprobacion}}</div>
+		</div>
+		{%endif%}
+
+		{%if primerPrueba.aprobacion == "Aprobado"%}
+		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<a {%if inicioDeTrabajo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajo</a>
+		</div>
+		{%endif%}
+
+		{%if inicioDeTrabajo%}
+		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<a {%if visitaDeAcuerdo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a>
+		</div>
+		{%endif%}
+
+		{%if visitaDeAcuerdo%}
+		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<a {%if sistemaBebedero.no_trazabilidad%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'bebederos:UpdateViewBebedero' perfil.pk%}"> Asignación de componentes del Sistema bebedero</a>
+		</div>
+		{%endif%}
+
+		{%if sistemaBebedero.no_trazabilidad%}
+		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<a {%if evidenciasConstruccion%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewEvidencias' perfil.pk%}">Evidencias de construccíón e Instalación de Mueble Bebedero</a>
+		</div>
+		{%endif%}
+
+		{%if evidencias%}
+		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<a {%if instalacionBebedero%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:ViewInstalacionBebedero' perfil.pk%}">Instalación de bebedero</a>
+		</div>
+		{%endif%}
+
+		{%if evidenciasConstruccion%}
+		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<div {%if evidenciaFinal%} class="thumbnail thumbnail-prueba-aprobado container" {%else%} class="thumbnail thumbnail-prueba-en-espera" {%endif%}>{%if evidenciaFinal%}Construcción finalizada{%else%}En proceso de construción o revisión{%endif%}</div>
+		</div>
+		{%endif%}
+
+		{%if evidenciaFinal%}
+		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<a {%if segundaPrueba%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad</a>
+		</div>
+		{%endif%}
+
+		{%if segundaPrueba%}
+		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<div {%if segundaPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif segundaPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif segundaPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%endif%}>Veredicto de Prueba de Calidad de Agua: {{segundaPrueba.aprobacion}}</div>
+		</div>
+		{%endif%}
+
+		{%if segundaPrueba.aprobacion == "Aprobado"%}
+		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<a {%if funcionamiento%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewInicioFuncionamiento' perfil.pk%}"> Inicio de funcionamiento</a>
+		</div>
+		{%endif%}
+
+		{%if funcionamiento%}
+		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<a {%if mantenimientos.count == 24%} class="thumbnail thumbnail-available container"{%elif mantenimientos.count > 0 and mantenimientos.count < 24%} class="thumbnail thumbnail-prueba-en-espera container" {%elif mantenimientos.count == 0%} class="thumbnail container"{%endif%} href="{%url 'mantenimiento:CRViewMantenimientos' perfil.pk%}">Mantenimientos <br> {%if mantenimientos.count != 0%}Cantidad: {{mantenimientos.count}}{%endif%}</a>
+		</div>
+		{%endif%}
+	</div>
+
+
 	<script>
-		$('.popup').click(function (event) {
-			event.preventDefault();
-			window.open($(this).attr("href"), "popupWindow", "width=600,height=600,scrollbars=yes");
+	$('.popup').click(function (event) {
+	event.preventDefault();
+	window.open($(this).attr("href"), "popupWindow", "width=600,height=600,scrollbars=yes");
 	});
 	</script>
 

@@ -7,11 +7,15 @@
 
 	{%if entidad.EscuelasCount%}{%endif%}
 
+		{%if request.user.perfil.tipo == "SI"%}
+		{%else%}
 		<a href="{%url 'accounts:ListViewPartidas' region.numero%}">Regresar</a>
-		<br>
 		<a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.pk%}">Avance de escuelas</a>
-		<br>
+
 		<a href="{% url 'pruebas:ExportPruebasPorEscuelasCSV' entidad.pk%}">Exportar todas las pruebas por escuela</a>
+		
+		<br>
+		
 		<br>
 	<h3>Información</h3>
 
@@ -47,6 +51,8 @@
 			</table>
 		</div>
 	</div>
+
+{%endif%}
 
 	<h3>Lista de municipios</h3>
 

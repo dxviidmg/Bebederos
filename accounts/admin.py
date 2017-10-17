@@ -16,8 +16,8 @@ admin.site.register(Partida, PartidaAdmin)
 
 #Entidades
 class EntidadAdmin(admin.ModelAdmin):
-    list_display = ['partida', 'nombre', 'coordinador_estatal']
-    search_fields = ['nombre']
+    list_display = ['nombre', 'partida', 'coordinador_estatal', 'residente_tecnico', 'laboratorio']
+    search_fields = ['nombre', 'coordinador_estatal__first_name', 'coordinador_estatal__last_name', 'residente_tecnico__first_name', 'residente_tecnico__last_name', 'laboratorio__first_name', 'laboratorio__last_name']
     list_filter = ['partida']
     prepopulated_fields = {"slug": ("nombre",)}
 

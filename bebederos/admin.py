@@ -17,7 +17,7 @@ admin.site.register(SistemaPotabilizacion, SistemaPotabilizacionAdmin)
 #Sistema de Bebederos
 class SistemaBebederoAdmin(admin.ModelAdmin):
 	model = SistemaBebedero
-	list_display = ['escuela', 'no_trazabilidad','sistema_potabilizacion', 'mueble']
-	search_fields = ['escuela__username', 'escuela__first_name', 'no_trazabilidad', 'constructora__first_name', 'escuela__last_name', 'constructora__last_name', 'sistema_potabilizacion__modelo']
-
+	list_display = ['escuela', 'no_trazabilidad','sistema_potabilizacion', 'mueble', 'ejecutora']
+	search_fields = ['escuela__username', 'escuela__first_name', 'escuela__last_name', 'no_trazabilidad', 'sistema_potabilizacion__modelo']
+	list_filter = [ 'mueble',]
 admin.site.register(SistemaBebedero, SistemaBebederoAdmin)

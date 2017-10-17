@@ -17,9 +17,10 @@ class ViewProfile(View):
 	def get(self, request):
 		template_name = "accounts/profile.html"
 		user = User.objects.get(pk=request.user.pk)
-		
+
 		try:
 			perfil = Perfil.objects.get(user=user)
+			entidad = Entidad.objects.get(coordinador_estatal=user)
 		except:
 			perfil = None
 	
@@ -63,17 +64,25 @@ class ListViewPartidas(View):
 
 class ListViewZonas(View):
 #	@method_decorator(login_required)
-	def get(self, request, slug):
+	def get(self, request, slug=None):
 		template_name = "accounts/listZonas.html"
-		entidad = Entidad.objects.get(slug=slug)
-		zonas = Zona.objects.filter(entidad=entidad)
-		municipios = Municipio.objects.filter(zona__in=zonas)
-		partida = Partida.objects.get(entidad=entidad)
-		region = Region.objects.get(partida=partida)
-	
 		ListMunicipiosPorZona = []
-		for zona in zonas:
+
+		if request.user.perfil.tipo == 'SI':
+			zona = request.user.superintendente
+			entidad = request.user.superintendente.entidad
+			
+			region = request.user.superintendente.entidad.partida.region
 			ListMunicipiosPorZona.append({'zona': zona.nombre, 'municipios': Municipio.objects.filter(zona=zona)})
+		elif slug:
+			entidad = Entidad.objects.get(slug=slug)
+			zonas = Zona.objects.filter(entidad=entidad)
+			municipios = Municipio.objects.filter(zona__in=zonas)
+			partida = Partida.objects.get(entidad=entidad)
+			region = Region.objects.get(partida=partida)
+	
+			for zona in zonas:
+				ListMunicipiosPorZona.append({'zona': zona.nombre, 'municipios': Municipio.objects.filter(zona=zona)})
 		
 		context = {
 			'entidad': entidad,
@@ -84,12 +93,23 @@ class ListViewZonas(View):
 
 class ListViewEscuelas(View):
 #	@method_decorator(login_required)
-	def get(self, request, pk):
+	def get(self, request, pk=None):
 		template_name = "accounts/listEscuelas.html"
-		municipio = Municipio.objects.get(pk=pk)
-		perfiles = Perfil.objects.filter(municipio=municipio).order_by('status')
-		zona = Zona.objects.get(municipio=municipio)
-		entidad = Entidad.objects.get(zona=zona)
+
+		if request.user.perfil.tipo == "Ejecutora":
+			ejecutora = User.objects.get(pk=request.user.pk)
+	
+			municipio = None
+			sistemaBebederos = SistemaBebedero.objects.filter(ejecutora=ejecutora)
+
+			escuelas = User.objects.filter(escuela__in=sistemaBebederos)
+			perfiles = Perfil.objects.filter(user__in=escuelas).order_by('status')
+			entidad = None
+		else:
+			municipio = Municipio.objects.get(pk=pk)
+			perfiles = Perfil.objects.filter(municipio=municipio).order_by('status')
+			zona = Zona.objects.get(municipio=municipio)
+			entidad = Entidad.objects.get(zona=zona)
 
 		context = {
 			'municipio': municipio,
@@ -347,5 +367,19 @@ class ListViewAvanceEscuelas(View):
 		context = {
 			'AvancePorEscuelas': AvancePorEscuelas,
 			'entidad': entidad,
+		}
+		return render(request,template_name, context)
+
+#Lista de Entidades para laboratorios
+class ListViewEntidades(View):
+#	@method_decorator(login_required)
+	def get(self, request):
+		template_name = "accounts/listEntidades.html"
+
+		user = User.objects.get(pk=request.user.pk)
+		entidades = Entidad.objects.filter(laboratorio=user)
+		
+		context = {
+			'entidades': entidades,
 		}
 		return render(request,template_name, context)

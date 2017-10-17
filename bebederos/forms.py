@@ -5,12 +5,12 @@ from accounts.models import Perfil
 class BebederoCreateForm(forms.ModelForm):	
 	class Meta:
 		model = SistemaBebedero
-		fields = ('mueble', 'ejecutora')
+		fields = ('mueble',)
 
-	def __init__(self, *args, **kwargs):
-		super(BebederoCreateForm, self).__init__(**kwargs)
-		perfilesEjecutoras = Perfil.objects.filter(tipo="Ejecutora")
-		self.fields['ejecutora'].queryset = User.objects.filter(perfil__in=perfilesEjecutoras)
+#	def __init__(self, *args, **kwargs):
+#		super(BebederoCreateForm, self).__init__(**kwargs)
+#		perfilesEjecutoras = Perfil.objects.filter(tipo="Ejecutora")
+#		self.fields['ejecutora'].queryset = User.objects.filter(perfil__in=perfilesEjecutoras)
 
 #ECA
 class BebederoEditForm1(forms.ModelForm):
