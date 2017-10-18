@@ -44,6 +44,7 @@ class CRViewIncidencias(View):
 
 		return redirect("incidencias:CRViewIncidencias", pk=perfil.pk)
 
+#Actualización de una incidencia
 class UpdateViewIncidencia(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):

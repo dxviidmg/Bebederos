@@ -126,8 +126,9 @@ class Perfil(models.Model):
 		("CEstatal", "Coordinador Estatal de INIFED"),
 		("RTINIFED", "Residente Técnico de INIFED"),
 		("IMTA", "IMTA"),
-		("ECA", "Encargado de Calidad de Agua"), #Pilar
-		("EMB", "Encargado de Mueble Bebedero"), #RaúL, Héctor
+		("PQ", "Procesos Químicos (Calidad de Agua)"), #Pilar, #Isauri
+		("PM", "Planta y Manufactura"), #Raúl, Héctor
+
 
 	)
 

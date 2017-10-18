@@ -10,8 +10,7 @@ from .forms import *
 from bebederos.forms import BebederoCreateForm
 from django.contrib import messages
 
-import qrcode
-
+#Ver perfil al iniciar sesión
 class ViewProfile(View):
 #	@method_decorator(login_required)
 	def get(self, request):
@@ -29,6 +28,7 @@ class ViewProfile(View):
 		}
 		return render(request,template_name, context)
 
+#Lista de regiones
 class ListViewRegiones(View):
 #	@method_decorator(login_required)
 	def get(self, request):
@@ -43,6 +43,7 @@ class ListViewRegiones(View):
 		}
 		return render(request,template_name, context)
 
+#Lista de partidas
 class ListViewPartidas(View):
 #	@method_decorator(login_required)
 	def get(self, request, numero):
@@ -62,6 +63,7 @@ class ListViewPartidas(View):
 		}
 		return render(request,template_name, context)
 
+#Lista de zonas
 class ListViewZonas(View):
 #	@method_decorator(login_required)
 	def get(self, request, slug=None):
@@ -91,6 +93,7 @@ class ListViewZonas(View):
 		}
 		return render(request,template_name, context)
 
+#Lista de escuelas
 class ListViewEscuelas(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk=None):
@@ -118,6 +121,7 @@ class ListViewEscuelas(View):
 		}
 		return render(request,template_name, context)
 
+#Detalle de escuela
 class DetailViewEscuela(View):
 	def get(self, request, pk):
 		template_name = "accounts/detailEscuela.html"
@@ -191,6 +195,7 @@ class DetailViewEscuela(View):
 		}
 		return render(request,template_name, context)
 
+#Creación de escuela
 class CreateViewEscuela(View):
 	def get(self, request, pk):
 		template_name = "accounts/createEscuela.html"
@@ -234,7 +239,7 @@ class CreateViewEscuela(View):
 
 		if NuevaEscuelaUserForm.is_valid():
 			NuevaEscuelaUser = NuevaEscuelaUserForm.save(commit=False)
-			NuevoEscuelaUser.set_password('generica')
+			NuevaEscuelaUser.set_password('generica')
 			NuevaEscuelaUser.save()
 
 		if NuevaEscuelaPerfilForm.is_valid():
@@ -251,6 +256,7 @@ class CreateViewEscuela(View):
 
 		return redirect("accounts:ListViewEscuelas", pk=municipio.pk)
 
+#Actualización de escuela
 class UpdateViewEscuela(View):
 	def get(self, request, pk):
 		template_name = "accounts/updateEscuela.html"
@@ -267,7 +273,6 @@ class UpdateViewEscuela(View):
 			'EdicionEscuelaPerfilForm': EdicionEscuelaPerfilForm,
 		}
 		return render(request,template_name, context)
-
 	def post(self, request, pk):
 		perfil = Perfil.objects.get(pk=pk)
 		escuela = User.objects.get(perfil=perfil)
@@ -284,6 +289,7 @@ class UpdateViewEscuela(View):
 
 		return redirect("accounts:UpdateViewEscuela", pk=perfil.pk)
 
+#Vizualicación de un mapa
 class DetailViewMapa(View):
 	def get(self, request, pk):
 		template_name = "accounts/detailMapa.html"
@@ -296,6 +302,7 @@ class DetailViewMapa(View):
 		}
 		return render(request,template_name, context)
 
+#Buscador de escuelas
 class SearchViewEscuelas(View):
 #	@method_decorator(login_required)
 	def get(self, request):
@@ -314,6 +321,7 @@ class SearchViewEscuelas(View):
 		}
 		return render(request,template_name, context)
 
+#Reporte de avance por escuela
 class ListViewAvanceEscuelas(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
@@ -370,7 +378,7 @@ class ListViewAvanceEscuelas(View):
 		}
 		return render(request,template_name, context)
 
-#Lista de Entidades para laboratorios
+#Lista de entidades (para laboratorios)
 class ListViewEntidades(View):
 #	@method_decorator(login_required)
 	def get(self, request):

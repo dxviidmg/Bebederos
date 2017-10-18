@@ -45,7 +45,7 @@ class SistemaBebedero(models.Model):
 	mueble = models.ForeignKey(Mueble, related_name="mueble")
 	sistema_potabilizacion = models.ForeignKey(SistemaPotabilizacion, related_name="sistema_potabilizacion",  null=True, blank=True)
 	identificador_sp = models.CharField(max_length=20, null=True, blank=True, verbose_name="Identificador de sistema de potabilización")
-	componentes_sp = models.CharField(max_length=30, null=True, blank=True, verbose_name="Componentes del sistema de potabilización")
+	etapas_sp = models.CharField(max_length=30, null=True, blank=True, verbose_name="Etapas del sistema de potabilización")
 	linea_ensamblaje = models.CharField(max_length=5, choices=linea_ensamblaje_choices, null=True, blank=True)
 	ejecutora = models.ForeignKey(User, related_name="ejecutora", null=True, blank=True)
 	asignacion = models.BooleanField(default=False, verbose_name="Si ya se descargó. imprimió y asignó la guia de trazabilidad al mueble correspondiente, oprima el botón")

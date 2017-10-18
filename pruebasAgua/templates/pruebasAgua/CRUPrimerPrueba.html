@@ -382,30 +382,31 @@
 		</div>
 	</div>
 	<div class="row">
+		<div class="col-5">
+			  <!-- Trigger the modal with a button -->
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Calculadora para sistema potabilización</button>
+
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+						<h4 class="modal-title">Recomendación de sistema potabilizador</h4>
+						</div>
+						<div class="modal-body">
+							<h3>{{sistemaPotabilizadorCalculado}}</h3>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="col-12">
 
-  <!-- Trigger the modal with a button -->
-  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Recomendación de sistema potabilizador</h4>
-        </div>
-        <div class="modal-body">
-          <h3>{{sistemaPotabilizadorCalculado}}</h3>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
 
 
 
@@ -442,6 +443,7 @@
 			<form action="." method="post" enctype="multipart/form-data">
 				<h4>Registro de documentación de la toma de agua (SI)</h4>
 				{%csrf_token%}
+				{{EdicionBebederoForm | bootstrap}}
 				{{NuevaPruebaForm | bootstrap}}
 				<a href=""><input type="submit" value="Crear registro"></a>
 			</form>

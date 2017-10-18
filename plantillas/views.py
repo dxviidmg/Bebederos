@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import View
 from .models import *
+
+#Consulta de plantillas por tipo de usuario
 class ListViewPlantillas(View):
 #	@method_decorator(login_required)
 	def get(self, request):

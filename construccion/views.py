@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from .forms import *
 from django.contrib import messages
 
-#Creación y edición de la visita de acuerdo
+#Creación, edición y detalle de una visita de acuerdo
 class CRViewInicioDeTrabajo(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
@@ -40,6 +40,7 @@ class CRViewInicioDeTrabajo(View):
 
 		return redirect("construccion:CRViewInicioDeTrabajo", pk=perfil.pk)
 
+#Creación, edición y detalle de un termino de trabajos
 class CRViewTerminoDeTrabajo(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
@@ -74,6 +75,7 @@ class CRViewTerminoDeTrabajo(View):
 
 		return redirect("construccion:ViewTerminoDeTrabajo", pk=perfil.pk)
 
+#Creación, edición y lista de evidencias de construcción 
 class CRViewEvidencias(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
@@ -128,8 +130,7 @@ class CRViewEvidencias(View):
 
 		return redirect("construccion:CRViewEvidencias", pk=perfil.pk)
 
-
-
+#Actualización de una evidencia
 class UpdateViewEvidencia(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):

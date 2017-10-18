@@ -10,13 +10,13 @@ class Plantilla(models.Model):
 		("Escuela", "Escuela"),
 		("Laboratorio", "Laboratorio"),
 		("INIFED", "INIFED"), #INIFED Federal
-		("Coor_Estatal", "Coordinador Estatal de INIFED"),
+		("CEstatal", "Coordinador Estatal de INIFED"),
 		("RTINIFED", "Residente Técnico de INIFED"),
 		("IMTA", "IMTA"),
-		("ECA", "Encargado de Calidad de Agua"), #Pilar
-		("EMB", "Encargado de Mueble Bebedero"), #RaúL, Héctor
-	)
-
+		("PQ", "Procesos Químicos (Calidad de Agua)"), #Pilar, #Isauri
+		("PM", "Planta y Manufactura"), #Raúl, Héctor
+)
+	
 	fase_choices = (
 		("Pruebas de calidad de agua", "Pruebas de calidad de agua"),
 		("Inicio de trabajo", "Inicio de trabajo"),	

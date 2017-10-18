@@ -206,98 +206,114 @@
 	</div>
 
 	<!--Tabla de cronologia-->
-	<div class="row">
+	<div class="row justify-content-center">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 			<h2>Cronología general de la gestión, construcción, instalación y mantenimiento de un sistema bebedero</h2>
 		</div>
 
+		{%if request.user.perfil.tipo == "SI"  or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a class="thumbnail thumbnail-available container" href="{%url 'incidencias:CRViewIncidencias' perfil.pk%}">Bitacora de Incidencias</a>
 		</div>
+		{%endif%}
+
+		{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "RTINIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if primerPrueba%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad</a>
 		</div>
+		{%endif%}
 
+		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "RTINIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		{%if primerPrueba%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<div {%if primerPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif primerPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif primerPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%endif%}>Veredicto de Prueba de Calidad de Agua: {{primerPrueba.aprobacion}}</div>
 		</div>
 		{%endif%}
+		{%endif%}
 
-		{%if primerPrueba.aprobacion == "Aprobado"%}
+		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "RTINIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%} {%if primerPrueba.aprobacion == "Aprobado"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if inicioDeTrabajo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajo</a>
 		</div>
 		{%endif%}
+		{%endif%}
 
+		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "RTINIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		{%if inicioDeTrabajo%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if visitaDeAcuerdo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a>
 		</div>
 		{%endif%}
-
+		{%endif%}
+		
+		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Administrador"  or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "RTINIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		{%if visitaDeAcuerdo%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if sistemaBebedero.no_trazabilidad%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'bebederos:UpdateViewBebedero' perfil.pk%}"> Asignación de componentes del Sistema bebedero</a>
 		</div>
 		{%endif%}
+		{%endif%}
 
+		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "RTINIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		{%if sistemaBebedero.no_trazabilidad%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if evidenciasConstruccion%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewEvidencias' perfil.pk%}">Evidencias de construccíón e Instalación de Mueble Bebedero</a>
 		</div>
 		{%endif%}
-
-		{%if evidencias%}
-		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
-			<div class="dummy"></div>
-			<a {%if instalacionBebedero%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:ViewInstalacionBebedero' perfil.pk%}">Instalación de bebedero</a>
-		</div>
 		{%endif%}
 
+		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "RTINIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		{%if evidenciasConstruccion%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<div {%if evidenciaFinal%} class="thumbnail thumbnail-prueba-aprobado container" {%else%} class="thumbnail thumbnail-prueba-en-espera" {%endif%}>{%if evidenciaFinal%}Construcción finalizada{%else%}En proceso de construción o revisión{%endif%}</div>
 		</div>
 		{%endif%}
+		{%endif%}
 
+		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio"  or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "RTINIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		{%if evidenciaFinal%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if segundaPrueba%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad</a>
 		</div>
 		{%endif%}
+		{%endif%}
 
+		{%if request.user.perfil.tipo == "SI"  or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO"  or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "RTINIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		{%if segundaPrueba%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<div {%if segundaPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif segundaPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif segundaPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%endif%}>Veredicto de Prueba de Calidad de Agua: {{segundaPrueba.aprobacion}}</div>
 		</div>
 		{%endif%}
+		{%endif%}
 
+		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "RTINIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		{%if segundaPrueba.aprobacion == "Aprobado"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if funcionamiento%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewInicioFuncionamiento' perfil.pk%}"> Inicio de funcionamiento</a>
 		</div>
 		{%endif%}
+		{%endif%}
 
+		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO"  or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "RTINIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		{%if funcionamiento%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if mantenimientos.count == 24%} class="thumbnail thumbnail-available container"{%elif mantenimientos.count > 0 and mantenimientos.count < 24%} class="thumbnail thumbnail-prueba-en-espera container" {%elif mantenimientos.count == 0%} class="thumbnail container"{%endif%} href="{%url 'mantenimiento:CRViewMantenimientos' perfil.pk%}">Mantenimientos <br> {%if mantenimientos.count != 0%}Cantidad: {{mantenimientos.count}}{%endif%}</a>
 		</div>
 		{%endif%}
+		{%endif%}
 	</div>
-
 
 	<script>
 	$('.popup').click(function (event) {

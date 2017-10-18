@@ -6,7 +6,9 @@ from .forms import *
 from django.http import HttpResponse
 import csv
 from django_modalview.generic.base import ModalTemplateView
+from bebederos.forms import BebederoUpdateForm4
 
+#Creación, edición y detalle de una Primer Prueba
 class CRUViewPrimerPrueba(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
@@ -14,7 +16,10 @@ class CRUViewPrimerPrueba(View):
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevaPruebaForm = PrimerPruebaCreateForm()
-
+		sistemaBebedero = SistemaBebedero.objects.get(escuela=escuela)
+		EdicionBebederoForm = BebederoUpdateForm4(instance=sistemaBebedero)
+		sistemaPotabilizadorCalculado = None		
+	
 		try:
 			prueba = PrimerPrueba.objects.get(escuela=escuela)
 			EdicionPruebaForm1 = PrimerPruebaUpdateForm1(instance=prueba)
@@ -42,6 +47,14 @@ class CRUViewPrimerPrueba(View):
 			dureza_total = prueba.dureza_total
 			solidos_disueltos  = prueba.solidos_disueltos
 
+			if manganeso is not None:
+				if manganeso > 0.165 or plomo > 0.011 or floururos > 1.265:
+					sistemaPotabilizadorCalculado = "Robusto"
+				elif arsenico > 0.0275 or hierro > 0.2 or nitratos > 11 or sulfatos > 440:
+					sistemaPotabilizadorCalculado = "Intermedio"
+				else:
+					 sistemaPotabilizadorCalculado = "Basico"
+
 		except PrimerPrueba.DoesNotExist:
 			prueba = None
 			EdicionPruebaForm1 = None
@@ -52,16 +65,6 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm6 = None
 			EdicionPruebaForm7 = None
 			EdicionPruebaForm8 = None
-
-		if manganeso is not None:
-			if manganeso > 0.165 or plomo > 0.011 or floururos > 1.265:
-				sistemaPotabilizadorCalculado = "Robusto"
-			elif arsenico > 0.0275 or hierro > 0.2 or nitratos > 11 or sulfatos > 440:
-				sistemaPotabilizadorCalculado = "Intermedio"
-			else:
-				 sistemaPotabilizadorCalculado = "Basico"
-		else:
-			sistemaPotabilizadorCalculado = None		 
 
 		context = {
 			'perfil': perfil,
@@ -78,6 +81,7 @@ class CRUViewPrimerPrueba(View):
 			'EdicionPruebaForm7': EdicionPruebaForm7,
 			'EdicionPruebaForm8': EdicionPruebaForm8,
 			'sistemaPotabilizadorCalculado': sistemaPotabilizadorCalculado,
+			'EdicionBebederoForm': EdicionBebederoForm,
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -85,6 +89,8 @@ class CRUViewPrimerPrueba(View):
 		escuela = User.objects.get(perfil=perfil)
 		NuevaPruebaForm = PrimerPruebaCreateForm(data=request.POST, files=request.FILES)
 		laboratorio = User.objects.get(pk=request.user.pk)
+		sistemaBebedero = SistemaBebedero.objects.get(escuela=escuela)
+		EdicionBebederoForm = BebederoUpdateForm4(instance=sistemaBebedero, data=request.POST, files=request.FILES)		
 
 		if NuevaPruebaForm.is_valid():
 			NuevaPrueba = NuevaPruebaForm.save(commit=False)
@@ -92,6 +98,8 @@ class CRUViewPrimerPrueba(View):
 			NuevaPrueba.laboratorio = laboratorio
 			NuevaPrueba.save()
 
+		if EdicionBebederoForm.is_valid():
+			EdicionBebederoForm.save()
 		try:
 			prueba = PrimerPrueba.objects.get(escuela=escuela)
 			EdicionPruebaForm1 = PrimerPruebaUpdateForm1(instance=prueba, data=request.POST, files=request.FILES)
@@ -139,7 +147,7 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm8 = None
 
 		return redirect("pruebas:CRUViewPrimerPrueba", pk=perfil.pk)
-
+#Creación, edición y detalle de una Segunda prueba
 class CRUViewSegundaPrueba(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):

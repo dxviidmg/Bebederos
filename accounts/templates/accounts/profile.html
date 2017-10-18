@@ -9,19 +9,12 @@
 		</div>
 	</div>
 
-	{%if perfil.tipo == "Escuela"%}
-
 	<p>Director: {{perfil.director}}</p>
 	<p>Cantidad de alumnos: {{perfil.cantidad_de_alumnos}}</p>
 	<p>Teléfono: {{perfil.teléfono}}</p>
 	<p>Domicilio: {{perfil.domicilio}}</p>
-	{%elif perfil.tipo == "Constructora"%}
-
 	<p>{{perfil.representante_legal}}</p>
-<p>Teléfono: {{perfil.teléfono}}</p>
+	<p>Teléfono: {{perfil.teléfono}}</p>
 	<p>Domicilio: {{perfil.domicilio}}</p>
-	{%endif%}
-
-	
 	
 {%endblock content%}

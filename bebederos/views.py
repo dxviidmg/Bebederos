@@ -12,7 +12,15 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4, cm
 from datetime import date
 
-#Actualización de un SistemasBebedero
+#Librerias para poder exportar PDFs
+from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse
+
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.units import inch
+
+#Actualización de un Sistema Bebedero
 class UpdateViewBebedero(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
@@ -25,9 +33,9 @@ class UpdateViewBebedero(View):
 		countSB = SistemaBebedero.objects.all().count()
  
 		sistemaBebedero = SistemaBebedero.objects.get(escuela=escuela)
-		EdicionBebederoForm1 = BebederoEditForm1(instance=sistemaBebedero)
-		EdicionBebederoForm2 = BebederoEditForm2(instance=sistemaBebedero)
-		EdicionBebederoForm3 = BebederoEditForm3(instance=sistemaBebedero)
+		EdicionBebederoForm1 = BebederoUpdateForm1(instance=sistemaBebedero)
+		EdicionBebederoForm2 = BebederoUpdateForm2(instance=sistemaBebedero)
+		EdicionBebederoForm3 = BebederoUpdateForm3(instance=sistemaBebedero)
 
 		context = {
 			'perfil': perfil,
@@ -48,15 +56,15 @@ class UpdateViewBebedero(View):
 		countSB = SistemaBebedero.objects.all().count()
 		sistemaBebedero = SistemaBebedero.objects.get(escuela=escuela)
 
-		EdicionBebederoForm1 = BebederoEditForm1(instance=sistemaBebedero, data=request.POST, files=request.FILES)
+		EdicionBebederoForm1 = BebederoUpdateForm1(instance=sistemaBebedero, data=request.POST, files=request.FILES)
 		if EdicionBebederoForm1.is_valid():
 			EdicionBebederoForm1.save()
 
-		EdicionBebederoForm2 = BebederoEditForm2(instance=sistemaBebedero, data=request.POST, files=request.FILES)
+		EdicionBebederoForm2 = BebederoUpdateForm2(instance=sistemaBebedero, data=request.POST, files=request.FILES)
 		if EdicionBebederoForm2.is_valid():
 			EdicionBebederoForm2.save()
 
-		EdicionBebederoForm3 = BebederoEditForm3(instance=sistemaBebedero, data=request.POST, files=request.FILES)
+		EdicionBebederoForm3 = BebederoUpdateForm3(instance=sistemaBebedero, data=request.POST, files=request.FILES)
 		if EdicionBebederoForm3.is_valid():
 			EdicionBebederoForm3.save()
 
@@ -64,13 +72,7 @@ class UpdateViewBebedero(View):
 
 		return redirect("bebederos:UpdateViewBebedero", pk=perfil.pk)
 
-from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponse
-
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.lib.units import inch
-
+#Exportación en PDF de guia de trazabilidad
 def ExportComprobanteTrazabilidadPDF(request, pk):
 	sistemaBebedero =get_object_or_404(SistemaBebedero, pk=pk)
 	today = date.today().strftime('%d-%m-%Y')
