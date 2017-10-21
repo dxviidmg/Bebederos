@@ -74,23 +74,50 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
       </li>
 
       {%elif request.user.perfil.tipo == "Laboratorio"%}
-      <li class="nav-item">
-        <a class="nav-link" href="{%url 'accounts:ListViewEntidades'%}">Entidades</a>
-      </li>
+
+      <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Escuelas
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{%url 'accounts:ListViewEntidades'%}">Por entidades</a>
+                <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
+              </div>
+            </li>
 
       {%elif request.user.perfil.tipo == "CEstatal"%}
-      <li class="nav-item">
-        <a class="nav-link" href="{%url 'accounts:ListViewZonas' request.user.coordinador_estatal.slug%}">{{request.user.coordinador_estatal.nombre}}</a>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.coordinador_estatal.slug%}">Por municipios</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.coordinador_estatal.pk%}">Por avance</a>
+          <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
+        </div>
       </li>
 
       {%elif request.user.perfil.tipo == "RTINIFED"%}
-      <li class="nav-item">
-        <a class="nav-link" href="{%url 'accounts:ListViewZonas' request.user.residente_tecnico.slug%}">{{request.user.residente_tecnico.nombre}}</a>
+    
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.residente_tecnico.slug%}">Por municipios</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.residente_tecnico.pk%}">Por avance</a>
+          <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
+        </div>
       </li>
-      
+
       {%elif request.user.perfil.tipo == "SI"%}
-      <li class="nav-item">
-        <a class="nav-link" href="{%url 'accounts:ListViewZonas2'%}">Mi zona</a>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Escuelas
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas2'%}">Por municipio</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelasPorZona' request.user.superintendente.pk%}">Avance por escuela</a>
+          <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
+        </div>
       </li>
 
       {%elif request.user.perfil.tipo == "Ejecutora"%}
@@ -98,16 +125,14 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
         <a class="nav-link" href="{%url 'accounts:ListViewEscuelasPorEjecutora'%}">Mis obras</a>
       </li>
       {%else%}
-
       <li class="nav-item">
         <a class="nav-link" href="{%url 'accounts:ListViewRegiones'%}">Regiones</a>
+
       </li>
-
-      {%endif%}
-
       <li class="nav-item">
         <a class="nav-link" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
       </li>
+      {%endif%}
 
       <li class="nav-item">
         <a class="nav-link" href="{%url 'plantillas:ListViewPlantillas'%}">Plantillas</a>
@@ -127,9 +152,6 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
   </div>
   
 	<div class="container content">
-
-      {%block title%}
-      {%endblock title%}
 
       {%block content%}
       {%endblock content%}

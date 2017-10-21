@@ -133,6 +133,7 @@
 
 	{%else%}
 
+	{%if request.user.perfil.tipo == "SI"%}
 	<div class="row">
 		<div class="col-12">
 			<h4>Registro de documentación</h4>
@@ -144,6 +145,7 @@
 		</div>
 	</div>
 
+	{%endif%}
 	{%endif%}
 
 {%endblock content%}

@@ -10,16 +10,24 @@ from django.contrib import messages
 #Creación y consulta de incidencias
 class CRViewIncidencias(View):
 #	@method_decorator(login_required)
-	def get(self, request, pk):
+	def get(self, request, pk=None):
 		template_name = "incidencias/CRIncidencias.html"
-		perfil = get_object_or_404(Perfil, pk=pk)
-		escuela = User.objects.get(perfil=perfil)
+		if pk:
+			perfil = get_object_or_404(Perfil, pk=pk)
+			escuela = User.objects.get(perfil=perfil)
 
-		NuevaIncidenciaForm = IncidenciaCreateForm()
+			NuevaIncidenciaForm = IncidenciaCreateForm()
 
-		incidencias = Incidencia.objects.filter(escuela=escuela)
-		incidenciasActuales = incidencias.filter(Q(status="En espera") | Q(status="Atendiendo"))
-		historialIncidencias = incidencias.filter(status="Solucionado")
+			incidencias = Incidencia.objects.filter(escuela=escuela)
+			incidenciasActuales = incidencias.filter(Q(status="En espera") | Q(status="Atendiendo"))
+			historialIncidencias = incidencias.filter(status="Solucionado")
+		else:
+			perfil=None
+			escuela=None
+			incidencias = Incidencia.objects.all()
+			incidenciasActuales = incidencias.filter(Q(status="En espera") | Q(status="Atendiendo"))
+			historialIncidencias = incidencias.filter(status="Solucionado")
+			NuevaIncidenciaForm = None
 
 		context = {
 			'perfil': perfil,

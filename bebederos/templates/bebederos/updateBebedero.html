@@ -13,10 +13,18 @@
 			<form action="." method="post" enctype="multipart/form-data">
 				<h4>Asignación de componentes y especificaciones</h4>
 				{%csrf_token%}
-				<p>ECA</p>
+				
+				{%if request.user.perfil.tipo == "PQ"%}
+				<p>Linea de ensambaje: {{sistemaBebedero.linea_ensamblaje}}</p>
+
 				{{EdicionBebederoForm1 | bootstrap}}
-				<p>Taller</p>
+				{%elif request.user.perfil.tipo == "PM"%}
+				<p>Sistema de potabilización: {{sistemaBebedero.sistema_potabilizacion}}</p>
+				<p>Identificador sistema de potabilización: {{sistemaBebedero.identificador_sp}}</p>
+				<p>Etapas del sistema de potabilización: {{sistemaBebedero.etapas_sp}}</p>
+				<p>Capacidad de tanque presurizador: {{sistemaBebedero.capacidad_tanque_presurizador}}</p>
 				{{EdicionBebederoForm2 | bootstrap}}
+				{%endif%}
 				<a href=""><input type="submit" value="Guardar cambios"></a>
 			</form>
 
@@ -25,7 +33,7 @@
 
 		{%if sistemaBebedero.asignacion is False%}
 
-		<p><a href="{%url 'bebederos:ExportComprobanteTrazabilidadPDF' sistemaBebedero.pk%}">Imprimir guia de trazabilidad</a></p>
+		<p><a href="{%url 'bebederos:ExportComprobanteTrazabilidadPDF' sistemaBebedero.pk%}">Descargar guia de trazabilidad</a></p>
 
 			<form action="." method="post" enctype="multipart/form-data">
 				{%csrf_token%}

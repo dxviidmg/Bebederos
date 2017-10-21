@@ -253,7 +253,7 @@ class CreateViewEscuela(View):
 			NuevoBebedero = NuevoBebederoForm.save(commit=False)
 			NuevoBebedero.escuela = NuevaEscuelaUser
 			NuevoBebedero.save()
-
+			NuevoBebedero.CalculaCTP()
 		return redirect("accounts:ListViewEscuelas", pk=municipio.pk)
 
 #Actualización de escuela
@@ -310,8 +310,8 @@ class SearchViewEscuelas(View):
 		query = request.GET.get("query")
 
 		if query:
-			escuelas = User.objects.filter(username__contains=query)
-			print(escuelas)
+			perfiles = Perfil.objects.filter(tipo="Escuela")
+			escuelas = User.objects.filter(perfil__in=perfiles ,username__contains=query)
 	
 		else:
 			escuelas = []
@@ -326,11 +326,21 @@ class ListViewAvanceEscuelas(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "accounts/listAvanceEscuelas.html"
-		entidad = Entidad.objects.get(pk=pk)
-		zonas = Zona.objects.filter(entidad=entidad)
-		municipios = Municipio.objects.filter(zona__in=zonas)
-		perfilesEscuelas = Perfil.objects.filter(municipio__in=municipios)
-		escuelas = User.objects.filter(perfil__in=perfilesEscuelas)
+		if request.user.perfil.tipo == "SI":
+			entidad = None
+			superintendente = User.objects.get(pk=request.user.pk)
+			zona = Zona.objects.get(superintendente=superintendente)
+			municipios = Municipio.objects.filter(zona=zona)
+			perfilesEscuelas = Perfil.objects.filter(municipio__in=municipios)
+			escuelas = User.objects.filter(perfil__in=perfilesEscuelas)
+		else:
+
+			entidad = Entidad.objects.get(pk=pk)
+			zonas = Zona.objects.filter(entidad=entidad)
+			municipios = Municipio.objects.filter(zona__in=zonas)
+			perfilesEscuelas = Perfil.objects.filter(municipio__in=municipios)
+			escuelas = User.objects.filter(perfil__in=perfilesEscuelas).order_by('perfil__municipio__nombre', 'perfil__localidad')
+
 		AvancePorEscuelas = []
 
 		for escuela in escuelas:

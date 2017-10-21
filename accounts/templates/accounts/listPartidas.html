@@ -13,6 +13,7 @@
 					<tr>
 						<th rowspan="2">Partida</th>
 						<th rowspan="2">Entidad</th>
+						<th rowspan="2" colspan="2">Listas</th>
 						<th colspan="5">Escuelas</th>
 					</tr>
 					<tr>
@@ -37,8 +38,10 @@
 						</td>
 					
 						{%endif%}
-							
-						<td><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">{{entidad}}</a></td>
+						<td>{{entidad}}</td>
+						<td><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">Por zonas</a></td>
+
+						<td><a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.pk%}">Por escuelas</a></td>
 		
 						<td>{{entidad.escuelas_asignadas}}</td>
 						<td>{{entidad.escuelas_registradas}}{%if entidad.EscuelasCount is None%}{%endif%}</td>
@@ -51,7 +54,7 @@
 		
 					<tr>
 						<td colspan="1">{{EntidadesPorPartida.partida}}</td>
-						<td colspan="6">No tiene entidades registradas</td>
+						<td colspan="8">No tiene entidades registradas</td>
 					</tr>
 
 		{%endfor%}

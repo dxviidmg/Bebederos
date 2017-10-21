@@ -14,11 +14,11 @@ class PrimerPruebaCreateForm(forms.ModelForm):
 class PrimerPruebaUpdateForm1(forms.ModelForm):
 	class Meta:
 		model = PrimerPrueba
-		fields = ('hoja_campo', 'cadena_custodia')
+		fields = ('registro_campo', 'cadena_custodia')
 #		fields = ()
 	def __init__(self, *args, **kwargs):
 		super(PrimerPruebaUpdateForm1, self).__init__(*args, **kwargs)
-		self.fields['hoja_campo'].required = True
+		self.fields['registro_campo'].required = True
 		self.fields['cadena_custodia'].required = True
 
 class PrimerPruebaUpdateForm2(forms.ModelForm):
@@ -81,7 +81,7 @@ class PrimerPruebaUpdateForm6(forms.ModelForm):
 class PrimerPruebaUpdateForm7(forms.ModelForm):
 	class Meta:
 		model = PrimerPrueba
-		fields = ('creacion_reporte_analisis', 'resultados_laboratorio', 'resultados_IMTA',)
+		fields = ('creacion_reporte_analisis', 'resultados_laboratorio', 'propuesta_sistema_potabilizador')
 #		fields = ()
 		widgets = {
 			'creacion_reporte_analisis': forms.TextInput(attrs={'placeholder': 'dd/mm/aaaa'}),
@@ -89,7 +89,7 @@ class PrimerPruebaUpdateForm7(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super(PrimerPruebaUpdateForm7, self).__init__(*args, **kwargs)
-		self.fields['resultados_IMTA'].required = True
+		self.fields['propuesta_sistema_potabilizador'].required = True
 		self.fields['resultados_laboratorio'].required = True
 		self.fields['creacion_reporte_analisis'].required = True
 
@@ -118,11 +118,11 @@ class SegundaPruebaCreateForm(forms.ModelForm):
 class SegundaPruebaUpdateForm1(forms.ModelForm):
 	class Meta:
 		model = SegundaPrueba
-		fields = ('hoja_campo', 'cadena_custodia')
+		fields = ('registro_campo', 'cadena_custodia')
 #		fields = ()
 	def __init__(self, *args, **kwargs):
 		super(SegundaPruebaUpdateForm1, self).__init__(*args, **kwargs)
-		self.fields['hoja_campo'].required = True
+		self.fields['registro_campo'].required = True
 		self.fields['cadena_custodia'].required = True
 
 class SegundaPruebaUpdateForm2(forms.ModelForm):
@@ -183,8 +183,8 @@ class SegundaPruebaUpdateForm6(forms.ModelForm):
 
 class SegundaPruebaUpdateForm7(forms.ModelForm):
 	class Meta:
-		model = PrimerPrueba
-		fields = ('creacion_reporte_analisis', 'resultados_laboratorio', 'resultados_IMTA',)
+		model = SegundaPrueba
+		fields = ('creacion_reporte_analisis', 'resultados_laboratorio',)
 #		fields = ()
 		widgets = {
 			'creacion_reporte_analisis': forms.TextInput(attrs={'placeholder': 'dd/mm/aaaa'}),
@@ -192,7 +192,6 @@ class SegundaPruebaUpdateForm7(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super(SegundaPruebaUpdateForm7, self).__init__(*args, **kwargs)
-		self.fields['resultados_IMTA'].required = True
 		self.fields['resultados_laboratorio'].required = True
 		self.fields['creacion_reporte_analisis'].required = True
 

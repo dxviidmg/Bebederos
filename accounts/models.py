@@ -1,6 +1,3 @@
-import qrcode
-from io import StringIO
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -217,25 +214,6 @@ class Perfil(models.Model):
 	class Meta:
 		ordering = ['user']
 		verbose_name_plural = "Perfiles"
-
-	def generate_qrcode(self):
-		qr = qrcode.QRCode(
-			version=1,
-			error_correction=qrcode.constants.ERROR_CORRECT_L,
-			box_size=6,
-			border=0,
-		)
-		qr.add_data(self.get_absolute_url())
-		qr.make(fit=True)
-
-		img = qr.make_image()
-
-		buffer = StringIO.StringIO()
-		img.save(buffer)
-		filename = 'events-%s.png' % (self.id)
-		filebuffer = InMemoryUploadedFile(
-			buffer, None, filename, 'image/png', buffer.len, None)
-		self.qrcode.save(filename, filebuffer)
 
 #Muestra nombre completo	
 def get_full_name(self):

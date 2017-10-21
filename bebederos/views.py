@@ -131,50 +131,55 @@ def ExportComprobanteTrazabilidadPDF(request, pk):
 	t11 = Paragraph(sistemaPotabilizacion, styleText3)
 	Story.append(t11)
 
-	trazabilidad = "No. de trazabilidad: " + str(sistemaBebedero.no_trazabilidad)
-	t12 = Paragraph(trazabilidad, styleText3)
+	tanque = "Capacidad de tanque presurizador: " + str(sistemaBebedero.capacidad_tanque_presurizador) + "galones"
+	t12 = Paragraph(tanque, styleText3)
 	Story.append(t12)
+
+
+	trazabilidad = "No. de trazabilidad: " + str(sistemaBebedero.no_trazabilidad)
+	t13 = Paragraph(trazabilidad, styleText3)
+	Story.append(t13)
 	Story.append(Spacer(1,0.5*inch))
 
 	firman = "Firman"
-	t13 = Paragraph(firman, styleText3)
-	Story.append(t13)
-
-	linea1 = "________________________"
-	t14 = Paragraph(linea1, styleText)
+	t14 = Paragraph(firman, styleText3)
 	Story.append(t14)
 
-	nombre1 = "Ing. Raul A. Mejía Mejía"
-	t15 = Paragraph(nombre1, styleText3)
+	linea1 = "________________________"
+	t15 = Paragraph(linea1, styleText)
 	Story.append(t15)
 
-	puesto1 = "Gerente de Manufactura"
-	t16 = Paragraph(puesto1, styleText3)
-	Story.append(t16)	
+	nombre1 = "Ing. Raul A. Mejía Mejía"
+	t16 = Paragraph(nombre1, styleText3)
+	Story.append(t16)
 
-	linea2 = "________________________"
-	t17 = Paragraph(linea2, styleText)
+	puesto1 = "Gerente de Manufactura"
+	t17 = Paragraph(puesto1, styleText3)
 	Story.append(t17)
 
-	nombre2 = "Ing. Pilar N. Velázquez Serna"
-	t18 = Paragraph(nombre2, styleText3)
+	linea2 = "________________________"
+	t18 = Paragraph(linea2, styleText)
 	Story.append(t18)
 
-	puesto2 = "Gerente de Procesos Quimicos"
-	t19 = Paragraph(puesto2, styleText3)
+	nombre2 = "Ing. Pilar N. Velázquez Serna"
+	t19 = Paragraph(nombre2, styleText3)
 	Story.append(t19)
 
-	linea3 = "________________________"
-	t20 = Paragraph(linea3, styleText)
+	puesto2 = "Gerente de Procesos Quimicos"
+	t20 = Paragraph(puesto2, styleText3)
 	Story.append(t20)
 
-	nombre3 = "Ing. Héctor M. Rios Sanchez"
-	t21 = Paragraph(nombre3, styleText3)
+	linea3 = "________________________"
+	t21 = Paragraph(linea3, styleText)
 	Story.append(t21)
 
-	puesto3 = "Gerente de Planta"
-	t22 = Paragraph(puesto3, styleText3)
+	nombre3 = "Ing. Héctor M. Rios Sanchez"
+	t22 = Paragraph(nombre3, styleText3)
 	Story.append(t22)
+
+	puesto3 = "Gerente de Planta"
+	t23 = Paragraph(puesto3, styleText3)
+	Story.append(t23)
 
 	doc.build(Story)
 

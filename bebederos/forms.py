@@ -48,3 +48,12 @@ class BebederoUpdateForm4(forms.ModelForm):
 		super(BebederoUpdateForm4, self).__init__(**kwargs)
 		perfilesEjecutoras = Perfil.objects.filter(tipo="Ejecutora")
 		self.fields['ejecutora'].queryset = User.objects.filter(perfil__in=perfilesEjecutoras)
+
+#ECA
+class BebederoUpdateForm5(forms.ModelForm):
+	class Meta:
+		model = SistemaBebedero
+		fields = ('sistema_potabilizacion',)
+	def __init__(self, *args, **kwargs):
+		super(BebederoUpdateForm5, self).__init__(*args, **kwargs)
+		self.fields['sistema_potabilizacion'].required = True

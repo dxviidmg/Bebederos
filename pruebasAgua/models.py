@@ -17,11 +17,11 @@ class PrimerPrueba(models.Model):
 
 	#Fase de analisis / LAB
 	resultados_laboratorio = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis de laboratorio", null=True, blank=True)
-	hoja_campo = models.FileField(upload_to='pruebas/1/hoja_campo/%Y/%m/%d/', verbose_name="Hoja de campo", null=True, blank=True)
+	registro_campo = models.FileField(upload_to='pruebas/1/hoja_campo/%Y/%m/%d/', verbose_name="Registro de campo", null=True, blank=True)
 	cadena_custodia = models.FileField(upload_to='pruebas/1/cadena_custioda/%Y/%m/%d/', verbose_name="Cadena de custodia", null=True, blank=True)
 
 	#Fase de Sugerencias / ECA(Pilar)
-	resultados_IMTA = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis con propuesta de sistema potabilizador", null=True, blank=True)
+	propuesta_sistema_potabilizador = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Propuesta de sistema potabilizador", null=True, blank=True)
 
 	#Fase de confirmación de IMTA
 	dictamen_sistema_potabilizador = models.FileField(upload_to='pruebas/1/dictamen/%Y/%m/%d/', verbose_name="Dictamen del sistema potabilizador a utilizar", null=True, blank=True)
@@ -41,19 +41,19 @@ class PrimerPrueba(models.Model):
 	ph = models.FloatField(null=True, blank=True, verbose_name="pH (unidades de pH)")
 	conductividad_electrica = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Conductividad eléctrica (µS/cm)")
 		#Bacteriologicos
-	coliformes_fecales = models.FloatField(null=True, blank=True, verbose_name="Coliformes fecales (unidades)")
-	coliformes_totales = models.FloatField(null=True, blank=True, verbose_name="Coliformes totales (Unidades)") 
+	coliformes_fecales = models.FloatField(null=True, blank=True, verbose_name="Coliformes fecales (UFC)")
+	coliformes_totales = models.FloatField(null=True, blank=True, verbose_name="Coliformes totales (UFC)") 
 		#Arsenico y metales
-	arsenico = models.FloatField(null=True, blank=True, verbose_name="Arsénico")
-	hierro = models.FloatField(null=True, blank=True, verbose_name="Hierro")
-	manganeso = models.FloatField(null=True, blank=True, verbose_name="Manganeso")
-	plomo = models.FloatField(null=True, blank=True, verbose_name="Plomo")
+	arsenico = models.FloatField(null=True, blank=True, verbose_name="Arsénico (mg/L)")
+	hierro = models.FloatField(null=True, blank=True, verbose_name="Hierro (mg/L)")
+	manganeso = models.FloatField(null=True, blank=True, verbose_name="Manganeso (mg/L)")
+	plomo = models.FloatField(null=True, blank=True, verbose_name="Plomo (mg/L)")
 		#Iones y compuestos inorganicos
-	floururos = models.FloatField(null=True, blank=True, verbose_name="Fluoruros")
-	nitratos = models.FloatField(null=True, blank=True, verbose_name="Nitratos")
-	sulfatos = models.FloatField(null=True, blank=True, verbose_name="Sulfatos")
-	dureza_total = models.FloatField(null=True, blank=True, verbose_name="Dureza total (CaCO3)")
-	solidos_disueltos  = models.FloatField(null=True, blank=True, verbose_name="Sólidos disueltos totales")
+	floururos = models.FloatField(null=True, blank=True, verbose_name="Fluoruros (mg/L)")
+	nitratos = models.FloatField(null=True, blank=True, verbose_name="Nitratos (mg/L)")
+	sulfatos = models.FloatField(null=True, blank=True, verbose_name="Sulfatos (mg/L)")
+	dureza_total = models.FloatField(null=True, blank=True, verbose_name="Dureza total (CaCO3) (mg/L)")
+	solidos_disueltos  = models.FloatField(null=True, blank=True, verbose_name="Sólidos disueltos totales (mg/L)")
 
 	def DeleteSB(self):
 		if self.aprobacion == "No aprobado":
@@ -78,13 +78,12 @@ class SegundaPrueba(models.Model):
 	foto_toma_agua = models.FileField(upload_to='pruebas/2/video/%Y/%m/%d/', verbose_name="Evidencia fotográfica de toma de agua")
 
 	#Fase de analisis / LAB
-	resultados_laboratorio = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis de laboratorio", null=True, blank=True)
-	hoja_campo = models.FileField(upload_to='pruebas/1/hoja_campo/%Y/%m/%d/', verbose_name="Hoja de campo", null=True, blank=True)
+
+	registro_campo = models.FileField(upload_to='pruebas/1/hoja_campo/%Y/%m/%d/', verbose_name="Registro de campo", null=True, blank=True)
 	cadena_custodia = models.FileField(upload_to='pruebas/1/cadena_custioda/%Y/%m/%d/', verbose_name="Cadena de custodia", null=True, blank=True)
 
 	#Fase de Sugerencias / ECA(Pilar)
-	resultados_IMTA = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis para IMTA", null=True, blank=True)
-	aprobacion_interna = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', null=True, blank=True, verbose_name="Aprobación interna")
+	resultados_laboratorio = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis de laboratorio", null=True, blank=True)
 
 	#Fase de confirmación de IMTA
 	dictamen_validacion = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', verbose_name="Dictamen de validación", null=True, blank=True)
@@ -104,19 +103,19 @@ class SegundaPrueba(models.Model):
 	ph = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="pH (unidades de pH)")
 	conductividad_electrica = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Conductividad eléctrica (µS/cm)")
 		#Bacteriologicos
-	coliformes_fecales = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Coliformes fecales (unidades)")
-	coliformes_totales = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Coliformes totales (Unidades)") 
+	coliformes_fecales = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Coliformes fecales (UFC)")
+	coliformes_totales = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Coliformes totales (UFC)") 
 		#Arsenico y metales
-	arsenico = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Arsénico")
-	hierro = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Hierro")
-	manganeso = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Manganeso")
-	plomo = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Plomo")
+	arsenico = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Arsénico (mg/L)")
+	hierro = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Hierro (mg/L)")
+	manganeso = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Manganeso (mg/L)")
+	plomo = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Plomo (mg/L)")
 		#Iones y compuestos inorgánicos
-	floururos = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Fluoruros")
-	nitratos = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Nitratos")
-	sulfatos = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Sulfatos")
-	dureza_total = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Dureza total (CaCO3)")
-	solidos_disueltos  = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Sólidos disueltos totales")
+	floururos = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Fluoruros (mg/L)")
+	nitratos = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Nitratos (mg/L)")
+	sulfatos = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Sulfatos (mg/L)")
+	dureza_total = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Dureza total (CaCO3) (mg/L)")
+	solidos_disueltos  = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Sólidos disueltos totales (mg/L)")
 
 	def __str__(self):
 		return '{}'.format(self.escuela)

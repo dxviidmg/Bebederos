@@ -73,11 +73,12 @@
 
 		</div>
 
+		{%if request.user.perfil.tipo == "PQ"%}
 		<div class="col-md-5">
 
-		{%if prueba.hoja_campo%}
+		{%if prueba.registro_campo%}
 
-			<a href="{{prueba.hoja_campo.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Hoja de campo</a>
+			<a href="{{prueba.registro_campo.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Registro de campo</a>
 
 		{%endif%}
 		
@@ -91,6 +92,7 @@
 		{%endif%}
 		
 		</div>
+		{%endif%}
 
 		<div class="col-md-5">
 
@@ -100,15 +102,6 @@
 
 		{%endif%}
 		
-		</div>
-		<div class="col-md-5">
-
-		{%if prueba.resultados_IMTA%}
-
-			<a href="{{prueba.resultados_IMTA.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Resultados para IMTA</a>
-
-		{%endif%}
-
 		</div>
 		<div class="col-md-5">
 
@@ -125,6 +118,8 @@
 	
 	<div class="row">
 		<div class="col-12">
+
+			{%if request.user.perfil.tipo == "Laboratorio"%}
 			<form action="." method="post" enctype="multipart/form-data">
 				<h4>Registro de documentación de analísis (LAB)</h4>
 				{%csrf_token%}
@@ -136,19 +131,19 @@
 						{{EdicionPruebaForm2 | bootstrap}}
 					</div>
 					<div class="col-12 col-sm-12 col-md-3">
-						<h5>Fisicos y organoelectricos</h5>
+						<h5>Físicos y organolépticos</h5>
 						{{EdicionPruebaForm3 | bootstrap}}
 					</div>
 					<div class="col-12 col-sm-12 col-md-3">
-						<h5>Fisicos y organoelectricos</h5>
+						<h5>Bacteriológicos</h5>
 						{{EdicionPruebaForm4 | bootstrap}}
 					</div>
 					<div class="col-12 col-sm-12 col-md-3">
-						<h5>Arsenico y metales</h5>
+						<h5>Metales</h5>
 						{{EdicionPruebaForm5 | bootstrap}}
 					</div>
 					<div class="col-12 col-sm-12 col-md-3">
-						<h5>Iones y compuestos inorganicos</h5>
+						<h5>Iones y compuestos inorgánicos</h5>
 						{{EdicionPruebaForm6 | bootstrap}}
 					</div>
 				</div>
@@ -159,10 +154,11 @@
 	</div>
 	
 		{%endif%}
+		{%endif%}
 
+		{%if request.user.perfil.tipo == "PQ"%}
 		{%if prueba.no_registro and prueba.aprobacion == "En espera"%}
 	
-
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
@@ -176,13 +172,13 @@
 						{{EdicionPruebaForm2 | bootstrap}}
 					</div>
 					<div class="col-12 col-sm-6 col-md-6">
-						<h5>Fisicos y organoelectricos</h5>
+						<h5>Físicos y organolépticos</h5>
 						{{EdicionPruebaForm3 | bootstrap}}
-						<h5>Bacteriologicos</h5>
+						<h5>Bacteriológicos</h5>
 						{{EdicionPruebaForm4 | bootstrap}}
-						<h5>Arsenico y metales</h5>
+						<h5>Metales</h5>
 						{{EdicionPruebaForm5 | bootstrap}}
-						<h5>Iones y compuestos inorganicos</h5>
+						<h5>Iones y compuestos inorgánicos</h5>
 						{{EdicionPruebaForm6 | bootstrap}}
 					</div>
 					<div class="hidden-xs-down col-sm-4 col-md-3" style="font-size: 25px;">
@@ -384,8 +380,7 @@
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-			<h2>Sugerencia de SP (ECA)</h2>
-				{%csrf_token%}			
+				{%csrf_token%}		
 				{{EdicionPruebaForm7 | bootstrap}}
 				<a href=""><input type="submit" value="Guardar cambios"></a>
 			</form>
@@ -393,8 +388,10 @@
 	</div>
 	
 		{%endif%}
+		{%endif%}
 
-		{%if prueba.resultados_IMTA and prueba.aprobacion == "En espera"%}
+		{%if request.user.perfil.tipo == "IMTA"%}
+		{%if prueba.resultados_laboratorio and prueba.aprobacion == "En espera"%}
 		
 
 	<div class="row">
@@ -409,8 +406,10 @@
 	</div>
 	
 		{%endif%}
+		{%endif%}
 	{%else%}
 	
+	{%if request.user.perfil.tipo == "SI"%}
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
@@ -421,7 +420,7 @@
 			</form>
 		</div>
 	</div>
-	
+	{%endif%}	
 	{%endif%}
 
 {%endblock content%}

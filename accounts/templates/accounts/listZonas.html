@@ -9,10 +9,20 @@
 
 		{%if request.user.perfil.tipo == "SI"%}
 		{%else%}
-		<a href="{%url 'accounts:ListViewPartidas' region.numero%}">Regresar</a>
-		<a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.pk%}">Avance de escuelas</a>
 
-		<a href="{% url 'pruebas:ExportPruebasPorEscuelasCSV' entidad.pk%}">Exportar todas las pruebas por escuela</a>
+		<a href="{%url 'accounts:ListViewPartidas' region.numero%}">Regresar</a>
+
+		<nav class="breadcrumb">
+			<a class="breadcrumb-item" href="{%url 'accounts:ListViewAvanceEscuelas' entidad.pk%}">Avance de escuelas</a>
+			{%if "Pilar" in request.user.first_name%}
+			<a class="breadcrumb-item" href="{% url 'pruebas:ExportPruebasPorEscuelasCSV' entidad.pk%}">Exportar todas las pruebas por escuela</a>
+			{%endif%}
+		</nav>
+
+
+		
+
+
 		
 		<br>
 		

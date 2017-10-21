@@ -76,8 +76,11 @@
 			<h1>{{perfil.tipo}} {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h1>
 
 			<p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">Regresar</a></p>
-			<p><a href="{%url 'accounts:UpdateViewEscuela' perfil.pk%}">Actualizar datos</a></p>
-
+			
+			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
+			<br>
+			<a href="{%url 'accounts:UpdateViewEscuela' perfil.pk%}">Actualizar datos</a>
+			{%endif%}
 			<h3>Información de la institución</h3>
 
 			<!--Tabla de Información de la escuela-->
@@ -225,7 +228,7 @@
 		</div>
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "RTINIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "RTINIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "Laboratorio"  or request.user.perfil.tipo == "IMTA"%}
 		{%if primerPrueba%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -305,7 +308,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO"  or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "RTINIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO"  or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "RTINIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "PQ"%}
 		{%if funcionamiento%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>

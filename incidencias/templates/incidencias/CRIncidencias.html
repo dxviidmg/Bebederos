@@ -14,20 +14,27 @@
 		{% endfor %}
 
 			<h1>Bitacora de Incidencias</h1>
+
+			{% if request.get_full_path != "/incidencias/" %}
 			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
 			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+			{%endif%}
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col-12">
 			
+			{% if request.get_full_path != "/incidencias/" %}
+
 			<form action="." method="post" enctype="multipart/form-data">
 				<h4>Registro</h4>	
 				{%csrf_token%}
 				{{NuevaIncidenciaForm | bootstrap}}
 				<a href=""><input type="submit" value="Registrar"></a>		
 			</form>
+
+			{%endif%}
 
 			<h4>Actuales</h4>
 			<div class="table-responsive">
@@ -39,7 +46,7 @@
 						<th>Status</th>
 						<th>Creación</th>
 						<th>Prioridad</th>
-						<th>Acciones</th>
+						<th>Opciones</th>
 					</thead>
 					<tbody>
 					

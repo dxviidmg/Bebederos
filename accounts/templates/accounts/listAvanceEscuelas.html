@@ -4,47 +4,170 @@
 
 	<h1>Avance de escuelas de {{entidad.nombre}}</h1>
 	
+	{%if request.user.perfil.tipo != "SI"%}
 	<p><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">Regresar</a></p>
+	{%endif%}
 
 	<div class="table-responsive">
 		<table class="table table-bordered">
 			<thead>
 				<tr>
+					<th>Zona</th>
+					<th>Municipio</th>
+					<th>Localidad</th>
 					<th>C. C. T</th>
 					<th>Nombre</th>
-					<th>Municipio</th>
-					<th>Primer prueba</th>
+
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					<th>Primer prueba (SI)</th>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					<th>Primer prueba (LAB)</th>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					<th>Primer prueba (PQ)</th>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					<th>Primer prueba (IMTA)</th>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}	
 					<th>Status de primer prueba</th>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "SI"%}
 					<th>Inicio de trabajo</th>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "SI"%}
 					<th>Visita de acuerdos</th>
-					<th>Manufactura terminada</th>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "PQ"%}
+					<th>Manufactura (PQ)</th>
+					{%endif%}
+					<th>Manufactura (GP)</th>
+
+					{%if request.user.perfil.tipo == "SI"%}
+					<th>Manufactura (Trazabilidad)</th>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "SI"%}
 					<th>Construcción</th>
+					{%endif%}
+					{%if request.user.perfil.tipo == "SI"%}
 					<th>Etapa de construcción</th>
-					<th>Segunda prueba</th>
-					<th>Status de segunda prueba</th>	
+					{%endif%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio"%}
+					<th>Segunda prueba (SI)</th>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Laboratorio"%}
+					<th>Segunda prueba (Lab)</th>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "PQ"%}
+					<th>Segunda prueba (PQ)</th>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "PQ"%}
+					<th>Segunda prueba (IMTA)</th>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "PQ"%}
+					<th>Status de segunda prueba</th>
+					{%endif%}
+					{%if request.user.perfil.tipo == "SI"%}
 					<th>Mantenimientos</th>
+					{%endif%}
 				</tr>
 			</thead>
 			<tbody>
 	{%for avanceEscuela in AvancePorEscuelas%}
 				<tr>
 					<td>
-					<a href="{%url 'accounts:DetailViewEscuela' avanceEscuela.escuela.perfil.pk%}">{{avanceEscuela.escuela.username}}</a>
+					{{avanceEscuela.escuela.perfil.municipio.zona.nombre}}
 					</td>
-					<td>{{avanceEscuela.escuela.get_full_name}}</td>
 					<td>{{avanceEscuela.escuela.perfil.municipio.nombre}}</td>
-					<td>{%if avanceEscuela.primerPrueba%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					<td>{{avanceEscuela.escuela.perfil.localidad}}</td>
+					<td><a href="{%url 'accounts:DetailViewEscuela' avanceEscuela.escuela.perfil.pk%}">{{avanceEscuela.escuela.username}}</a></td>
+					<td>{{avanceEscuela.escuela.get_full_name}}</td>
+
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					<td>{%if avanceEscuela.primerPrueba.reporte_toma_agua%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					<td>{%if avanceEscuela.primerPrueba.no_registro%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					<td>{%if avanceEscuela.primerPrueba.propuesta_sistema_potabilizador%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					<td>{%if avanceEscuela.primerPrueba.dictamen_sistema_potabilizador%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
 					<td>{{avanceEscuela.primerPrueba.aprobacion}}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "SI"%}
 					<td>{%if avanceEscuela.inicioDeTrabajo%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "SI"%}
 					<td>{%if avanceEscuela.visitaDeAcuerdo%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "PQ"%}
+					<td>{%if avanceEscuela.sistemaBebedero.etapas_sp%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					<td>{%if avanceEscuela.sistemaBebedero.linea_ensamblaje%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					
+					{%if request.user.perfil.tipo == "SI"%}
 					<td>{%if avanceEscuela.sistemaBebedero.asignacion%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+					{%if request.user.perfil.tipo == "SI"%}
 					<td>{%if avanceEscuela.evidencias%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
-					<td>{%if avanceEscuela.escuela.perfil.avance == 100%}Finalizada{%elif avanceEscuela.escuela.perfil.avance != 100%}En proceso o revisión{%endif%}</td>
-					<td>{%if avanceEscuela.segundaPrueba%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+					{%if request.user.perfil.tipo == "SI"%}
+					<td>{%if avanceEscuela.escuela.perfil.avance == 100%}Finalizada{%endif%}</td>
+					{%endif%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio"%}
+					<td>{%if avanceEscuela.segundaPrueba.reporte_toma_agua%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Laboratorio"%}
+					<td>{%if avanceEscuela.segundaPrueba.no_registro%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+
+					{%if request.user.perfil.tipo == "PQ"%}
+					<td>{%if avanceEscuela.segundaPrueba.resultados_laboratorio%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "PQ"%}
+					<td>{%if avanceEscuela.segundaPrueba.dictamen_validacion%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "PQ"%}
 					<td>{{avanceEscuela.segundaPrueba.aprobacion}}</td>
-					<td>{%if avanceEscuela.mantenimientos%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+					{%if request.user.perfil.tipo == "SI"%}
+					<td>{%if avanceEscuela.mantenimientos%}{{avanceEscuela.mantenimientos.count}}{%endif%}</td>
+					{%endif%}
 				</tr>
 
+	{%empty%}
+				<tr>
+					<td colspan="18">No hay datos para mostrar</td>
+				</tr>
 	{%endfor%}
 			</tbody>
 		</table>

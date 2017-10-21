@@ -40,7 +40,9 @@
 		</div>
 	</div>
 
+	{%if request.user.is_superuser%}
 	<a href="{%url 'accounts:CreateViewEscuela' municipio.pk%}">Crear escuela</a>
+	{%endif%}
 
 	{%endif%}
 	<h3>Lista de escuelas</h3>
@@ -52,7 +54,18 @@
 					<tr>
 						<th>CCT</th>
 						<th>Nombre</th>
+
+						{%if request.user.perfil.tipo == "Ejecutora"%}
+
+						<th>Municipio</th>
+						<th>Zona</th>
+						<th>Entidad</th>
+						{%endif%}
+
+						{%if request.user.perfil.tipo != "Ejecutora"%}
 						<th>Status</th>
+						{%endif%}
+
 						<th>Avance de construcción</th>
 					</tr>
 				</thead>
@@ -63,7 +76,17 @@
 					<tr>
 						<td><a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">{{perfil.user.username}}</a></td>
 						<td>{{perfil.tipo}} {{perfil.nivel_educativo}} {{perfil.user.get_full_name}}</td>
+
+						{%if request.user.perfil.tipo == "Ejecutora"%}
+						<td>{{perfil.municipio.nombre}}</td>
+						<td>{{perfil.municipio.zona.nombre}}</td>
+						<td>{{perfil.municipio.zona.entidad.nombre}}</td>
+						{%endif%}
+
+						{%if request.user.perfil.tipo != "Ejecutora"%}
 						<td>{%if perfil.status is not None%} {{perfil.status}} {%else%}Pendiente {%endif%}{%if perfil.UpdateStatus is None%}{%endif%}</td>
+						{%endif%}
+
 						<td> {%if perfil.avance is not NULL%} {{perfil.avance}}% {%endif%} {%if perfil.UpdateAvance%}{%endif%}</td>
 					</tr>
 
