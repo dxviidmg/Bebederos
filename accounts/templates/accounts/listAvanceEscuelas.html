@@ -18,69 +18,74 @@
 					<th>C. C. T</th>
 					<th>Nombre</th>
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
 					<th>Primer prueba (SI)</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
 					<th>Primer prueba (LAB)</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
 					<th>Primer prueba (PQ)</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador"%}
 					<th>Primer prueba (IMTA)</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}	
+					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}	
 					<th>Status de primer prueba</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
 					<th>Inicio de trabajo</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
 					<th>Visita de acuerdos</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
 					<th>Manufactura (PQ)</th>
 					{%endif%}
-					<th>Manufactura (GP)</th>
 
-					{%if request.user.perfil.tipo == "SI"%}
+					{%if request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Administrador"%}
+					<th>Manufactura (GP)</th>
+					{%endif%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
 					<th>Manufactura (Trazabilidad)</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
 					<th>Construcción</th>
 					{%endif%}
-					{%if request.user.perfil.tipo == "SI"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
 					<th>Etapa de construcción</th>
 					{%endif%}
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Administrador"%}
 					<th>Segunda prueba (SI)</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "Laboratorio"%}
+					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Administrador"%}
 					<th>Segunda prueba (Lab)</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
 					<th>Segunda prueba (PQ)</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador"%}
 					<th>Segunda prueba (IMTA)</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
 					<th>Status de segunda prueba</th>
 					{%endif%}
-					{%if request.user.perfil.tipo == "SI"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
+					<th>Inicio de funcionamiento</th>
+					{%endif%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
 					<th>Mantenimientos</th>
 					{%endif%}
 				</tr>
@@ -96,77 +101,83 @@
 					<td><a href="{%url 'accounts:DetailViewEscuela' avanceEscuela.escuela.perfil.pk%}">{{avanceEscuela.escuela.username}}</a></td>
 					<td>{{avanceEscuela.escuela.get_full_name}}</td>
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.primerPrueba.reporte_toma_agua%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.primerPrueba.no_registro%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.primerPrueba.propuesta_sistema_potabilizador%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.primerPrueba.dictamen_sistema_potabilizador%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
 					<td>{{avanceEscuela.primerPrueba.aprobacion}}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.inicioDeTrabajo%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.visitaDeAcuerdo%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.sistemaBebedero.etapas_sp%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
+					{%if request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.sistemaBebedero.linea_ensamblaje%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
-					
-					{%if request.user.perfil.tipo == "SI"%}
+					{%endif%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.sistemaBebedero.asignacion%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
-					{%if request.user.perfil.tipo == "SI"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.evidencias%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
-					{%if request.user.perfil.tipo == "SI"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.escuela.perfil.avance == 100%}Finalizada{%endif%}</td>
 					{%endif%}
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.segundaPrueba.reporte_toma_agua%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "Laboratorio"%}
+					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.segundaPrueba.no_registro%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-
-					{%if request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.segundaPrueba.resultados_laboratorio%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.segundaPrueba.dictamen_validacion%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
 					<td>{{avanceEscuela.segundaPrueba.aprobacion}}</td>
 					{%endif%}
-					{%if request.user.perfil.tipo == "SI"%}
+
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
+					<td>{% if avanceEscuela.incioFuncionamiento%}a {%else%}no llega{%endif%}</td>
+					{%endif%}
+
+
+					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
 					<td>{%if avanceEscuela.mantenimientos%}{{avanceEscuela.mantenimientos.count}}{%endif%}</td>
 					{%endif%}
 				</tr>
 
 	{%empty%}
 				<tr>
-					<td colspan="18">No hay datos para mostrar</td>
+					<td colspan="24">No hay datos para mostrar</td>
 				</tr>
 	{%endfor%}
 			</tbody>

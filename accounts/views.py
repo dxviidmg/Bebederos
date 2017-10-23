@@ -207,20 +207,6 @@ class CreateViewEscuela(View):
 		NuevaEscuelaPerfilForm = EscuelaPerfilCreateForm()	
 		NuevoBebederoForm = BebederoCreateForm()
 
-		#Img rq code
-		qr = qrcode.QRCode(
-			version=1,
-			error_correction=qrcode.constants.ERROR_CORRECT_L,
-			box_size=10,
-			border=4,
-		)
-		qr.add_data('Some data')
-		qr.make(fit=True)
-
-		img = qr.make_image(fill_color="black", back_color="white")
-		print(qr)
-		print(img)
-
 		context = {
 			'municipio': municipio,
 			'NuevaEscuelaUserForm': NuevaEscuelaUserForm,
@@ -374,12 +360,19 @@ class ListViewAvanceEscuelas(View):
 			except SegundaPrueba.DoesNotExist:
 				segundaPrueba = None
 
+			try: 
+				inicioFuncionamiento = InicioFuncionamiento.objects.get(escuela=escuela)
+
+			except InicioFuncionamiento.DoesNotExist:
+				inicioFuncionamiento = None
+
 			try:
 				mantenimientos = Mantenimiento.objects.filter(escuela=escuela)
 			except Mantenimiento.DoesNotExist:
 				mantenimientos = None
 
-			data = {'escuela' : escuela, 'primerPrueba': primerPrueba, 'inicioDeTrabajo': inicioDeTrabajo, 'visitaDeAcuerdo': visitaDeAcuerdo, 'sistemaBebedero': sistemaBebedero, 'evidencias': evidencias, 'segundaPrueba': segundaPrueba, 'mantenimientos': mantenimientos}
+			data = {'escuela' : escuela, 'primerPrueba': primerPrueba, 'inicioDeTrabajo': inicioDeTrabajo, 'visitaDeAcuerdo': visitaDeAcuerdo, 'sistemaBebedero': sistemaBebedero, 'evidencias': evidencias, 'segundaPrueba': segundaPrueba, inicioFuncionamiento: 'inicioFuncionamiento', 'mantenimientos': mantenimientos}
+
 			AvancePorEscuelas.append(data)
 
 		context = {

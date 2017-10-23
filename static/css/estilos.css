@@ -7,6 +7,9 @@ body{
   padding-top: 80px;
 }
 
+a {
+  color: #27971B;
+}
 a:hover {
   text-decoration: none;
 }
@@ -57,4 +60,3 @@ h1, h2, h3, h4 {
 .espacio {
   padding-bottom: 100px;
 }
-
