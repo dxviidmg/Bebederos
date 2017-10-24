@@ -6,6 +6,16 @@
 
 	<div class="row">
 		<div class="col-12">
+			
+		{% for message in messages %}
+	
+			<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+
+		{% endfor %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
 			<h1>Sistema Bebedero</h1>
 			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
 			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
@@ -33,7 +43,8 @@
 
 		{%if sistemaBebedero.asignacion is False%}
 
-		<p><a href="{%url 'bebederos:ExportComprobanteTrazabilidadPDF' sistemaBebedero.pk%}">Descargar guia de trazabilidad</a></p>
+		<button type="button" class="btn btn-secondary" ><a href="{%url 'bebederos:ExportComprobanteTrazabilidadPDF' sistemaBebedero.pk%}">Descargar guia de trazabilidad</a></button>
+		<p></p>
 
 			<form action="." method="post" enctype="multipart/form-data">
 				{%csrf_token%}

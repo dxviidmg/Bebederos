@@ -8,7 +8,7 @@ from geoposition.fields import GeopositionField
 class Region(models.Model):
 	numero = models.IntegerField()
 	color = models.CharField(max_length=10)
-	nombre = models.CharField(max_length=20, default="Default")
+	nombre = models.CharField(max_length=20)
 
 	def __str__(self):
 		return '{}'.format(self.numero)
@@ -33,7 +33,6 @@ class Partida(models.Model):
 
 class Entidad(models.Model):
 	coordinador_estatal = models.OneToOneField(User, null=True, blank=True, verbose_name="Coordinador Estatal", related_name="coordinador_estatal")
-	residente_tecnico = models.OneToOneField(User, null=True, blank=True, verbose_name="Residente Técnico", related_name="residente_tecnico")
 	laboratorio = models.ForeignKey(User, null=True, blank=True, verbose_name="Laboratorio", related_name="laboratorio")
 	partida = models.ForeignKey(Partida)
 	nombre = models.CharField(max_length=30)
@@ -114,19 +113,15 @@ class Municipio(models.Model):
 class Perfil(models.Model):
 	tipo_choices = (
 		("Administrador", "Administrador"), #Yo
-		("CEO", "CEO"), #Carlos, Beto
 		("SI", "Superintendente"),
 		("Ejecutora", "Ejecutora"),
 		("Escuela", "Escuela"),
 		("Laboratorio", "Laboratorio"),
 		("INIFED", "INIFED"), #INIFED Federal
 		("CEstatal", "Coordinador Estatal de INIFED"),
-		("RTINIFED", "Residente Técnico de INIFED"),
 		("IMTA", "IMTA"),
 		("PQ", "Procesos Químicos (Calidad de Agua)"), #Pilar, #Isauri
 		("PM", "Planta y Manufactura"), #Raúl, Héctor
-
-
 	)
 
 	nivel_choices = (
@@ -167,7 +162,7 @@ class Perfil(models.Model):
 	referencias = models.CharField(max_length=200, blank=True, null=True)
 	SSID = models.CharField(max_length=20, null=True, blank=True)
 	clave_SSID = models.CharField(max_length=20, null=True, blank=True)
-	qrcode = models.ImageField(upload_to='fotos/qr/%Y/%m/%d/', null=True, blank=True, verbose_name="Código QR")
+
 	#Atributo exclusivo para Constructoras
 	representante_legal = models.CharField(max_length=100, blank=True, null=True)
 	coordenadas = GeopositionField(null=True, blank=True)

@@ -312,6 +312,7 @@ class ListViewAvanceEscuelas(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "accounts/listAvanceEscuelas.html"
+
 		if request.user.perfil.tipo == "SI":
 			entidad = None
 			superintendente = User.objects.get(pk=request.user.pk)
@@ -362,7 +363,6 @@ class ListViewAvanceEscuelas(View):
 
 			try: 
 				inicioFuncionamiento = InicioFuncionamiento.objects.get(escuela=escuela)
-
 			except InicioFuncionamiento.DoesNotExist:
 				inicioFuncionamiento = None
 
@@ -371,8 +371,7 @@ class ListViewAvanceEscuelas(View):
 			except Mantenimiento.DoesNotExist:
 				mantenimientos = None
 
-			data = {'escuela' : escuela, 'primerPrueba': primerPrueba, 'inicioDeTrabajo': inicioDeTrabajo, 'visitaDeAcuerdo': visitaDeAcuerdo, 'sistemaBebedero': sistemaBebedero, 'evidencias': evidencias, 'segundaPrueba': segundaPrueba, inicioFuncionamiento: 'inicioFuncionamiento', 'mantenimientos': mantenimientos}
-
+			data = {'escuela' : escuela, 'primerPrueba': primerPrueba, 'inicioDeTrabajo': inicioDeTrabajo, 'visitaDeAcuerdo': visitaDeAcuerdo, 'sistemaBebedero': sistemaBebedero, 'evidencias': evidencias, 'segundaPrueba': segundaPrueba, 'inicioFuncionamiento': inicioFuncionamiento, 'mantenimientos': mantenimientos}
 			AvancePorEscuelas.append(data)
 
 		context = {

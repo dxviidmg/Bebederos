@@ -11,6 +11,7 @@ from io import BytesIO
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4, cm
 from datetime import date
+from django.contrib import messages
 
 #Librerias para poder exportar PDFs
 from django.core.files.storage import FileSystemStorage
@@ -69,6 +70,8 @@ class UpdateViewBebedero(View):
 			EdicionBebederoForm3.save()
 
 			sistemaBebedero.GenerateId()
+		
+		messages.success(request, "Actualización exitosa")
 
 		return redirect("bebederos:UpdateViewBebedero", pk=perfil.pk)
 

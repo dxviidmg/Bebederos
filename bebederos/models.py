@@ -38,7 +38,7 @@ class SistemaPotabilizacion(models.Model):
 		verbose_name_plural = 'Sistemas de potabilización'
 
 class SistemaBebedero(models.Model):
-	linea_ensamblaje_choices = [(str(i), i) for i in range(1,7)]
+	linea_ensamblaje_choices = [(str(i), i) for i in range(1,9)]
 
 	no_trazabilidad = models.CharField(max_length=100, null=True, blank=True)
 	escuela = models.OneToOneField(User, related_name="escuela")

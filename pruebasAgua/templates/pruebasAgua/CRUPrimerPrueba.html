@@ -73,7 +73,7 @@
 
 		</div>
 
-		{%if request.user.perfil.tipo == "PQ"%}
+		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Laboratorio"%}
 		<div class="col-md-5">
 
 		{%if prueba.registro_campo%}
@@ -83,7 +83,7 @@
 		{%endif%}
 		
 		</div>
-		{%endif%}
+		
 		
 		<div class="col-md-5">
 
@@ -94,6 +94,8 @@
 		{%endif%}
 		
 		</div>
+
+	{%endif%}
 
 		<div class="col-md-5">
 
@@ -389,7 +391,13 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-5">
+		<div class="col-12">
+			<form action="." method="post" enctype="multipart/form-data">
+			<h2>Sugerencia de SP (ECA)</h2>
+				{%csrf_token%}			
+				{{EdicionPruebaForm7 | bootstrap}}
+
+		<div class="offset-md-4 col-4">
 			  <!-- Trigger the modal with a button -->
 			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Sugerir sistema potabilización</button>
 
@@ -411,16 +419,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-12">
 
-
-
-
-
-			<form action="." method="post" enctype="multipart/form-data">
-			<h2>Sugerencia de SP (ECA)</h2>
-				{%csrf_token%}			
-				{{EdicionPruebaForm7 | bootstrap}}
 				{{EdicionBebederoForm2 | bootstrap}}
 				<a href=""><input type="submit" value="Guardar cambios"></a>
 			</form>
@@ -450,6 +449,7 @@
 
 	{%else%}
 	
+		{%if request.user.perfil.tipo == "SI"%}
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
@@ -460,6 +460,7 @@
 				<a href=""><input type="submit" value="Crear registro"></a>
 			</form>
 		</div>
+			{%endif%}
 	</div>
 	
 	{%endif%}

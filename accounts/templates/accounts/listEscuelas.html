@@ -53,6 +53,7 @@
 				<thead>
 					<tr>
 						<th>CCT</th>
+						<th>Nivel educativo</th>
 						<th>Nombre</th>
 
 						{%if request.user.perfil.tipo == "Ejecutora"%}
@@ -60,6 +61,8 @@
 						<th>Municipio</th>
 						<th>Zona</th>
 						<th>Entidad</th>
+						<th>Trazabilidad</th>
+						<th>Status de construción</th>
 						{%endif%}
 
 						{%if request.user.perfil.tipo != "Ejecutora"%}
@@ -75,12 +78,15 @@
 				
 					<tr>
 						<td><a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">{{perfil.user.username}}</a></td>
-						<td>{{perfil.tipo}} {{perfil.nivel_educativo}} {{perfil.user.get_full_name}}</td>
+						<td>{{perfil.nivel_educativo}}</td>
+						<td>{{perfil.user.get_full_name}}</td>
 
 						{%if request.user.perfil.tipo == "Ejecutora"%}
 						<td>{{perfil.municipio.nombre}}</td>
 						<td>{{perfil.municipio.zona.nombre}}</td>
 						<td>{{perfil.municipio.zona.entidad.nombre}}</td>
+						<td>{%if perfil.user.escuela.asignacion%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+						<td>{%if perfil.avance == 100%}Finalizado{%elif perfil.avance < 100%}En proceso o revisión{%endif%}</td>
 						{%endif%}
 
 						{%if request.user.perfil.tipo != "Ejecutora"%}

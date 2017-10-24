@@ -40,9 +40,14 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
     text-align: center;
 }
 
-.nav-item:hover {
+.nav-item:hover, .nav-link:focus, .dropdown-item:hover{
   background-color: #27971B;
-  color: ;
+  color: white;
+}
+
+.dropdown-menu, .dropdown-item{
+  background-color: #44B036;
+  color: white;
 }
   </style>
 	<body>
@@ -76,7 +81,7 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
       {%elif request.user.perfil.tipo == "Laboratorio"%}
 
       <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Escuelas
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -88,7 +93,7 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
       {%elif request.user.perfil.tipo == "CEstatal"%}
 
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.coordinador_estatal.slug%}">Por municipios</a>
           <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.coordinador_estatal.pk%}">Por avance</a>
@@ -96,21 +101,10 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
         </div>
       </li>
 
-      {%elif request.user.perfil.tipo == "RTINIFED"%}
-    
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.residente_tecnico.slug%}">Por municipios</a>
-          <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.residente_tecnico.pk%}">Por avance</a>
-          <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
-        </div>
-      </li>
-
       {%elif request.user.perfil.tipo == "SI"%}
 
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Escuelas
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -124,16 +118,25 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
       <li class="nav-item">
         <a class="nav-link" href="{%url 'accounts:ListViewEscuelasPorEjecutora'%}">Mis obras</a>
       </li>
-      {%else%}
-      <li class="nav-item">
-        <a class="nav-link" href="{%url 'accounts:ListViewRegiones'%}">Regiones</a>
+      {%elif request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "IMTA"%}
 
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{%url 'accounts:ListViewRegiones'%}">Por regiones</a>
+          <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
+        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
-      </li>
+
       {%endif%}
 
+      {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
+
+      <li class="nav-item">
+        <a class="nav-link" href="{%url 'incidencias:ListViewIncidencias'%}">Incidencias</a>
+      </li>
+
+      {%endif%}
       <li class="nav-item">
         <a class="nav-link" href="{%url 'plantillas:ListViewPlantillas'%}">Plantillas</a>
       </li>

@@ -7,18 +7,16 @@
 
 	{%if entidad.EscuelasCount%}{%endif%}
 
-		{%if request.user.perfil.tipo == "SI"%}
-		{%else%}
+		{%if request.user.perfil.tipo != "SI"%}
 
 		<a href="{%url 'accounts:ListViewPartidas' region.numero%}">Regresar</a>
 
+		{%if "Pilar" in request.user.first_name%}
 		<nav class="breadcrumb">
-			<a class="breadcrumb-item" href="{%url 'accounts:ListViewAvanceEscuelas' entidad.pk%}">Avance de escuelas</a>
-			{%if "Pilar" in request.user.first_name%}
+			
 			<a class="breadcrumb-item" href="{% url 'pruebas:ExportPruebasPorEscuelasCSV' entidad.pk%}">Exportar todas las pruebas por escuela</a>
-			{%endif%}
 		</nav>
-
+		{%endif%}
 
 		
 
