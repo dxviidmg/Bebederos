@@ -20,16 +20,15 @@ class Mantenimiento (models.Model):
 	tipo_choices =  (
 		('Preventivo' , 'Preventivo'),
 		('Correctivo' , 'Correctivo'),
-		('Acta de entrega' , 'Acta de entrega (Mes 24)'),
 	)
 
-	carnet = models.FileField(verbose_name="Carnet actualizado")
+	carnet = models.FileField(verbose_name="Carnet actualizado", upload_to='mantenimientos/%Y/%m/%d/')
 	si = models.ForeignKey(User, related_name="sim")
 	escuela = models.ForeignKey(User, related_name="escuela_mtto")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	mes = models.CharField(choices=Mes_CHOICES, max_length=10)
 	año = models.IntegerField()
-	volumen = models.IntegerField(verbose_name="Volumen indicado en medidor")
+	volumen = models.IntegerField(verbose_name="Volumen indicado en medidor (Litros)")
 	tipo = models.CharField(max_length=20, default="Preventivo", choices=tipo_choices)
 	descripcion = models.TextField(null=True, blank=True, verbose_name="Descripción")
 

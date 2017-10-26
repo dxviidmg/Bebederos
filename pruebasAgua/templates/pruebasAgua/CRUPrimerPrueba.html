@@ -22,6 +22,9 @@
 	.padding-top-icon-3{
 		padding-top: 82;
 	}
+	.padding-top-icon-4{
+		padding-top: 90;
+	}
 	.padding-top-parametro-1{
 		padding-top: 63;
 	}
@@ -132,7 +135,7 @@
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Registro de documentación de analísis (LAB)</h4>
+				<h4>Registro de documentación de analísis</h4>
 				{%csrf_token%}
 				{{EdicionPruebaForm1 | bootstrap}}
 
@@ -175,7 +178,7 @@
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Registro de documentación de analísis (eca2)</h4>
+				<h4>Registro de documentación de analísis</h4>
 				{%csrf_token%}
 				{{EdicionPruebaForm1 | bootstrap}}
 
@@ -215,17 +218,17 @@
 						</div>
 						<div class="padding-top-parametro-2">
 						{%if prueba.conductividad_electrica  is not null%}
-						No regulada
+						No aplica
 						{%endif%}
 						</div>
 						<div class="padding-top-parametro-3">
 						{%if prueba.coliformes_fecales  is not null%}
-						Ausencia
+						Ausencia (0)
 						{%endif%}
 						</div>
 						<div class="padding-top-parametro-2">
 						{%if prueba.coliformes_totales is not null%}
-						Ausencia
+						Ausencia (0)
 						{%endif%}
 						</div>
 						<div class="padding-top-parametro-3">
@@ -299,12 +302,7 @@
 						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
 						{%endif%}
 						</div>
-						<div class="padding-top-icon-2">
-						{%if prueba.conductividad_electrica <= 8.5%}
-						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
-						{%elif prueba.conductividad_electrica > 8.5%}
-						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
-						{%endif%}
+						<div class="padding-top-icon-4">
 						</div>
 						<div class="padding-top-icon-3">
 						{%if prueba.coliformes_fecales == 0%}
@@ -393,7 +391,7 @@
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-			<h2>Sugerencia de SP (ECA)</h2>
+			<h2>Sugerencia de sistema potabilizador</h2>
 				{%csrf_token%}			
 				{{EdicionPruebaForm7 | bootstrap}}
 
@@ -436,7 +434,7 @@
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Confirmación de Sistema potabilizador (IMTA)</h4>
+				<h4>Confirmación de Sistema potabilizador</h4>
 				{%csrf_token%}
 				{{EdicionPruebaForm8 | bootstrap}}
 				<a href=""><input type="submit" value="Guardar cambios"></a>
@@ -453,7 +451,7 @@
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Registro de documentación de la toma de agua (SI)</h4>
+				<h4>Registro de documentación de la toma de agua</h4>
 				{%csrf_token%}
 				{{EdicionBebederoForm1 | bootstrap}}
 				{{NuevaPruebaForm | bootstrap}}

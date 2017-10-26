@@ -19,6 +19,8 @@
 		</div>
 	</div>
 
+{%if request.user.perfil.tipo == "SI" and mantenimientos.count < 24%}
+
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
@@ -29,6 +31,24 @@
 			</form>
 		</div>
 	</div>
+{%endif%}
+
+{%if request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" %}
+	{%if mantenimientos.count == 24%}
+	
+	<div class="row">
+		<div class="col-12">
+			<form action="." method="post" enctype="multipart/form-data">
+				<h4>Registro</h4>	
+				{%csrf_token%}
+				{{NuevoMantenimientoForm | bootstrap}}
+				<a href=""><input type="submit" value="Registrar"></a>
+			</form>
+		</div>
+	</div>
+
+	{%endif%}
+{%endif%}
 
 	<div class="row">
 		<div class="col-12">

@@ -9,6 +9,7 @@ class Incidencia(models.Model):
 		("Solucionado", "Solucionado"),
 	)
 	prioridad_choices = (
+		("Ninguna", "Ninguna (Es una notificación)"),
 		("Baja", "Baja"),
 		("Media", "Media"),
 		("Alta", "Alta"),

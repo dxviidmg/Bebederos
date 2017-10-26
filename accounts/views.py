@@ -319,7 +319,7 @@ class ListViewAvanceEscuelas(View):
 			zona = Zona.objects.get(superintendente=superintendente)
 			municipios = Municipio.objects.filter(zona=zona)
 			perfilesEscuelas = Perfil.objects.filter(municipio__in=municipios)
-			escuelas = User.objects.filter(perfil__in=perfilesEscuelas)
+			escuelas = User.objects.filter(perfil__in=perfilesEscuelas).order_by('perfil__municipio__nombre', 'perfil__localidad')
 		else:
 
 			entidad = Entidad.objects.get(pk=pk)

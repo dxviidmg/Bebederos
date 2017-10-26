@@ -35,7 +35,9 @@
 				<p>Capacidad de tanque presurizador: {{sistemaBebedero.capacidad_tanque_presurizador}}</p>
 				{{EdicionBebederoForm2 | bootstrap}}
 				{%endif%}
+				{%if request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ"%}
 				<a href=""><input type="submit" value="Guardar cambios"></a>
+				{%endif%}
 			</form>
 
 		{%if entidad.abreviatura and sistemaBebedero.mueble and sistemaBebedero.sistema_potabilizacion and sistemaBebedero.linea_ensamblaje%}
@@ -43,9 +45,11 @@
 
 		{%if sistemaBebedero.asignacion is False%}
 
-		<button type="button" class="btn btn-secondary" ><a href="{%url 'bebederos:ExportComprobanteTrazabilidadPDF' sistemaBebedero.pk%}">Descargar guia de trazabilidad</a></button>
-		<p></p>
-
+		<div class="row">
+			<div class="col-md-4 col-sm-6 col-12">
+		<a class="btn btn-primary" href="{%url 'bebederos:ExportComprobanteTrazabilidadPDF' sistemaBebedero.pk%}" role="button">Descargar guia de trazabilidad</a>
+		</div>
+		</div>
 			<form action="." method="post" enctype="multipart/form-data">
 				{%csrf_token%}
 				{{EdicionBebederoForm3 | bootstrap}}

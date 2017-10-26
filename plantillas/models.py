@@ -15,7 +15,7 @@ class Plantilla(models.Model):
 		("IMTA", "IMTA"),
 		("PQ", "Procesos Químicos (Calidad de Agua)"), #Pilar, #Isauri
 		("PM", "Planta y Manufactura"), #Raúl, Héctor
-)
+	)
 	
 	fase_choices = (
 		("Pruebas de calidad de agua", "Pruebas de calidad de agua"),
