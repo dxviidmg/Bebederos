@@ -53,3 +53,4 @@ class EvidenciaConstruccion(models.Model):
 	class Meta:
 		ordering = ['escuela']
 		verbose_name_plural = 'Evidencias de construcción'
+

@@ -175,7 +175,12 @@ class DetailViewEscuela(View):
 			mantenimientos = Mantenimiento.objects.filter(escuela=escuela)
 		except Mantenimiento.DoesNotExist:
 			mantenimientos = None
-		
+
+		try: 
+			actaEntrega = ActaEntrega.objects.get(escuela=escuela)
+		except ActaEntrega.DoesNotExist:
+			actaEntrega = None
+
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
@@ -188,6 +193,7 @@ class DetailViewEscuela(View):
 			'segundaPrueba': segundaPrueba,
 			'funcionamiento': funcionamiento,
 			'mantenimientos': mantenimientos,
+			'actaEntrega': actaEntrega,
 			'municipio': municipio,
 			'zona': zona,
 			'entidad': entidad,
@@ -371,7 +377,12 @@ class ListViewAvanceEscuelas(View):
 			except Mantenimiento.DoesNotExist:
 				mantenimientos = None
 
-			data = {'escuela' : escuela, 'primerPrueba': primerPrueba, 'inicioDeTrabajo': inicioDeTrabajo, 'visitaDeAcuerdo': visitaDeAcuerdo, 'sistemaBebedero': sistemaBebedero, 'evidencias': evidencias, 'segundaPrueba': segundaPrueba, 'inicioFuncionamiento': inicioFuncionamiento, 'mantenimientos': mantenimientos}
+			try: 
+				actaEntrega = ActaEntrega.objects.get(escuela=escuela)
+			except ActaEntrega.DoesNotExist:
+				actaEntrega = None
+
+			data = {'escuela' : escuela, 'primerPrueba': primerPrueba, 'inicioDeTrabajo': inicioDeTrabajo, 'visitaDeAcuerdo': visitaDeAcuerdo, 'sistemaBebedero': sistemaBebedero, 'evidencias': evidencias, 'segundaPrueba': segundaPrueba, 'inicioFuncionamiento': inicioFuncionamiento, 'mantenimientos': mantenimientos, 'actaEntrega': actaEntrega}
 			AvancePorEscuelas.append(data)
 
 		context = {

@@ -30,3 +30,8 @@ class InicioFuncionamientoCreateForm(forms.ModelForm):
 		model = InicioFuncionamiento
 		fields = ('acta_funcionamiento', 'video')
 		#fields = ()
+
+class ActaEntregaCreateForm (forms.ModelForm):
+	class Meta:
+		model = ActaEntrega
+		fields = ('acta_entrega',)	

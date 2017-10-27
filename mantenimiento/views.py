@@ -14,23 +14,21 @@ class CRViewMantenimientos(View):
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		mantenimientos = Mantenimiento.objects.filter(escuela=escuela)
-		user = User.objects.get(pk=request.user.pk)
-		NuevoMantenimientoForm = MantenimientoCreateForm(user)
+		NuevoMantenimientoForm = MantenimientoCreateForm()
 
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
 			'mantenimientos': mantenimientos,
 			'NuevoMantenimientoForm': NuevoMantenimientoForm,
-			#'NuevaEntregaForm': NuevaEntregaForm
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 
-		NuevoMantenimientoForm = MantenimientoCreateForm(data=request.POST, files=request.FILES)
 		si = User.objects.get(pk=request.user.pk)
+		NuevoMantenimientoForm = MantenimientoCreateForm(data=request.POST, files=request.FILES)
 
 		if NuevoMantenimientoForm.is_valid():
 			NuevoMantenimiento = NuevoMantenimientoForm.save(commit=False)
@@ -38,6 +36,6 @@ class CRViewMantenimientos(View):
 			NuevoMantenimiento.si = si
 			NuevoMantenimiento.save()
 
-		messages.success(request, "Actualización exitosa")			
+			messages.success(request, "Actualización exitosa")			
 
 		return redirect("mantenimiento:CRViewMantenimientos", pk=perfil.pk)

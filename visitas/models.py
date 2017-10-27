@@ -38,3 +38,15 @@ class InicioFuncionamiento(models.Model):
 	class Meta:
 		ordering = ['escuela']
 		verbose_name_plural = 'Entregas de bebedero'
+
+class ActaEntrega(models.Model):
+	escuela = models.OneToOneField(User)
+	acta_entrega = models.FileField(upload_to='trabajos/entrega/acta/%Y/%m/%d/', verbose_name="Acta de entrega")
+	si = models.ForeignKey(User, related_name="si_acta_entrega", null=True, blank=True, verbose_name="Superintendente")
+
+	def __str__(self):
+		return '{}'.format(self.escuela)
+
+	class Meta:
+		ordering = ['escuela']
+		verbose_name_plural = 'Actas de entrega'		

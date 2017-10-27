@@ -51,7 +51,7 @@ class CRViewVisitaDeAcuerdo(View):
 class CRViewInicioFuncionamiento(View):
 #	@method_decorator(login_required)
 	def get(self, request, pk):
-		template_name = "visitas/CRVInicioFuncionamiento.html"
+		template_name = "visitas/CRInicioFuncionamiento.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevoFuncionamientoForm=InicioFuncionamientoCreateForm()
@@ -80,4 +80,39 @@ class CRViewInicioFuncionamiento(View):
 			NuevoFuncionamiento.si = si
 			NuevoFuncionamiento.save()
 
-		return redirect("visitas:CRViewInicioFuncionamiento", pk=perfil.pk)		
+		return redirect("visitas:CRViewInicioFuncionamiento", pk=perfil.pk)
+
+#Creación y edición de inicio de funcionamiento
+class CRViewActaEntrega(View):
+#	@method_decorator(login_required)
+	def get(self, request, pk):
+		template_name = "visitas/CRActaEntrega.html"
+		perfil = get_object_or_404(Perfil, pk=pk)
+		escuela = User.objects.get(perfil=perfil)
+		NuevaActaEntregaForm=ActaEntregaCreateForm()
+
+		try:
+			actaEntrega = ActaEntrega.objects.get(escuela=escuela)
+		except ActaEntrega.DoesNotExist:
+			actaEntrega = None
+
+		context = {
+			'perfil': perfil,
+			'escuela': escuela,
+			'NuevaActaEntregaForm': NuevaActaEntregaForm,
+			'actaEntrega': actaEntrega,
+		}
+		return render(request, template_name, context)
+	def post(self, request, pk):
+		perfil = get_object_or_404(Perfil, pk=pk)
+		escuela = User.objects.get(perfil=perfil)
+		NuevaActaEntregaForm=ActaEntregaCreateForm(data=request.POST, files=request.FILES)
+		si = User.objects.get(pk=request.user.pk)
+
+		if NuevaActaEntregaForm.is_valid():
+			NuevaActaEntrega = NuevaActaEntregaForm.save(commit=False)
+			NuevaActaEntrega.escuela = escuela
+			NuevaActaEntregaForm.si = si
+			NuevaActaEntregaForm.save()
+
+		return redirect("visitas:CRViewActaEntrega", pk=perfil.pk)		
