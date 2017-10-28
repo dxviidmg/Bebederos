@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from django.contrib.admin.widgets import AdminDateWidget
 
 class PrimerPruebaCreateForm(forms.ModelForm):
 	class Meta:
@@ -83,8 +84,9 @@ class PrimerPruebaUpdateForm7(forms.ModelForm):
 		model = PrimerPrueba
 		fields = ('creacion_reporte_analisis', 'resultados_laboratorio', 'propuesta_sistema_potabilizador')
 #		fields = ()
+
 		widgets = {
-			'creacion_reporte_analisis': forms.TextInput(attrs={'placeholder': 'dd/mm/aaaa'}),
+			'creacion_reporte_analisis': forms.DateInput(attrs={'type':'date'}),
 		}
 
 	def __init__(self, *args, **kwargs):
@@ -187,7 +189,7 @@ class SegundaPruebaUpdateForm7(forms.ModelForm):
 		fields = ('creacion_reporte_analisis', 'resultados_laboratorio',)
 #		fields = ()
 		widgets = {
-			'creacion_reporte_analisis': forms.TextInput(attrs={'placeholder': 'dd/mm/aaaa'}),
+			'creacion_reporte_analisis': forms.DateInput(attrs={'type':'date'}),
 		}
 
 	def __init__(self, *args, **kwargs):

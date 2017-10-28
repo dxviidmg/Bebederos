@@ -5,10 +5,12 @@ from django.contrib.auth.models import User
 from .models import *
 from .forms import *
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 #Creación y edición de la visita de acuerdo
 class CRViewMantenimientos(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "mantenimiento/CRMantenimiento.html"
 		perfil = get_object_or_404(Perfil, pk=pk)

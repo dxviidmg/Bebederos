@@ -6,10 +6,12 @@ from django.db.models import Q
 from .forms import *
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 #Creación y consulta de incidencias
 class CRViewIncidencias(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request, pk=None):
 		template_name = "incidencias/CRIncidencias.html"
 		if pk:
@@ -54,7 +56,7 @@ class CRViewIncidencias(View):
 
 #Actualización de una incidencia
 class UpdateViewIncidencia(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "incidencias/updateIncidencia.html"
 		incidencia = get_object_or_404(Incidencia, pk=pk)

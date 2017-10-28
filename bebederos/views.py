@@ -12,6 +12,8 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4, cm
 from datetime import date
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 #Librerias para poder exportar PDFs
 from django.core.files.storage import FileSystemStorage
@@ -23,7 +25,7 @@ from reportlab.lib.units import inch
 
 #Actualización de un Sistema Bebedero
 class UpdateViewBebedero(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "bebederos/updateBebedero.html"
 		perfil = get_object_or_404(Perfil, pk=pk)

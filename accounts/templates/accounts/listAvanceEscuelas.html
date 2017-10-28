@@ -193,27 +193,37 @@
 					<td colspan="24">No hay datos para mostrar</td>
 				</tr>
 	{%endfor%}
-
-		{%if request.user.perfil.tipo == "Administrador"%}
-				<tr>
-					<td colspan="6">Descargas masivas de documentos</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><a href="{%url 'visitas:ExportCedulasIdentificacionZIP' entidad.pk%}">Cédulas de identificación</a></td>				
-				</tr>
 		
-		{%endif%}
-
 			</tbody>
 		</table>
 	</div>
 
+	{%if request.user.perfil.tipo == "Administrador"%}
 
-
+	<div style="padding-top: 50px;" class="table-responsive">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th colspan="4">Descarga masiva de documentos</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a href="{%url 'visitas:ExportCedulasIdentificacionZIP' entidad.pk%}">Cédulas de identificación</a></td>
+					<td><a href="{%url 'visitas:ExportPlanosConjuntoZIP' entidad.pk%}">Planos de conjunto</a></td>
+					<td><a href="{%url 'visitas:ExportDistribucionesPlantaZIP' entidad.pk%}">Distribuciones de planta</a></td>
+					<td><a href="{%url 'visitas:ExportMemoriasCalculoZIP' entidad.pk%}">Memorias cálculo</a></td>			
+				</tr>
+				<tr>
+					<td><a href="{%url 'visitas:ExportPlanosInstalacionElectricaZIP' entidad.pk%}">Planos de instalación eléctrica</a></td>
+					<td><a href="{%url 'visitas:ExportPlanosInstalacionHidraculicaZIP' entidad.pk%}">Planos de instalación hidráulica</a></td>
+					<td><a href="{%url 'visitas:ExportPlanosInstalacionSanitariaZIP' entidad.pk%}">Planos de instalación sanitaria</a></td>
+					<td><a href="{%url 'visitas:ExportActasFuncionamietoZIP' entidad.pk%}">Actas de inicio de funcionamieto</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	{%endif%}
 
 
 {%endblock content%}

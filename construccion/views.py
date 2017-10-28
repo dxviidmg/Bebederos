@@ -4,10 +4,12 @@ from accounts.models import Perfil
 from django.contrib.auth.models import User
 from .forms import *
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 #Creación, edición y detalle de una visita de acuerdo
 class CRViewInicioDeTrabajo(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "construccion/CRInicioDeTrabajo.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
@@ -42,7 +44,7 @@ class CRViewInicioDeTrabajo(View):
 
 #Creación, edición y detalle de un termino de trabajos
 class CRViewTerminoDeTrabajo(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "construccion/CRTerminoDeTrabajo.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
@@ -77,7 +79,7 @@ class CRViewTerminoDeTrabajo(View):
 
 #Creación, edición y lista de evidencias de construcción 
 class CRViewEvidencias(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "construccion/CREvidencias.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
@@ -132,7 +134,7 @@ class CRViewEvidencias(View):
 
 #Actualización de una evidencia
 class UpdateViewEvidencia(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "construccion/updateEvidencia.html"
 		evidencia = get_object_or_404(EvidenciaConstruccion, pk=pk)

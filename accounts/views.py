@@ -9,6 +9,8 @@ from mantenimiento.models import Mantenimiento
 from .forms import *
 from bebederos.forms import BebederoCreateForm
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 #Librerias para generar ZIP
 import zipfile
@@ -19,7 +21,7 @@ from io import BytesIO
 
 #Ver perfil al iniciar sesión
 class ViewProfile(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request):
 		template_name = "accounts/profile.html"
 		user = User.objects.get(pk=request.user.pk)
@@ -37,7 +39,7 @@ class ViewProfile(View):
 
 #Lista de regiones
 class ListViewRegiones(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request):
 		template_name = "accounts/listRegiones.html"	
 		user = User.objects.get(pk=request.user.pk)
@@ -52,7 +54,7 @@ class ListViewRegiones(View):
 
 #Lista de partidas
 class ListViewPartidas(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request, numero):
 		template_name = "accounts/listPartidas.html"
 		region = Region.objects.get(numero=numero)
@@ -72,7 +74,7 @@ class ListViewPartidas(View):
 
 #Lista de zonas
 class ListViewZonas(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request, slug=None):
 		template_name = "accounts/listZonas.html"
 		ListMunicipiosPorZona = []
@@ -102,7 +104,7 @@ class ListViewZonas(View):
 
 #Lista de escuelas
 class ListViewEscuelas(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request, pk=None):
 		template_name = "accounts/listEscuelas.html"
 
@@ -130,6 +132,7 @@ class ListViewEscuelas(View):
 
 #Detalle de escuela
 class DetailViewEscuela(View):
+	@method_decorator(login_required)	
 	def get(self, request, pk):
 		template_name = "accounts/detailEscuela.html"
 		user = User.objects.get(pk=request.user.pk)
@@ -210,6 +213,7 @@ class DetailViewEscuela(View):
 
 #Creación de escuela
 class CreateViewEscuela(View):
+	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "accounts/createEscuela.html"
 		municipio = Municipio.objects.get(pk=pk)
@@ -257,6 +261,7 @@ class CreateViewEscuela(View):
 
 #Actualización de escuela
 class UpdateViewEscuela(View):
+	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "accounts/updateEscuela.html"
 		perfil = Perfil.objects.get(pk=pk)
@@ -290,6 +295,7 @@ class UpdateViewEscuela(View):
 
 #Vizualicación de un mapa
 class DetailViewMapa(View):
+	@method_decorator(login_required)	
 	def get(self, request, pk):
 		template_name = "accounts/detailMapa.html"
 		perfil = Perfil.objects.get(pk=pk)
@@ -303,7 +309,7 @@ class DetailViewMapa(View):
 
 #Buscador de escuelas
 class SearchViewEscuelas(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request):
 		template_name = "accounts/searchEscuelas.html"
 		query = request.GET.get("query")
@@ -322,7 +328,7 @@ class SearchViewEscuelas(View):
 
 #Reporte de avance por escuela
 class ListViewAvanceEscuelas(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "accounts/listAvanceEscuelas.html"
 
@@ -400,7 +406,7 @@ class ListViewAvanceEscuelas(View):
 
 #Lista de entidades (para laboratorios)
 class ListViewEntidades(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request):
 		template_name = "accounts/listEntidades.html"
 
@@ -412,6 +418,7 @@ class ListViewEntidades(View):
 		}
 		return render(request,template_name, context)
 
+#Export ZIP
 def ExportExpedienteZIP(request, pk):
 	escuela = get_object_or_404(User, pk=pk)
 	origen = settings.BASE_DIR
@@ -438,32 +445,20 @@ def ExportExpedienteZIP(request, pk):
 
 	filenames = [cedulaIdentificacion, planoConjunto, distribucionPlanta, memoriaCalculo, planoInstalacionElectrica, planoInstalacionHidraulica, planoInstalacionSanitaria, videoPrimerPrueba, videoSegundaPrueba, primerVideoConstrucion, ultimoVideoConstrucion, videoInicioFuncionamiento]
 
-	# Folder name in ZIP archive which contains the above files
-	# E.g [thearchive.zip]/somefiles/file2.txt
-	# FIXME: Set this to something better
 	zip_subdir = "Expediente técnico " + str(escuela.username)
 	zip_filename = "%s.zip" % zip_subdir
 
-	# Open StringIO to grab in-memory ZIP contents
 	s = BytesIO()
-
-	# The zip compressor
 	zf = zipfile.ZipFile(s, "w")
 
 	for fpath in filenames:
-		# Calculate path for file in zip
 		fdir, fname = os.path.split(fpath)
 		zip_path = os.path.join(zip_subdir, fname)
-
-		# Add file, at correct path
 		zf.write(fpath, zip_path)
 
-	# Must close zip for all contents to be written
 	zf.close()
 
-	# Grab ZIP file from in-memory, make response with correct MIME-type
 	response = HttpResponse(s.getvalue(), content_type = "application/x-zip-compressed")
-	# ..and correct content-disposition
 	response['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
 
 	return response

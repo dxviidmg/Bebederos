@@ -7,10 +7,12 @@ from django.http import HttpResponse
 import csv
 from django_modalview.generic.base import ModalTemplateView
 from bebederos.forms import BebederoUpdateForm4, BebederoUpdateForm5
- 
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
 #Creación, edición y detalle de una Primer Prueba
 class CRUViewPrimerPrueba(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "pruebasAgua/CRUPrimerPrueba.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
@@ -153,9 +155,10 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm8 = None
 
 		return redirect("pruebas:CRUViewPrimerPrueba", pk=perfil.pk)
+
 #Creación, edición y detalle de una Segunda prueba
 class CRUViewSegundaPrueba(View):
-#	@method_decorator(login_required)
+	@method_decorator(login_required)
 	def get(self, request, pk):
 		template_name = "pruebasAgua/CRUSegundaPrueba.html"
 		perfil = get_object_or_404(Perfil, pk=pk)

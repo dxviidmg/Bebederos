@@ -61,3 +61,68 @@ h1, h2, h3, h4 {
 .espacio {
   padding-bottom: 100px;
 }
+
+    .titulo-tabla {
+      background-color: #44B036;
+      font-weight: bold;
+    }
+    .dummy {
+      margin-top: 100%;
+    }
+    .thumbnail {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-align:center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: solid black 0.5px;
+      background-color: #eeeee1;
+      color: black;
+    }
+    .thumbnail:hover {
+      color: #848484;
+    }
+    .thumbnail-inprogress {
+      background-color: #DFF336;
+      color: black;
+    }
+    .thumbnail-inprogress:hover {
+      background-color: #D2E532 ;
+      color: black;
+    }
+    .thumbnail-available {
+      background-color: #44B036;
+      color: white;
+    }
+    .thumbnail-available:hover {
+      background-color: #197D0E;
+      color: white;
+    }
+    .thumbnail-prueba-en-espera {
+      background-color: yellow;
+      color: black;
+    }
+    .thumbnail-prueba-en-espera:hover {
+      background-color: #E5BB31;
+      color: black;
+    }
+    .thumbnail-prueba-aprobado {
+      background-color: green;
+      color: white;
+    }
+    .thumbnail-prueba-aprobado:hover {
+      background-color: #006600;
+      color: white;
+    }
+    .thumbnail-prueba-no-aprobado {
+      background-color: red;
+      color: white;
+    }
+    .thumbnail-prueba-no-aprobado:hover {
+      background-color: #F00000 ;
+      color: white;
+    }
