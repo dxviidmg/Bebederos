@@ -15,6 +15,8 @@ urlpatterns = [
 #	url(r'^reset-password/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', password_reset_confirm, {'template_name': 'accounts/reset_password_confirm.html', 'post_reset_redirect': 'accounts:password_reset_complete'}, name='password_reset_confirm'),
 #	url(r'^reset-password/complete/$', password_reset_complete,{'template_name': 'accounts/reset_password_complete.html'}, name='password_reset_complete'),
 
+	url(r'^expediente/export/zip/(?P<pk>\d+)/$', views.ExportExpedienteZIP, name='ExportExpedienteZIP'),
+
 	url(r'^region/estado/reporte_avance/zona/(?P<pk>[-\w]+)/$', views.ListViewAvanceEscuelas.as_view(), name="ListViewAvanceEscuelasPorZona"),
 
 	url(r'^region/estado/zona/$', views.ListViewZonas.as_view(), name="ListViewZonas2"),

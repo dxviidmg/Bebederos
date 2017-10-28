@@ -4,7 +4,7 @@ from django.utils import timezone
 
 class InicioDeTrabajo(models.Model):
 	escuela = models.OneToOneField(User)
-	acta_inicio = models.FileField(upload_to='trabajos/inicio/acta/%Y/%m/%d/', verbose_name="Acta de inicio de trabajo")
+	acta_inicio = models.FileField(upload_to='iniciosTrabajo/actas/%Y/%m/%d/', verbose_name="Acta de inicio de trabajo")
 	si = models.ForeignKey(User, related_name="si_inicio_trabajo", null=True, blank=True, verbose_name="Superintendente")
 
 	def __str__(self):
@@ -16,8 +16,8 @@ class InicioDeTrabajo(models.Model):
 
 class InstalacionBebedero(models.Model):
 	escuela = models.OneToOneField(User)
-	reporte = models.FileField(upload_to='instalaciones/reporte/%Y/%m/%d/', verbose_name="Reporte de instalación")
-	recepcion_mueble_bebedero = models.FileField(upload_to='instalaciones/recepcion/%Y/%m/%d/', verbose_name="Recepción del mueble bebedero y sus componentes")
+	reporte = models.FileField(upload_to='instalaciones/reportes/%Y/%m/%d/', verbose_name="Reporte de instalación")
+	recepcion_mueble_bebedero = models.FileField(upload_to='instalaciones/recepciones/%Y/%m/%d/', verbose_name="Recepción del mueble bebedero y sus componentes")
 	si = models.ForeignKey(User, related_name="sim_instalacion_sb", verbose_name="Superintendente")
 
 	def __str__(self):
@@ -43,7 +43,7 @@ class EvidenciaConstruccion(models.Model):
 
 	escuela = models.ForeignKey(User, related_name="escuela_evidencia")
 	fase = models.CharField(max_length=30, choices=fase_choices)
-	video = models.FileField(upload_to='instalaciones/bitacora/video/%Y/%m/%d/', verbose_name="Evidencia audio visual")
+	video = models.FileField(upload_to='instalaciones/video/%Y/%m/%d/', verbose_name="Evidencia audio visual")
 	aprobacion_SI = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación de SI")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 

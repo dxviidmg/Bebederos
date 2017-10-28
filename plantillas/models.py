@@ -26,6 +26,6 @@ class Plantilla(models.Model):
 		("Mantenimiento", "Mantenimiento"),
 	)
 	nombre = models.CharField(max_length=100)
-	archivo = models.FileField()
+	archivo = models.FileField(upload_to='plantillas/%Y/%m/%d/')
 	tipo_usuario = models.CharField(max_length=20, choices=tipo_choices)
 	fase = models.CharField(choices=fase_choices, max_length=100)

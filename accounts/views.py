@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import View
 from .models import *
 from visitas.models import *
@@ -9,6 +9,13 @@ from mantenimiento.models import Mantenimiento
 from .forms import *
 from bebederos.forms import BebederoCreateForm
 from django.contrib import messages
+
+#Librerias para generar ZIP
+import zipfile
+import os
+from django.http import HttpResponse
+from django.conf import settings
+from io import BytesIO
 
 #Ver perfil al iniciar sesión
 class ViewProfile(View):
@@ -404,3 +411,59 @@ class ListViewEntidades(View):
 			'entidades': entidades,
 		}
 		return render(request,template_name, context)
+
+def ExportExpedienteZIP(request, pk):
+	escuela = get_object_or_404(User, pk=pk)
+	origen = settings.BASE_DIR
+	visitaDeAcuerdo = VisitaDeAcuerdo.objects.get(escuela=escuela)	
+	primerPrueba = PrimerPrueba.objects.get(escuela=escuela)
+	segundaPrueba = SegundaPrueba.objects.get(escuela=escuela)
+	PrimerEvidenciaConstruccion = EvidenciaConstruccion.objects.filter(escuela=escuela).first()
+	UltimaEvidenciaConstruccion = EvidenciaConstruccion.objects.filter(escuela=escuela).last()	
+	inicioFuncionamiento = InicioFuncionamiento.objects.get(escuela=escuela)
+
+	cedulaIdentificacion = origen + str(visitaDeAcuerdo.cedula_identificacion.url)
+	planoConjunto = origen + str(visitaDeAcuerdo.plano_conjunto.url)
+	distribucionPlanta = origen + str(visitaDeAcuerdo.distribucion_planta.url)
+	memoriaCalculo = origen + str(visitaDeAcuerdo.memoria_calculo.url)
+	planoInstalacionElectrica = origen + str(visitaDeAcuerdo.plano_instalacion_electrica.url)
+	planoInstalacionHidraulica = origen + str(visitaDeAcuerdo.plano_instalacion_hidraulica.url)
+	planoInstalacionSanitaria = origen + str(visitaDeAcuerdo.plano_instalacion_sanitaria.url)
+
+	videoPrimerPrueba = origen + str(primerPrueba.foto_toma_agua.url)
+	videoSegundaPrueba = origen + str(segundaPrueba.foto_toma_agua.url)
+	primerVideoConstrucion = origen + str(PrimerEvidenciaConstruccion.video.url)
+	ultimoVideoConstrucion = origen + str(UltimaEvidenciaConstruccion.video.url)	
+	videoInicioFuncionamiento = origen + str(inicioFuncionamiento.video.url)
+
+	filenames = [cedulaIdentificacion, planoConjunto, distribucionPlanta, memoriaCalculo, planoInstalacionElectrica, planoInstalacionHidraulica, planoInstalacionSanitaria, videoPrimerPrueba, videoSegundaPrueba, primerVideoConstrucion, ultimoVideoConstrucion, videoInicioFuncionamiento]
+
+	# Folder name in ZIP archive which contains the above files
+	# E.g [thearchive.zip]/somefiles/file2.txt
+	# FIXME: Set this to something better
+	zip_subdir = "Expediente técnico " + str(escuela.username)
+	zip_filename = "%s.zip" % zip_subdir
+
+	# Open StringIO to grab in-memory ZIP contents
+	s = BytesIO()
+
+	# The zip compressor
+	zf = zipfile.ZipFile(s, "w")
+
+	for fpath in filenames:
+		# Calculate path for file in zip
+		fdir, fname = os.path.split(fpath)
+		zip_path = os.path.join(zip_subdir, fname)
+
+		# Add file, at correct path
+		zf.write(fpath, zip_path)
+
+	# Must close zip for all contents to be written
+	zf.close()
+
+	# Grab ZIP file from in-memory, make response with correct MIME-type
+	response = HttpResponse(s.getvalue(), content_type = "application/x-zip-compressed")
+	# ..and correct content-disposition
+	response['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
+
+	return response
