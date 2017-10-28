@@ -193,8 +193,27 @@
 					<td colspan="24">No hay datos para mostrar</td>
 				</tr>
 	{%endfor%}
+
+		{%if request.user.perfil.tipo == "Administrador"%}
+				<tr>
+					<td colspan="6">Descargas masivas de documentos</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td><a href="{%url 'visitas:ExportCedulasIdentificacionZIP' entidad.pk%}">Cédulas de identificación</a></td>				
+				</tr>
+		
+		{%endif%}
+
 			</tbody>
 		</table>
 	</div>
+
+
+
+
 
 {%endblock content%}

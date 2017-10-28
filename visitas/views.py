@@ -2,9 +2,16 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
 from .models import *
 from django.core.urlresolvers import reverse_lazy
-from accounts.models import Perfil
+from accounts.models import *
 from .forms import *
 from django.contrib.auth.models import User
+
+#Librerias para generar ZIP
+import zipfile
+import os
+from django.http import HttpResponse
+from django.conf import settings
+from io import BytesIO
 
 #Creación y edición de la visita de acuerdo
 class CRViewVisitaDeAcuerdo(View):
@@ -115,4 +122,48 @@ class CRViewActaEntrega(View):
 			NuevaActaEntregaForm.si = si
 			NuevaActaEntregaForm.save()
 
-		return redirect("visitas:CRViewActaEntrega", pk=perfil.pk)		
+		return redirect("visitas:CRViewActaEntrega", pk=perfil.pk)
+
+def ExportCedulasIdentificacionZIP(request, pk):
+	entidad = get_object_or_404(Entidad, pk=pk)
+	zonas = Zona.objects.filter(entidad=entidad)
+	municipios = Municipio.objects.filter(zona__in=zonas)
+	perfilesEscuelas = Perfil.objects.filter(municipio__in=municipios)
+	escuelas = User.objects.filter(perfil__in=perfilesEscuelas)
+	visitasAcuerdo = VisitaDeAcuerdo.objects.filter(escuela__in=escuelas)
+	origen = settings.BASE_DIR
+
+	filenames = []
+
+	for visitaAcuerdo in visitasAcuerdo:
+		cedulaIdentificacion = origen + str(visitaAcuerdo.cedula_identificacion.url)
+		filenames.append(cedulaIdentificacion)
+	# Folder name in ZIP archive which contains the above files
+	# E.g [thearchive.zip]/somefiles/file2.txt
+	# FIXME: Set this to something better
+	zip_subdir = "Cédulas de identificación basica de " + str(entidad.nombre)
+	zip_filename = "%s.zip" % zip_subdir
+
+	# Open StringIO to grab in-memory ZIP contents
+	s = BytesIO()
+
+	# The zip compressor
+	zf = zipfile.ZipFile(s, "w")
+
+	for fpath in filenames:
+		# Calculate path for file in zip
+		fdir, fname = os.path.split(fpath)
+		zip_path = os.path.join(zip_subdir, fname)
+
+		# Add file, at correct path
+		zf.write(fpath, zip_path)
+
+	# Must close zip for all contents to be written
+	zf.close()
+
+	# Grab ZIP file from in-memory, make response with correct MIME-type
+	response = HttpResponse(s.getvalue(), content_type = "application/x-zip-compressed")
+	# ..and correct content-disposition
+	response['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
+
+	return response		

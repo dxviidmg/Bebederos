@@ -24,7 +24,7 @@ class EntidadAdmin(admin.ModelAdmin):
 admin.site.register(Entidad, EntidadAdmin)
 
 class ZonaAdmin(admin.ModelAdmin):
-    list_display = ['entidad', 'nombre']
+    list_display = ['entidad', 'nombre', 'superintendente']
     search_fields = ['entidad__nombre', 'nombre']
     list_filter = ['entidad']
 admin.site.register(Zona, ZonaAdmin)
