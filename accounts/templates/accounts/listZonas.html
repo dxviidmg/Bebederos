@@ -11,12 +11,7 @@
 
 		<a href="{%url 'accounts:ListViewPartidas' region.numero%}">Regresar</a>
 
-		{%if "Pilar" in request.user.first_name%}
-		<nav class="breadcrumb">
-			
-			<a class="breadcrumb-item" href="{% url 'pruebas:ExportPruebasPorEscuelasCSV' entidad.pk%}">Exportar todas las pruebas por escuela</a>
-		</nav>
-		{%endif%}
+
 
 		
 

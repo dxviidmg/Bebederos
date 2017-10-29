@@ -52,10 +52,10 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th>CCT</th>
-						<th>Nivel educativo</th>
+						<th>Localidad</th>
+						<th>C. C. T.</th>
 						<th>Nombre</th>
-
+						<th>Nivel educativo</th>
 						{%if request.user.perfil.tipo == "Ejecutora"%}
 
 						<th>Municipio</th>
@@ -63,9 +63,9 @@
 						<th>Entidad</th>
 						<th>Trazabilidad</th>
 						<th>Status de construción</th>
-						{%endif%}
-
-						{%if request.user.perfil.tipo != "Ejecutora"%}
+						{%else%}
+						<th>Mueble</th>
+						<th>Sistema de potabilización</th>
 						<th>Status</th>
 						{%endif%}
 
@@ -77,9 +77,11 @@
 				{%for perfil in perfiles%}
 				
 					<tr>
+						<td>{{perfil.localidad}}</td>
 						<td><a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">{{perfil.user.username}}</a></td>
+						<td>{{perfil.user.get_full_name}}</td>	
 						<td>{{perfil.nivel_educativo}}</td>
-						<td>{{perfil.user.get_full_name}}</td>
+						
 
 						{%if request.user.perfil.tipo == "Ejecutora"%}
 						<td>{{perfil.municipio.nombre}}</td>
@@ -87,9 +89,10 @@
 						<td>{{perfil.municipio.zona.entidad.nombre}}</td>
 						<td>{%if perfil.user.escuela.asignacion%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 						<td>{%if perfil.avance == 100%}Finalizado{%elif perfil.avance < 100%}En proceso o revisión{%endif%}</td>
-						{%endif%}
 
-						{%if request.user.perfil.tipo != "Ejecutora"%}
+						{%else%}
+						<td>{{perfil.user.escuela.mueble}}</td>
+						<td>{%if perfil.user.escuela.sistema_potabilizacion%}{{perfil.user.escuela.sistema_potabilizacion}}{%endif%}</td>
 						<td>{%if perfil.status is not None%} {{perfil.status}} {%else%}Pendiente {%endif%}{%if perfil.UpdateStatus is None%}{%endif%}</td>
 						{%endif%}
 

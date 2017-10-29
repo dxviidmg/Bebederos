@@ -4,11 +4,24 @@ from .models import *
 class EscuelaUserCreateForm(forms.ModelForm):
 	class Meta:
 		model = User
+
 		fields = ('username', 'first_name',)
 
 		labels = {
 			"username": "C. C. T."
 		}
+
+		help_texts = {
+			'username': None,
+		}
+
+	def clean_username(self):
+	    username = self.cleaned_data['username']
+	    try:
+	        user = User.objects.exclude(pk=self.instance.pk).get(username=username)
+	    except User.DoesNotExist:
+	        return username
+	    raise forms.ValidationError(u'Esta escuela "%s" ya ha sido registrada.' % username)
 
 class EscuelaPerfilCreateForm(forms.ModelForm):
 	class Meta:

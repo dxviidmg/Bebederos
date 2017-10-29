@@ -13,7 +13,7 @@
 
 		{% endfor %}
 
-			<h1>Bitacora de Incidencias</h1>
+			<h1>Bitacora de incidencias y notas</h1>
 
 			{% if request.get_full_path != "/incidencias/" %}
 			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
@@ -40,13 +40,26 @@
 			<div class="table-responsive">
 				<table class="table table-bordered">
 					<thead>
-						<th>Folio</th>
-						<th>Etapa</th>
-						<th>Descripción</th>
-						<th>Status</th>
-						<th>Creación</th>
-						<th>Prioridad</th>
-						<th>Opciones</th>
+						<tr>
+							<th>Folio</th>
+
+							{% if request.get_full_path == "/incidencias/" %}
+			
+							<th>Municipio</th>
+							<th>Localidad</th>
+							<th>C. C. T.</th>
+							<th>Nombre</th>
+							<th>Nivel educativo</th>
+
+							{%endif%}
+
+							<th>Etapa</th>
+							<th>Descripción</th>
+							<th>Status</th>
+							<th>Creación</th>
+							<th>Prioridad</th>
+							<th>Opciones</th>
+						</tr>	
 					</thead>
 					<tbody>
 					
@@ -54,11 +67,23 @@
 
 						<tr>
 							<td>{{incidencia.pk}}</td>
+
+							{% if request.get_full_path == "/incidencias/" %}
+			
+							<td>{{incidencia.escuela.perfil.municipio.nombre}}</td>
+							<td>{{incidencia.escuela.perfil.localidad}}</td>
+							<td><a href="{%url 'accounts:DetailViewEscuela' incidencia.escuela.perfil.pk%}">{{incidencia.escuela.username}}</a></td>
+							<td>{{incidencia.escuela.get_full_name}}</td>
+							<td>{{incidencia.escuela.perfil.nivel_educativo}}</td>
+
+						{%endif%}
+
 							<td>{{incidencia.fase}}</td>
 							<td>{{incidencia.descripcion}}</td>
 							<td>{{incidencia.status}}</td>
 							<td>{{incidencia.creacion}}</td>
-							<td {%if incidencia.prioridad == "Baja"%}style="background-color: yellow" {%elif incidencia.prioridad == "Media"%}style="background-color: orange" {%elif incidencia.prioridad == "Alta"%}style="background-color: red"{%endif%}></td>
+							<td {%if incidencia.prioridad == "Baja"%}class="thumbnail-prueba-en-espera" {%elif incidencia.prioridad == "Media"%}
+							class="thumbnail-advertencia" {%elif incidencia.prioridad == "Alta"%} class="thumbnail-prueba-no-aprobado" {%else%}class="thumbnail-prueba-aprobado"{%endif%}> {{incidencia.prioridad}}</td>
 							<td><a href="{%url 'incidencias:UpdateViewIncidencia' incidencia.pk%}">Actualizar</a></td>
 						</tr>
 
@@ -79,9 +104,20 @@
 				<table class="table table-bordered">
 					<thead>
 						<th>Folio</th>
+
+							{% if request.get_full_path == "/incidencias/" %}
+			
+							<th>Municipio</th>
+							<th>Localidad</th>
+							<th>C. C. T.</th>
+							<th>Nombre</th>
+							<th>Nivel educativo</th>
+
+							{%endif%}
+							
 						<th>Etapa</th>
 						<th>Descripción</th>
-						<th>Status</th>
+						<th>Solución</th>
 						<th>Creación</th>
 					</thead>
 					<tbody>
@@ -89,7 +125,19 @@
 					{% for incidencia in historialIncidencias%}
 
 						<tr>
-							<td>{{incidencia.pk}}</td>
+							<td>{{incidencia.pk}}
+
+							{% if request.get_full_path == "/incidencias/" %}
+			
+							<td>{{incidencia.escuela.perfil.municipio.nombre}}</td>
+							<td>{{incidencia.escuela.perfil.localidad}}</td>
+							<td><a href="{%url 'accounts:DetailViewEscuela' incidencia.escuela.perfil.pk%}">{{incidencia.escuela.username}}</a></td>
+							<td>{{incidencia.escuela.get_full_name}}</td>
+							<td>{{incidencia.escuela.perfil.nivel_educativo}}</td>
+
+						{%endif%}
+
+							</td>
 							<td>{{incidencia.fase}}</td>
 							<td>{{incidencia.descripcion}}</td>
 							<td>{{incidencia.solucion}}</td>

@@ -21,7 +21,6 @@ class Region(models.Model):
 		return reverse('accounts:ListViewPartidas', kwargs={'numero': self.numero})
 
 class Partida(models.Model):
-	si = models.ForeignKey(User, null=True, blank=True, verbose_name="Superintendente")
 	region = models.ForeignKey(Region, verbose_name="Región")
 	numero = models.IntegerField(verbose_name="número")
 

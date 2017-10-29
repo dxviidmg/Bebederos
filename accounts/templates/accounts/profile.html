@@ -3,9 +3,9 @@
 {%block content%}
 	
 	<div class="row">
-		<div class="col-12 col-md-12">
-			<h3 style="padding-bottom: 50px;">Bienvenido(a): {%if request.user.perfil.tipo == "Escuela"%} Escuela {{request.user.perfil.nivel_educativo}} {%endif%} {{request.user.get_full_name}}</h3>
-			{{request.user.perfil.tipo}}
+		<div class="col-12 col-md-12 espacio">
+			<h3>Bienvenido(a): {%if request.user.perfil.tipo == "Escuela"%} Escuela {{request.user.perfil.nivel_educativo}} {%endif%} {{request.user.get_full_name}}</h3>
+
 			{%if request.user.perfil.representante_legal%}
 			<p>Representante legal: {{request.user.perfil.representante_legal}}</p>
 			{%endif%}

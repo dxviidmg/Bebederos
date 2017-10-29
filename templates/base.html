@@ -15,40 +15,7 @@
 
   <style type="text/css">
 
-.navbar-toggler .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
-}
 
-.navbar-light .navbar-nav .nav-link {
-    color: rgb(250,250,250);
-}
-
-.navbar-light .navbar-nav .nav-link:hover {
-    color: rgb(255,255,255);
-}
-
-thead{
-  background-color: #44B036;
-}
-
-tbody {
-  background-color: #eeeee1;
-}
-table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
-    border:1px solid #606F5F;
-    vertical-align: middle;
-    text-align: center;
-}
-
-.nav-item:hover, .nav-link:focus, .dropdown-item:hover{
-  background-color: #27971B;
-  color: white;
-}
-
-.dropdown-menu, .dropdown-item{
-  background-color: #44B036;
-  color: white;
-}
   </style>
 	<body>
 
@@ -61,7 +28,7 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
   </button>
 
   {%endif%}
-  <a class="navbar-brand" href="#" style="color: white;">TEASIB 3.7.3</a>
+  <a class="navbar-brand" href="#" style="color: white;">TEASIB 3.7.4</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
@@ -130,7 +97,7 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
 
       {%endif%}
 
-      {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
+      {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "SI" %}
 
       <li class="nav-item">
         <a class="nav-link" href="{%url 'incidencias:ListViewIncidencias'%}">Incidencias</a>

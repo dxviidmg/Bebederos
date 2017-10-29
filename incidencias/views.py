@@ -23,6 +23,14 @@ class CRViewIncidencias(View):
 			incidencias = Incidencia.objects.filter(escuela=escuela)
 			incidenciasActuales = incidencias.filter(Q(status="En espera") | Q(status="Atendiendo"))
 			historialIncidencias = incidencias.filter(status="Solucionado")
+		elif request.user.perfil.tipo == "SI":
+			autor = User.objects.get(pk=request.user.pk)
+			incidencias = Incidencia.objects.filter(autor=autor)
+			incidenciasActuales = incidencias.filter(Q(status="En espera") | Q(status="Atendiendo"))
+			historialIncidencias = incidencias.filter(status="Solucionado")
+			perfil=None
+			escuela=None
+			NuevaIncidenciaForm=None
 		else:
 			perfil=None
 			escuela=None

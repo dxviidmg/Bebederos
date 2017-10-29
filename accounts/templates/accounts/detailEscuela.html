@@ -4,73 +4,6 @@
 
 {%block content%}
 
-	<style type="text/css">
-		.titulo-tabla {
-			background-color: #44B036;
-			font-weight: bold;
-		}
-		.dummy {
-			margin-top: 100%;
-		}
-		.thumbnail {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			text-align:center;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			border: solid black 0.5px;
-			background-color: #eeeee1;
-			color: black;
-		}
-		.thumbnail:hover {
-			color: #848484;
-		}
-		.thumbnail-inprogress {
-			background-color: #DFF336;
-			color: black;
-		}
-		.thumbnail-inprogress:hover {
-			background-color: #D2E532 ;
-			color: black;
-		}
-		.thumbnail-available {
-			background-color: #44B036;
-			color: white;
-		}
-		.thumbnail-available:hover {
-			background-color: #197D0E;
-			color: white;
-		}
-		.thumbnail-prueba-en-espera {
-			background-color: yellow;
-			color: black;
-		}
-		.thumbnail-prueba-en-espera:hover {
-			background-color: #E5BB31;
-			color: black;
-		}
-		.thumbnail-prueba-aprobado {
-			background-color: green;
-			color: white;
-		}
-		.thumbnail-prueba-aprobado:hover {
-			background-color: #006600;
-			color: white;
-		}
-		.thumbnail-prueba-no-aprobado {
-			background-color: red;
-			color: white;
-		}
-		.thumbnail-prueba-no-aprobado:hover {
-			background-color: #F00000 ;
-			color: white;
-		}
-	</style>
-
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 			<h1>{{escuela.get_full_name}}</h1>
@@ -192,7 +125,7 @@
 
 		{%endif%}
 			<!-- Tabla de Contactos-->
-			<h2>Contactos</h2>
+			<h2 class="espacio2">Contactos</h2>
 
 			<div class="table-responsive text-center">
 				<table class="table table-bordered">
@@ -225,14 +158,14 @@
 
 	<!--Tabla de cronologia-->
 	<div class="row justify-content-center">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-12 espacio2">
 			<h2>Cronología general de la gestión, construcción, instalación y mantenimiento de un sistema bebedero</h2>
 		</div>
 
 		{%if request.user.perfil.tipo == "SI"  or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
-			<a class="thumbnail thumbnail-available container" href="{%url 'incidencias:CRViewIncidencias' perfil.pk%}">Bitacora de Incidencias</a>
+			<a class="thumbnail thumbnail-available container" href="{%url 'incidencias:CRViewIncidencias' perfil.pk%}">Bitacora de incidencias y notas</a>
 		</div>
 		{%endif%}
 
@@ -240,7 +173,7 @@
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if primerPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif primerPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif primerPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad 
-			<br>Veredicto de Prueba de Calidad de Agua: {{primerPrueba.aprobacion}}</a>
+			<br>Veredicto de calidad de agua: {{primerPrueba.aprobacion}}</a>
 		</div>
 		{%endif%}
 
@@ -283,7 +216,7 @@
 		{%if evidenciaFinal%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
-			<a {%if segundaPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif segundaPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif segundaPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad<br>Veredicto de Prueba de Calidad de Agua: {{segundaPrueba.aprobacion}}</a>
+			<a {%if segundaPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif segundaPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif segundaPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad<br>Veredicto de calidad de agua: {{segundaPrueba.aprobacion}}</a>
 		</div>
 		{%endif%}
 		{%endif%}

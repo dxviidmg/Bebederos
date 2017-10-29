@@ -115,11 +115,11 @@ class ListViewEscuelas(View):
 			sistemaBebederos = SistemaBebedero.objects.filter(ejecutora=ejecutora)
 
 			escuelas = User.objects.filter(escuela__in=sistemaBebederos)
-			perfiles = Perfil.objects.filter(user__in=escuelas).order_by('status')
+			perfiles = Perfil.objects.filter(user__in=escuelas).order_by('municipio__nombre', 'localidad', 'nivel_educativo')
 			entidad = None
 		else:
 			municipio = Municipio.objects.get(pk=pk)
-			perfiles = Perfil.objects.filter(municipio=municipio).order_by('status')
+			perfiles = Perfil.objects.filter(municipio=municipio).order_by('municipio__nombre', 'localidad', 'nivel_educativo')
 			zona = Zona.objects.get(municipio=municipio)
 			entidad = Entidad.objects.get(zona=zona)
 
@@ -232,6 +232,7 @@ class CreateViewEscuela(View):
 		}
 		return render(request,template_name, context)
 	def post(self, request, pk):
+		template_name = "accounts/createEscuela.html"		
 		municipio = Municipio.objects.get(pk=pk)
 		zona = Zona.objects.get(municipio=municipio)
 		entidad = Entidad.objects.get(zona=zona)
@@ -240,23 +241,32 @@ class CreateViewEscuela(View):
 		NuevaEscuelaPerfilForm = EscuelaPerfilCreateForm(request.POST)
 		NuevoBebederoForm = BebederoCreateForm(request.POST)
 
-		if NuevaEscuelaUserForm.is_valid():
+		if NuevaEscuelaUserForm.is_valid() and NuevaEscuelaPerfilForm.is_valid() and NuevoBebederoForm.is_valid():
+#		if NuevaEscuelaUserForm.is_valid():
 			NuevaEscuelaUser = NuevaEscuelaUserForm.save(commit=False)
 			NuevaEscuelaUser.set_password('generica')
 			NuevaEscuelaUser.save()
 
-		if NuevaEscuelaPerfilForm.is_valid():
+#		if NuevaEscuelaPerfilForm.is_valid():
 			NuevaEscuelaPerfil = NuevaEscuelaPerfilForm.save(commit=False)
 			NuevaEscuelaPerfil.user = NuevaEscuelaUser
 			NuevaEscuelaPerfil.tipo = "Escuela"
 			NuevaEscuelaPerfil.municipio = municipio
 			NuevaEscuelaPerfil.save()
 
-		if NuevoBebederoForm.is_valid():
+#		if NuevoBebederoForm.is_valid():
 			NuevoBebedero = NuevoBebederoForm.save(commit=False)
 			NuevoBebedero.escuela = NuevaEscuelaUser
 			NuevoBebedero.save()
 			NuevoBebedero.CalculaCTP()
+		else:
+			context = {
+				'municipio': municipio,
+				'NuevaEscuelaUserForm': NuevaEscuelaUserForm,
+				'NuevaEscuelaPerfilForm': NuevaEscuelaPerfilForm,
+				'NuevoBebederoForm': NuevoBebederoForm				
+			}
+			return render(request,template_name,context)			
 		return redirect("accounts:ListViewEscuelas", pk=municipio.pk)
 
 #Actualización de escuela
@@ -338,14 +348,14 @@ class ListViewAvanceEscuelas(View):
 			zona = Zona.objects.get(superintendente=superintendente)
 			municipios = Municipio.objects.filter(zona=zona)
 			perfilesEscuelas = Perfil.objects.filter(municipio__in=municipios)
-			escuelas = User.objects.filter(perfil__in=perfilesEscuelas).order_by('perfil__municipio__nombre', 'perfil__localidad')
+			escuelas = User.objects.filter(perfil__in=perfilesEscuelas).order_by('perfil__municipio__nombre', 'perfil__localidad', 'perfil__nivel_educativo')
 		else:
 
 			entidad = Entidad.objects.get(pk=pk)
 			zonas = Zona.objects.filter(entidad=entidad)
 			municipios = Municipio.objects.filter(zona__in=zonas)
 			perfilesEscuelas = Perfil.objects.filter(municipio__in=municipios)
-			escuelas = User.objects.filter(perfil__in=perfilesEscuelas).order_by('perfil__municipio__nombre', 'perfil__localidad')
+			escuelas = User.objects.filter(perfil__in=perfilesEscuelas).order_by('perfil__municipio__nombre', 'perfil__localidad', 'perfil__nivel_educativo')
 
 		AvancePorEscuelas = []
 

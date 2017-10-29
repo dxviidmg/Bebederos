@@ -3,7 +3,7 @@ from .models import *
 
 class MuebleAdmin(admin.ModelAdmin):
 	model = Mueble
-	list_display = ['modelo']
+	list_display = ['modelo', 'nivel_educativo', 'total_salidas']
 
 admin.site.register(Mueble, MuebleAdmin)
 
