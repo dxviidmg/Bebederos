@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -133,14 +134,14 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
 
-from django.core.urlresolvers import reverse_lazy
 LOGOUT_REDIRECT_URL = reverse_lazy('accounts:login')
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    '/var/www/static/',
-]
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, "static"),
+#    '/var/www/static/',
+#]
 
+#API google maps
 GEOPOSITION_GOOGLE_MAPS_API_KEY = 'AIzaSyBZDksCoJKcLZjKlsBLzodI8miwc2iQqMg'
 
 GEOPOSITION_MARKER_OPTIONS = {

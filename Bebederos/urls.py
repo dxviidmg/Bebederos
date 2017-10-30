@@ -25,7 +25,8 @@ from incidencias import urls as incidenciasUrls
 from mantenimiento import urls as mantenimientoUrls
 from bebederos import urls as bebederosUrls
 from plantillas import urls as plantillasUrls
-#Images
+
+#Media and static
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -41,6 +42,10 @@ urlpatterns = [
     url(r'^', include(plantillasUrls, namespace="plantillas")),    
 ]
 
-#Images
+#Media
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+#Static
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
