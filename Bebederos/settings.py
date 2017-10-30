@@ -136,14 +136,8 @@ MEDIA_URL = '/media/'
 
 LOGOUT_REDIRECT_URL = reverse_lazy('accounts:login')
 
-#STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, "static"),
-#    '/var/www/static/',
-#]
-
 #API google maps
 GEOPOSITION_GOOGLE_MAPS_API_KEY = 'AIzaSyBZDksCoJKcLZjKlsBLzodI8miwc2iQqMg'
-
 GEOPOSITION_MARKER_OPTIONS = {
     'cursor': 'move'
 }
