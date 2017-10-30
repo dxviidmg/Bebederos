@@ -4,14 +4,12 @@ from accounts.models import Perfil
 class Plantilla(models.Model):
 	tipo_choices = (
 		("Administrador", "Administrador"), #Yo
-		("CEO", "CEO"), #Carlos, Beto
 		("SI", "Superintendente"),
 		("Ejecutora", "Ejecutora"),
 		("Escuela", "Escuela"),
 		("Laboratorio", "Laboratorio"),
 		("INIFED", "INIFED"), #INIFED Federal
 		("CEstatal", "Coordinador Estatal de INIFED"),
-		("RTINIFED", "Residente Técnico de INIFED"),
 		("IMTA", "IMTA"),
 		("PQ", "Procesos Químicos (Calidad de Agua)"), #Pilar, #Isauri
 		("PM", "Planta y Manufactura"), #Raúl, Héctor
