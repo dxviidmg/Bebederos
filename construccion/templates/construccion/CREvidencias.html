@@ -16,7 +16,7 @@
 		
 			<h1>Evidencias de construcción e instalación de sistema bebedero</h1>
 			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
-			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+			<h3>Escuela {{escuela.get_full_name}}</h3>
 		</div>
 	</div>
 
@@ -39,7 +39,7 @@
 					<thead>
 						<th>Folio</th>
 						<th>Fase</th>
-						<th>Creación</th>
+						<th>Hora y fecha de registro</th>
 						<th>Aprobación de Superintendente</th>
 						{%if request.user.perfil.tipo == "SI"%}
 						<th>Acciones</th>

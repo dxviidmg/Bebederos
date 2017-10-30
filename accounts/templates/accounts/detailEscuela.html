@@ -7,9 +7,12 @@
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 			<h1>{{escuela.get_full_name}}</h1>
-
+			
 			{%if request.user.perfil.tipo != "Laboratorio" or request.user.perfil.tipo != "CEstatal"%}
+
+			{%if request.user.perfil.tipo != "Escuela"%}
 			<p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">Regresar a zona</a></p>
+			{%endif%}
 			{%endif%}
 			{%if request.user.perfil.tipo == "SI"%}
 			<p><a href="{%url 'accounts:ListViewAvanceEscuelasPorZona' request.user.superintendente.pk%}">Regresar a lista de escuelas</a></p>
@@ -34,7 +37,7 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<th colspan="12">CCT</th>
+							<th colspan="12">C. C. T.</th>
 							<th colspan="12">Nombre</th>
 							<th colspan="12">Nivel educativo</th>
 							<th colspan="12">Status</th>
@@ -53,7 +56,7 @@
 					<thead>
 						<tr>
 							<th colspan="15">Turno</th>
-							<th colspan="15">Matricula</th>
+							<th colspan="15">Matrícula</th>
 							<th colspan="15">Director</th>
 							<th colspan="15">Foto</th>
 						</tr>
@@ -68,8 +71,8 @@
 					</tbody>
 					<thead>
 						<tr>
-							<th colspan="12">Telefono</th>
-							<th colspan="12">Mail</th>
+							<th colspan="12">Teléfono</th>
+							<th colspan="12">Correo electrónico</th>
 							<th colspan="12">Domicilio</th>
 							<th colspan="12">Referencias</th>
 							<th colspan="12">Foto de la entrada</th>
@@ -107,7 +110,7 @@
 							<th colspan="12">Coordenadas</th>
 							<th colspan="12">Geolocalización</th>
 							<th colspan="12">Tipo de conexión</th>
-							<th colspan="12">Nombre de SSID (red WiFi)</th>
+							<th colspan="12">Nombre de SSID (Red Wifi)</th>
 							<th colspan="12">Contraseña de SSID</th>
 						</tr>
 					</thead>
@@ -165,14 +168,14 @@
 		{%if request.user.perfil.tipo == "SI"  or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
-			<a class="thumbnail thumbnail-available container" href="{%url 'incidencias:CRViewIncidencias' perfil.pk%}">Bitacora de incidencias y notas</a>
+			<a class="thumbnail thumbnail-available container" href="{%url 'incidencias:CRViewIncidencias' perfil.pk%}">Bitácora de incidencias y notas</a>
 		</div>
 		{%endif%}
 
 		{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
-			<a {%if primerPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif primerPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif primerPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad 
+			<a {%if primerPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif primerPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif primerPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad. 
 			<br>Veredicto de calidad de agua: {{primerPrueba.aprobacion}}</a>
 		</div>
 		{%endif%}
@@ -207,7 +210,7 @@
 		{%if sistemaBebedero.no_trazabilidad%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
-			<a {%if evidenciaFinal%} class="thumbnail thumbnail-prueba-aprobado container" {%elif evidenciasConstruccion%} class="thumbnail thumbnail-prueba-en-espera" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewEvidencias' perfil.pk%}">Evidencias de construccíón e Instalación de Mueble Bebedero{%if evidenciaFinal%}<br>Construcción finalizada{%else%}En proceso de construción o revisión{%endif%}</a>
+			<a {%if evidenciaFinal%} class="thumbnail thumbnail-prueba-aprobado container" {%elif evidenciasConstruccion%} class="thumbnail thumbnail-prueba-en-espera" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewEvidencias' perfil.pk%}">Evidencias de construccíón e instalación de mueble bebedero.{%if evidenciaFinal%}<br>Construcción finalizada{%else%}En proceso de construción o revisión{%endif%}</a>
 		</div>
 		{%endif%}
 		{%endif%}
@@ -216,7 +219,7 @@
 		{%if evidenciaFinal%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
-			<a {%if segundaPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif segundaPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif segundaPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad<br>Veredicto de calidad de agua: {{segundaPrueba.aprobacion}}</a>
+			<a {%if segundaPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif segundaPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif segundaPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad.<br>Veredicto de calidad de agua: {{segundaPrueba.aprobacion}}</a>
 		</div>
 		{%endif%}
 		{%endif%}

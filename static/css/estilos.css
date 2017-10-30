@@ -270,3 +270,7 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
   background-color: #44B036;
   color: white;
 }
+
+.col-md-5{
+  padding-top: 10px;
+}

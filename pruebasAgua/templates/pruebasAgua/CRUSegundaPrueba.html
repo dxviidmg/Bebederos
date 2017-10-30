@@ -10,7 +10,7 @@
 			
 			<h1>Segunda prueba de calidad de agua</h1>
 			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
-			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+			<h3>Escuela {{escuela.get_full_name}}</h3>
 		</div>
 	</div>
 
@@ -68,7 +68,7 @@
 
 		{%if prueba.resultados_laboratorio%}
 
-			<a href="{{prueba.resultados_laboratorio.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Resultados del Laboratorio</a>
+			<a href="{{prueba.resultados_laboratorio.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Resultados de laboratorio</a>
 
 		{%endif%}
 		
@@ -86,18 +86,20 @@
 
 		{%if prueba.reporte_toma_agua and not prueba.resultados_laboratorio%}
 	
-	<div class="row">
+	<div class="row espacio2">
 		<div class="col-12">
 
 			{%if request.user.perfil.tipo == "Laboratorio"%}
+
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Registro de documentación de analísis</h4>
+				<h4>Análisis de laboratorio</h4>
+				<h5>Registro de documentación</h5>
 				{%csrf_token%}
 				{{EdicionPruebaForm1 | bootstrap}}
 
 				<div class="row">
 					<div class="col-md-12">
-						<h4>Información y parámetros de análisis</h4>
+						<h5>Registro de parámetros</h5>
 						{{EdicionPruebaForm2 | bootstrap}}
 					</div>
 					<div class="col-12 col-sm-12 col-md-3">
@@ -129,16 +131,17 @@
 		{%if request.user.perfil.tipo == "PQ"%}
 		{%if prueba.no_registro and prueba.aprobacion == "En espera"%}
 	
-	<div class="row">
+	<div class="row espacio2">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Registro de documentación de analísis</h4>
+				<h4>Consulta y confirmación de resultados de análisis</h4>
+				<h5>Documentación</h5>
 				{%csrf_token%}
 				{{EdicionPruebaForm1 | bootstrap}}
 
 				<div class="row">
 					<div class="col-md-12">
-						<h4>Información y parámetros de análisis</h4>
+						<h5>Parámetros</h5>
 						{{EdicionPruebaForm2 | bootstrap}}
 					</div>
 					<div class="col-12 col-sm-6 col-md-6">
@@ -359,10 +362,10 @@
 		{%if prueba.resultados_laboratorio and prueba.aprobacion == "En espera"%}
 		
 
-	<div class="row">
+	<div class="row espacio2">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Confirmación de Sistema potabilizador</h4>
+				<h5>Confirmación de sistema potabilizador</h5>
 				{%csrf_token%}
 				{{EdicionPruebaForm8 | bootstrap}}
 				<a href=""><input type="submit" value="Guardar cambios"></a>

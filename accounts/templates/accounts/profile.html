@@ -4,33 +4,36 @@
 	
 	<div class="row">
 		<div class="col-12 col-md-12 espacio">
-			<h3>Bienvenido(a): {%if request.user.perfil.tipo == "Escuela"%} Escuela {{request.user.perfil.nivel_educativo}} {%endif%} {{request.user.get_full_name}}</h3>
+			<h3>Bienvenido(a): {%if request.user.perfil.tipo == "Escuela"%} Escuela {%endif%} {{request.user.get_full_name}}</h3>
 
-			{%if request.user.perfil.representante_legal%}
-			<p>Representante legal: {{request.user.perfil.representante_legal}}</p>
-			{%endif%}
-
-			{%if request.user.perfil.director%}
-			<p>Director: {{request.user.perfil.director}}</p>
-			{%endif%}
+			<div class="espacio2">
 			
-			{%if request.user.perfil.plantilla_escolar%}
-			<p>Cantidad de alumnos: {{request.user.perfil.plantilla_escolar}}</p>
-			{%endif%}
+				{%if request.user.perfil.representante_legal%}
+				<p>Representante legal: {{request.user.perfil.representante_legal}}</p>
+				{%endif%}
 
-			{%if request.user.perfil.telefono%}
-			<p>Teléfono: {{request.user.perfil.telefono}}</p>
-			{%endif%}
+				{%if request.user.perfil.director%}
+				<p>Director: {{request.user.perfil.director}}</p>
+				{%endif%}
+				
+				{%if request.user.perfil.plantilla_escolar%}
+				<p>Cantidad de alumnos: {{request.user.perfil.plantilla_escolar}}</p>
+				{%endif%}
 
-			{%if request.user.perfil.domicilio%}			
-			<p>Domicilio: {{request.user.perfil.domicilio}}</p>
-			{%endif%}
+				{%if request.user.perfil.telefono%}
+				<p>Teléfono: {{request.user.perfil.telefono}}</p>
+				{%endif%}
+
+				{%if request.user.perfil.domicilio%}			
+				<p>Domicilio: {{request.user.perfil.domicilio}}</p>
+				{%endif%}
 
 
-			{%if request.user.perfil.conexion%}			
-			<p>Domicilio: {{request.user.perfil.conexion}}</p>
-			{%endif%}
-
+				{%if request.user.perfil.conexion%}			
+				<p>Domicilio: {{request.user.perfil.conexion}}</p>
+				{%endif%}
+				
+			</div>
 		</div>
 	</div>
 

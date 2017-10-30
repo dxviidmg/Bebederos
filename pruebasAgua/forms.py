@@ -86,7 +86,7 @@ class PrimerPruebaUpdateForm7(forms.ModelForm):
 #		fields = ()
 
 		widgets = {
-			'creacion_reporte_analisis': forms.DateInput(attrs={'type':'date'}),
+			'creacion_reporte_analisis': forms.TextInput(attrs={'type':'date'}),
 		}
 
 	def __init__(self, *args, **kwargs):
@@ -188,8 +188,9 @@ class SegundaPruebaUpdateForm7(forms.ModelForm):
 		model = SegundaPrueba
 		fields = ('creacion_reporte_analisis', 'resultados_laboratorio',)
 #		fields = ()
+
 		widgets = {
-			'creacion_reporte_analisis': forms.DateInput(attrs={'type':'date'}),
+			'creacion_reporte_analisis': forms.TextInput(attrs={'type':'date'}),
 		}
 
 	def __init__(self, *args, **kwargs):

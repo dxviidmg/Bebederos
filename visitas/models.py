@@ -7,13 +7,13 @@ class VisitaDeAcuerdo(models.Model):
 	convenio_concertacion = models.FileField(upload_to='visita/concertaciones/%Y/%m/%d/', verbose_name="Convenio de concertación de aplicación de recurso")
 	cedula_identificacion = models.FileField(upload_to='visita/identificaciones/%Y/%m/%d/', verbose_name="Cédula de identificación básica")
 	acta_acuerdos = models.FileField(upload_to='visitas/actas/%Y/%m/%d/', verbose_name="Acta de acuerdos")
-	croquis_modulo = models.FileField(upload_to='visitas/croquis/%Y/%m/%d/', verbose_name="Croquis de ubicación de modulo", default="default.pdf")	
-	constancia_integracion_comite = models.FileField(upload_to='visitas/comites/%Y/%m/%d/', verbose_name="Constancia de Integración de Comité")
+	croquis_modulo = models.FileField(upload_to='visitas/croquis/%Y/%m/%d/', verbose_name="Croquis de ubicación de módulo", default="default.pdf")	
+	constancia_integracion_comite = models.FileField(upload_to='visitas/comites/%Y/%m/%d/', verbose_name="Constancia de integración de comité")
 	plano_conjunto = models.FileField(upload_to='visitas/planosConjunto/%Y/%m/%d/', verbose_name="Plano de conjunto", null=True, blank=True)
 	distribucion_planta = models.FileField(upload_to='visitas/distribuciones/%Y/%m/%d/', verbose_name="Distribución en planta", null=True, blank=True)	
 	memoria_calculo = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Memoria de cálculo hidrosanitario y eléctrico", null=True, blank=True)
-	plano_instalacion_electrica = models.FileField(upload_to='visitas/pihs/%Y/%m/%d/', verbose_name="Plano de instalación electrica", null=True, blank=True)
-	plano_instalacion_hidraulica = models.FileField(upload_to='visitas/pies/%Y/%m/%d/', verbose_name="Plano de instalación hidraulica con isométrico", null=True, blank=True)
+	plano_instalacion_electrica = models.FileField(upload_to='visitas/pihs/%Y/%m/%d/', verbose_name="Plano de instalación eléctrica", null=True, blank=True)
+	plano_instalacion_hidraulica = models.FileField(upload_to='visitas/pies/%Y/%m/%d/', verbose_name="Plano de instalación hidráulica con isométrico", null=True, blank=True)
 	plano_instalacion_sanitaria = models.FileField(upload_to='visitas/piss/%Y/%m/%d/', verbose_name="Plano de instalación sanitaria  con isométrico", null=True, blank=True)
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	si = models.ForeignKey(User, related_name="si_visita_acuerdo")
@@ -27,8 +27,8 @@ class VisitaDeAcuerdo(models.Model):
 
 class InicioFuncionamiento(models.Model):
 	escuela = models.OneToOneField(User)
-	acta_funcionamiento = models.FileField(upload_to='funcionamiento/actas/%Y/%m/%d/', verbose_name="Acta de inicio de funcionamiento")
-	video = models.FileField(upload_to='funcionamiento/videos/%Y/%m/%d/', verbose_name="Video de muestra del funcionamiento")
+	acta_funcionamiento = models.FileField(upload_to='funcionamiento/actas/%Y/%m/%d/', verbose_name="Acta")
+	video = models.FileField(upload_to='funcionamiento/videos/%Y/%m/%d/', verbose_name="Video")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	si = models.ForeignKey(User, related_name="si_entrega_bebedero", null=True, blank=True)
 
@@ -37,7 +37,7 @@ class InicioFuncionamiento(models.Model):
 
 	class Meta:
 		ordering = ['escuela']
-		verbose_name_plural = 'Entregas de bebedero'
+		verbose_name_plural = 'Inicios de funcionamiento'
 
 class ActaEntrega(models.Model):
 	escuela = models.OneToOneField(User)

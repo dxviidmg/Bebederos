@@ -44,7 +44,7 @@ class EvidenciaConstruccion(models.Model):
 	escuela = models.ForeignKey(User, related_name="escuela_evidencia")
 	fase = models.CharField(max_length=30, choices=fase_choices)
 	video = models.FileField(upload_to='instalaciones/video/%Y/%m/%d/', verbose_name="Evidencia audio visual")
-	aprobacion_SI = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación de SI")
+	aprobacion_SI = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación del Superintendente")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 
 	def __str__(self):

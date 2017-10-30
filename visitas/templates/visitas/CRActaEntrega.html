@@ -8,7 +8,7 @@
 		<div class="col-12">
 			<h1>Entrega de Bebedero</h1>
 			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
-			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+			<h3>Escuela {{escuela.get_full_name}}</h3>
 		</div>
 	</div>
 
@@ -28,6 +28,8 @@
 
 	{%else%}
 	
+		{%if request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
+
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
@@ -38,7 +40,8 @@
 			</form>
 		</div>
 	</div>
-	
+
+		{%endif%}
 	{%endif%}
 
 {%endblock content%}

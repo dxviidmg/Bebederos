@@ -11,9 +11,9 @@
 	<div class="row">
 		<div class="col-12">
 			
-			<h1>Primera prueba de calidad de agua</h1>
+			<h1>Primer prueba de calidad de agua</h1>
 			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
-			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+			<h3>Escuela {{escuela.get_full_name}}</h3>
 		</div>
 	</div>
 
@@ -74,7 +74,7 @@
 
 		{%if prueba.resultados_laboratorio%}
 
-			<a href="{{prueba.resultados_laboratorio.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Resultados del Laboratorio</a>
+			<a href="{{prueba.resultados_laboratorio.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Resultados de laboratorio</a>
 
 		{%endif%}
 		
@@ -102,16 +102,17 @@
 		{%if request.user.perfil.tipo == "Laboratorio"%}
 		{%if prueba.reporte_toma_agua and not prueba.resultados_laboratorio%}
 	
-	<div class="row">
+	<div class="row espacio2">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Registro de documentación de analísis</h4>
+				<h4>Análisis de laboratorio</h4>
+				<h5>Registro de documentación</h5>
 				{%csrf_token%}
 				{{EdicionPruebaForm1 | bootstrap}}
 
 				<div class="row">
 					<div class="col-md-12">
-						<h4>Información y parámetros de análisis</h4>
+						<h5>Registro de parámetros</h5>
 						{{EdicionPruebaForm2 | bootstrap}}
 					</div>
 					<div class="col-12 col-sm-12 col-md-3">
@@ -145,26 +146,27 @@
 		{%if prueba.no_registro and prueba.aprobacion == "En espera"%}
 	
 
-	<div class="row">
+	<div class="row espacio2">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Registro de documentación de analísis</h4>
+				<h4>Consulta y confirmación de resultados de análisis</h4>
+				<h5>Documentación</h5>
 				{%csrf_token%}
 				{{EdicionPruebaForm1 | bootstrap}}
 
 				<div class="row">
 					<div class="col-md-12">
-						<h4>Información y parámetros de análisis</h4>
+						<h5> Parámetros</h5>
 						{{EdicionPruebaForm2 | bootstrap}}
 					</div>
 					<div class="col-12 col-sm-6 col-md-6">
-						<h5>Fisicos y organoelectricos</h5>
+						<h5>Fisicos y organolépticos</h5>
 						{{EdicionPruebaForm3 | bootstrap}}
-						<h5>Bacteriologicos</h5>
+						<h5>Bacteriológicos</h5>
 						{{EdicionPruebaForm4 | bootstrap}}
-						<h5>Arsenico y metales</h5>
+						<h5>Metales</h5>
 						{{EdicionPruebaForm5 | bootstrap}}
-						<h5>Iones y compuestos inorganicos</h5>
+						<h5>Iones y compuestos inorgánicos</h5>
 						{{EdicionPruebaForm6 | bootstrap}}
 					</div>
 					<div class="hidden-xs-down col-sm-4 col-md-3" style="font-size: 25px;">
@@ -361,13 +363,13 @@
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-			<h2>Sugerencia de sistema potabilizador</h2>
+			<h4>Sugerencia de sistema potabilizador</h4>
 				{%csrf_token%}			
 				{{EdicionPruebaForm7 | bootstrap}}
 
 		<div class="offset-md-4 col-6">
 			  <!-- Trigger the modal with a button -->
-			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Sugerir sistema potabilización</button>
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Sugerir sistema potabilizador</button>
 
 			<!-- Modal -->
 			<div class="modal fade" id="myModal" role="dialog">

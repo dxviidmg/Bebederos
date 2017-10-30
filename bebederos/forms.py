@@ -36,8 +36,8 @@ class BebederoUpdateForm3(forms.ModelForm):
 		model = SistemaBebedero
 		fields = ('asignacion',)
 #	def __init__(self, *args, **kwargs):
-#		super(BebederoEditForm2, self).__init__(*args, **kwargs)
-#		self.fields['linea_ensamblaje'].required = True
+#		super(BebederoEditForm3, self).__init__(*args, **kwargs)
+#		self.fields['asignacion'].required = True
 
 class BebederoUpdateForm4(forms.ModelForm):	
 	class Meta:

@@ -15,16 +15,16 @@
 		
 			<h1>Mantenimientos</h1>
 			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
-			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+			<h3>Escuela {{escuela.get_full_name}}</h3>
 		</div>
 	</div>
 
 {%if request.user.perfil.tipo == "SI" and mantenimientos.count < 24%}
 
-	<div class="row">
+	<div class="row espacio2">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Registro</h4>	
+				<h5>Registro</h5>	
 				{%csrf_token%}
 				{{NuevoMantenimientoForm | bootstrap}}
 				<a href=""><input type="submit" value="Registrar"></a>
@@ -33,9 +33,9 @@
 	</div>
 {%endif%}
 
-	<div class="row">
+	<div class="row espacio2">
 		<div class="col-12">
-			<h3>Lista de mantenimientos</h3>
+			<h4>Lista</h4>
 			<div class="table-responsive">
 				<table class="table table-bordered">
 					<thead>
@@ -44,7 +44,7 @@
 						<th>Carnet</th>
 						<th>Tipo</th>
 						<th>Descripción</th>
-						<th>Creación</th>
+						<th>Fecha y hora de registro</th>
 					</thead>
 					<tbody>
 					
@@ -53,7 +53,7 @@
 						<tr>
 							<td>{{mantenimiento.mes}} {{mantenimiento.año}}</td>
 							<td>{{mantenimiento.volumen}}</td>
-							<td><a href="{{mantenimiento.carnet.url}}">Ver</a></td>
+							<td><a href="{{mantenimiento.carnet.url}}">Descargar</a></td>
 							<td>{{mantenimiento.tipo}}</td>
 							<td> {%if mantenimiento.descripcion%}{{mantenimiento.descripcion}}{%endif%}</td>
 							<td>{{mantenimiento.creacion}}</td>

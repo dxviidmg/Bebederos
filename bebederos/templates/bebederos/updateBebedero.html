@@ -18,20 +18,20 @@
 		<div class="col-12">
 			<h1>Sistema Bebedero</h1>
 			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
-			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
+			<h3>Escuela {{escuela.get_full_name}}</h3>
 
 			<form action="." method="post" enctype="multipart/form-data">
 				<h4>Asignación de componentes y especificaciones</h4>
 				{%csrf_token%}
 				
 				{%if request.user.perfil.tipo == "PQ"%}
-				<p>Linea de ensambaje: {{sistemaBebedero.linea_ensamblaje}}</p>
+				<p>Línea de ensamblaje: {%if sistemaBebedero.linea_ensamblaje%}{{sistemaBebedero.linea_ensamblaje}}{%else%}por definir{%endif%}</p>
 
 				{{EdicionBebederoForm1 | bootstrap}}
 				{%elif request.user.perfil.tipo == "PM"%}
-				<p>Sistema de potabilización: {{sistemaBebedero.sistema_potabilizacion}}</p>
-				<p>Identificador sistema de potabilización: {{sistemaBebedero.identificador_sp}}</p>
-				<p>Etapas del sistema de potabilización: {{sistemaBebedero.etapas_sp}}</p>
+				<p>Sistema potabilizador: {{sistemaBebedero.sistema_potabilizacion}}</p>
+				<p>Identificador del sistema potabilizador (No. de serie): {{sistemaBebedero.identificador_sp}}</p>
+				<p>Etapas del sistema  potabilizador: {{sistemaBebedero.etapas_sp}}</p>
 				<p>Capacidad de tanque presurizador: {{sistemaBebedero.capacidad_tanque_presurizador}}</p>
 				{{EdicionBebederoForm2 | bootstrap}}
 				{%endif%}
@@ -47,7 +47,7 @@
 
 		<div class="row">
 			<div class="col-md-4 col-sm-6 col-12">
-		<a class="btn btn-primary" href="{%url 'bebederos:ExportComprobanteTrazabilidadPDF' sistemaBebedero.pk%}" role="button">Descargar guia de trazabilidad</a>
+		<a class="btn btn-primary" href="{%url 'bebederos:ExportComprobanteTrazabilidadPDF' sistemaBebedero.pk%}" role="button">Descargar guía de trazabilidad</a>
 		</div>
 		</div>
 			<form action="." method="post" enctype="multipart/form-data">

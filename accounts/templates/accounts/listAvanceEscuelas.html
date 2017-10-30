@@ -2,7 +2,7 @@
 
 {%block content%}
 
-	<h1>Avance de escuelas de {{entidad.nombre}}</h1>
+	<h1>Avance de escuelas {%if request.user.perfil.tipo != "SI"%} de {{entidad.nombre}}{%endif%}</h1>
 	
 	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "IMTA"%}
 	<p><a href="{%url 'accounts:ListViewPartidas' entidad.partida.numero%}">Regresar</a></p>
