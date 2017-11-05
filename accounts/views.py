@@ -11,6 +11,7 @@ from bebederos.forms import BebederoCreateForm
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 #Librerias para generar ZIP
 import zipfile
@@ -52,23 +53,26 @@ class ListViewRegiones(View):
 		}
 		return render(request,template_name, context)
 
-#Lista de partidas
-class ListViewPartidas(View):
+class ListViewEntidades(View):
 	@method_decorator(login_required)
-	def get(self, request, numero):
-		template_name = "accounts/listPartidas.html"
-		region = Region.objects.get(numero=numero)
-		partidas = Partida.objects.filter(region=region)
+	def get(self, request, numero=None):
+		template_name = "accounts/listEntidades.html"
 		
-		ListEntidadesPorPartida = []
+		if request.user.perfil.cargo == "SIM":
+			region = None
+			sim = User.objects.get(pk=request.user.pk)
+			entidades = Entidad.objects.filter(sim=sim)
+		elif request.user.perfil.tipo == "Laboratorio":
+			region = None
+			laboratorio = User.objects.get(pk=request.user.pk)
+			entidades = Entidad.objects.filter(laboratorio=laboratorio)
+		elif request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM":
+			region = Region.objects.get(numero=numero)
+			entidades = Entidad.objects.filter(region=region)			
 
-		for partida in partidas:
-
-			ListEntidadesPorPartida.append({'partida': partida.numero, 'entidades': Entidad.objects.filter(partida=partida)})
-			
 		context = {
 			'region': region,
-			'ListEntidadesPorPartida': ListEntidadesPorPartida,
+			'entidades': entidades,
 		}
 		return render(request,template_name, context)
 
@@ -79,18 +83,21 @@ class ListViewZonas(View):
 		template_name = "accounts/listZonas.html"
 		ListMunicipiosPorZona = []
 
-		if request.user.perfil.tipo == 'SI':
-			zona = request.user.superintendente
-			entidad = request.user.superintendente.entidad
-			
-			region = request.user.superintendente.entidad.partida.region
-			ListMunicipiosPorZona.append({'zona': zona.nombre, 'municipios': Municipio.objects.filter(zona=zona)})
+		if request.user.perfil.cargo == 'CEINIFED':
+			print(request.user.coordinador_estatal_inifed.nombre)
+			ceinided = User.objects.get(pk=request.user.pk)
+			entidad = Entidad.objects.get(coordinador_estatal_inifed=ceinided)
+			zonas = Zona.objects.filter(entidad=entidad)
+			municipios = Municipio.objects.filter(zona__in=zonas)			
+			region = None
+			for zona in zonas:
+				ListMunicipiosPorZona.append({'zona': zona.nombre, 'municipios': Municipio.objects.filter(zona=zona)})
+
 		elif slug:
 			entidad = Entidad.objects.get(slug=slug)
 			zonas = Zona.objects.filter(entidad=entidad)
 			municipios = Municipio.objects.filter(zona__in=zonas)
-			partida = Partida.objects.get(entidad=entidad)
-			region = Region.objects.get(partida=partida)
+			region = Region.objects.get(entidad=entidad)
 	
 			for zona in zonas:
 				ListMunicipiosPorZona.append({'zona': zona.nombre, 'municipios': Municipio.objects.filter(zona=zona)})
@@ -108,20 +115,10 @@ class ListViewEscuelas(View):
 	def get(self, request, pk=None):
 		template_name = "accounts/listEscuelas.html"
 
-		if request.user.perfil.tipo == "Ejecutora":
-			ejecutora = User.objects.get(pk=request.user.pk)
-	
-			municipio = None
-			sistemaBebederos = SistemaBebedero.objects.filter(ejecutora=ejecutora)
-
-			escuelas = User.objects.filter(escuela__in=sistemaBebederos)
-			perfiles = Perfil.objects.filter(user__in=escuelas).order_by('municipio__nombre', 'localidad', 'nivel_educativo')
-			entidad = None
-		else:
-			municipio = Municipio.objects.get(pk=pk)
-			perfiles = Perfil.objects.filter(municipio=municipio).order_by('municipio__nombre', 'localidad', 'nivel_educativo')
-			zona = Zona.objects.get(municipio=municipio)
-			entidad = Entidad.objects.get(zona=zona)
+		municipio = Municipio.objects.get(pk=pk)
+		perfiles = Perfil.objects.filter(municipio=municipio).order_by('municipio__nombre', 'localidad', 'nivel_educativo')
+		zona = Zona.objects.get(municipio=municipio)
+		entidad = Entidad.objects.get(zona=zona)
 
 		context = {
 			'municipio': municipio,
@@ -141,8 +138,14 @@ class DetailViewEscuela(View):
 		municipio = Municipio.objects.get(perfil=perfil)
 		zona = Zona.objects.get(municipio=municipio)
 		entidad = Entidad.objects.get(zona=zona)
-		partida = Partida.objects.get(entidad=entidad)
-		region = Region.objects.get(partida=partida)
+		region = Region.objects.get(entidad=entidad)
+
+		try: 
+			perfilesRTs = Perfil.objects.filter(residente_tecnico_inifed=entidad)
+			rts = User.objects.filter(perfil__in=perfilesRTs)
+		except Perfil.DoesNotExist:
+			perfilesRTs = None
+			rts = None
 
 		try:
 			visitaDeAcuerdo = VisitaDeAcuerdo.objects.get(escuela=escuela)
@@ -208,6 +211,7 @@ class DetailViewEscuela(View):
 			'zona': zona,
 			'entidad': entidad,
 			'region': region,
+			'rts': rts
 		}
 		return render(request,template_name, context)
 
@@ -339,7 +343,7 @@ class SearchViewEscuelas(View):
 #Reporte de avance por escuela
 class ListViewAvanceEscuelas(View):
 	@method_decorator(login_required)
-	def get(self, request, pk):
+	def get(self, request, slug):
 		template_name = "accounts/listAvanceEscuelas.html"
 
 		if request.user.perfil.tipo == "SI":
@@ -351,7 +355,7 @@ class ListViewAvanceEscuelas(View):
 			escuelas = User.objects.filter(perfil__in=perfilesEscuelas).order_by('perfil__municipio__nombre', 'perfil__localidad', 'perfil__nivel_educativo')
 		else:
 
-			entidad = Entidad.objects.get(pk=pk)
+			entidad = Entidad.objects.get(slug=slug)
 			zonas = Zona.objects.filter(entidad=entidad)
 			municipios = Municipio.objects.filter(zona__in=zonas)
 			perfilesEscuelas = Perfil.objects.filter(municipio__in=municipios)
@@ -407,26 +411,24 @@ class ListViewAvanceEscuelas(View):
 
 			data = {'escuela' : escuela, 'primerPrueba': primerPrueba, 'inicioDeTrabajo': inicioDeTrabajo, 'visitaDeAcuerdo': visitaDeAcuerdo, 'sistemaBebedero': sistemaBebedero, 'evidencias': evidencias, 'segundaPrueba': segundaPrueba, 'inicioFuncionamiento': inicioFuncionamiento, 'mantenimientos': mantenimientos, 'actaEntrega': actaEntrega}
 			AvancePorEscuelas.append(data)
+			paginator = Paginator(AvancePorEscuelas, 10)
+			page = request.GET.get('page')
+			try:
+				escuelas = paginator.page(page)
+			except PageNotAnInteger:
+				escuelas = paginator.page(1)
+			except EmptyPage:
+				escuelas = paginator.page(paginator.num_pages)
 
 		context = {
 			'AvancePorEscuelas': AvancePorEscuelas,
 			'entidad': entidad,
+			'escuelas': escuelas,
 		}
 		return render(request,template_name, context)
 
 #Lista de entidades (para laboratorios)
-class ListViewEntidades(View):
-	@method_decorator(login_required)
-	def get(self, request):
-		template_name = "accounts/listEntidades.html"
 
-		user = User.objects.get(pk=request.user.pk)
-		entidades = Entidad.objects.filter(laboratorio=user)
-		
-		context = {
-			'entidades': entidades,
-		}
-		return render(request,template_name, context)
 
 #Export ZIP
 def ExportExpedienteZIP(request, pk):

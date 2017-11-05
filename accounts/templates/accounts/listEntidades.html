@@ -2,12 +2,22 @@
 
 {%block content%}
 
-<h1>Entidades</h1>
+<h1>Lista de Entidades de la Región {{region.numero}}: {{region.nombre}}</h1>
+
+<a href="{%url 'accounts:ListViewRegiones'%}">Regresar</a>
 <div class="table-responsive">
 	<table class="table table-bordered">
 		<thead>
 			<tr>
+				<th>Región</th>
+				<th>Partida</th>
 				<th>Estado</th>
+				<th colspan="2">Listas</th>
+				<th>Asignadas</th>
+				<th>Registradas</th>
+				<th>Aceptadas</th>
+				<th>Pendientes</th>
+				<th>Rechazadas</th>					
 			</tr>
 		</thead>
 		<tbody>
@@ -15,14 +25,23 @@
 	{%for entidad in entidades%}
 	
 			<tr>
-				
-				<td><a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.pk%}">{{entidad}}</a></td>
+				<td>{{entidad.region}}</td>
+				<td>{{entidad.partida}}</td>
+				<td>{{entidad}}</td>	
+				<td><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">Por zonas</a></td>	
+				<td><a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.slug%}">Avance detallado por escuela</a></td>
+			
+				<td>{{entidad.escuelas_asignadas}}</td>
+				<td>{{entidad.escuelas_registradas}}</td>
+				<td>{{entidad.escuelas_aceptadas}}</td>
+				<td>{{entidad.escuelas_pendientes}}</td>
+				<td>{{entidad.escuelas_rechazadas}}</td>								
 			</tr>
 	{%empty%}
 
 			<tr>
 				
-				<td>No hay entidades asignadas</td>
+				<td colspan="10">No hay entidades asignadas</td>
 			</tr>
 
 	{%endfor%}

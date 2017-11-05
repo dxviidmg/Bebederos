@@ -2,110 +2,124 @@
 
 {%block content%}
 
-	<h1>Avance de escuelas {%if request.user.perfil.tipo != "SI"%} de {{entidad.nombre}}{%endif%}</h1>
+	<h1>Avance detallado de las escuelas {%if request.user.perfil.tipo != "SI"%} de {{entidad.nombre}}{%endif%}</h1>
 	
 	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "IMTA"%}
-	<p><a href="{%url 'accounts:ListViewPartidas' entidad.partida.numero%}">Regresar</a></p>
+	<p><a href="{%url 'accounts:ListViewEntidades' entidad.region.numero%}">Regresar</a></p>
 	{%endif%}
 	<div class="table-responsive">
 		<table class="table table-bordered">
 			<thead>
 				<tr>
-					<th>Zona</th>
-					<th>Municipio</th>
-					<th>Localidad</th>
-					<th>C. C. T</th>
-					<th>Nombre</th>
-					<th>Nivel educativo</th>
+					<th rowspan="2">Zona</th>
+					<th rowspan="2">Municipio</th>
+					<th rowspan="2">Localidad</th>
+					<th rowspan="2">C. C. T</th>
+					<th rowspan="2">Nombre</th>
+					<th rowspan="2">Nivel educativo</th>
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
-					<th>Mueble</th>
-					{%endif%}
-
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
-					<th>Sistema de potabilización</th>
-					{%endif%}					
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
-					<th>Primer prueba (SI)</th>
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
+					<th rowspan="2">Mueble</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
-					<th>Primer prueba (LAB)</th>
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
+					<th rowspan="2">Sistema potabilizador</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "IMTA"%}
-					<th>Primer prueba (PQ)</th>
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
+					<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%} colspan="5" {%elif request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "IMTA"%} colspan="2"{%endif%}>Primer prueba</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
-					<th>Primer prueba (IMTA)</th>
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}
+					<th rowspan="2">Inicio de trabajo</th>
+					{%endif%}
+					
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
+					<th rowspan="2">Visita de acuerdos</th>
+					{%endif%}			
+					
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
+					<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%} colspan="3"{%endif%}>Manufactura</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "IMTA"%}	
-					<th>Status de primer prueba</th>
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"  or request.user.perfil.tipo == "PQ"%}
+					<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%} colspan="2"{%endif%}>Construcción</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
-					<th>Inicio de trabajo</th>
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
+					<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%} colspan="5" {% elif request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "IMTA"%} colspan="2"{%endif%}>Segunda prueba</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"  or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
-					<th>Visita de acuerdos</th>
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}
+					<th rowspan="2">Inicio de funcionamiento</th>
 					{%endif%}
-
-					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"  or request.user.perfil.tipo == "PM"%}
-					<th>Manufactura (PQ)</th>
+	
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}
+					<th rowspan="2">Mantenimientos</th>
 					{%endif%}
-
-					{%if request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
-					<th>Manufactura (GP)</th>
+					
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}
+					<th rowspan="2">Acta de entrega</th>
 					{%endif%}
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
-					<th>Manufactura (Trazabilidad)</th>
-					{%endif%}
-
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
-					<th>Construcción</th>
-					{%endif%}
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "PQ"%}
-					<th>Etapa de construcción</th>
-					{%endif%}
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "PQ"%}
-					<th>Segunda prueba (SI)</th>
-					{%endif%}
-
-					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "PQ"%}
-					<th>Segunda prueba (Lab)</th>
-					{%endif%}
-
-					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "IMTA"%}
-					<th>Segunda prueba (PQ)</th>
-					{%endif%}
-
-					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
-					<th>Segunda prueba (IMTA)</th>
-					{%endif%}
-
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "IMTA"%}
-					<th>Status de segunda prueba</th>
-					{%endif%}
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
-					<th>Inicio de funcionamiento</th>
-					{%endif%}
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
-					<th>Mantenimientos</th>
-					{%endif%}
-
-					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
-					<th>Acta de entrega</th>
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
-					<th>Expediente técnico</th>
-					{%endif%}
+					
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED"%}
+					<th rowspan="2">Expediente técnico</th>
 					{%endif%}
 				</tr>
+				<tr>
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					<th>Muestreo</th>{%endif%}
+					
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					<th>Analísis de laboratorio</th>{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
+					<th>Propuesta de sistema potabilizador</th>{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
+					<th>Validación de sistema potabilizador</th>{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
+					<th>Resultado de validación</th>{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
+					<th>Asignación de sistema potabilizador</th>{%endif%}
+					
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
+					<th>Asignación de mueble</th>{%endif%}
+					
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
+					<th>Guía de trazabilidad)</th>{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}
+					<th>Evidencias</th>{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
+					<th>Etapa</th>{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"  or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					<th>Muestreo</th>{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED"  or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+					<th>Analísis de laboratorio</th>{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
+					<th>Propuesta de sistema potabilizador</th>{%endif%}
+					
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
+					<th>Validación de sistema potabilizador</th>{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
+					<th>Resultado de validación</th>	{%endif%}
+
+				</tr>
+
 			</thead>
 			<tbody>
-	{%for avanceEscuela in AvancePorEscuelas%}
+
+	{%for avanceEscuela in escuelas%}
+				
 				<tr>
 					<td style="background-color: {{avanceEscuela.escuela.perfil.municipio.zona.color}};">
 					{{avanceEscuela.escuela.perfil.municipio.zona.nombre}}
@@ -117,91 +131,99 @@
 					<td>{{avanceEscuela.escuela.get_full_name}}</td>
 					<td>{{avanceEscuela.escuela.perfil.nivel_educativo}}</td>
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
 					<td>{%if avanceEscuela.sistemaBebedero.mueble%}{{avanceEscuela.sistemaBebedero.mueble}}{%endif%}</td>
 					{%endif%}
+					
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
 					<td>{%if avanceEscuela.sistemaBebedero.sistema_potabilizacion%}{{avanceEscuela.sistemaBebedero.sistema_potabilizacion}}{%endif%}</td>
-					{%endif%}					
+					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
 					<td>{%if avanceEscuela.primerPrueba.reporte_toma_agua%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
 					<td>{%if avanceEscuela.primerPrueba.no_registro%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "IMTA"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
 					<td>{%if avanceEscuela.primerPrueba.propuesta_sistema_potabilizador%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
 					<td>{%if avanceEscuela.primerPrueba.dictamen_sistema_potabilizador%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "IMTA"%}
-					<td>{{avanceEscuela.primerPrueba.aprobacion}}</td>
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
+					<td>{%if avanceEscuela.primerPrueba.aprobacion%}{{avanceEscuela.primerPrueba.aprobacion}}{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}
 					<td>{%if avanceEscuela.inicioDeTrabajo%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
 					<td>{%if avanceEscuela.visitaDeAcuerdo%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "PM"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
 					<td>{%if avanceEscuela.sistemaBebedero.etapas_sp%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
 					<td>{%if avanceEscuela.sistemaBebedero.linea_ensamblaje%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
 					<td>{%if avanceEscuela.sistemaBebedero.asignacion%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}
 					<td>{%if avanceEscuela.evidencias%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "PQ"%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
 					<td>{%if avanceEscuela.escuela.perfil.avance == 100%}Finalizada{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
 					<td>{%if avanceEscuela.segundaPrueba.reporte_toma_agua%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
 					<td>{%if avanceEscuela.segundaPrueba.no_registro%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "IMTA"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
 					<td>{%if avanceEscuela.segundaPrueba.resultados_laboratorio%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
 					<td>{%if avanceEscuela.segundaPrueba.dictamen_validacion%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "IMTA"%}
-					<td>{{avanceEscuela.segundaPrueba.aprobacion}}</td>
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
+					<td>{%if avanceEscuela.segundaPrueba.aprobacion%}{{avanceEscuela.segundaPrueba.aprobacion}}{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}
 					<td>{% if avanceEscuela.inicioFuncionamiento%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}
 					<td>{%if avanceEscuela.mantenimientos%}{{avanceEscuela.mantenimientos.count}}{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}
 					<td>{%if avanceEscuela.actaEntrega%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
-					<td><a href="{%url 'accounts:ExportExpedienteZIP' avanceEscuela.escuela.pk%}">{%if avanceEscuela.inicioFuncionamiento%}Descargar{%endif%}</a></td>
 					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED"%}
+					<td>{%if avanceEscuela.inicioFuncionamiento%}<a href="{%url 'accounts:ExportExpedienteZIP' avanceEscuela.escuela.pk%}">Descargar</a>{%endif%}</td>
+					{%endif%}
+
 				</tr>
 
 	{%empty%}
@@ -213,6 +235,39 @@
 			</tbody>
 		</table>
 	</div>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+  	    {% if escuelas.has_previous %}
+	         
+
+    <li class="page-item">
+      <a class="page-link" href="?page={{ escuelas.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    	    {% endif %}
+
+	    {% for page in escuelas.paginator.page_range %}
+
+	        <li class="page-item {% if escuelas.number == page  %}active{% endif %}"><a class="page-link" href="?page={{page }}">{{page}}</a></li>
+	    {% endfor %}
+
+
+  	    {% if escuelas.has_next %}
+	         
+
+    <li class="page-item">
+      <a class="page-link" href="?page={{ escuelas.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+    	    {% endif %}
+
+  </ul>
+</nav>
 
 	{%if request.user.perfil.tipo == "Administrador" or "Pilar" in request.user.first_name%}
 
@@ -238,8 +293,8 @@
 					<td><a href="{%url 'visitas:ExportPlanosInstalacionHidraculicaZIP' entidad.pk%}">Planos de instalación hidráulica</a></td>
 					<td><a href="{%url 'visitas:ExportPlanosInstalacionSanitariaZIP' entidad.pk%}">Planos de instalación sanitaria</a></td>
 					<td><a href="{%url 'visitas:ExportActasFuncionamietoZIP' entidad.pk%}">Actas de inicio de funcionamieto</a></td>
-					
 					{%endif%}
+					
 					{%if "Pilar" in request.user.first_name%}
 					<td>
 					<a href="{% url 'pruebas:ExportPruebasPorEscuelasCSV' entidad.pk%}">Base de formato T7</a>

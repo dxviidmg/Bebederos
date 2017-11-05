@@ -2,7 +2,7 @@
 
 {%block content%}
 
-	{%if request.user.perfil.tipo != "Ejecutora"%}
+	{%if request.user.perfil.tipo == "Ejecutora"%}
 	<h1>{{municipio.nombre}}</h1>
 
 	<p><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">Regresar</a></p>

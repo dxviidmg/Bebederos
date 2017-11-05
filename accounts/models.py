@@ -6,34 +6,33 @@ from construccion.models import EvidenciaConstruccion
 from geoposition.fields import GeopositionField
 
 class Region(models.Model):
+	nombre = models.CharField(max_length=20)
 	numero = models.IntegerField()
 	color = models.CharField(max_length=10)
-	nombre = models.CharField(max_length=20)
+
 
 	def __str__(self):
-		return '{}'.format(self.numero)
+		return '{} {}'.format(self.numero, self.nombre)
 
 	class Meta:
 		ordering = ['numero']
 		verbose_name_plural = "Regiones"
 
-	def get_absolute_url(self):
-		return reverse('accounts:ListViewPartidas', kwargs={'numero': self.numero})
-
-class Partida(models.Model):
-	region = models.ForeignKey(Region, verbose_name="Región")
-	numero = models.IntegerField(verbose_name="número")
-
-	def __str__(self):
-		return '{} de región {}'.format(self.numero, self.region)	
-
-	class Meta:
-		ordering = ['region', 'numero']
-
 class Entidad(models.Model):
-	coordinador_estatal = models.OneToOneField(User, null=True, blank=True, verbose_name="Coordinador Estatal", related_name="coordinador_estatal")
+	region = models.ForeignKey(Region, verbose_name="Región")
+	partida = models.IntegerField(verbose_name="número")
+
+	#Perfiles de INIFED
+	coordinador_estatal_inifed = models.OneToOneField(User, null=True, blank=True, verbose_name="Coordinador Estatal de INIFED", related_name="coordinador_estatal_inifed")
+#	residente_tecnico_inifed = models.ForeignKey(User, null=True, blank=True, verbose_name="Residente Técnico de INIFED", related_name="residente_tecnico_inifed")
+
+	#Perfiles de Residente
+	residente_obra = models.OneToOneField(User, null=True, blank=True, verbose_name="Residente de Obra", related_name="residente_obra")
+	sim = models.ForeignKey(User, null=True, blank=True, verbose_name="Superintendente de mantenimiento", related_name="sim")
+
 	laboratorio = models.ForeignKey(User, null=True, blank=True, verbose_name="Laboratorio", related_name="laboratorio")
-	partida = models.ForeignKey(Partida)
+
+#	partida = models.ForeignKey(Partida)
 	nombre = models.CharField(max_length=30)
 	abreviatura = models.CharField(max_length=4)
 	escuelas_asignadas = models.IntegerField(default=0)
@@ -70,7 +69,7 @@ class Entidad(models.Model):
 		return reverse('accounts:ListViewMunicipios', kwargs={'numero': self.partida.numero, 'slug': self.slug})
 
 class Zona(models.Model):
-	superintendente = models.OneToOneField(User, null=True, blank=True, related_name="superintendente")
+#	superintendente = models.OneToOneField(User, null=True, blank=True, related_name="superintendente")
 	entidad = models.ForeignKey(Entidad)
 	nombre = models.CharField(max_length=30, verbose_name="Nombre o número")
 	color = models.CharField(max_length=30)
@@ -112,12 +111,10 @@ class Municipio(models.Model):
 class Perfil(models.Model):
 	tipo_choices = (
 		("Administrador", "Administrador"), #Yo
-		("SI", "Superintendente"),
 		("Ejecutora", "Ejecutora"),
 		("Escuela", "Escuela"),
 		("Laboratorio", "Laboratorio"),
 		("INIFED", "INIFED"), #INIFED Federal
-		("CEstatal", "Coordinador Estatal de INIFED"),
 		("IMTA", "IMTA"),
 		("PQ", "Procesos Químicos (Calidad de Agua)"), #Pilar, #Isauri
 		("PM", "Planta y Manufactura"), #Raúl, Héctor
@@ -131,19 +128,23 @@ class Perfil(models.Model):
 		("Superior", "Superior"),
 	)
 
-	conexion_choices = (
-		("Red Municipal", "Red Municipal"),
-		("No especificado", "No especificado"),
-	)
-
 	turno_choices = (
 		("Matutino", "Matutino"),
 		("Vespertino", "Vespertino"),
 	)
 
+	cargo_choices = (
+		("CEINIFED", "Coordinador Estatal de INIFED"),		
+		("RTINIFED", "Residente Técnico de INIFED"),
+		("RO", "Residente de Obra"),
+		("SIM", "SIM"),		
+	)	
+
+	#Atributos de todos los usuarios, sin importar el tipo
 	user = models.OneToOneField(User)
-	tipo = models.CharField(max_length=30, choices=tipo_choices)
 	telefono = models.CharField(max_length=10, blank=True, null=True, verbose_name="Teléfono")
+	tipo = models.CharField(max_length=30, choices=tipo_choices)
+	cargo = models.CharField(max_length=30, blank=True, null=True, verbose_name="Cargo", choices=cargo_choices)
 
 	#Atributos exclusivos de escuelas
 	municipio = models.ForeignKey(Municipio, null=True, blank=True)	
@@ -153,7 +154,6 @@ class Perfil(models.Model):
 	nivel_educativo = models.CharField(max_length=20, blank=True, null=True, choices=nivel_choices)
 	turno = models.CharField(max_length=20, blank=True, null=True, choices=turno_choices)
 	plantilla_escolar = models.IntegerField(blank=True, null=True)
-	conexion = models.CharField(max_length=20, blank=True, null=True, choices=conexion_choices)
 	status = models.CharField(max_length=20, blank=True, null=True)
 	avance = models.IntegerField(blank=True, null=True)
 	domicilio = models.CharField(max_length=300, blank=True, null=True)
@@ -161,10 +161,11 @@ class Perfil(models.Model):
 	referencias = models.CharField(max_length=200, blank=True, null=True)
 	SSID = models.CharField(max_length=20, null=True, blank=True)
 	clave_SSID = models.CharField(max_length=20, null=True, blank=True)
-
-	#Atributo exclusivo para Constructoras
-	representante_legal = models.CharField(max_length=100, blank=True, null=True)
 	coordenadas = GeopositionField(null=True, blank=True)
+
+	#Atributo exclusivo para la ejecutora o INIFED
+	
+	residente_tecnico_inifed = models.ForeignKey(Entidad, verbose_name="Es residente estatal INIFED de", null=True, blank=True, related_name="residente_tecnico_estatal")
 	
 	def UpdateStatus(self):
 		perfil = Perfil.objects.get(pk=self.pk)

@@ -14,14 +14,15 @@
 			<p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">Regresar a zona</a></p>
 			{%endif%}
 			{%endif%}
-			{%if request.user.perfil.tipo == "SI"%}
-			<p><a href="{%url 'accounts:ListViewAvanceEscuelasPorZona' request.user.superintendente.pk%}">Regresar a lista de escuelas</a></p>
+
+			{%if request.user.perfil.tipo == "Ejecutora"%}
+			<p><a href="">Regresar a lista de escuelas</a></p>
 			{%elif request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Administrador"%}
 			<p><a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.pk%}">Regresar a lista de escuelas</a></p>			
 			{%endif%}
 
 
-			{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador"%}
+			{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador"%}
 			<br>
 			<a href="{%url 'accounts:UpdateViewEscuela' perfil.pk%}">Actualizar datos</a>
 			<br>
@@ -129,35 +130,69 @@
 		{%endif%}
 			<!-- Tabla de Contactos-->
 			<h2 class="espacio2">Contactos</h2>
-
+			<h3>INIFED</h3>
 			<div class="table-responsive text-center">
 				<table class="table table-bordered">
 					<thead>
 						<tr>
 							<th>Cargo</th>
-							<th>Coordinador Estatal</th>
-							<th>Superintendente</th>
-							<th>Ejecutora</th>
+							<th>Coordinador Estatal de INIFED</th>
+							<th colspan="{{rts|length}}"> {%if rts|length > 1%}Residentes Técnicos{%else%}Residente Técnico{%endif%}</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td class="titulo-tabla">Nombre</td>
-							<td>{{perfil.municipio.zona.entidad.coordinador_estatal.get_full_name}}</td>
-							<td>{{perfil.municipio.zona.superintendente.get_full_name}}</td>
-							<td>{%if sistemaBebedero.ejecutora%}{{sistemaBebedero.ejecutora}}{%else%}No aplica{%endif%}</td>
+							<td>{{perfil.municipio.zona.entidad.coordinador_estatal_inifed.get_full_name}}</td>
+
+							{%for rt in rts%}
+							<td>{{rt.get_full_name}}</td>
+							{%empty%}
+							<td></td>
+							{%endfor%}
 							</tr>
 							<tr>
 							<td class="titulo-tabla" ">Teléfono</td>
-							<td>{{perfil.municipio.zona.entidad.coordinador_estatal.perfil.telefono}}</td>
-							<td>{{perfil.municipio.zona.superintendente.perfil.telefono}}</td>
-							<td>{%if sistemaBebedero.ejecutora.perfil.telefono%}{{sistemaBebedero.ejecutora.perfil.telefono}}{%else%}No aplica{%endif%}</td>
-						</tr>
+							<td>{{perfil.municipio.zona.entidad.coordinador_estatal_inifed.perfil.telefono}}</td>
+							{%for rt in rts%}
+							<td>{{rt.perfil.telefono}}</td>
+							{%empty%}
+							<td></td>
+							{%endfor%}
+							</tr>
 					</tbody>
 				</table>
 			</div>
+
+			<h3>Ejecutora</h3>
+			<div class="table-responsive text-center">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Cargo</th>
+							<th>Residente de Obra</th>
+							<th colspan="{{rts|length}}">
+								Superintendente de Mantenimiento
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="titulo-tabla">Nombre</td>
+							<td>{{perfil.municipio.zona.entidad.residente_obra.get_full_name}}</td>
+							<td>{{perfil.municipio.zona.entidad.sim.get_full_name}}</td>
+							</tr>
+							<tr>
+							<td class="titulo-tabla" ">Teléfono</td>
+							<td>{{perfil.municipio.zona.entidad.residente_obra.perfil.telefono}}</td>
+							<td>{{perfil.municipio.zona.entidad.sim.perfil.telefono}}</td>							
+							</tr>
+					</tbody>
+				</table>
+			</div>			
 		</div>
 	</div>
+
 
 	<!--Tabla de cronologia-->
 	<div class="row justify-content-center">
@@ -165,14 +200,14 @@
 			<h2>Cronología general de la gestión, construcción, instalación y mantenimiento de un sistema bebedero</h2>
 		</div>
 
-		{%if request.user.perfil.tipo == "SI"  or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO"%}
+		{%if request.user.perfil.tipo == "Ejecutora"  or request.user.perfil.tipo == "Administrador"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a class="thumbnail thumbnail-available container" href="{%url 'incidencias:CRViewIncidencias' perfil.pk%}">Bitácora de incidencias y notas</a>
 		</div>
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if primerPrueba.aprobacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif primerPrueba.aprobacion == "No aprobado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif primerPrueba.aprobacion == "Aprobado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad. 
@@ -180,7 +215,7 @@
 		</div>
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%} {%if primerPrueba.aprobacion == "Aprobado"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela"%} {%if primerPrueba.aprobacion == "Aprobado"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if inicioDeTrabajo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajo</a>
@@ -188,7 +223,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "INIFED"%}
 		{%if inicioDeTrabajo%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -197,7 +232,7 @@
 		{%endif%}
 		{%endif%}
 		
-		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Administrador"  or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "Ejecutora"%}
 		{%if visitaDeAcuerdo%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -206,7 +241,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		{%if sistemaBebedero.no_trazabilidad%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -215,7 +250,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Laboratorio"  or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"  or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		{%if evidenciaFinal%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -224,7 +259,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		{%if segundaPrueba.aprobacion == "Aprobado"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -233,7 +268,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO"  or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "PQ"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO"  or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "PQ"%}
 		{%if funcionamiento%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -243,7 +278,7 @@
 		{%endif%}
 
 
-		{%if request.user.perfil.tipo == "SI" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		{%if mantenimientos.count == 24%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>

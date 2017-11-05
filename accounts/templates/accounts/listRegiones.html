@@ -11,10 +11,10 @@
 
     <div class="col-12 col-sm-4 col-md-4">
 
-      <a href="{{region.get_absolute_url}}"><div class='square-box' style="background-color: {{region.color}}">
+      <a href="{%url 'accounts:ListViewEntidades' region.numero%}"><div class='square-box' style="background-color: {{region.color}}">
         <div class='square-content'>
          <div>
-            <span>{{region}}</span>
+            <span>{{region.numero}}</span>
           </div>
         </div>
       </div>

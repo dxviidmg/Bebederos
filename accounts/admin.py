@@ -8,23 +8,23 @@ from bebederos.models import *
 admin.site.register(Region)
 
 #Partidas
-class PartidaAdmin(admin.ModelAdmin):
-    list_display = ['region', 'numero']
-    search_fields = ['numero', 'region__numero']
-    list_filter = ['region']
-admin.site.register(Partida, PartidaAdmin)
+#class PartidaEntidadAdmin(admin.ModelAdmin):
+#    list_display = ['region', 'numero']
+#    search_fields = ['numero', 'region__numero']
+#    list_filter = ['region']
+#    prepopulated_fields = {"slug": ("nombre",)}    
+#admin.site.register(Partida, PartidaAdmin)
 
 #Entidades
 class EntidadAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'partida', 'coordinador_estatal', 'laboratorio']
-    search_fields = ['nombre', 'coordinador_estatal__first_name', 'coordinador_estatal__last_name', 'laboratorio__first_name', 'laboratorio__last_name']
+    list_display = ['nombre', 'partida', 'coordinador_estatal_inifed', 'residente_obra', 'sim', 'laboratorio']
+    search_fields = ['nombre', 'coordinador_estatal_inifed__first_name', 'coordinador_estatal_inifed__last_name', 'laboratorio__first_name', 'laboratorio__last_name']
     list_filter = ['partida']
-    prepopulated_fields = {"slug": ("nombre",)}
 
 admin.site.register(Entidad, EntidadAdmin)
 
 class ZonaAdmin(admin.ModelAdmin):
-    list_display = ['entidad', 'nombre', 'superintendente']
+    list_display = ['entidad', 'nombre']
     search_fields = ['entidad__nombre', 'nombre']
     list_filter = ['entidad']
 admin.site.register(Zona, ZonaAdmin)

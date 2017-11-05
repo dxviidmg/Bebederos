@@ -7,6 +7,7 @@ class PrimerPrueba(models.Model):
 	aprobacion_choices = (
 		("Aprobado", "Aprobado"),
 		("No aprobado", "No aprobado"),
+		("En espera", "En espera"),
 	)
 	escuela = models.OneToOneField(User, related_name="escuela_primer_prueba")
 

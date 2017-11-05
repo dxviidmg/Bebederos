@@ -57,35 +57,47 @@
               </div>
             </li>
 
-      {%elif request.user.perfil.tipo == "CEstatal"%}
-
+      {%elif request.user.perfil.cargo == "SIM"%}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.coordinador_estatal.slug%}">Por municipios</a>
-          <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.coordinador_estatal.pk%}">Por avance</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewEntidades'%}">Entidades</a>
+                    
           <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
         </div>
       </li>
 
-      {%elif request.user.perfil.tipo == "SI"%}
-
+      {%elif request.user.perfil.cargo == "RO"%}
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Escuelas
-        </a>
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas2'%}">Por municipio</a>
-          <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelasPorZona' request.user.superintendente.pk%}">Avance por escuela</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.residente_obra.slug%}">Por municipios</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.residente_obra.slug%}">Avance general</a>          
           <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
         </div>
       </li>
 
-      {%elif request.user.perfil.tipo == "Ejecutora"%}
-      <li class="nav-item">
-        <a class="nav-link" href="{%url 'accounts:ListViewEscuelasPorEjecutora'%}">Mis obras</a>
+      {%elif request.user.perfil.cargo == "CEINIFED"%}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.coordinador_estatal_inifed.slug%}">Por municipios</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.coordinador_estatal_inifed.slug%}">Avance general</a>          
+          <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
+        </div>
       </li>
-      {%elif request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "IMTA"%}
+
+      {%elif request.user.perfil.cargo == "RTINIFED"%}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.perfil.residente_tecnico_inifed.slug%}">Por municipios</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.perfil.residente_tecnico_inifed.slug%}">Avance general</a>          
+          <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
+        </div>
+      </li>
+
+      {%elif request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "IMTA"%}
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
@@ -115,11 +127,6 @@
 
   </div>
 </nav>
-  
-
-  <div class="container container-header">
-    <img style="width: 100%" src="{%static 'img/header.png'%}">
-  </div>
   
 	<div class="container content">
 

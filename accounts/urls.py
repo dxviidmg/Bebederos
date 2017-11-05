@@ -21,17 +21,18 @@ urlpatterns = [
 
 	url(r'^region/estado/zona/$', views.ListViewZonas.as_view(), name="ListViewZonas2"),
 	url(r'^escuelas/por_ejecutora/$', views.ListViewEscuelas.as_view(), name="ListViewEscuelasPorEjecutora"),
-	url(r'^regiones/estados/$', views.ListViewEntidades.as_view(), name="ListViewEntidades"),
-
+#	url(r'^region/(?P<numero>[-\w]+)/estados/$', views.ListViewEntidades.as_view(), name="ListViewEntidades"),
+	url(r'^region/estados/$', views.ListViewEntidades.as_view(), name="ListViewEntidades"),
 	url(r'^escuelas/search/$',views.SearchViewEscuelas.as_view(), name='SearchViewEscuelas'),
 	url(r'^region/estado/municipio/escuela/mapa/(?P<pk>[-\w]+)/$', views.DetailViewMapa.as_view(), name="DetailViewMapa"),
 	url(r'^region/estado/municipio/escuela/actualizar/(?P<pk>[-\w]+)/$', views.UpdateViewEscuela.as_view(), name="UpdateViewEscuela"),
 	url(r'^region/estado/municipio/escuela/(?P<pk>[-\w]+)/$', views.DetailViewEscuela.as_view(), name="DetailViewEscuela"),
-	url(r'^region/estado/reporte_avance/(?P<pk>[-\w]+)/$', views.ListViewAvanceEscuelas.as_view(), name="ListViewAvanceEscuelas"),	
+	url(r'^region/estado/reporte_avance/(?P<slug>[-\w]+)/$', views.ListViewAvanceEscuelas.as_view(), name="ListViewAvanceEscuelas"),	
 	url(r'^region/estado/municipio/(?P<pk>[-\w]+)/$', views.ListViewEscuelas.as_view(), name="ListViewEscuelas"),
 	url(r'^region/estado/municipio/(?P<pk>[-\w]+)/escuela/create/$', views.CreateViewEscuela.as_view(), name="CreateViewEscuela"),
 	url(r'^region/estado/(?P<slug>[-\w]+)/$', views.ListViewZonas.as_view(), name="ListViewZonas"),	
-	url(r'^region/(?P<numero>[-\w]+)/$', views.ListViewPartidas.as_view(), name="ListViewPartidas"),   
+#	url(r'^region/(?P<numero>[-\w]+)/$', views.ListViewPartidas.as_view(), name="ListViewPartidas"),   
+	url(r'^region/estados/(?P<numero>[-\w]+)/$', views.ListViewEntidades.as_view(), name="ListViewEntidades"),
 	url(r'^regiones/$', views.ListViewRegiones.as_view(), name="ListViewRegiones"),
     ]
 

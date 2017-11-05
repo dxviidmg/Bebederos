@@ -13,3 +13,8 @@ class InicioFuncionamientoAdmin(admin.ModelAdmin):
 
 admin.site.register(InicioFuncionamiento, InicioFuncionamientoAdmin)
 
+class ActaEntregaAdmin(admin.ModelAdmin):
+    list_display = ['escuela']
+    search_fields = ['escuela__get_full_name', 'escuela__username']
+
+admin.site.register(ActaEntrega, ActaEntregaAdmin)

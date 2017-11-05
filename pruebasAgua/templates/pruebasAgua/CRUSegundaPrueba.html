@@ -43,7 +43,7 @@
 
 		</div>
 
-		{%if request.user.perfil.tipo == "PQ"%}
+		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Laboratorio"%}
 		<div class="col-md-5">
 
 		{%if prueba.registro_campo%}
@@ -377,7 +377,7 @@
 		{%endif%}
 	{%else%}
 	
-	{%if request.user.perfil.tipo == "SI"%}
+	{%if request.user.perfil.tipo == "Ejecutora"%}
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
