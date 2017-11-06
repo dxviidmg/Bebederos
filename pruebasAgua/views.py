@@ -6,7 +6,7 @@ from .forms import *
 from django.http import HttpResponse
 import csv
 from django_modalview.generic.base import ModalTemplateView
-from bebederos.forms import BebederoUpdateForm4, BebederoUpdateForm5
+from bebederos.forms import BebederoUpdateForm5
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
@@ -19,8 +19,7 @@ class CRUViewPrimerPrueba(View):
 		escuela = User.objects.get(perfil=perfil)
 		NuevaPruebaForm = PrimerPruebaCreateForm()
 		sistemaBebedero = SistemaBebedero.objects.get(escuela=escuela)
-		EdicionBebederoForm1 = BebederoUpdateForm4(instance=sistemaBebedero)
-		EdicionBebederoForm2 = BebederoUpdateForm5(instance=sistemaBebedero)		
+		EdicionBebederoForm = BebederoUpdateForm5(instance=sistemaBebedero)		
 		sistemaPotabilizadorCalculado = None		
 	
 		try:
@@ -84,8 +83,7 @@ class CRUViewPrimerPrueba(View):
 			'EdicionPruebaForm7': EdicionPruebaForm7,
 			'EdicionPruebaForm8': EdicionPruebaForm8,
 			'sistemaPotabilizadorCalculado': sistemaPotabilizadorCalculado,
-			'EdicionBebederoForm1': EdicionBebederoForm1,
-			'EdicionBebederoForm2': EdicionBebederoForm2,			
+			'EdicionBebederoForm': EdicionBebederoForm,
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -94,8 +92,7 @@ class CRUViewPrimerPrueba(View):
 		NuevaPruebaForm = PrimerPruebaCreateForm(data=request.POST, files=request.FILES)
 		laboratorio = User.objects.get(pk=request.user.pk)
 		sistemaBebedero = SistemaBebedero.objects.get(escuela=escuela)
-		EdicionBebederoForm1 = BebederoUpdateForm4(instance=sistemaBebedero, data=request.POST, files=request.FILES)
-		EdicionBebederoForm2 = BebederoUpdateForm5(instance=sistemaBebedero, data=request.POST, files=request.FILES)
+		EdicionBebederoForm = BebederoUpdateForm5(instance=sistemaBebedero, data=request.POST, files=request.FILES)
 
 		if NuevaPruebaForm.is_valid():
 			NuevaPrueba = NuevaPruebaForm.save(commit=False)
@@ -103,11 +100,9 @@ class CRUViewPrimerPrueba(View):
 			NuevaPrueba.laboratorio = laboratorio
 			NuevaPrueba.save()
 
-		if EdicionBebederoForm1.is_valid():
-			EdicionBebederoForm1.save()
+		if EdicionBebederoForm.is_valid():
+			EdicionBebederoForm.save()
 
-		if EdicionBebederoForm2.is_valid():
-			EdicionBebederoForm2.save()			
 		try:
 			prueba = PrimerPrueba.objects.get(escuela=escuela)
 			EdicionPruebaForm1 = PrimerPruebaUpdateForm1(instance=prueba, data=request.POST, files=request.FILES)

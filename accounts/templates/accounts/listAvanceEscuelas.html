@@ -11,18 +11,22 @@
 		<table class="table table-bordered">
 			<thead>
 				<tr>
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM"%}
 					<th rowspan="2">Zona</th>
+					{%endif%}
+		
 					<th rowspan="2">Municipio</th>
 					<th rowspan="2">Localidad</th>
 					<th rowspan="2">C. C. T</th>
 					<th rowspan="2">Nombre</th>
 					<th rowspan="2">Nivel educativo</th>
 
-					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM"%}
 					<th rowspan="2">Mueble</th>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
 					<th rowspan="2">Sistema potabilizador</th>
 					{%endif%}
 
@@ -121,9 +125,13 @@
 	{%for avanceEscuela in escuelas%}
 				
 				<tr>
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM"%}
 					<td style="background-color: {{avanceEscuela.escuela.perfil.municipio.zona.color}};">
 					{{avanceEscuela.escuela.perfil.municipio.zona.nombre}}
 					</td>
+					{%endif%}
+					
 					<td>{{avanceEscuela.escuela.perfil.municipio.nombre}}</td>
 					<td>{{avanceEscuela.escuela.perfil.localidad}}</td>
 					<td><a href="{%url 'accounts:DetailViewEscuela' avanceEscuela.escuela.perfil.pk%}">{{avanceEscuela.escuela.username}}</a></td>
@@ -131,12 +139,12 @@
 					<td>{{avanceEscuela.escuela.get_full_name}}</td>
 					<td>{{avanceEscuela.escuela.perfil.nivel_educativo}}</td>
 
-					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM"%}
 					<td>{%if avanceEscuela.sistemaBebedero.mueble%}{{avanceEscuela.sistemaBebedero.mueble}}{%endif%}</td>
 					{%endif%}
 					
 
-					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
 					<td>{%if avanceEscuela.sistemaBebedero.sistema_potabilizacion%}{{avanceEscuela.sistemaBebedero.sistema_potabilizacion}}{%endif%}</td>
 					{%endif%}
 
@@ -169,7 +177,7 @@
 					{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
-					<td>{%if avanceEscuela.sistemaBebedero.etapas_sp%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					<td>{%if avanceEscuela.sistemaBebedero.no_serie_sp%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
@@ -185,7 +193,7 @@
 					{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
-					<td>{%if avanceEscuela.escuela.perfil.avance == 100%}Finalizada{%endif%}</td>
+					<td>{%if  avanceEscuela.escuela.perfil.avance == 100%}Finalizado{%elif  avanceEscuela.escuela.perfil.avance < 100%}En proceso o revisión{%endif%}</td>
 					{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}

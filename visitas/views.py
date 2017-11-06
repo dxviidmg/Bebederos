@@ -40,12 +40,10 @@ class CRViewVisitaDeAcuerdo(View):
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevaVisitaForm = VisitaDeAcuerdoCreateForm(data=request.POST, files=request.FILES)
-		si = User.objects.get(pk=request.user.pk)
 
 		if NuevaVisitaForm.is_valid():
 			NuevaVisita = NuevaVisitaForm.save(commit=False)
 			NuevaVisita.escuela = escuela
-			NuevaVisita.si = si
 			NuevaVisita.save()
 
 		try:
@@ -81,12 +79,10 @@ class CRViewInicioFuncionamiento(View):
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevoFuncionamientoForm=InicioFuncionamientoCreateForm(data=request.POST, files=request.FILES)
-		si = User.objects.get(pk=request.user.pk)
 
 		if NuevoFuncionamientoForm.is_valid():
 			NuevoFuncionamiento = NuevoFuncionamientoForm.save(commit=False)
 			NuevoFuncionamiento.escuela = escuela
-			NuevoFuncionamiento.si = si
 			NuevoFuncionamiento.save()
 
 		return redirect("visitas:CRViewInicioFuncionamiento", pk=perfil.pk)
@@ -116,12 +112,10 @@ class CRViewActaEntrega(View):
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
 		NuevaActaEntregaForm=ActaEntregaCreateForm(data=request.POST, files=request.FILES)
-		si = User.objects.get(pk=request.user.pk)
 
 		if NuevaActaEntregaForm.is_valid():
 			NuevaActaEntrega = NuevaActaEntregaForm.save(commit=False)
 			NuevaActaEntrega.escuela = escuela
-			NuevaActaEntregaForm.si = si
 			NuevaActaEntregaForm.save()
 
 		return redirect("visitas:CRViewActaEntrega", pk=perfil.pk)

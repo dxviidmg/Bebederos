@@ -16,7 +16,6 @@ class VisitaDeAcuerdo(models.Model):
 	plano_instalacion_hidraulica = models.FileField(upload_to='visitas/pies/%Y/%m/%d/', verbose_name="Plano de instalación hidráulica con isométrico", null=True, blank=True)
 	plano_instalacion_sanitaria = models.FileField(upload_to='visitas/piss/%Y/%m/%d/', verbose_name="Plano de instalación sanitaria  con isométrico", null=True, blank=True)
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
-	si = models.ForeignKey(User, related_name="si_visita_acuerdo")
 
 	def __str__(self):
 		return '{}'.format(self.escuela)
@@ -30,7 +29,6 @@ class InicioFuncionamiento(models.Model):
 	acta_funcionamiento = models.FileField(upload_to='funcionamiento/actas/%Y/%m/%d/', verbose_name="Acta")
 	video = models.FileField(upload_to='funcionamiento/videos/%Y/%m/%d/', verbose_name="Video")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
-	si = models.ForeignKey(User, related_name="si_entrega_bebedero", null=True, blank=True)
 
 	def __str__(self):
 		return '{}'.format(self.escuela)
@@ -42,11 +40,10 @@ class InicioFuncionamiento(models.Model):
 class ActaEntrega(models.Model):
 	escuela = models.OneToOneField(User)
 	acta_entrega = models.FileField(upload_to='entrega/actas/%Y/%m/%d/', verbose_name="Acta de entrega")
-	si = models.ForeignKey(User, related_name="si_acta_entrega", null=True, blank=True, verbose_name="Superintendente")
 
 	def __str__(self):
 		return '{}'.format(self.escuela)
 
 	class Meta:
 		ordering = ['escuela']
-		verbose_name_plural = 'Actas de entrega'		
+		verbose_name_plural = 'Actas de entrega'

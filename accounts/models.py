@@ -124,8 +124,6 @@ class Perfil(models.Model):
 		("Preescolar", "Preescolar"),
 		("Primaria", "Primaria"),
 		("Secundaria", "Secundaria"),
-		("Media Superior", "Media Superior"),
-		("Superior", "Superior"),
 	)
 
 	turno_choices = (
@@ -137,7 +135,7 @@ class Perfil(models.Model):
 		("CEINIFED", "Coordinador Estatal de INIFED"),		
 		("RTINIFED", "Residente Técnico de INIFED"),
 		("RO", "Residente de Obra"),
-		("SIM", "SIM"),		
+		("SIM", "Superintendente"),		
 	)	
 
 	#Atributos de todos los usuarios, sin importar el tipo

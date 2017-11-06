@@ -41,7 +41,10 @@
 						<th>Fase</th>
 						<th>Hora y fecha de registro</th>
 						<th>Aprobación de Superintendente</th>
+
+						{%if request.user.perfil.cargo == "SIM"%}
 						<th>Acciones</th>
+						{%endif%}
 					</thead>
 					<tbody>
 					
@@ -52,8 +55,9 @@
 							<td>{{evidencia.fase}}</td>
 							<td>{{evidencia.creacion}}</td>
 							<td>{{evidencia.aprobacion_SI}}</td>
-	
+							{%if request.user.perfil.cargo == "SIM"%}
 							<td><a href="{%url 'construccion:UpdateViewEvidencia' evidencia.pk%}">Revisar</a></td>
+							{%endif%}
 						</tr>
 
 					{%empty%}

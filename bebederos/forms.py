@@ -7,22 +7,18 @@ class BebederoCreateForm(forms.ModelForm):
 		model = SistemaBebedero
 		fields = ('mueble',)
 
-#	def __init__(self, *args, **kwargs):
-#		super(BebederoCreateForm, self).__init__(**kwargs)
-#		perfilesEjecutoras = Perfil.objects.filter(tipo="Ejecutora")
-#		self.fields['ejecutora'].queryset = User.objects.filter(perfil__in=perfilesEjecutoras)
-
-#ECA
+#PQ
 class BebederoUpdateForm1(forms.ModelForm):
 	class Meta:
 		model = SistemaBebedero
-		fields = ('sistema_potabilizacion', 'identificador_sp', 'etapas_sp',)
+		fields = ('sistema_potabilizacion', 'no_serie_sp', 'etapas_sp',)
 	def __init__(self, *args, **kwargs):
 		super(BebederoUpdateForm1, self).__init__(*args, **kwargs)
 		self.fields['sistema_potabilizacion'].required = True
-		self.fields['identificador_sp'].required = True
+		self.fields['no_serie_sp'].required = True
 		self.fields['etapas_sp'].required = True
-#Taller
+
+#PM
 class BebederoUpdateForm2(forms.ModelForm):
 	class Meta:
 		model = SistemaBebedero
@@ -38,16 +34,6 @@ class BebederoUpdateForm3(forms.ModelForm):
 #	def __init__(self, *args, **kwargs):
 #		super(BebederoEditForm3, self).__init__(*args, **kwargs)
 #		self.fields['asignacion'].required = True
-
-class BebederoUpdateForm4(forms.ModelForm):	
-	class Meta:
-		model = SistemaBebedero
-		fields = ('ejecutora',)
-
-	def __init__(self, *args, **kwargs):
-		super(BebederoUpdateForm4, self).__init__(**kwargs)
-		perfilesEjecutoras = Perfil.objects.filter(tipo="Ejecutora")
-		self.fields['ejecutora'].queryset = User.objects.filter(perfil__in=perfilesEjecutoras)
 
 #ECA
 class BebederoUpdateForm5(forms.ModelForm):

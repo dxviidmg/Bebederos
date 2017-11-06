@@ -5,7 +5,6 @@ from django.utils import timezone
 class InicioDeTrabajo(models.Model):
 	escuela = models.OneToOneField(User)
 	acta_inicio = models.FileField(upload_to='iniciosTrabajo/actas/%Y/%m/%d/', verbose_name="Acta de inicio de trabajo")
-	si = models.ForeignKey(User, related_name="si_inicio_trabajo", null=True, blank=True, verbose_name="Superintendente")
 
 	def __str__(self):
 		return '{}'.format(self.escuela)
@@ -18,7 +17,6 @@ class InstalacionBebedero(models.Model):
 	escuela = models.OneToOneField(User)
 	reporte = models.FileField(upload_to='instalaciones/reportes/%Y/%m/%d/', verbose_name="Reporte de instalación")
 	recepcion_mueble_bebedero = models.FileField(upload_to='instalaciones/recepciones/%Y/%m/%d/', verbose_name="Recepción del mueble bebedero y sus componentes")
-	si = models.ForeignKey(User, related_name="sim_instalacion_sb", verbose_name="Superintendente")
 
 	def __str__(self):
 		return '{}'.format(self.escuela)

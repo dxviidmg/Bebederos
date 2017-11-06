@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 class Mantenimiento (models.Model):
-	Mes_CHOICES = (
+	mes_CHOICES = (
 		('Enero' , 'Enero'),
 		('Febrero' , 'Febrero'),
 		('Marzo' , 'Marzo'),
@@ -34,7 +34,7 @@ class Mantenimiento (models.Model):
 	si = models.ForeignKey(User, related_name="si_mtto")
 	escuela = models.ForeignKey(User, related_name="escuela_mtto")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
-	mes = models.CharField(choices=Mes_CHOICES, max_length=10)
+	mes = models.CharField(choices=mes_CHOICES, max_length=10)
 	año = models.IntegerField(choices=año_choices)
 	volumen = models.IntegerField(verbose_name="Volumen indicado en medidor (Litros)")
 	tipo = models.CharField(max_length=20, default="Preventivo", choices=tipo_choices)

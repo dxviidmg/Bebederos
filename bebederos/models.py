@@ -28,7 +28,6 @@ class Mueble(models.Model):
 class SistemaPotabilizacion(models.Model):
 	tipo = models.CharField(max_length=15)
 	descripcion = models.TextField(verbose_name="Descripción")
-	litros_vida = models.IntegerField(verbose_name="Litrso de vida")
 
 	def __str__(self):
 		return '{}'.format(self.tipo)
@@ -39,16 +38,21 @@ class SistemaPotabilizacion(models.Model):
 
 class SistemaBebedero(models.Model):
 	linea_ensamblaje_choices = [(str(i), i) for i in range(1,9)]
-
+	
+	etapas_CHOICES = (
+		('A1' , 'A1'),
+		('B1' , 'B1'),
+		('B2' , 'B2'),
+		('B3' , 'B3'),
+	)
 	no_trazabilidad = models.CharField(max_length=100, null=True, blank=True)
 	escuela = models.OneToOneField(User, related_name="escuela")
 	mueble = models.ForeignKey(Mueble, related_name="mueble")
 	sistema_potabilizacion = models.ForeignKey(SistemaPotabilizacion, related_name="sistema_potabilizacion",  null=True, blank=True, verbose_name="Sistema potabilizador")
-	identificador_sp = models.CharField(max_length=20, null=True, blank=True, verbose_name="Identificador del sistema potabilizador (No. de serie)")
-	etapas_sp = models.CharField(max_length=30, null=True, blank=True, verbose_name="Etapas del sistema potabilizador")
+	no_serie_sp = models.CharField(max_length=20, null=True, blank=True, verbose_name="No. de serie del sistema potabilizador ")
+	etapas_sp = models.CharField(max_length=15, null=True, blank=True, choices=etapas_CHOICES, verbose_name="Etapas del sistema potabilizador")
 	capacidad_tanque_presurizador = models.IntegerField(null=True, blank=True, )
 	linea_ensamblaje = models.CharField(max_length=5, choices=linea_ensamblaje_choices, null=True, blank=True, verbose_name="Línea de ensamblaje")
-	ejecutora = models.ForeignKey(User, related_name="ejecutora", null=True, blank=True)
 	asignacion = models.BooleanField(default=False, verbose_name="Si ya se descargó. imprimió y asignó la guia de trazabilidad al mueble correspondiente, oprima el botón")
 
 	def GenerateId(self):

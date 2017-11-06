@@ -71,8 +71,7 @@ class SegundaPrueba(models.Model):
 		("Aprobado", "Aprobado"),
 		("No aprobado", "No aprobado"),
 	)
-	escuela = models.OneToOneField(User, related_name="escuela_segunda_prueba")
-
+	escuela = models.OneToOneField(User, related_name="escuela_segunda_prueba")	
 	#Fase de Toma de Agua / SI
 	reporte_toma_agua = models.FileField(upload_to='pruebas/2/reportes_de_toma/%Y/%m/%d/', verbose_name="Reporte de toma de muestra")
 	foto_toma_agua = models.FileField(upload_to='pruebas/2/fotos/%Y/%m/%d/', verbose_name="Evidencia fotográfica de toma de agua")
@@ -90,7 +89,6 @@ class SegundaPrueba(models.Model):
 	aprobacion = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación")
 
 	creacion = models.DateField(default=timezone.now, verbose_name="Fecha de creación")
-	laboratorio = models.ForeignKey(User, related_name="lab_segunda_prueba")
 
 	#Datos de análisis
 	no_registro = models.CharField(max_length=10, null=True, blank=True, verbose_name="Número de registro")	
