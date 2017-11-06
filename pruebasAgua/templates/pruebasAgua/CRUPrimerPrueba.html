@@ -38,14 +38,32 @@
 
 		<div class="col-md-5">
 	
-		{%if prueba.foto_toma_agua%}
+		{%if prueba.foto_toma_agua_1%}
 
-			<a href="{{prueba.foto_toma_agua.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Evidencia fotográfica de toma de agua</a>
+			<a href="{{prueba.foto_toma_agua_1.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Fotografía 1</a>
 
 		{%endif%}
+		</div>
+		
+		<div class="col-md-5">
+		
+		{%if prueba.foto_toma_agua_2%}
+
+			<a href="{{prueba.foto_toma_agua_2.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Fotografía 2</a>
+
+		{%endif%}		
 
 		</div>
 
+		<div class="col-md-5">
+		
+		{%if prueba.video_toma_agua%}
+
+			<a href="{{prueba.video_toma_agua.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Video</a>
+
+		{%endif%}		
+
+		</div>
 		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Laboratorio"%}
 		<div class="col-md-5">
 
@@ -115,20 +133,32 @@
 						<h5>Registro de parámetros</h5>
 						{{EdicionPruebaForm2 | bootstrap}}
 					</div>
+					<div class="col-12 col-sm-12 col-md-1">
+						<h5>.</h5>
+						{{EdicionPruebaForm9 | bootstrap}}
+						<h5>.</h5>
+						{{EdicionPruebaForm10 | bootstrap}}	
+					</div>
 					<div class="col-12 col-sm-12 col-md-3">
 						<h5>Físicos y organolépticos</h5>
 						{{EdicionPruebaForm3 | bootstrap}}
-					</div>
-					<div class="col-12 col-sm-12 col-md-3">
 						<h5>Bacteriológicos</h5>
-						{{EdicionPruebaForm4 | bootstrap}}
+						{{EdicionPruebaForm4 | bootstrap}}						
+					</div>
+					<div class="col-12 col-sm-12 col-md-1">
+						<h5>.</h5>
+						{{EdicionPruebaForm11 | bootstrap}}
 					</div>
 					<div class="col-12 col-sm-12 col-md-3">
 						<h5>Metales</h5>
 						{{EdicionPruebaForm5 | bootstrap}}
 					</div>
+					<div class="col-12 col-sm-12 col-md-1">
+						<h5>.</h5>
+						{{EdicionPruebaForm12 | bootstrap}}
+					</div>
 					<div class="col-12 col-sm-12 col-md-3">
-						<h5>Iones y compuestos inorgánicos</h5>
+						<h5>Iones y comps. inorgánicos</h5>
 						{{EdicionPruebaForm6 | bootstrap}}
 					</div>
 				</div>
@@ -159,7 +189,17 @@
 						<h5> Parámetros</h5>
 						{{EdicionPruebaForm2 | bootstrap}}
 					</div>
-					<div class="col-12 col-sm-6 col-md-6">
+					<div class="col-12 col-sm-6 col-md-1">
+						<h5>F</h5>
+						{{EdicionPruebaForm9 | bootstrap}}
+						<h5>B</h5>
+						{{EdicionPruebaForm10 | bootstrap}}
+						<h5>M</h5>
+						{{EdicionPruebaForm11 | bootstrap}}
+						<h5>I</h5>
+						{{EdicionPruebaForm12 | bootstrap}}
+					</div>
+					<div class="col-12 col-sm-6 col-md-4">
 						<h5>Fisicos y organolépticos</h5>
 						{{EdicionPruebaForm3 | bootstrap}}
 						<h5>Bacteriológicos</h5>

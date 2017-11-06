@@ -32,6 +32,10 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm6 = PrimerPruebaUpdateForm6(instance=prueba)
 			EdicionPruebaForm7 = PrimerPruebaUpdateForm7(instance=prueba)
 			EdicionPruebaForm8 = PrimerPruebaUpdateForm8(instance=prueba)
+			EdicionPruebaForm9 = PrimerPruebaUpdateForm9(instance=prueba)
+			EdicionPruebaForm10 = PrimerPruebaUpdateForm10(instance=prueba)
+			EdicionPruebaForm11 = PrimerPruebaUpdateForm11(instance=prueba)
+			EdicionPruebaForm12 = PrimerPruebaUpdateForm12(instance=prueba)
 
 			color_verdadero = prueba.color_verdadero
 			turbiedad = prueba.turbiedad
@@ -67,6 +71,10 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm6 = None
 			EdicionPruebaForm7 = None
 			EdicionPruebaForm8 = None
+			EdicionPruebaForm9 = None
+			EdicionPruebaForm10 = None
+			EdicionPruebaForm11 = None
+			EdicionPruebaForm12 = None
 
 		context = {
 			'perfil': perfil,
@@ -82,6 +90,10 @@ class CRUViewPrimerPrueba(View):
 			'EdicionPruebaForm6': EdicionPruebaForm6,
 			'EdicionPruebaForm7': EdicionPruebaForm7,
 			'EdicionPruebaForm8': EdicionPruebaForm8,
+			'EdicionPruebaForm9': EdicionPruebaForm9,
+			'EdicionPruebaForm10': EdicionPruebaForm10,
+			'EdicionPruebaForm11': EdicionPruebaForm11,
+			'EdicionPruebaForm12': EdicionPruebaForm12,
 			'sistemaPotabilizadorCalculado': sistemaPotabilizadorCalculado,
 			'EdicionBebederoForm': EdicionBebederoForm,
 		}
@@ -113,6 +125,10 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm6 = PrimerPruebaUpdateForm6(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm7 = PrimerPruebaUpdateForm7(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm8 = PrimerPruebaUpdateForm8(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm9 = PrimerPruebaUpdateForm9(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm10 = PrimerPruebaUpdateForm10(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm11 = PrimerPruebaUpdateForm11(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm12 = PrimerPruebaUpdateForm12(instance=prueba, data=request.POST, files=request.FILES)
 
 			if EdicionPruebaForm1.is_valid():
 				EdicionPruebaForm1.save()
@@ -138,6 +154,17 @@ class CRUViewPrimerPrueba(View):
 			if EdicionPruebaForm8.is_valid():
 				EdicionPruebaForm8.save()
 
+			if EdicionPruebaForm9.is_valid():
+				EdicionPruebaForm9.save()
+
+			if EdicionPruebaForm10.is_valid():
+				EdicionPruebaForm10.save()
+
+			if EdicionPruebaForm11.is_valid():
+				EdicionPruebaForm11.save()
+
+			if EdicionPruebaForm12.is_valid():
+				EdicionPruebaForm12.save()
 		except PrimerPrueba.DoesNotExist:
 			prueba = None
 			EdicionPruebaForm1 = None
@@ -148,7 +175,10 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm6 = None
 			EdicionPruebaForm7 = None
 			EdicionPruebaForm8 = None
-
+			EdicionPruebaForm9 = None
+			EdicionPruebaForm10 = None
+			EdicionPruebaForm11 = None
+			EdicionPruebaForm12 = None
 		return redirect("pruebas:CRUViewPrimerPrueba", pk=perfil.pk)
 
 #Creación, edición y detalle de una Segunda prueba

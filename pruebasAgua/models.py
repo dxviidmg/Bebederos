@@ -9,11 +9,19 @@ class PrimerPrueba(models.Model):
 		("No aprobado", "No aprobado"),
 		("En espera", "En espera"),
 	)
-	escuela = models.OneToOneField(User, related_name="escuela_primer_prueba")
+	comparacion_choices = (
+		("=", "="),
+		("<", "<"),
+		("≥", "≥"),
+		("≤", "≤"),		
+	)
 
+	escuela = models.OneToOneField(User, related_name="escuela_primer_prueba")
 	#Fase de Toma de Agua / SI
 	reporte_toma_agua = models.FileField(upload_to='pruebas/1/reportes/%Y/%m/%d/', verbose_name="Reporte de toma de muestra")
-	foto_toma_agua = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Evidencia fotográfica de toma de agua")
+	foto_toma_agua_1 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía 1", null=True, blank=True)
+	foto_toma_agua_2 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía 2", null=True, blank=True)
+	video_toma_agua = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Video", null=True, blank=True)
 
 	#Fase de analisis / LAB
 	resultados_laboratorio = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis de laboratorio", null=True, blank=True)
@@ -28,21 +36,39 @@ class PrimerPrueba(models.Model):
 	aprobacion = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación")
 
 	creacion = models.DateField(default=timezone.now, verbose_name="Fecha de creación")
-	laboratorio = models.ForeignKey(User, related_name="lab_primer_prueba")
 		
 	#Datos del analísis
-	no_registro = models.CharField(max_length=10, null=True, blank=True, verbose_name="Número de registro (Orden de Trabajo)")
+	no_registro = models.CharField(max_length=30, null=True, blank=True, verbose_name="Número de registro (Orden de Trabajo)")
 	creacion_reporte_analisis = models.DateField(null=True, blank=True, verbose_name="Fecha del reporte de análisis")
+
+	comparacion_color_verdadero = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_turbiedad = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_ph = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_conductividad_electrica = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_coliformes_fecales = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_coliformes_totales  = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_arsenico = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_hierro = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_manganeso  = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_plomo = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_floururos = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_nitratos = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_sulfatos = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_dureza_total = models.CharField(max_length=1, choices=comparacion_choices, default="=",verbose_name=".")
+	comparacion_solidos_disueltos = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
 
 	#Parametros
 		#Fisicos y organoelectricos
+
+	
+	
 	color_verdadero = models.FloatField(null=True, blank=True, verbose_name="Color verdadero (U Pt-Co)")
 	turbiedad = models.FloatField(null=True, blank=True, verbose_name="Turbiedad (UTN o equivalente)")
 	ph = models.FloatField(null=True, blank=True, verbose_name="pH (unidades de pH)")
 	conductividad_electrica = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Conductividad eléctrica (µS/cm)")
 		#Bacteriologicos
-	coliformes_fecales = models.FloatField(null=True, blank=True, verbose_name="Coliformes fecales (UFC)")
-	coliformes_totales = models.FloatField(null=True, blank=True, verbose_name="Coliformes totales (UFC)") 
+	coliformes_fecales = models.FloatField(null=True, blank=True, verbose_name="Coliformes fecales (UFC o NMP)")
+	coliformes_totales = models.FloatField(null=True, blank=True, verbose_name="Coliformes totales (UFC o NMP)") 
 		#Arsenico y metales
 	arsenico = models.FloatField(null=True, blank=True, verbose_name="Arsénico (mg/L)")
 	hierro = models.FloatField(null=True, blank=True, verbose_name="Hierro (mg/L)")
@@ -91,7 +117,7 @@ class SegundaPrueba(models.Model):
 	creacion = models.DateField(default=timezone.now, verbose_name="Fecha de creación")
 
 	#Datos de análisis
-	no_registro = models.CharField(max_length=10, null=True, blank=True, verbose_name="Número de registro")	
+	no_registro = models.CharField(max_length=30, null=True, blank=True, verbose_name="Número de registro")	
 	creacion_reporte_analisis = models.DateField(null=True, verbose_name="Fecha de creación del reporte de análisis")
 
 	#Parámetros
@@ -101,8 +127,8 @@ class SegundaPrueba(models.Model):
 	ph = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="pH (unidades de pH)")
 	conductividad_electrica = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Conductividad eléctrica (µS/cm)")
 		#Bacteriologicos
-	coliformes_fecales = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Coliformes fecales (UFC)")
-	coliformes_totales = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Coliformes totales (UFC)") 
+	coliformes_fecales = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Coliformes fecales (UFC o NMP)")
+	coliformes_totales = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Coliformes totales (UFC o NMP)") 
 		#Arsenico y metales
 	arsenico = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Arsénico (mg/L)")
 	hierro = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Hierro (mg/L)")

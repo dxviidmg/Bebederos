@@ -5,12 +5,14 @@ from django.contrib.admin.widgets import AdminDateWidget
 class PrimerPruebaCreateForm(forms.ModelForm):
 	class Meta:
 		model = PrimerPrueba
-		fields = ('reporte_toma_agua', 'foto_toma_agua')
+		fields = ('reporte_toma_agua', 'foto_toma_agua_1', 'foto_toma_agua_2', 'video_toma_agua')
 #		fields = ()
 	def __init__(self, *args, **kwargs):
 		super(PrimerPruebaCreateForm, self).__init__(*args, **kwargs)
 		self.fields['reporte_toma_agua'].required = True
-		self.fields['foto_toma_agua'].required = True
+		self.fields['foto_toma_agua_1'].required = True
+		self.fields['foto_toma_agua_2'].required = True
+		self.fields['video_toma_agua'].required = True
 
 class PrimerPruebaUpdateForm1(forms.ModelForm):
 	class Meta:
@@ -105,6 +107,53 @@ class PrimerPruebaUpdateForm8(forms.ModelForm):
 		super(PrimerPruebaUpdateForm8, self).__init__(*args, **kwargs)
 		self.fields['dictamen_sistema_potabilizador'].required = True
 		self.fields['aprobacion'].required = True
+
+class PrimerPruebaUpdateForm9(forms.ModelForm):
+	class Meta:
+		model = PrimerPrueba
+		fields = ('comparacion_color_verdadero', 'comparacion_turbiedad', 'comparacion_ph', 'comparacion_conductividad_electrica')
+
+	def __init__(self, *args, **kwargs):
+		super(PrimerPruebaUpdateForm9, self).__init__(*args, **kwargs)
+		self.fields['comparacion_color_verdadero'].required = True
+		self.fields['comparacion_turbiedad'].required = True
+		self.fields['comparacion_ph'].required = True
+		self.fields['comparacion_conductividad_electrica'].required = True
+
+class PrimerPruebaUpdateForm10(forms.ModelForm):
+	class Meta:
+		model = PrimerPrueba
+		fields = ('comparacion_coliformes_fecales', 'comparacion_coliformes_totales')
+#		fields = ()
+	def __init__(self, *args, **kwargs):
+		super(PrimerPruebaUpdateForm10, self).__init__(*args, **kwargs)
+		self.fields['comparacion_coliformes_fecales'].required = True
+		self.fields['comparacion_coliformes_totales'].required = True
+
+class PrimerPruebaUpdateForm11(forms.ModelForm):
+	class Meta:
+		model = PrimerPrueba
+		fields = ('comparacion_arsenico', 'comparacion_hierro', 'comparacion_manganeso', 'comparacion_plomo',)
+#		fields = ()
+	def __init__(self, *args, **kwargs):
+		super(PrimerPruebaUpdateForm11, self).__init__(*args, **kwargs)
+		self.fields['comparacion_arsenico'].required = True
+		self.fields['comparacion_hierro'].required = True
+		self.fields['comparacion_manganeso'].required = True
+		self.fields['comparacion_plomo'].required = True
+
+class PrimerPruebaUpdateForm12(forms.ModelForm):
+	class Meta:
+		model = PrimerPrueba
+		fields = ('comparacion_floururos', 'comparacion_nitratos', 'comparacion_sulfatos', 'comparacion_dureza_total', 'comparacion_solidos_disueltos')
+#		fields = ()
+	def __init__(self, *args, **kwargs):
+		super(PrimerPruebaUpdateForm12, self).__init__(*args, **kwargs)
+		self.fields['comparacion_floururos'].required = True
+		self.fields['comparacion_nitratos'].required = True
+		self.fields['comparacion_sulfatos'].required = True
+		self.fields['comparacion_dureza_total'].required = True
+		self.fields['comparacion_solidos_disueltos'].required = True
 
 """Segunda Prueba de Calidad de Agua"""
 class SegundaPruebaCreateForm(forms.ModelForm):
