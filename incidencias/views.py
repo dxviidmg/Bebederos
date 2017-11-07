@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from django.views.generic import View
-from accounts.models import Perfil
+from accounts.models import *
 from django.db.models import Q
 from .forms import *
 from django.contrib.auth.models import User
@@ -19,25 +19,37 @@ class CRViewIncidencias(View):
 			escuela = User.objects.get(perfil=perfil)
 
 			NuevaIncidenciaForm = IncidenciaCreateForm()
-
 			incidencias = Incidencia.objects.filter(escuela=escuela)
-			incidenciasActuales = incidencias.filter(Q(status="En espera") | Q(status="Atendiendo"))
-			historialIncidencias = incidencias.filter(status="Solucionado")
-		elif request.user.perfil.tipo == "SI":
-			autor = User.objects.get(pk=request.user.pk)
-			incidencias = Incidencia.objects.filter(autor=autor)
-			incidenciasActuales = incidencias.filter(Q(status="En espera") | Q(status="Atendiendo"))
-			historialIncidencias = incidencias.filter(status="Solucionado")
+
+		elif request.user.perfil.tipo == "Ejecutora":
+			if request.user.perfil.cargo == "SIM":
+				entidades = Entidad.objects.filter(sim=request.user.pk)
+				zonas = Zona.objects.filter(entidad__in=entidades)
+			if request.user.perfil.cargo == "RO":
+				entidad = Entidad.objects.filter(residente_obra=request.user.pk)
+				zonas = Zona.objects.filter(entidad=entidad)
+
+			municipios = Municipio.objects.filter(zona__in=zonas)
+			perfiles = Perfil.objects.filter(municipio__in=municipios)
+			escuelas = User.objects.filter(perfil__in=perfiles)
+			incidencias = Incidencia.objects.filter(escuela__in=escuelas)
 			perfil=None
 			escuela=None
 			NuevaIncidenciaForm=None
+
+		elif request.user.perfil.tipo == "PQ":
+			incidencias = Incidencia.objects.filter(Q(fase="Primer prueba de calidad de agua") | Q(fase="Segunda prueba de calidad de agua"))
+			perfil=None
+			escuela=None
+			NuevaIncidenciaForm = None
 		else:
 			perfil=None
 			escuela=None
-			incidencias = Incidencia.objects.all()
-			incidenciasActuales = incidencias.filter(Q(status="En espera") | Q(status="Atendiendo"))
-			historialIncidencias = incidencias.filter(status="Solucionado")
 			NuevaIncidenciaForm = None
+			incidencias = Incidencia.objects.all()
+
+		incidenciasActuales = incidencias.filter(Q(status="En espera") | Q(status="Atendiendo"))
+		historialIncidencias = incidencias.filter(status="Solucionado")
 
 		context = {
 			'perfil': perfil,

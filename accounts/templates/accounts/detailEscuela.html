@@ -108,20 +108,18 @@
 					</tbody>
 					<thead>
 						<tr>
-							<th colspan="12">Coordenadas</th>
-							<th colspan="12">Geolocalización</th>
-							<th colspan="12">Tipo de conexión</th>
-							<th colspan="12">Nombre de SSID (Red Wifi)</th>
-							<th colspan="12">Contraseña de SSID</th>
+							<th colspan="15">Coordenadas</th>
+							<th colspan="15">Geolocalización</th>
+							<th colspan="15">Nombre de SSID (Red Wifi)</th>
+							<th colspan="15">Contraseña de SSID</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td colspan="12">{%if perfil.coordenadas%}{{perfil.coordenadas}}{%endif%}</td>
-							<td colspan="12">{%if perfil.coordenadas%}<a href="{%url 'accounts:DetailViewMapa' perfil.pk%}" target="_blank">Ver mapa</a>{%endif%}</td>
-							<td colspan="12">{%if perfil.conexion%}{{perfil.conexion}}{%endif%}</td>
-							<td colspan="12">{%if perfil.SSID%}{{perfil.SSID}}{%endif%}</td>
-							<td colspan="20">{%if perfil.clave_SSID%}{{perfil.clave_SSID}}{%endif%}</td>
+							<td colspan="15">{%if perfil.coordenadas%}{{perfil.coordenadas}}{%endif%}</td>
+							<td colspan="15">{%if perfil.coordenadas%}<a href="{%url 'accounts:DetailViewMapa' perfil.pk%}" target="_blank">Ver mapa</a>{%endif%}</td>
+							<td colspan="15">{%if perfil.SSID%}{{perfil.SSID}}{%endif%}</td>
+							<td colspan="15">{%if perfil.clave_SSID%}{{perfil.clave_SSID}}{%endif%}</td>
 						</tr>
 					</tbody>
 				</table>

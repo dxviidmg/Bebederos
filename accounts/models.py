@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from pruebasAgua.models import PrimerPrueba
 from construccion.models import EvidenciaConstruccion
 from geoposition.fields import GeopositionField
+from mantenimiento.models import *
 
 class Region(models.Model):
 	nombre = models.CharField(max_length=20)
@@ -160,6 +161,7 @@ class Perfil(models.Model):
 	SSID = models.CharField(max_length=20, null=True, blank=True)
 	clave_SSID = models.CharField(max_length=20, null=True, blank=True)
 	coordenadas = GeopositionField(null=True, blank=True)
+	mantenimientos = models.IntegerField(null=True, blank=True)
 
 	#Atributo exclusivo para la ejecutora o INIFED
 	
@@ -200,6 +202,13 @@ class Perfil(models.Model):
 				elif ultimaEvidencia.fase == "Instalación de Mueble Bebedero" and ultimaEvidencia.aprobacion_SI == "Aprobado":
 					self.avance = 100
 					self.save()
+
+	def UpdateMantenimientosCount(self):
+		perfil = Perfil.objects.get(pk=self.pk)
+		escuela = User.objects.get(perfil=perfil)
+		mantenimientos = Mantenimiento.objects.filter(escuela=escuela).count()
+		self.mantenimientos = mantenimientos
+		self.save()
 
 	def __str__(self):
 		return '{} {} {}'.format(self.tipo, self.user.first_name, self.user.last_name)

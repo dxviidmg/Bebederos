@@ -35,9 +35,29 @@
 
 		<div class="col-md-5">
 	
-		{%if prueba.foto_toma_agua%}
+		{%if prueba.foto_toma_agua_1%}
 
-			<a href="{{prueba.foto_toma_agua.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Evidencia fotográfica de toma de agua</a>
+			<a href="{{prueba.foto_toma_agua_1.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Fotografía 1</a>
+
+		{%endif%}
+
+		</div>
+
+		<div class="col-md-5">
+	
+		{%if prueba.foto_toma_agua_2%}
+
+			<a href="{{prueba.foto_toma_agua_2.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Fotografía 2</a>
+
+		{%endif%}
+
+		</div>
+
+		<div class="col-md-5">
+	
+		{%if prueba.video_toma_agua%}
+
+			<a href="{{prueba.video_toma_agua.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Video</a>
 
 		{%endif%}
 
@@ -83,14 +103,12 @@
 
 		</div>
 	</div>
-
+		
+		{%if request.user.perfil.tipo == "Laboratorio"%}
 		{%if prueba.reporte_toma_agua and not prueba.resultados_laboratorio%}
-	
+		
 	<div class="row espacio2">
 		<div class="col-12">
-
-			{%if request.user.perfil.tipo == "Laboratorio"%}
-
 			<form action="." method="post" enctype="multipart/form-data">
 				<h4>Análisis de laboratorio</h4>
 				<h5>Registro de documentación</h5>
@@ -102,20 +120,32 @@
 						<h5>Registro de parámetros</h5>
 						{{EdicionPruebaForm2 | bootstrap}}
 					</div>
+					<div class="col-12 col-sm-12 col-md-1">
+						<h5>.</h5>
+						{{EdicionPruebaForm9 | bootstrap}}
+						<h5>.</h5>
+						{{EdicionPruebaForm10 | bootstrap}}	
+					</div>
 					<div class="col-12 col-sm-12 col-md-3">
 						<h5>Físicos y organolépticos</h5>
 						{{EdicionPruebaForm3 | bootstrap}}
-					</div>
-					<div class="col-12 col-sm-12 col-md-3">
 						<h5>Bacteriológicos</h5>
-						{{EdicionPruebaForm4 | bootstrap}}
+						{{EdicionPruebaForm4 | bootstrap}}						
+					</div>
+					<div class="col-12 col-sm-12 col-md-1">
+						<h5>.</h5>
+						{{EdicionPruebaForm11 | bootstrap}}
 					</div>
 					<div class="col-12 col-sm-12 col-md-3">
 						<h5>Metales</h5>
 						{{EdicionPruebaForm5 | bootstrap}}
 					</div>
+					<div class="col-12 col-sm-12 col-md-1">
+						<h5>.</h5>
+						{{EdicionPruebaForm12 | bootstrap}}
+					</div>
 					<div class="col-12 col-sm-12 col-md-3">
-						<h5>Iones y compuestos inorgánicos</h5>
+						<h5>Iones y comps. inorgánicos</h5>
 						{{EdicionPruebaForm6 | bootstrap}}
 					</div>
 				</div>
@@ -124,6 +154,7 @@
 			</form>
 		</div>
 	</div>
+
 	
 		{%endif%}
 		{%endif%}
@@ -141,11 +172,21 @@
 
 				<div class="row">
 					<div class="col-md-12">
-						<h5>Parámetros</h5>
+						<h5> Parámetros</h5>
 						{{EdicionPruebaForm2 | bootstrap}}
 					</div>
-					<div class="col-12 col-sm-6 col-md-6">
-						<h5>Físicos y organolépticos</h5>
+					<div class="col-12 col-sm-6 col-md-1">
+						<h5>F</h5>
+						{{EdicionPruebaForm9 | bootstrap}}
+						<h5>B</h5>
+						{{EdicionPruebaForm10 | bootstrap}}
+						<h5>M</h5>
+						{{EdicionPruebaForm11 | bootstrap}}
+						<h5>I</h5>
+						{{EdicionPruebaForm12 | bootstrap}}
+					</div>
+					<div class="col-12 col-sm-6 col-md-4">
+						<h5>Fisicos y organolépticos</h5>
 						{{EdicionPruebaForm3 | bootstrap}}
 						<h5>Bacteriológicos</h5>
 						{{EdicionPruebaForm4 | bootstrap}}
@@ -160,12 +201,12 @@
 							</div>
 						<div style="padding-top: 30px;" >
 						{%if prueba.color_verdadero is not null%}
-						15
+						20
 						{%endif%}
 						</div>
 						<div class="padding-top-parametro-2">
 						{%if prueba.turbiedad  is not null%}
-						3
+						5
 						{%endif%}
 						</div>
 						<div class="padding-top-parametro-2">
@@ -190,7 +231,7 @@
 						</div>
 						<div class="padding-top-parametro-3">
 						{%if prueba.arsenico  is not null%}
-						0.01
+						0.025
 						{%endif%}
 						</div>
 						<div class="padding-top-parametro-2">
@@ -210,7 +251,7 @@
 						</div>
 						<div class="padding-top-parametro-3">
 						{%if prueba.floururos is not null%}
-						0.70
+						1.50
 						{%endif%}
 						</div>
 						<div class="padding-top-parametro-2">
@@ -239,16 +280,16 @@
 							<h5>P < LMP</h5>
 						</div>
 						<div style="padding-top: 30px;">
-						{%if prueba.color_verdadero <= 15%}
+						{%if prueba.color_verdadero <= 20%}
 						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
-						{%elif prueba.color_verdadero > 15%}
+						{%elif prueba.color_verdadero > 20%}
 						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
 						{%endif%}
 						</div>
 						<div class="padding-top-icon-2">
-						{%if prueba.turbiedad <= 3%}
+						{%if prueba.turbiedad <= 5%}
 						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
-						{%elif prueba.turbiedad > 3%}
+						{%elif prueba.turbiedad > 5%}
 						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
 						{%endif%}
 						</div>
@@ -276,9 +317,9 @@
 						{%endif%}
 						</div>
 						<div class="padding-top-icon-3">
-						{%if prueba.arsenico <= 0.01%}
+						{%if prueba.arsenico <= 0.025%}
 						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
-						{%elif prueba.arsenico > 0.01%}
+						{%elif prueba.arsenico > 0.025%}
 						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
 						{%endif%}
 						</div>
@@ -304,9 +345,9 @@
 						{%endif%}
 						</div>
 						<div class="padding-top-icon-3">
-						{%if prueba.floururos <= 0.7%}
+						{%if prueba.floururos <= 1.5%}
 						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
-						{%elif prueba.floururos > 0.7%}
+						{%elif prueba.floururos > 1.5%}
 						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
 						{%endif%}
 						</div>
@@ -348,26 +389,9 @@
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-				{%csrf_token%}		
+			<h4>Sugerencia de sistema potabilizador</h4>
+				{%csrf_token%}			
 				{{EdicionPruebaForm7 | bootstrap}}
-				<a href=""><input type="submit" value="Guardar cambios"></a>
-			</form>
-		</div>
-	</div>
-	
-		{%endif%}
-		{%endif%}
-
-		{%if request.user.perfil.tipo == "IMTA"%}
-		{%if prueba.resultados_laboratorio and prueba.aprobacion == "En espera"%}
-		
-
-	<div class="row espacio2">
-		<div class="col-12">
-			<form action="." method="post" enctype="multipart/form-data">
-				<h5>Confirmación de sistema potabilizador</h5>
-				{%csrf_token%}
-				{{EdicionPruebaForm8 | bootstrap}}
 				<a href=""><input type="submit" value="Guardar cambios"></a>
 			</form>
 		</div>

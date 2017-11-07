@@ -159,12 +159,14 @@ class PrimerPruebaUpdateForm12(forms.ModelForm):
 class SegundaPruebaCreateForm(forms.ModelForm):
 	class Meta:
 		model = SegundaPrueba
-		fields = ('reporte_toma_agua', 'foto_toma_agua')
+		fields = ('reporte_toma_agua', 'foto_toma_agua_1', 'foto_toma_agua_2', 'video_toma_agua')
 #		fields = ()
 	def __init__(self, *args, **kwargs):
 		super(SegundaPruebaCreateForm, self).__init__(*args, **kwargs)
 		self.fields['reporte_toma_agua'].required = True
-		self.fields['foto_toma_agua'].required = True
+		self.fields['foto_toma_agua_1'].required = True
+		self.fields['foto_toma_agua_2'].required = True
+		self.fields['video_toma_agua'].required = True
 
 class SegundaPruebaUpdateForm1(forms.ModelForm):
 	class Meta:
@@ -256,3 +258,50 @@ class SegundaPruebaUpdateForm8(forms.ModelForm):
 		super(SegundaPruebaUpdateForm8, self).__init__(*args, **kwargs)
 		self.fields['dictamen_validacion'].required = True
 		self.fields['aprobacion'].required = True
+
+class SegundaPruebaUpdateForm9(forms.ModelForm):
+	class Meta:
+		model = SegundaPrueba
+		fields = ('comparacion_color_verdadero', 'comparacion_turbiedad', 'comparacion_ph', 'comparacion_conductividad_electrica')
+
+	def __init__(self, *args, **kwargs):
+		super(SegundaPruebaUpdateForm9, self).__init__(*args, **kwargs)
+		self.fields['comparacion_color_verdadero'].required = True
+		self.fields['comparacion_turbiedad'].required = True
+		self.fields['comparacion_ph'].required = True
+		self.fields['comparacion_conductividad_electrica'].required = True
+
+class SegundaPruebaUpdateForm10(forms.ModelForm):
+	class Meta:
+		model = SegundaPrueba
+		fields = ('comparacion_coliformes_fecales', 'comparacion_coliformes_totales')
+#		fields = ()
+	def __init__(self, *args, **kwargs):
+		super(SegundaPruebaUpdateForm10, self).__init__(*args, **kwargs)
+		self.fields['comparacion_coliformes_fecales'].required = True
+		self.fields['comparacion_coliformes_totales'].required = True
+
+class SegundaPruebaUpdateForm11(forms.ModelForm):
+	class Meta:
+		model = SegundaPrueba
+		fields = ('comparacion_arsenico', 'comparacion_hierro', 'comparacion_manganeso', 'comparacion_plomo',)
+#		fields = ()
+	def __init__(self, *args, **kwargs):
+		super(SegundaPruebaUpdateForm11, self).__init__(*args, **kwargs)
+		self.fields['comparacion_arsenico'].required = True
+		self.fields['comparacion_hierro'].required = True
+		self.fields['comparacion_manganeso'].required = True
+		self.fields['comparacion_plomo'].required = True
+
+class SegundaPruebaUpdateForm12(forms.ModelForm):
+	class Meta:
+		model = SegundaPrueba
+		fields = ('comparacion_floururos', 'comparacion_nitratos', 'comparacion_sulfatos', 'comparacion_dureza_total', 'comparacion_solidos_disueltos')
+#		fields = ()
+	def __init__(self, *args, **kwargs):
+		super(SegundaPruebaUpdateForm12, self).__init__(*args, **kwargs)
+		self.fields['comparacion_floururos'].required = True
+		self.fields['comparacion_nitratos'].required = True
+		self.fields['comparacion_sulfatos'].required = True
+		self.fields['comparacion_dureza_total'].required = True
+		self.fields['comparacion_solidos_disueltos'].required = True		

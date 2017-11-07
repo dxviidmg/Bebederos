@@ -12,6 +12,7 @@ from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import csv
 
 #Librerias para generar ZIP
 import zipfile
@@ -53,6 +54,7 @@ class ListViewRegiones(View):
 		}
 		return render(request,template_name, context)
 
+#Lista de entidades
 class ListViewEntidades(View):
 	@method_decorator(login_required)
 	def get(self, request, numero=None):
@@ -117,12 +119,13 @@ class ListViewEscuelas(View):
 
 		municipio = Municipio.objects.get(pk=pk)
 		perfiles = Perfil.objects.filter(municipio=municipio).order_by('municipio__nombre', 'localidad', 'nivel_educativo')
+		escuelas = User.objects.filter(perfil__in=perfiles)
 		zona = Zona.objects.get(municipio=municipio)
 		entidad = Entidad.objects.get(zona=zona)
 
 		context = {
 			'municipio': municipio,
-			'perfiles': perfiles,
+			'escuelas': escuelas,
 			'entidad': entidad,
 		}
 		return render(request,template_name, context)
@@ -130,11 +133,10 @@ class ListViewEscuelas(View):
 #Detalle de escuela
 class DetailViewEscuela(View):
 	@method_decorator(login_required)	
-	def get(self, request, pk):
+	def get(self, request, username):
 		template_name = "accounts/detailEscuela.html"
-		user = User.objects.get(pk=request.user.pk)
-		perfil = Perfil.objects.get(pk=pk)
-		escuela = User.objects.get(perfil=perfil)
+		escuela = User.objects.get(username=username)
+		perfil = Perfil.objects.get(user=escuela)
 		municipio = Municipio.objects.get(perfil=perfil)
 		zona = Zona.objects.get(municipio=municipio)
 		entidad = Entidad.objects.get(zona=zona)
@@ -345,21 +347,12 @@ class ListViewAvanceEscuelas(View):
 	@method_decorator(login_required)
 	def get(self, request, slug):
 		template_name = "accounts/listAvanceEscuelas.html"
-
-		if request.user.perfil.tipo == "SI":
-			entidad = None
-			superintendente = User.objects.get(pk=request.user.pk)
-			zona = Zona.objects.get(superintendente=superintendente)
-			municipios = Municipio.objects.filter(zona=zona)
-			perfilesEscuelas = Perfil.objects.filter(municipio__in=municipios)
-			escuelas = User.objects.filter(perfil__in=perfilesEscuelas).order_by('perfil__municipio__nombre', 'perfil__localidad', 'perfil__nivel_educativo')
-		else:
-
-			entidad = Entidad.objects.get(slug=slug)
-			zonas = Zona.objects.filter(entidad=entidad)
-			municipios = Municipio.objects.filter(zona__in=zonas)
-			perfilesEscuelas = Perfil.objects.filter(municipio__in=municipios)
-			escuelas = User.objects.filter(perfil__in=perfilesEscuelas).order_by('perfil__municipio__nombre', 'perfil__localidad', 'perfil__nivel_educativo')
+		
+		entidad = Entidad.objects.get(slug=slug)
+		zonas = Zona.objects.filter(entidad=entidad)
+		municipios = Municipio.objects.filter(zona__in=zonas)
+		perfilesEscuelas = Perfil.objects.filter(municipio__in=municipios)
+		escuelas = User.objects.filter(perfil__in=perfilesEscuelas).order_by('perfil__municipio__nombre', 'perfil__localidad', 'perfil__nivel_educativo')
 
 		AvancePorEscuelas = []
 
@@ -427,9 +420,6 @@ class ListViewAvanceEscuelas(View):
 		}
 		return render(request,template_name, context)
 
-#Lista de entidades (para laboratorios)
-
-
 #Export ZIP
 def ExportExpedienteZIP(request, pk):
 	escuela = get_object_or_404(User, pk=pk)
@@ -474,3 +464,20 @@ def ExportExpedienteZIP(request, pk):
 	response['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
 
 	return response
+
+def ExportAvancePorEscuelasCSV(request, pk):
+	response = HttpResponse(content_type='text/csv')
+	response['Content-Disposition'] = 'attachment; filename="AvancePorEscuela.csv"'
+	writer = csv.writer(response)
+	writer.writerow(['Municipio', 'Localidad','C. C. T.','Nombre', 'Nivel educativo', 'Mueble', 'Sistema potabilizador', 'Validación de primer prueba', 'Porcentaje de construcción', 'Validación de sistema potabilizador', 'Inicio de funcionamiento', 'Mantenimientos', 'Acta de entrega'])
+
+	entidad = get_object_or_404(Entidad, pk=pk)
+	zonas = Zona.objects.filter(entidad=entidad)
+	municipios=Municipio.objects.filter(zona__in=zonas)
+	perfiles = Perfil.objects.filter(municipio__in=municipios)
+
+	escuelas = User.objects.filter(perfil__in=perfiles).values_list('perfil__municipio__nombre', 'perfil__localidad', 'username', 'first_name', 'perfil__nivel_educativo', 'escuela__mueble__modelo', 'escuela__sistema_potabilizacion__tipo', 'escuela_primer_prueba__aprobacion', 'perfil__avance', 'escuela_segunda_prueba__aprobacion', 'iniciofuncionamiento__creacion', 'actaentrega__creacion', 'perfil__mantenimientos')
+	for escuela in escuelas:
+		writer.writerow(escuela)
+
+	return response	

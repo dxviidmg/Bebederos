@@ -2,7 +2,7 @@
 
 {%block content%}
 
-	<h1>Avance detallado de las escuelas {%if request.user.perfil.tipo != "SI"%} de {{entidad.nombre}}{%endif%}</h1>
+	<h1>Reporte de avance de las escuelas {%if request.user.perfil.cargo != "SIM"%} de {{entidad.nombre}}{%endif%}</h1>
 	
 	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "IMTA"%}
 	<p><a href="{%url 'accounts:ListViewEntidades' entidad.region.numero%}">Regresar</a></p>
@@ -76,7 +76,7 @@
 					<th>Muestreo</th>{%endif%}
 					
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
-					<th>Analísis de laboratorio</th>{%endif%}
+					<th>Análisis de laboratorio</th>{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
 					<th>Propuesta de sistema potabilizador</th>{%endif%}
@@ -106,10 +106,10 @@
 					<th>Muestreo</th>{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED"  or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
-					<th>Analísis de laboratorio</th>{%endif%}
+					<th>Análisis de laboratorio</th>{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
-					<th>Propuesta de sistema potabilizador</th>{%endif%}
+					<th>Confirmación de funcionamiento de sistema potabilizador</th>{%endif%}
 					
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
 					<th>Validación de sistema potabilizador</th>{%endif%}
@@ -134,7 +134,7 @@
 					
 					<td>{{avanceEscuela.escuela.perfil.municipio.nombre}}</td>
 					<td>{{avanceEscuela.escuela.perfil.localidad}}</td>
-					<td><a href="{%url 'accounts:DetailViewEscuela' avanceEscuela.escuela.perfil.pk%}">{{avanceEscuela.escuela.username}}</a></td>
+					<td><a href="{%url 'accounts:DetailViewEscuela' avanceEscuela.escuela.username%}">{{avanceEscuela.escuela.username}}</a></td>
 					
 					<td>{{avanceEscuela.escuela.get_full_name}}</td>
 					<td>{{avanceEscuela.escuela.perfil.nivel_educativo}}</td>
@@ -287,10 +287,13 @@
 				</tr>
 			</thead>
 			<tbody>
+				{%if request.user.perfil.tipo == "Administrador"%}
 				<tr>
-
-					{%if request.user.perfil.tipo == "Administrador"%}
-
+					<td colspan="4">
+						<a href="{%url 'accounts:ExportAvancePorEscuelasCSV' entidad.pk%}">Reporte de avance en excel</a>
+					</td>
+				</tr>
+				<tr>
 					<td><a href="{%url 'visitas:ExportCedulasIdentificacionZIP' entidad.pk%}">Cédulas de identificación</a></td>
 					<td><a href="{%url 'visitas:ExportPlanosConjuntoZIP' entidad.pk%}">Planos de conjunto</a></td>
 					<td><a href="{%url 'visitas:ExportDistribucionesPlantaZIP' entidad.pk%}">Distribuciones de planta</a></td>

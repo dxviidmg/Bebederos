@@ -41,6 +41,7 @@ class PrimerPrueba(models.Model):
 	no_registro = models.CharField(max_length=30, null=True, blank=True, verbose_name="Número de registro (Orden de Trabajo)")
 	creacion_reporte_analisis = models.DateField(null=True, blank=True, verbose_name="Fecha del reporte de análisis")
 
+	#Comparaciones
 	comparacion_color_verdadero = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
 	comparacion_turbiedad = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
 	comparacion_ph = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
@@ -59,8 +60,6 @@ class PrimerPrueba(models.Model):
 
 	#Parametros
 		#Fisicos y organoelectricos
-
-	
 	
 	color_verdadero = models.FloatField(null=True, blank=True, verbose_name="Color verdadero (U Pt-Co)")
 	turbiedad = models.FloatField(null=True, blank=True, verbose_name="Turbiedad (UTN o equivalente)")
@@ -97,13 +96,20 @@ class SegundaPrueba(models.Model):
 		("Aprobado", "Aprobado"),
 		("No aprobado", "No aprobado"),
 	)
+	comparacion_choices = (
+		("=", "="),
+		("<", "<"),
+		("≥", "≥"),
+		("≤", "≤"),		
+	)	
 	escuela = models.OneToOneField(User, related_name="escuela_segunda_prueba")	
 	#Fase de Toma de Agua / SI
 	reporte_toma_agua = models.FileField(upload_to='pruebas/2/reportes_de_toma/%Y/%m/%d/', verbose_name="Reporte de toma de muestra")
-	foto_toma_agua = models.FileField(upload_to='pruebas/2/fotos/%Y/%m/%d/', verbose_name="Evidencia fotográfica de toma de agua")
+	foto_toma_agua_1 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía 1", null=True, blank=True)
+	foto_toma_agua_2 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía 2", null=True, blank=True)
+	video_toma_agua = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Video", null=True, blank=True)
 
 	#Fase de analisis / LAB
-
 	registro_campo = models.FileField(upload_to='pruebas/1/hojasCampo/%Y/%m/%d/', verbose_name="Registro de campo", null=True, blank=True)
 	cadena_custodia = models.FileField(upload_to='pruebas/1/cadenasCustioda/%Y/%m/%d/', verbose_name="Cadena de custodia", null=True, blank=True)
 
@@ -119,6 +125,23 @@ class SegundaPrueba(models.Model):
 	#Datos de análisis
 	no_registro = models.CharField(max_length=30, null=True, blank=True, verbose_name="Número de registro")	
 	creacion_reporte_analisis = models.DateField(null=True, verbose_name="Fecha de creación del reporte de análisis")
+
+	#Comparaciones
+	comparacion_color_verdadero = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_turbiedad = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_ph = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_conductividad_electrica = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_coliformes_fecales = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_coliformes_totales  = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_arsenico = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_hierro = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_manganeso  = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_plomo = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_floururos = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_nitratos = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_sulfatos = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
+	comparacion_dureza_total = models.CharField(max_length=1, choices=comparacion_choices, default="=",verbose_name=".")
+	comparacion_solidos_disueltos = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
 
 	#Parámetros
 		#Fisicos y organoelectricos

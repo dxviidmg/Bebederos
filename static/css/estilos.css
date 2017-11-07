@@ -252,7 +252,7 @@ thead{
   background-color: #44B036;
 }
 
-tbody {
+tbody, page-link {
   background-color: #eeeee1;
 }
 table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
@@ -273,4 +273,13 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
 
 .col-md-5{
   padding-top: 10px;
+}
+
+.page-link {
+  background-color: #ECEEEF;
+}
+
+.page-link:active {
+  background-color: #44B036
+  color: white;
 }

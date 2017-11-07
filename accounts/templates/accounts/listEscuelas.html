@@ -72,29 +72,18 @@
 				</thead>
 				<tbody>
 				
-				{%for perfil in perfiles%}
+				{%for escuela in escuelas%}
 				
 					<tr>
-						<td>{{perfil.localidad}}</td>
-						<td><a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">{{perfil.user.username}}</a></td>
-						<td>{{perfil.user.get_full_name}}</td>	
-						<td>{{perfil.nivel_educativo}}</td>
+						<td>{{escuela.perfil.localidad}}</td>
+						<td><a href="{%url 'accounts:DetailViewEscuela' escuela.username%}">{{escuela.username}}</a></td>
+						<td>{{escuela.get_full_name}}</td>	
+						<td>{{escuela.perfil.nivel_educativo}}</td>
 						
-
-						{%if request.user.perfil.tipo == "Ejecutora"%}
-						<td>{{perfil.municipio.nombre}}</td>
-						<td>{{perfil.municipio.zona.nombre}}</td>
-						<td>{{perfil.municipio.zona.entidad.nombre}}</td>
-						<td>{%if perfil.user.escuela.asignacion%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
-						<td>{%if perfil.avance == 100%}Finalizado{%elif perfil.avance < 100%}En proceso o revisión{%endif%}</td>
-
-						{%else%}
-						<td>{{perfil.user.escuela.mueble}}</td>
-						<td>{%if perfil.user.escuela.sistema_potabilizacion%}{{perfil.user.escuela.sistema_potabilizacion}}{%endif%}</td>
-						<td>{%if perfil.status is not None%} {{perfil.status}} {%else%}Pendiente {%endif%}{%if perfil.UpdateStatus is None%}{%endif%}</td>
-						{%endif%}
-
-						<td> {%if perfil.avance is not NULL%} {{perfil.avance}}% {%endif%} {%if perfil.UpdateAvance%}{%endif%}</td>
+						<td>{{escuela.escuela.mueble}}</td>
+						<td>{%if escuela.escuela.sistema_potabilizacion%}{{escuela.escuela.sistema_potabilizacion}}{%endif%}</td>
+						<td>{%if escuela.perfil.status is not None%} {{escuela.perfil.status}} {%else%}Pendiente {%endif%}{%if escuela.perfil.UpdateStatus is None%}{%endif%}</td>
+						<td> {%if escuela.perfil.avance is not NULL%} {{escuela.perfil.avance}}% {%endif%} {%if escuela.perfil.UpdateAvance%}{%endif%}</td>
 					</tr>
 
 				{%empty%}

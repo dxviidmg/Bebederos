@@ -17,6 +17,7 @@ class CRViewMantenimientos(View):
 		escuela = User.objects.get(perfil=perfil)
 		mantenimientos = Mantenimiento.objects.filter(escuela=escuela)
 		NuevoMantenimientoForm = MantenimientoCreateForm()
+		perfil.UpdateMantenimientosCount()
 
 		context = {
 			'perfil': perfil,

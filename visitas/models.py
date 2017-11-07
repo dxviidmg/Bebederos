@@ -40,7 +40,8 @@ class InicioFuncionamiento(models.Model):
 class ActaEntrega(models.Model):
 	escuela = models.OneToOneField(User)
 	acta_entrega = models.FileField(upload_to='entrega/actas/%Y/%m/%d/', verbose_name="Acta de entrega")
-
+	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
+	
 	def __str__(self):
 		return '{}'.format(self.escuela)
 

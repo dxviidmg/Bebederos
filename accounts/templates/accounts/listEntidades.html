@@ -9,7 +9,9 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
+				{%if request.user.perfil.cargo == "SIM"%}
 				<th>Región</th>
+				{%endif%}
 				<th>Partida</th>
 				<th>Estado</th>
 				<th colspan="2">Listas</th>
@@ -25,11 +27,13 @@
 	{%for entidad in entidades%}
 	
 			<tr>
+				{%if request.user.perfil.cargo == "SIM"%}
 				<td>{{entidad.region}}</td>
+				{%endif%}
 				<td>{{entidad.partida}}</td>
 				<td>{{entidad}}</td>	
 				<td><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">Por zonas</a></td>	
-				<td><a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.slug%}">Avance detallado por escuela</a></td>
+				<td><a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.slug%}">Reporte de avance por escuela</a></td>
 			
 				<td>{{entidad.escuelas_asignadas}}</td>
 				<td>{{entidad.escuelas_registradas}}</td>

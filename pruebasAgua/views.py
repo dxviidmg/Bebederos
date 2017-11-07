@@ -201,6 +201,11 @@ class CRUViewSegundaPrueba(View):
 			EdicionPruebaForm6 = SegundaPruebaUpdateForm6(instance=prueba)
 			EdicionPruebaForm7 = SegundaPruebaUpdateForm7(instance=prueba)
 			EdicionPruebaForm8 = SegundaPruebaUpdateForm8(instance=prueba)
+			EdicionPruebaForm9 = SegundaPruebaUpdateForm9(instance=prueba)
+			EdicionPruebaForm10 = SegundaPruebaUpdateForm10(instance=prueba)
+			EdicionPruebaForm11 = SegundaPruebaUpdateForm11(instance=prueba)
+			EdicionPruebaForm12 = SegundaPruebaUpdateForm12(instance=prueba)
+
 		except SegundaPrueba.DoesNotExist:
 			prueba = None
 			EdicionPruebaForm0 = None
@@ -212,7 +217,11 @@ class CRUViewSegundaPrueba(View):
 			EdicionPruebaForm6 = None
 			EdicionPruebaForm7 = None
 			EdicionPruebaForm8 = None
-			
+			EdicionPruebaForm9 = None
+			EdicionPruebaForm10 = None
+			EdicionPruebaForm11 = None
+			EdicionPruebaForm12 = None
+
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
@@ -227,6 +236,10 @@ class CRUViewSegundaPrueba(View):
 			'EdicionPruebaForm6': EdicionPruebaForm6,
 			'EdicionPruebaForm7': EdicionPruebaForm7,
 			'EdicionPruebaForm8': EdicionPruebaForm8,
+			'EdicionPruebaForm9': EdicionPruebaForm9,
+			'EdicionPruebaForm10': EdicionPruebaForm10,
+			'EdicionPruebaForm11': EdicionPruebaForm11,
+			'EdicionPruebaForm12': EdicionPruebaForm12,			
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -251,6 +264,10 @@ class CRUViewSegundaPrueba(View):
 			EdicionPruebaForm6 = SegundaPruebaUpdateForm6(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm7 = SegundaPruebaUpdateForm7(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm8 = SegundaPruebaUpdateForm8(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm9 = SegundaPruebaUpdateForm9(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm10 = SegundaPruebaUpdateForm10(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm11 = SegundaPruebaUpdateForm11(instance=prueba, data=request.POST, files=request.FILES)
+			EdicionPruebaForm12 = SegundaPruebaUpdateForm12(instance=prueba, data=request.POST, files=request.FILES)
 
 			if EdicionPruebaForm1.is_valid():
 				EdicionPruebaForm1.save()
@@ -276,6 +293,18 @@ class CRUViewSegundaPrueba(View):
 			if EdicionPruebaForm8.is_valid():
 				EdicionPruebaForm8.save()
 
+			if EdicionPruebaForm9.is_valid():
+				EdicionPruebaForm9.save()
+
+			if EdicionPruebaForm10.is_valid():
+				EdicionPruebaForm10.save()
+
+			if EdicionPruebaForm11.is_valid():
+				EdicionPruebaForm11.save()
+
+			if EdicionPruebaForm12.is_valid():
+				EdicionPruebaForm12.save()				
+
 		except SegundaPrueba.DoesNotExist:
 			prueba = None
 			EdicionPruebaForm1 = None
@@ -286,6 +315,10 @@ class CRUViewSegundaPrueba(View):
 			EdicionPruebaForm6 = None
 			EdicionPruebaForm7 = None
 			EdicionPruebaForm8 = None
+			EdicionPruebaForm9 = None
+			EdicionPruebaForm10 = None
+			EdicionPruebaForm11 = None
+			EdicionPruebaForm12 = None
 
 		return redirect("pruebas:CRUViewSegundaPrueba", pk=perfil.pk)
 

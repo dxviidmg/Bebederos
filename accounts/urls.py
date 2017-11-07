@@ -17,23 +17,22 @@ urlpatterns = [
 
 	url(r'^expediente/export/zip/(?P<pk>\d+)/$', views.ExportExpedienteZIP, name='ExportExpedienteZIP'),
 
-	url(r'^region/estado/reporte_avance/zona/(?P<pk>[-\w]+)/$', views.ListViewAvanceEscuelas.as_view(), name="ListViewAvanceEscuelasPorZona"),
+#	url(r'^region/estado/reporte_avance/zona/(?P<pk>[-\w]+)/$', views.ListViewAvanceEscuelas.as_view(), name="ListViewAvanceEscuelasPorZona"),
 
-	url(r'^region/estado/zona/$', views.ListViewZonas.as_view(), name="ListViewZonas2"),
-	url(r'^escuelas/por_ejecutora/$', views.ListViewEscuelas.as_view(), name="ListViewEscuelasPorEjecutora"),
+#	url(r'^region/estado/zona/$', views.ListViewZonas.as_view(), name="ListViewZonas2"),
+#	url(r'^escuelas/por_ejecutora/$', views.ListViewEscuelas.as_view(), name="ListViewEscuelasPorEjecutora"),
 #	url(r'^region/(?P<numero>[-\w]+)/estados/$', views.ListViewEntidades.as_view(), name="ListViewEntidades"),
-	url(r'^region/estados/$', views.ListViewEntidades.as_view(), name="ListViewEntidades"),
+	url(r'^escuelas/avance/export/csv/(?P<pk>\d+)/$', views.ExportAvancePorEscuelasCSV, name='ExportAvancePorEscuelasCSV'),
+
 	url(r'^escuelas/search/$',views.SearchViewEscuelas.as_view(), name='SearchViewEscuelas'),
-	url(r'^region/estado/municipio/escuela/mapa/(?P<pk>[-\w]+)/$', views.DetailViewMapa.as_view(), name="DetailViewMapa"),
-	url(r'^region/estado/municipio/escuela/actualizar/(?P<pk>[-\w]+)/$', views.UpdateViewEscuela.as_view(), name="UpdateViewEscuela"),
-	url(r'^region/estado/municipio/escuela/(?P<pk>[-\w]+)/$', views.DetailViewEscuela.as_view(), name="DetailViewEscuela"),
-	url(r'^region/estado/reporte_avance/(?P<slug>[-\w]+)/$', views.ListViewAvanceEscuelas.as_view(), name="ListViewAvanceEscuelas"),	
-	url(r'^region/estado/municipio/(?P<pk>[-\w]+)/$', views.ListViewEscuelas.as_view(), name="ListViewEscuelas"),
-	url(r'^region/estado/municipio/(?P<pk>[-\w]+)/escuela/create/$', views.CreateViewEscuela.as_view(), name="CreateViewEscuela"),
-	url(r'^region/estado/(?P<slug>[-\w]+)/$', views.ListViewZonas.as_view(), name="ListViewZonas"),	
-#	url(r'^region/(?P<numero>[-\w]+)/$', views.ListViewPartidas.as_view(), name="ListViewPartidas"),   
-	url(r'^region/estados/(?P<numero>[-\w]+)/$', views.ListViewEntidades.as_view(), name="ListViewEntidades"),
+	url(r'^escuela/(?P<username>[-\w]+)/$', views.DetailViewEscuela.as_view(), name="DetailViewEscuela"),
+	url(r'^escuela/mapa/(?P<pk>[-\w]+)/$', views.DetailViewMapa.as_view(), name="DetailViewMapa"),
+	url(r'^escuela/actualizar/(?P<pk>[-\w]+)/$', views.UpdateViewEscuela.as_view(), name="UpdateViewEscuela"),
+	url(r'^escuela/create/(?P<pk>[-\w]+)$', views.CreateViewEscuela.as_view(), name="CreateViewEscuela"),
+	url(r'^municipio/(?P<pk>[-\w]+)/$', views.ListViewEscuelas.as_view(), name="ListViewEscuelas"),
+	url(r'^estado/reporte_avance/(?P<slug>[-\w]+)/$', views.ListViewAvanceEscuelas.as_view(), name="ListViewAvanceEscuelas"),
+	url(r'^estado/(?P<slug>[-\w]+)/$', views.ListViewZonas.as_view(), name="ListViewZonas"),
+	url(r'^estados/$', views.ListViewEntidades.as_view(), name="ListViewEntidades"),	
+	url(r'^region/(?P<numero>[-\w]+)/$', views.ListViewEntidades.as_view(), name="ListViewEntidades"),
 	url(r'^regiones/$', views.ListViewRegiones.as_view(), name="ListViewRegiones"),
     ]
-
-
