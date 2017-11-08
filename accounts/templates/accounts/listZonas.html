@@ -7,19 +7,16 @@
 
 	{%if entidad.EscuelasCount%}{%endif%}
 
-		{%if request.user.perfil.tipo != "SI"%}
+		{%if request.user.perfil.cargo == "SIM" or request.user.perfil.tipo == "Laboratorio"%}
 
-		<a href="">Regresar</a>
+		<a href="{%url 'accounts:ListViewEntidades'%}">Regresar</a>
 
+		{%elif request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.cargo == "CRINIFED"%}
 
+		<a href="{%url 'accounts:ListViewEntidades' entidad.region.numero%}">Regresar</a>
 
-		
-
-
-		
-		<br>
-		
-		<br>
+		{%endif%}
+	
 	<h3>Información</h3>
 
 	<div class="row justify-content-center">
@@ -54,8 +51,6 @@
 			</table>
 		</div>
 	</div>
-
-{%endif%}
 
 	<h3>Lista de municipios</h3>
 

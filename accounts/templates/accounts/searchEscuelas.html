@@ -23,7 +23,7 @@
 				<tr>
 					<td>{{escuela.username}}</td>
 					<td>{{escuela.get_full_name}}</td>
-					<td><a href="{%url 'accounts:DetailViewEscuela' escuela.perfil.pk%}">Ver detalle</a></td>
+					<td><a href="{%url 'accounts:DetailViewEscuela' escuela.username%}">Ver detalle</a></td>
 				</tr>
 
 			{%empty%}

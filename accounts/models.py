@@ -7,6 +7,7 @@ from geoposition.fields import GeopositionField
 from mantenimiento.models import *
 
 class Region(models.Model):
+	coordinador_regional_inifed = models.OneToOneField(User, null=True, blank=True, verbose_name="Coordinador Regional de INIFED", related_name="coordinador_regional_inifed")
 	nombre = models.CharField(max_length=20)
 	numero = models.IntegerField()
 	color = models.CharField(max_length=10)
@@ -135,13 +136,14 @@ class Perfil(models.Model):
 	cargo_choices = (
 		("CEINIFED", "Coordinador Estatal de INIFED"),		
 		("RTINIFED", "Residente Técnico de INIFED"),
+		("CRINIFED", "Coordinador Regional de INIFED"),		
 		("RO", "Residente de Obra"),
 		("SIM", "Superintendente"),		
 	)	
 
 	#Atributos de todos los usuarios, sin importar el tipo
 	user = models.OneToOneField(User)
-	telefono = models.CharField(max_length=10, blank=True, null=True, verbose_name="Teléfono")
+	telefono = models.CharField(max_length=25, blank=True, null=True, verbose_name="Teléfono")
 	tipo = models.CharField(max_length=30, choices=tipo_choices)
 	cargo = models.CharField(max_length=30, blank=True, null=True, verbose_name="Cargo", choices=cargo_choices)
 

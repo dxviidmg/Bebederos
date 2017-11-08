@@ -5,15 +5,10 @@ from django.contrib.auth.models import User
 from bebederos.models import *
 
 #Regiones
-admin.site.register(Region)
-
-#Partidas
-#class PartidaEntidadAdmin(admin.ModelAdmin):
-#    list_display = ['region', 'numero']
-#    search_fields = ['numero', 'region__numero']
-#    list_filter = ['region']
-#    prepopulated_fields = {"slug": ("nombre",)}    
-#admin.site.register(Partida, PartidaAdmin)
+class RegionAdmin(admin.ModelAdmin):
+    list_display = ['nombre', 'numero', 'coordinador_regional_inifed']
+    search_fields = ['nombre', 'coordinador_regional_inifed__first_name', 'coordinador_regional_inifed']
+admin.site.register(Region, RegionAdmin)    
 
 #Entidades
 class EntidadAdmin(admin.ModelAdmin):

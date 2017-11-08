@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="col-12">
 			<h1>Entrega de Bebedero</h1>
-			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
+			<a href="{%url 'accounts:DetailViewEscuela' perfil.user.username%}">Regresar</a>
 			<h3>Escuela {{escuela.get_full_name}}</h3>
 		</div>
 	</div>

@@ -14,6 +14,7 @@
 					<tr>
 						<th rowspan="2">Región</th>
 						<th rowspan="2">Partida</th>
+						<th rowspan="2">Entidad</th>
 						<th rowspan="2">Zona</th>
 						<th colspan="4">Escuelas</th>
 					</tr>
@@ -26,8 +27,9 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>{{entidad.partida.region}}</td>
-						<td>{{entidad.partida.numero}}</td>
+						<td>{{entidad.region}}</td>
+						<td>{{entidad.partida}}</td>
+						<td>{{entidad.nombre}}</td>
 						<td>{{municipio.zona.nombre}}</td>
 						<td>{{municipio.escuelas_registradas}}</td>
 						<td>{{municipio.escuelas_aceptadas}}</td>
@@ -54,19 +56,9 @@
 						<th>C. C. T.</th>
 						<th>Nombre</th>
 						<th>Nivel educativo</th>
-						{%if request.user.perfil.tipo == "Ejecutora"%}
-
-						<th>Municipio</th>
-						<th>Zona</th>
-						<th>Entidad</th>
-						<th>Trazabilidad</th>
-						<th>Status de construción</th>
-						{%else%}
 						<th>Mueble</th>
 						<th>Sistema de potabilización</th>
-						<th>Status</th>
-						{%endif%}
-
+						<th>Aprobación de primer prueba</th>
 						<th>Avance de construcción</th>
 					</tr>
 				</thead>

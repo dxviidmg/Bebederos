@@ -12,7 +12,7 @@
 		<div class="col-12">
 			
 			<h1>Primer prueba de calidad de agua</h1>
-			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
+			<a href="{%url 'accounts:DetailViewEscuela' escuela.username%}">Regresar</a>
 			<h3>Escuela {{escuela.get_full_name}}</h3>
 		</div>
 	</div>
@@ -134,9 +134,9 @@
 						{{EdicionPruebaForm2 | bootstrap}}
 					</div>
 					<div class="col-12 col-sm-12 col-md-1">
-						<h5>.</h5>
+						<h5>F</h5>
 						{{EdicionPruebaForm9 | bootstrap}}
-						<h5>.</h5>
+						<h5>B</h5>
 						{{EdicionPruebaForm10 | bootstrap}}	
 					</div>
 					<div class="col-12 col-sm-12 col-md-3">
@@ -146,7 +146,7 @@
 						{{EdicionPruebaForm4 | bootstrap}}						
 					</div>
 					<div class="col-12 col-sm-12 col-md-1">
-						<h5>.</h5>
+						<h5>M</h5>
 						{{EdicionPruebaForm11 | bootstrap}}
 					</div>
 					<div class="col-12 col-sm-12 col-md-3">
@@ -154,7 +154,7 @@
 						{{EdicionPruebaForm5 | bootstrap}}
 					</div>
 					<div class="col-12 col-sm-12 col-md-1">
-						<h5>.</h5>
+						<h5>I</h5>
 						{{EdicionPruebaForm12 | bootstrap}}
 					</div>
 					<div class="col-12 col-sm-12 col-md-3">

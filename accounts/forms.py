@@ -16,12 +16,13 @@ class EscuelaUserCreateForm(forms.ModelForm):
 		}
 
 	def clean_username(self):
-	    username = self.cleaned_data['username']
-	    try:
-	        user = User.objects.exclude(pk=self.instance.pk).get(username=username)
-	    except User.DoesNotExist:
-	        return username
-	    raise forms.ValidationError(u'Esta escuela "%s" ya ha sido registrada.' % username)
+		username = self.cleaned_data['username']
+		try:
+			user = User.objects.exclude(pk=self.instance.pk).get(username=username)
+		except User.DoesNotExist:
+			return username
+			print(username[0])
+		raise forms.ValidationError(u'Esta escuela "%s" ya ha sido registrada.' % username)
 
 class EscuelaPerfilCreateForm(forms.ModelForm):
 	class Meta:

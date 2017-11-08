@@ -64,7 +64,7 @@ class PrimerPrueba(models.Model):
 	color_verdadero = models.FloatField(null=True, blank=True, verbose_name="Color verdadero (U Pt-Co)")
 	turbiedad = models.FloatField(null=True, blank=True, verbose_name="Turbiedad (UTN o equivalente)")
 	ph = models.FloatField(null=True, blank=True, verbose_name="pH (unidades de pH)")
-	conductividad_electrica = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Conductividad eléctrica (µS/cm)")
+	conductividad_electrica = models.FloatField(null=True, blank=True, verbose_name="Conductividad eléctrica (µS/cm)")
 		#Bacteriologicos
 	coliformes_fecales = models.FloatField(null=True, blank=True, verbose_name="Coliformes fecales (UFC o NMP)")
 	coliformes_totales = models.FloatField(null=True, blank=True, verbose_name="Coliformes totales (UFC o NMP)") 
@@ -145,24 +145,24 @@ class SegundaPrueba(models.Model):
 
 	#Parámetros
 		#Fisicos y organoelectricos
-	color_verdadero = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Color verdadero (U Pt-Co)")
-	turbiedad = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Turbiedad (UTN o equivalente)")
-	ph = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="pH (unidades de pH)")
-	conductividad_electrica = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Conductividad eléctrica (µS/cm)")
+	color_verdadero = models.FloatField(null=True, blank=True, verbose_name="Color verdadero (U Pt-Co)")
+	turbiedad = models.FloatField(null=True, blank=True, verbose_name="Turbiedad (UTN o equivalente)")
+	ph = models.FloatField(null=True, blank=True, verbose_name="pH (unidades de pH)")
+	conductividad_electrica = models.FloatField(null=True, blank=True, verbose_name="Conductividad eléctrica (µS/cm)")
 		#Bacteriologicos
-	coliformes_fecales = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Coliformes fecales (UFC o NMP)")
-	coliformes_totales = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Coliformes totales (UFC o NMP)") 
+	coliformes_fecales = models.FloatField(null=True, blank=True, verbose_name="Coliformes fecales (UFC o NMP)")
+	coliformes_totales = models.FloatField(null=True, blank=True, verbose_name="Coliformes totales (UFC o NMP)") 
 		#Arsenico y metales
-	arsenico = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Arsénico (mg/L)")
-	hierro = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Hierro (mg/L)")
-	manganeso = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Manganeso (mg/L)")
-	plomo = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Plomo (mg/L)")
+	arsenico = models.FloatField(null=True, blank=True, verbose_name="Arsénico (mg/L)")
+	hierro = models.FloatField(null=True, blank=True, verbose_name="Hierro (mg/L)")
+	manganeso = models.FloatField(null=True, blank=True, verbose_name="Manganeso (mg/L)")
+	plomo = models.FloatField(null=True, blank=True, verbose_name="Plomo (mg/L)")
 		#Iones y compuestos inorgánicos
-	floururos = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Fluoruros (mg/L)")
-	nitratos = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Nitratos (mg/L)")
-	sulfatos = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Sulfatos (mg/L)")
-	dureza_total = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Dureza total (CaCO3) (mg/L)")
-	solidos_disueltos  = models.DecimalField(max_digits=7, decimal_places=3, null=True, blank=True, verbose_name="Sólidos disueltos totales (mg/L)")
+	floururos = models.FloatField(null=True, blank=True, verbose_name="Fluoruros (mg/L)")
+	nitratos = models.FloatField(null=True, blank=True, verbose_name="Nitratos (mg/L)")
+	sulfatos = models.FloatField(null=True, blank=True, verbose_name="Sulfatos (mg/L)")
+	dureza_total = models.FloatField(null=True, blank=True, verbose_name="Dureza total (CaCO3) (mg/L)")
+	solidos_disueltos  = models.FloatField(null=True, blank=True, verbose_name="Sólidos disueltos totales (mg/L)")
 
 	def __str__(self):
 		return '{}'.format(self.escuela)

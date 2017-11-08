@@ -42,7 +42,7 @@
       {%if request.user.perfil.tipo == "Escuela"%}
 
       <li class="nav-item">
-        <a class="nav-link" href="{%url 'accounts:DetailViewEscuela' request.user.perfil.pk%}">Expediente</a>
+        <a class="nav-link" href="{%url 'accounts:DetailViewEscuela' request.user.username%}">Expediente</a>
       </li>
 
       {%elif request.user.perfil.tipo == "Laboratorio"%}
@@ -73,6 +73,15 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.residente_obra.slug%}">Por municipios</a>
           <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.residente_obra.slug%}">Reporte de avance por escuela</a>          
+          <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
+        </div>
+      </li>
+
+      {%elif request.user.perfil.cargo == "CRINIFED"%}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{%url 'accounts:ListViewEntidades' request.user.coordinador_regional_inifed.numero%}">Entidades</a>
           <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
         </div>
       </li>

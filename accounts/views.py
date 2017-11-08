@@ -68,7 +68,7 @@ class ListViewEntidades(View):
 			region = None
 			laboratorio = User.objects.get(pk=request.user.pk)
 			entidades = Entidad.objects.filter(laboratorio=laboratorio)
-		elif request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM":
+		elif request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.cargo == "CRINIFED":
 			region = Region.objects.get(numero=numero)
 			entidades = Entidad.objects.filter(region=region)			
 
@@ -439,13 +439,17 @@ def ExportExpedienteZIP(request, pk):
 	planoInstalacionHidraulica = origen + str(visitaDeAcuerdo.plano_instalacion_hidraulica.url)
 	planoInstalacionSanitaria = origen + str(visitaDeAcuerdo.plano_instalacion_sanitaria.url)
 
-	videoPrimerPrueba = origen + str(primerPrueba.foto_toma_agua.url)
-	videoSegundaPrueba = origen + str(segundaPrueba.foto_toma_agua.url)
+	foto1PrimerPrueba = origen + str(primerPrueba.foto_toma_agua_1.url)
+	foto2PrimerPrueba = origen + str(primerPrueba.foto_toma_agua_2.url)
+	videoPrimerPrueba = origen + str(primerPrueba.video_toma_agua.url)
+	foto1SegundaPrueba = origen + str(primerSegunda.foto_toma_agua_1.url)
+	foto2SegundaPrueba = origen + str(primerSegunda.foto_toma_agua_2.url)
+	videoSegundaPrueba = origen + str(primerSegunda.video_toma_agua.url)
 	primerVideoConstrucion = origen + str(PrimerEvidenciaConstruccion.video.url)
 	ultimoVideoConstrucion = origen + str(UltimaEvidenciaConstruccion.video.url)	
 	videoInicioFuncionamiento = origen + str(inicioFuncionamiento.video.url)
 
-	filenames = [cedulaIdentificacion, planoConjunto, distribucionPlanta, memoriaCalculo, planoInstalacionElectrica, planoInstalacionHidraulica, planoInstalacionSanitaria, videoPrimerPrueba, videoSegundaPrueba, primerVideoConstrucion, ultimoVideoConstrucion, videoInicioFuncionamiento]
+	filenames = [cedulaIdentificacion, planoConjunto, distribucionPlanta, memoriaCalculo, planoInstalacionElectrica, planoInstalacionHidraulica, planoInstalacionSanitaria, foto1PrimerPrueba, foto2PrimerPrueba, videoPrimerPrueba, foto1SegundaPrueba, foto2SegundaPrueba, videoSegundaPrueba, primerVideoConstrucion, ultimoVideoConstrucion, videoInicioFuncionamiento]
 
 	zip_subdir = "Expediente técnico " + str(escuela.username)
 	zip_filename = "%s.zip" % zip_subdir
@@ -476,7 +480,7 @@ def ExportAvancePorEscuelasCSV(request, pk):
 	municipios=Municipio.objects.filter(zona__in=zonas)
 	perfiles = Perfil.objects.filter(municipio__in=municipios)
 
-	escuelas = User.objects.filter(perfil__in=perfiles).values_list('perfil__municipio__nombre', 'perfil__localidad', 'username', 'first_name', 'perfil__nivel_educativo', 'escuela__mueble__modelo', 'escuela__sistema_potabilizacion__tipo', 'escuela_primer_prueba__aprobacion', 'perfil__avance', 'escuela_segunda_prueba__aprobacion', 'iniciofuncionamiento__creacion', 'actaentrega__creacion', 'perfil__mantenimientos')
+	escuelas = User.objects.filter(perfil__in=perfiles).values_list('perfil__municipio__nombre', 'perfil__localidad', 'username', 'first_name', 'perfil__nivel_educativo', 'escuela__mueble__modelo', 'escuela__sistema_potabilizacion__tipo', 'escuela_primer_prueba__aprobacion', 'perfil__avance', 'escuela_segunda_prueba__aprobacion', 'iniciofuncionamiento__creacion', 'perfil__mantenimientos', 'actaentrega__creacion')
 	for escuela in escuelas:
 		writer.writerow(escuela)
 

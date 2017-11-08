@@ -15,7 +15,7 @@
 		{% endfor %}
 		
 			<h1>Evidencias de construcción e instalación de sistema bebedero</h1>
-			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
+			<a href="{%url 'accounts:DetailViewEscuela' perfil.user.username%}">Regresar</a>
 			<h3>Escuela {{escuela.get_full_name}}</h3>
 		</div>
 	</div>
@@ -40,6 +40,7 @@
 						<th>Folio</th>
 						<th>Fase</th>
 						<th>Hora y fecha de registro</th>
+						<th>Video</th>
 						<th>Aprobación de Superintendente</th>
 
 						{%if request.user.perfil.cargo == "SIM"%}
@@ -54,6 +55,7 @@
 							<td>{{evidencia.pk}}</td>
 							<td>{{evidencia.fase}}</td>
 							<td>{{evidencia.creacion}}</td>
+							<td><a href="{{evidencia.video.url}}">Ver</a></td>							
 							<td>{{evidencia.aprobacion_SI}}</td>
 							{%if request.user.perfil.cargo == "SIM"%}
 							<td><a href="{%url 'construccion:UpdateViewEvidencia' evidencia.pk%}">Revisar</a></td>

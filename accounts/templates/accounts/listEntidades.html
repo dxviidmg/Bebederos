@@ -2,9 +2,11 @@
 
 {%block content%}
 
-<h1>Lista de Entidades de la Región {{region.numero}}: {{region.nombre}}</h1>
+<h1>Lista de Entidades {%if request.user.perfil.tipo == "Admistrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.cargo == "CRINIFED"%} de la Región {{region.numero}}: {{region.nombre}} {%endif%}</h1>
 
-<a href="{%url 'accounts:ListViewRegiones'%}">Regresar</a>
+{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
+<p><a href="{%url 'accounts:ListViewRegiones'%}">Regresar</a></p>
+{%endif%}
 <div class="table-responsive">
 	<table class="table table-bordered">
 		<thead>
