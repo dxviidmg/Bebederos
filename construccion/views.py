@@ -158,5 +158,5 @@ class UpdateViewEvidencia(View):
 		EdicionEvidenciaForm=EvidenciaConstruccionEditForm(instance=evidencia, data=request.POST)
 		if EdicionEvidenciaForm.is_valid:
 			EdicionEvidenciaForm.save()
-
+			perfil.UpdateAvance()
 		return redirect("construccion:CRViewEvidencias", pk=perfil.pk)

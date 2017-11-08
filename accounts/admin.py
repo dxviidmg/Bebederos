@@ -15,7 +15,7 @@ class EntidadAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'partida', 'coordinador_estatal_inifed', 'residente_obra', 'sim', 'laboratorio']
     search_fields = ['nombre', 'coordinador_estatal_inifed__first_name', 'coordinador_estatal_inifed__last_name', 'laboratorio__first_name', 'laboratorio__last_name']
     list_filter = ['partida']
-
+    prepopulated_fields = {"slug": ("nombre",)}
 admin.site.register(Entidad, EntidadAdmin)
 
 class ZonaAdmin(admin.ModelAdmin):

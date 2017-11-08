@@ -389,7 +389,7 @@
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-			<h4>Sugerencia de sistema potabilizador</h4>
+			<h4>Confirmación de funcionamiento de sistema potabilizador</h4>
 				{%csrf_token%}			
 				{{EdicionPruebaForm7 | bootstrap}}
 				<a href=""><input type="submit" value="Guardar cambios"></a>
@@ -399,6 +399,25 @@
 	
 		{%endif%}
 		{%endif%}
+
+		{%if request.user.perfil.tipo == "IMTA"%}
+		{%if prueba.resultados_laboratorio and prueba.aprobacion == "En espera"%}
+		
+
+	<div class="row espacio2">
+		<div class="col-12">
+			<form action="." method="post" enctype="multipart/form-data">
+				<h4>Confirmación de Sistema potabilizador</h4>
+				{%csrf_token%}
+				{{EdicionPruebaForm8 | bootstrap}}
+				<a href=""><input type="submit" value="Guardar cambios"></a>
+			</form>
+		</div>
+	</div>
+	
+		{%endif%}
+		{%endif%}
+
 	{%else%}
 	
 	{%if request.user.perfil.tipo == "Ejecutora"%}

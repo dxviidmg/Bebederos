@@ -431,6 +431,7 @@ def ExportExpedienteZIP(request, pk):
 	UltimaEvidenciaConstruccion = EvidenciaConstruccion.objects.filter(escuela=escuela).last()	
 	inicioFuncionamiento = InicioFuncionamiento.objects.get(escuela=escuela)
 
+	#Archivos
 	cedulaIdentificacion = origen + str(visitaDeAcuerdo.cedula_identificacion.url)
 	planoConjunto = origen + str(visitaDeAcuerdo.plano_conjunto.url)
 	distribucionPlanta = origen + str(visitaDeAcuerdo.distribucion_planta.url)
@@ -438,18 +439,17 @@ def ExportExpedienteZIP(request, pk):
 	planoInstalacionElectrica = origen + str(visitaDeAcuerdo.plano_instalacion_electrica.url)
 	planoInstalacionHidraulica = origen + str(visitaDeAcuerdo.plano_instalacion_hidraulica.url)
 	planoInstalacionSanitaria = origen + str(visitaDeAcuerdo.plano_instalacion_sanitaria.url)
-
 	foto1PrimerPrueba = origen + str(primerPrueba.foto_toma_agua_1.url)
 	foto2PrimerPrueba = origen + str(primerPrueba.foto_toma_agua_2.url)
 	videoPrimerPrueba = origen + str(primerPrueba.video_toma_agua.url)
-	foto1SegundaPrueba = origen + str(primerSegunda.foto_toma_agua_1.url)
-	foto2SegundaPrueba = origen + str(primerSegunda.foto_toma_agua_2.url)
-	videoSegundaPrueba = origen + str(primerSegunda.video_toma_agua.url)
+	foto1SegundaPrueba = origen + str(segundaPrueba.foto_toma_agua_1.url)
+	foto2SegundaPrueba = origen + str(segundaPrueba.foto_toma_agua_2.url)
+	videoSegundaPrueba = origen + str(segundaPrueba.video_toma_agua.url)
 	primerVideoConstrucion = origen + str(PrimerEvidenciaConstruccion.video.url)
 	ultimoVideoConstrucion = origen + str(UltimaEvidenciaConstruccion.video.url)	
 	videoInicioFuncionamiento = origen + str(inicioFuncionamiento.video.url)
 
-	filenames = [cedulaIdentificacion, planoConjunto, distribucionPlanta, memoriaCalculo, planoInstalacionElectrica, planoInstalacionHidraulica, planoInstalacionSanitaria, foto1PrimerPrueba, foto2PrimerPrueba, videoPrimerPrueba, foto1SegundaPrueba, foto2SegundaPrueba, videoSegundaPrueba, primerVideoConstrucion, ultimoVideoConstrucion, videoInicioFuncionamiento]
+	filenames = [	cedulaIdentificacion, planoConjunto, distribucionPlanta, memoriaCalculo, planoInstalacionElectrica, planoInstalacionHidraulica, planoInstalacionSanitaria, foto1PrimerPrueba, foto2PrimerPrueba, videoPrimerPrueba, foto1SegundaPrueba, foto2SegundaPrueba, videoSegundaPrueba, primerVideoConstrucion, ultimoVideoConstrucion,	videoInicioFuncionamiento]
 
 	zip_subdir = "Expediente técnico " + str(escuela.username)
 	zip_filename = "%s.zip" % zip_subdir

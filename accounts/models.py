@@ -10,7 +10,7 @@ class Region(models.Model):
 	coordinador_regional_inifed = models.OneToOneField(User, null=True, blank=True, verbose_name="Coordinador Regional de INIFED", related_name="coordinador_regional_inifed")
 	nombre = models.CharField(max_length=20)
 	numero = models.IntegerField()
-	color = models.CharField(max_length=10)
+	color = models.CharField(max_length=10, verbose_name="Color (Hexadecimal o en inglés)")
 
 
 	def __str__(self):
@@ -22,7 +22,7 @@ class Region(models.Model):
 
 class Entidad(models.Model):
 	region = models.ForeignKey(Region, verbose_name="Región")
-	partida = models.IntegerField(verbose_name="número")
+	partida = models.IntegerField(verbose_name="Partida")
 
 	#Perfiles de INIFED
 	coordinador_estatal_inifed = models.OneToOneField(User, null=True, blank=True, verbose_name="Coordinador Estatal de INIFED", related_name="coordinador_estatal_inifed")
@@ -34,7 +34,6 @@ class Entidad(models.Model):
 
 	laboratorio = models.ForeignKey(User, null=True, blank=True, verbose_name="Laboratorio", related_name="laboratorio")
 
-#	partida = models.ForeignKey(Partida)
 	nombre = models.CharField(max_length=30)
 	abreviatura = models.CharField(max_length=4)
 	escuelas_asignadas = models.IntegerField(default=0)
@@ -71,10 +70,9 @@ class Entidad(models.Model):
 		return reverse('accounts:ListViewMunicipios', kwargs={'numero': self.partida.numero, 'slug': self.slug})
 
 class Zona(models.Model):
-#	superintendente = models.OneToOneField(User, null=True, blank=True, related_name="superintendente")
 	entidad = models.ForeignKey(Entidad)
 	nombre = models.CharField(max_length=30, verbose_name="Nombre o número")
-	color = models.CharField(max_length=30)
+	color = models.CharField(max_length=30, verbose_name="Color (Hexadecimal o en inglés)")
 
 	def __str__(self):
 		return '{} de {}'.format(self.nombre, self.entidad)
