@@ -118,8 +118,8 @@ class ListViewEscuelas(View):
 		template_name = "accounts/listEscuelas.html"
 
 		municipio = Municipio.objects.get(pk=pk)
-		perfiles = Perfil.objects.filter(municipio=municipio).order_by('municipio__nombre', 'localidad', 'nivel_educativo')
-		escuelas = User.objects.filter(perfil__in=perfiles)
+		perfiles = Perfil.objects.filter(municipio=municipio)
+		escuelas = User.objects.filter(perfil__in=perfiles).order_by('perfil__localidad', 'perfil__nivel_educativo')
 		zona = Zona.objects.get(municipio=municipio)
 		entidad = Entidad.objects.get(zona=zona)
 
@@ -278,11 +278,12 @@ class CreateViewEscuela(View):
 #Actualización de escuela
 class UpdateViewEscuela(View):
 	@method_decorator(login_required)
-	def get(self, request, pk):
+	def get(self, request, username):
 		template_name = "accounts/updateEscuela.html"
-		perfil = Perfil.objects.get(pk=pk)
-		escuela = User.objects.get(perfil=perfil)
-		
+		#perfil = Perfil.objects.get(pk=pk)
+		escuela = User.objects.get(username=username)
+		perfil = Perfil.objects.get(user=escuela)
+
 		EdicionEscuelaUserForm = EscuelaUserUpdateForm(instance=escuela)
 		EdicionEscuelaPerfilForm = EscuelaPerfilUpdateForm(instance=perfil)
 
@@ -293,9 +294,9 @@ class UpdateViewEscuela(View):
 			'EdicionEscuelaPerfilForm': EdicionEscuelaPerfilForm,
 		}
 		return render(request,template_name, context)
-	def post(self, request, pk):
-		perfil = Perfil.objects.get(pk=pk)
-		escuela = User.objects.get(perfil=perfil)
+	def post(self, request, username):
+		escuela = User.objects.get(username=username)
+		perfil = Perfil.objects.get(user=escuela)
 		
 		EdicionEscuelaUserForm = EscuelaUserUpdateForm(instance=escuela, data=request.POST)
 		EdicionEscuelaPerfilForm = EscuelaPerfilUpdateForm(instance=perfil, data=request.POST, files=request.FILES)		
@@ -307,7 +308,7 @@ class UpdateViewEscuela(View):
 		if EdicionEscuelaPerfilForm.is_valid:
 			EdicionEscuelaPerfilForm.save()
 
-		return redirect("accounts:UpdateViewEscuela", pk=perfil.pk)
+		return redirect("accounts:UpdateViewEscuela", username=escuela.username)
 
 #Vizualicación de un mapa
 class DetailViewMapa(View):

@@ -34,7 +34,7 @@ class Entidad(models.Model):
 
 	laboratorio = models.ForeignKey(User, null=True, blank=True, verbose_name="Laboratorio", related_name="laboratorio")
 
-	nombre = models.CharField(max_length=30)
+	nombre = models.CharField(max_length=100)
 	abreviatura = models.CharField(max_length=4)
 	escuelas_asignadas = models.IntegerField(default=0)
 	escuelas_registradas = models.IntegerField(default=0)
@@ -82,7 +82,7 @@ class Zona(models.Model):
 
 class Municipio(models.Model):
 	zona = models.ForeignKey(Zona, null=True)
-	nombre = models.CharField(max_length=30)
+	nombre = models.CharField(max_length=100)
 	escuelas_registradas = models.IntegerField(default=0)
 	escuelas_aceptadas = models.IntegerField(default=0)
 	escuelas_pendientes = models.IntegerField(default=0)
@@ -146,7 +146,7 @@ class Perfil(models.Model):
 	cargo = models.CharField(max_length=30, blank=True, null=True, verbose_name="Cargo", choices=cargo_choices)
 
 	#Atributos exclusivos de escuelas
-	municipio = models.ForeignKey(Municipio, null=True, blank=True)	
+	municipio = models.ForeignKey(Municipio, null=True, blank=True)
 	director = models.CharField(max_length=100, blank=True, null=True)
 	foto_director = models.ImageField(upload_to='fotos/director/%Y/%m/%d/', null=True, blank=True, verbose_name="Foto del director")
 	foto_escuela = models.ImageField(upload_to='fotos/escuela/%Y/%m/%d/', null=True, blank=True, verbose_name="Foto de la entrada de la escuela")
@@ -155,8 +155,8 @@ class Perfil(models.Model):
 	plantilla_escolar = models.IntegerField(blank=True, null=True)
 	status = models.CharField(max_length=20, blank=True, null=True)
 	avance = models.IntegerField(blank=True, null=True)
-	domicilio = models.CharField(max_length=300, blank=True, null=True)
-	localidad = models.CharField(max_length=30, blank=True, null=True)
+	domicilio = models.CharField(max_length=400, blank=True, null=True)
+	localidad = models.CharField(max_length=200, blank=True, null=True)
 	referencias = models.CharField(max_length=200, blank=True, null=True)
 	SSID = models.CharField(max_length=20, null=True, blank=True)
 	clave_SSID = models.CharField(max_length=20, null=True, blank=True)

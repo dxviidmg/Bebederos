@@ -274,14 +274,14 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
 .col-md-5{
   padding-top: 10px;
 }
-.
-page-link {
+
+.page-link {
     position: relative;
     display: block;
     padding: .5rem .75rem;
     margin-left: -1px;
     line-height: 1.25;
-    color: #44B036;
+    color: #000;
     background-color: #fff;
     border: 1px solid #ddd;
 }

@@ -6,7 +6,7 @@
 
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-			<h1>{{escuela.get_full_name}}</h1>
+			<h1>Escuela {{escuela.get_full_name}}</h1>
 			
 			{%if request.user.perfil.tipo != "Laboratorio" or request.user.perfil.tipo != "CEstatal"%}
 
@@ -22,7 +22,7 @@
 
 			{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador"%}
 			<br>
-			<a href="{%url 'accounts:UpdateViewEscuela' perfil.pk%}">Actualizar datos</a>
+			<a href="{%url 'accounts:UpdateViewEscuela' escuela.username%}">Actualizar datos</a>
 			<br>
 			{%endif%}
 		

@@ -14,7 +14,7 @@
 		{% endfor %}
 
 			<h1>Actualización de Información</h1>
-			<a href="{%url 'accounts:DetailViewEscuela' perfil.pk%}">Regresar</a>
+			<a href="{%url 'accounts:DetailViewEscuela' escuela.username%}">Regresar</a>
 			<h3>Escuela {{perfil.nivel_educativo}} "{{escuela.get_full_name}}"</h3>
 		</div>
 	</div>

@@ -2,7 +2,7 @@
 
 {%block content%}
 
-<h1>Lista de Entidades {%if request.user.perfil.tipo == "Admistrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.cargo == "CRINIFED"%} de la Región {{region.numero}}: {{region.nombre}} {%endif%}</h1>
+<h1>Lista de Entidades {%if request.user.perfil.tipo == "Admistrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.cargo == "CRINIFED" or request.user.perfil.tipo == "Administrador"%} de la Región {{region.numero}}: {{region.nombre}} {%endif%}</h1>
 
 {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
 <p><a href="{%url 'accounts:ListViewRegiones'%}">Regresar</a></p>
