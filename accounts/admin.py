@@ -6,8 +6,8 @@ from bebederos.models import *
 
 #Regiones
 class RegionAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'numero', 'coordinador_regional_inifed']
-    search_fields = ['nombre', 'coordinador_regional_inifed__first_name', 'coordinador_regional_inifed']
+    list_display = ['nombre', 'numero', 'coordinador_regional_inifed', 'enlace_institucional_inifed']
+    search_fields = ['nombre', 'coordinador_regional_inifed__first_name', 'coordinador_regional_inifed', 'enlace_institucional_inifed']
 admin.site.register(Region, RegionAdmin)    
 
 #Entidades

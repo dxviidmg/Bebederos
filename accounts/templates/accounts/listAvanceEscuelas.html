@@ -23,7 +23,9 @@
 					<th rowspan="2">C. C. T</th>
 					<th rowspan="2">Nombre</th>
 					<th rowspan="2">Nivel educativo</th>
-
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM"%}
+					<th rowspan="2">Plantilla</th>
+					{%endif%}
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM"%}
 					<th rowspan="2">Mueble</th>
 					{%endif%}
@@ -140,6 +142,10 @@
 					
 					<td>{{avanceEscuela.escuela.get_full_name}}</td>
 					<td>{{avanceEscuela.escuela.perfil.nivel_educativo}}</td>
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM"%}
+					<td>{%if avanceEscuela.escuela.perfil.plantilla_escolar%}{{avanceEscuela.escuela.perfil.plantilla_escolar}}{%endif%}</td>
+					{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM"%}
 					<td>{%if avanceEscuela.sistemaBebedero.mueble%}{{avanceEscuela.sistemaBebedero.mueble}}{%endif%}</td>
@@ -308,7 +314,7 @@
 					<td><a href="{%url 'visitas:ExportActasFuncionamietoZIP' entidad.pk%}">Actas de inicio de funcionamieto</a></td>
 					{%endif%}
 					
-					{%if "Pilar" in request.user.first_name%}
+					{%if request.user.perfil.tipo == "PQ"%}
 					<td>
 					<a href="{% url 'pruebas:ExportPruebasPorEscuelasCSV' entidad.pk%}">Base de formato T7</a>
 					</td>

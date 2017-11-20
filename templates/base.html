@@ -28,7 +28,7 @@
   </button>
 
   {%endif%}
-  <a class="navbar-brand" href="#" style="color: white;">TEASIB 4.2</a>
+  <a class="navbar-brand" href="#" style="color: white;">TEASIB 4.2.2</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
@@ -85,6 +85,15 @@
           <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
         </div>
       </li>
+
+      {%elif request.user.perfil.cargo == "EIINIFED"%}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{%url 'accounts:ListViewEntidades' request.user.enlace_institucional_inifed.numero%}">Entidades</a>
+          <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
+        </div>
+      </li>      
 
       {%elif request.user.perfil.cargo == "CEINIFED"%}
       <li class="nav-item dropdown">

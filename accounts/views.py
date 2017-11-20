@@ -13,7 +13,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import csv
-
+from datetime import datetime
 #Librerias para generar ZIP
 import zipfile
 import os
@@ -68,7 +68,7 @@ class ListViewEntidades(View):
 			region = None
 			laboratorio = User.objects.get(pk=request.user.pk)
 			entidades = Entidad.objects.filter(laboratorio=laboratorio)
-		elif request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.cargo == "CRINIFED":
+		elif request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.cargo == "CRINIFED" or request.user.perfil.cargo == "EIINIFED":
 			region = Region.objects.get(numero=numero)
 			entidades = Entidad.objects.filter(region=region)			
 
@@ -471,17 +471,19 @@ def ExportExpedienteZIP(request, pk):
 	return response
 
 def ExportAvancePorEscuelasCSV(request, pk):
-	response = HttpResponse(content_type='text/csv')
-	response['Content-Disposition'] = 'attachment; filename="AvancePorEscuela.csv"'
-	writer = csv.writer(response)
-	writer.writerow(['Municipio', 'Localidad','C. C. T.','Nombre', 'Nivel educativo', 'Mueble', 'Sistema potabilizador', 'Validación de primer prueba', 'Porcentaje de construcción', 'Validación de sistema potabilizador', 'Inicio de funcionamiento', 'Mantenimientos', 'Acta de entrega'])
-
 	entidad = get_object_or_404(Entidad, pk=pk)
 	zonas = Zona.objects.filter(entidad=entidad)
 	municipios=Municipio.objects.filter(zona__in=zonas)
 	perfiles = Perfil.objects.filter(municipio__in=municipios)
 
-	escuelas = User.objects.filter(perfil__in=perfiles).values_list('perfil__municipio__nombre', 'perfil__localidad', 'username', 'first_name', 'perfil__nivel_educativo', 'escuela__mueble__modelo', 'escuela__sistema_potabilizacion__tipo', 'escuela_primer_prueba__aprobacion', 'perfil__avance', 'escuela_segunda_prueba__aprobacion', 'iniciofuncionamiento__creacion', 'perfil__mantenimientos', 'actaentrega__creacion')
+	ahora = datetime.now().strftime("%d-%m-%Y %H:%M")
+	
+	response = HttpResponse(content_type='text/csv')
+	response['Content-Disposition'] = 'attachment; filename="Reporte general de ' + entidad.nombre + ' ' + ahora +'.csv"'
+	writer = csv.writer(response)
+	writer.writerow(['Municipio', 'Localidad','C. C. T.','Nombre', 'Nivel educativo', 'Plantilla', 'Mueble', 'Sistema potabilizador', 'Validación de primer prueba', 'Porcentaje de construcción', 'Validación de sistema potabilizador', 'Inicio de funcionamiento', 'Mantenimientos', 'Acta de entrega'])
+
+	escuelas = User.objects.filter(perfil__in=perfiles).values_list('perfil__municipio__nombre', 'perfil__localidad', 'username', 'first_name', 'perfil__nivel_educativo', 'perfil__plantilla_escolar', 'escuela__mueble__modelo', 'escuela__sistema_potabilizacion__tipo', 'escuela_primer_prueba__aprobacion', 'perfil__avance', 'escuela_segunda_prueba__aprobacion', 'iniciofuncionamiento__creacion', 'perfil__mantenimientos', 'actaentrega__creacion')
 	for escuela in escuelas:
 		writer.writerow(escuela)
 

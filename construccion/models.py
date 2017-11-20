@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 class InicioDeTrabajo(models.Model):
-	escuela = models.OneToOneField(User)
+	escuela = models.OneToOneField(User, related_name="escuela_inicio_trabajo")
 	acta_inicio = models.FileField(upload_to='iniciosTrabajo/actas/%Y/%m/%d/', verbose_name="Acta de inicio de trabajo")
 
 	def __str__(self):
@@ -14,7 +14,7 @@ class InicioDeTrabajo(models.Model):
 		verbose_name_plural = 'Inicio de trabajos'
 
 class InstalacionBebedero(models.Model):
-	escuela = models.OneToOneField(User)
+	escuela = models.OneToOneField(User, related_name="escuela_instalacion_bebedero")
 	reporte = models.FileField(upload_to='instalaciones/reportes/%Y/%m/%d/', verbose_name="Reporte de instalación")
 	recepcion_mueble_bebedero = models.FileField(upload_to='instalaciones/recepciones/%Y/%m/%d/', verbose_name="Recepción del mueble bebedero y sus componentes")
 

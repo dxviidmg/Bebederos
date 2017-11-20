@@ -8,10 +8,10 @@ from mantenimiento.models import *
 
 class Region(models.Model):
 	coordinador_regional_inifed = models.OneToOneField(User, null=True, blank=True, verbose_name="Coordinador Regional de INIFED", related_name="coordinador_regional_inifed")
+	enlace_institucional_inifed = models.OneToOneField(User, null=True, blank=True, verbose_name="Enlace Institucional de INIFED", related_name="enlace_institucional_inifed")	
 	nombre = models.CharField(max_length=20)
 	numero = models.IntegerField()
 	color = models.CharField(max_length=10, verbose_name="Color (Hexadecimal o en inglés)")
-
 
 	def __str__(self):
 		return '{} {}'.format(self.numero, self.nombre)
@@ -132,12 +132,19 @@ class Perfil(models.Model):
 	)
 
 	cargo_choices = (
-		("CEINIFED", "Coordinador Estatal de INIFED"),		
-		("RTINIFED", "Residente Técnico de INIFED"),
-		("CRINIFED", "Coordinador Regional de INIFED"),		
-		("RO", "Residente de Obra"),
-		("SIM", "Superintendente"),		
-	)	
+		('INIFED', (
+				('CRINIFED', 'Coordinador Regional'),
+				('EIINIFED', 'Enlace Institucional'),
+				('CEINIFED', 'Coordinador Estatal'),
+				('RTINIFED', 'Residente Técnico'),
+			)
+		),
+		('Ejecutora', (
+				('RO', 'Residente de Obra'),
+				('SIM', 'Superintendente'),
+			)
+		)
+	)
 
 	#Atributos de todos los usuarios, sin importar el tipo
 	user = models.OneToOneField(User)
@@ -163,8 +170,7 @@ class Perfil(models.Model):
 	coordenadas = GeopositionField(null=True, blank=True)
 	mantenimientos = models.IntegerField(null=True, blank=True)
 
-	#Atributo exclusivo para la ejecutora o INIFED
-	
+	#Llave foranea para Residentes Técnicos de INIFED
 	residente_tecnico_inifed = models.ForeignKey(Entidad, verbose_name="Es residente estatal INIFED de", null=True, blank=True, related_name="residente_tecnico_estatal")
 	
 	def UpdateStatus(self):

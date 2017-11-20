@@ -132,30 +132,46 @@
 					<thead>
 						<tr>
 							<th>Cargo</th>
-							<th>Coordinador Estatal de INIFED</th>
+							<th>Coordinador Regional</th>
+							<th>Enlace Institucional</th>
+							<th>Coordinador Estatal</th>
 							<th colspan="{{rts|length}}"> {%if rts|length > 1%}Residentes Técnicos{%else%}Residente Técnico{%endif%}</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td class="titulo-tabla">Nombre</td>
+							<td>{{perfil.municipio.zona.entidad.region.coordinador_regional_inifed.get_full_name}}</td>
+							<td>{{perfil.municipio.zona.entidad.region.enlace_institucional_inifed.get_full_name}}</td>	
 							<td>{{perfil.municipio.zona.entidad.coordinador_estatal_inifed.get_full_name}}</td>
-
 							{%for rt in rts%}
 							<td>{{rt.get_full_name}}</td>
 							{%empty%}
 							<td></td>
 							{%endfor%}
-							</tr>
-							<tr>
+						</tr>
+						<tr>
 							<td class="titulo-tabla" ">Teléfono</td>
-							<td>{{perfil.municipio.zona.entidad.coordinador_estatal_inifed.perfil.telefono}}</td>
+							<td>{%if perfil.municipio.zona.entidad.region.coordinador_regional_inifed.perfil.telefono%}{{perfil.municipio.zona.entidad.region.coordinador_regional_inifed.perfil.telefono}}{%endif%}</td>
+							<td>{%if perfil.municipio.zona.entidad.region.enlace_institucional_inifed.perfil.telefono%}{{perfil.municipio.zona.entidad.region.enlace_institucional_inifed.perfil.telefono}}{%endif%}</td>
+							<td>{% if perfil.municipio.zona.entidad.coordinador_estatal_inifed.perfil.telefono%}{{perfil.municipio.zona.entidad.coordinador_estatal_inifed.perfil.telefono}}{%endif%}</td>
 							{%for rt in rts%}
-							<td>{{rt.perfil.telefono}}</td>
+							<td>{%if rt.perfil.telefono%}{{rt.perfil.telefono}}{%endif%}</td>
 							{%empty%}
 							<td></td>
 							{%endfor%}
-							</tr>
+						</tr>
+						<tr>
+							<td class="titulo-tabla" ">Correo electrónico</td>
+							<td>{{perfil.municipio.zona.entidad.region.coordinador_regional_inifed.email}}</td>
+							<td>{{perfil.municipio.zona.entidad.region.enlace_institucional_inifed.email}}</td>			
+							<td>{{perfil.municipio.zona.entidad.coordinador_estatal_inifed.email}}</td>
+							{%for rt in rts%}
+							<td>{{rt.email}} </td>
+							{%empty%}
+							<td></td>
+							{%endfor%}
+						</tr>						
 					</tbody>
 				</table>
 			</div>
@@ -177,12 +193,17 @@
 							<td class="titulo-tabla">Nombre</td>
 							<td>{{perfil.municipio.zona.entidad.residente_obra.get_full_name}}</td>
 							<td>{{perfil.municipio.zona.entidad.sim.get_full_name}}</td>
-							</tr>
-							<tr>
+						</tr>
+						<tr>
 							<td class="titulo-tabla" ">Teléfono</td>
-							<td>{{perfil.municipio.zona.entidad.residente_obra.perfil.telefono}}</td>
-							<td>{{perfil.municipio.zona.entidad.sim.perfil.telefono}}</td>							
-							</tr>
+							<td>{%if perfil.municipio.zona.entidad.residente_obra.perfil.telefono%}{{perfil.municipio.zona.entidad.residente_obra.perfil.telefono}}{%endif%}</td>
+							<td>{% if perfil.municipio.zona.entidad.sim.perfil.telefono%}{{perfil.municipio.zona.entidad.sim.perfil.telefono}}{%endif%}</td>
+						</tr>
+						<tr>
+							<td class="titulo-tabla" ">Correo electrónico</td>
+							<td>{%if perfil.municipio.zona.entidad.residente_obra.perfil.telefono%}{{perfil.municipio.zona.entidad.residente_obra.email}}{%endif%}</td>
+							<td>{% if perfil.municipio.zona.entidad.sim.perfil.telefono%}{{perfil.municipio.zona.entidad.sim.email}}{%endif%}</td>
+						</tr>						
 					</tbody>
 				</table>
 			</div>			

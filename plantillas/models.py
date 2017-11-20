@@ -3,14 +3,14 @@ from django.contrib.auth.models import User
 from accounts.models import Perfil
 class Plantilla(models.Model):
 	tipo_choices = (
-		("Administrador", "Administrador"), #Yo
+		("Administrador", "Administrador"),
 		("Ejecutora", "Ejecutora"),
 		("Escuela", "Escuela"),
 		("Laboratorio", "Laboratorio"),
-		("INIFED", "INIFED"), #INIFED Federal
+		("INIFED", "INIFED"),
 		("IMTA", "IMTA"),
-		("PQ", "Procesos Químicos (Calidad de Agua)"), #Pilar, #Isauri
-		("PM", "Planta y Manufactura"), #Raúl, Héctor
+		("PQ", "Procesos Químicos (Calidad de Agua)"),
+		("PM", "Planta y Manufactura"),
 	)
 	
 	fase_choices = (

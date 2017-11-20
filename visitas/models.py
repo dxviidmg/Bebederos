@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 class VisitaDeAcuerdo(models.Model):
-	escuela = models.OneToOneField(User)
+	escuela = models.OneToOneField(User, related_name="escuela_visita_acuerdo")
 	convenio_concertacion = models.FileField(upload_to='visita/concertaciones/%Y/%m/%d/', verbose_name="Convenio de concertación de aplicación de recurso")
 	cedula_identificacion = models.FileField(upload_to='visita/identificaciones/%Y/%m/%d/', verbose_name="Cédula de identificación básica")
 	acta_acuerdos = models.FileField(upload_to='visitas/actas/%Y/%m/%d/', verbose_name="Acta de acuerdos")
@@ -25,7 +25,7 @@ class VisitaDeAcuerdo(models.Model):
 		verbose_name_plural = 'Visitas de acuerdo'
 
 class InicioFuncionamiento(models.Model):
-	escuela = models.OneToOneField(User)
+	escuela = models.OneToOneField(User, related_name="escuela_inicio_funcionamiento")
 	acta_funcionamiento = models.FileField(upload_to='funcionamiento/actas/%Y/%m/%d/', verbose_name="Acta")
 	video = models.FileField(upload_to='funcionamiento/videos/%Y/%m/%d/', verbose_name="Video")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
@@ -38,7 +38,7 @@ class InicioFuncionamiento(models.Model):
 		verbose_name_plural = 'Inicios de funcionamiento'
 
 class ActaEntrega(models.Model):
-	escuela = models.OneToOneField(User)
+	escuela = models.OneToOneField(User, related_name="escuela_acta_entrega")
 	acta_entrega = models.FileField(upload_to='entrega/actas/%Y/%m/%d/', verbose_name="Acta de entrega")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	

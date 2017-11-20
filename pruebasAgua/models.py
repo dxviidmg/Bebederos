@@ -60,7 +60,6 @@ class PrimerPrueba(models.Model):
 
 	#Parametros
 		#Fisicos y organoelectricos
-	
 	color_verdadero = models.FloatField(null=True, blank=True, verbose_name="Color verdadero (U Pt-Co)")
 	turbiedad = models.FloatField(null=True, blank=True, verbose_name="Turbiedad (UTN o equivalente)")
 	ph = models.FloatField(null=True, blank=True, verbose_name="pH (unidades de pH)")
