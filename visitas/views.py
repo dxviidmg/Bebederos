@@ -7,6 +7,7 @@ from .forms import *
 from django.contrib.auth.models import User
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from __future__ import unicode_literals
 
 #Librerias para generar ZIP
 import zipfile
