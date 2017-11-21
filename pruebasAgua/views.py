@@ -323,16 +323,19 @@ class CRUViewSegundaPrueba(View):
 		return redirect("pruebas:CRUViewSegundaPrueba", pk=perfil.pk)
 
 def ExportPruebasPorEscuelasCSV(request, pk):
-	response = HttpResponse(content_type='text/csv')
-	response['Content-Disposition'] = 'attachment; filename="PruebasPorEscuela.csv"'
-	writer = csv.writer(response)
-	writer.writerow(['Laboratorio', 'No. de registro','C. C. T.','Nombre del plantel', 'Municipio', 'Localidad', 'Domicilio', 'Nivel Educativo', 'Plantilla escolar', 'Boquillas regulares', 'Boquilla para discapacitados', 'Llave de llenado para botella', 'Total de salidas', 'Tipo de bebedero', 'Fecha de muestreo', 'Fecha de reporte de análisis', 'Color verdadero (U PT-Co)', 'Turbiedad (UTN o equivalente)', 'pH (unidades de pH)', 'Conductividad eléctrica (µS/cm)', 'Coliformes fecales (Unidades)', 'Coliformes totales (Unidades)', 'Arsénico', 'Hierro', 'Manganeso', 'Plomo', 'Floururos', 'Nitratos', 'Sulfatos', 'Dureza total (CaCO3)', 'Sólidos disueltos totales', 'Equipo de potabilización (validado por IMTA)', 'Fecha de muestreo', 'Fecha de reporte de análisis', 'Color verdadero (U Pt-Co)', 'Turbiedad (UTN o equivalente)', 'pH (unidades de pH)', 'Conductividad eléctrica (µS/cm)', 'Coliformes fecales (Unidades)', 'Coliformes totales (Unidades)', 'Arsénico', 'Hierro', 'Manganeso', 'Plomo', 'Floururos', 'Nitratos', 'Sulfatos', 'Dureza total (CaCO3)', 'Sólidos disueltos totales', 'Guía de trazabilidad'])
-
 	entidad = get_object_or_404(Entidad, pk=pk)
 	zonas = Zona.objects.filter(entidad=entidad)
 	municipios=Municipio.objects.filter(zona__in=zonas)
 	perfiles = Perfil.objects.filter(municipio__in=municipios)
 	escuelas = User.objects.filter(perfil__in=perfiles).values_list('perfil__municipio__zona__entidad__laboratorio__first_name', 'escuela_primer_prueba__no_registro', 'username', 'first_name','perfil__municipio__nombre', 'perfil__localidad', 'perfil__domicilio', 'perfil__nivel_educativo', 'perfil__plantilla_escolar', 'escuela__mueble__salidas_regulares', 'escuela__mueble__salidas_discapacidad', 'escuela__mueble__llenador_botellas', 'escuela__mueble__total_salidas', 'escuela__mueble__modelo', 'escuela_primer_prueba__creacion', 'escuela_primer_prueba__creacion_reporte_analisis', 'escuela_primer_prueba__color_verdadero', 'escuela_primer_prueba__turbiedad', 'escuela_primer_prueba__ph', 'escuela_primer_prueba__conductividad_electrica', 'escuela_primer_prueba__coliformes_fecales', 'escuela_primer_prueba__coliformes_totales', 'escuela_primer_prueba__arsenico',  'escuela_primer_prueba__hierro',  'escuela_primer_prueba__manganeso', 'escuela_primer_prueba__plomo', 'escuela_primer_prueba__floururos', 'escuela_primer_prueba__nitratos', 'escuela_primer_prueba__sulfatos', 'escuela_primer_prueba__dureza_total','escuela_primer_prueba__solidos_disueltos', 'escuela__sistema_potabilizacion__tipo', 'escuela_segunda_prueba__creacion', 'escuela_segunda_prueba__creacion_reporte_analisis', 'escuela_segunda_prueba__color_verdadero', 'escuela_segunda_prueba__turbiedad', 'escuela_segunda_prueba__ph', 'escuela_segunda_prueba__conductividad_electrica', 'escuela_segunda_prueba__coliformes_fecales', 'escuela_segunda_prueba__coliformes_totales', 'escuela_segunda_prueba__arsenico',  'escuela_segunda_prueba__hierro',  'escuela_segunda_prueba__manganeso', 'escuela_segunda_prueba__plomo', 'escuela_segunda_prueba__floururos', 'escuela_segunda_prueba__nitratos', 'escuela_segunda_prueba__sulfatos', 'escuela_segunda_prueba__dureza_total','escuela_segunda_prueba__solidos_disueltos', 'escuela__no_trazabilidad')
+
+	ahora = datetime.now().strftime("%d-%m-%Y %H:%M")
+
+	response = HttpResponse(content_type='text/csv')
+	response['Content-Disposition'] = 'attachment; filename="Base de formato T7 de '+ entidad.nombre + ' ' + ahora + '.csv"'
+	writer = csv.writer(response)
+	writer.writerow(['Laboratorio', 'No. de registro','C. C. T.','Nombre del plantel', 'Municipio', 'Localidad', 'Domicilio', 'Nivel Educativo', 'Plantilla escolar', 'Boquillas regulares', 'Boquilla para discapacitados', 'Llave de llenado para botella', 'Total de salidas', 'Tipo de bebedero', 'Fecha de muestreo', 'Fecha de reporte de análisis', 'Color verdadero (U PT-Co)', 'Turbiedad (UTN o equivalente)', 'pH (unidades de pH)', 'Conductividad eléctrica (µS/cm)', 'Coliformes fecales (Unidades)', 'Coliformes totales (Unidades)', 'Arsénico', 'Hierro', 'Manganeso', 'Plomo', 'Floururos', 'Nitratos', 'Sulfatos', 'Dureza total (CaCO3)', 'Sólidos disueltos totales', 'Equipo de potabilización (validado por IMTA)', 'Fecha de muestreo', 'Fecha de reporte de análisis', 'Color verdadero (U Pt-Co)', 'Turbiedad (UTN o equivalente)', 'pH (unidades de pH)', 'Conductividad eléctrica (µS/cm)', 'Coliformes fecales (Unidades)', 'Coliformes totales (Unidades)', 'Arsénico', 'Hierro', 'Manganeso', 'Plomo', 'Floururos', 'Nitratos', 'Sulfatos', 'Dureza total (CaCO3)', 'Sólidos disueltos totales', 'Guía de trazabilidad'])
+
 	for escuela in escuelas:
 		writer.writerow(escuela)
 

@@ -405,7 +405,7 @@ class ListViewAvanceEscuelas(View):
 
 			data = {'escuela' : escuela, 'primerPrueba': primerPrueba, 'inicioDeTrabajo': inicioDeTrabajo, 'visitaDeAcuerdo': visitaDeAcuerdo, 'sistemaBebedero': sistemaBebedero, 'evidencias': evidencias, 'segundaPrueba': segundaPrueba, 'inicioFuncionamiento': inicioFuncionamiento, 'mantenimientos': mantenimientos, 'actaEntrega': actaEntrega}
 			AvancePorEscuelas.append(data)
-			paginator = Paginator(AvancePorEscuelas, 10)
+			paginator = Paginator(AvancePorEscuelas, 15)
 			page = request.GET.get('page')
 			try:
 				escuelas = paginator.page(page)
@@ -483,7 +483,7 @@ def ExportAvancePorEscuelasCSV(request, pk):
 	writer = csv.writer(response)
 	writer.writerow(['Municipio', 'Localidad','C. C. T.','Nombre', 'Nivel educativo', 'Plantilla', 'Mueble', 'Sistema potabilizador', 'Validación de primer prueba', 'Porcentaje de construcción', 'Validación de sistema potabilizador', 'Inicio de funcionamiento', 'Mantenimientos', 'Acta de entrega'])
 
-	escuelas = User.objects.filter(perfil__in=perfiles).values_list('perfil__municipio__nombre', 'perfil__localidad', 'username', 'first_name', 'perfil__nivel_educativo', 'perfil__plantilla_escolar', 'escuela__mueble__modelo', 'escuela__sistema_potabilizacion__tipo', 'escuela_primer_prueba__aprobacion', 'perfil__avance', 'escuela_segunda_prueba__aprobacion', 'iniciofuncionamiento__creacion', 'perfil__mantenimientos', 'actaentrega__creacion')
+	escuelas = User.objects.filter(perfil__in=perfiles).values_list('perfil__municipio__nombre', 'perfil__localidad', 'username', 'first_name', 'perfil__nivel_educativo', 'perfil__plantilla_escolar', 'escuela__mueble__modelo', 'escuela__sistema_potabilizacion__tipo', 'escuela_primer_prueba__aprobacion', 'perfil__avance', 'escuela_segunda_prueba__aprobacion', 'escuela_inicio_funcionamiento__creacion', 'perfil__mantenimientos', 'escuela_acta_entrega__creacion')
 	for escuela in escuelas:
 		writer.writerow(escuela)
 
