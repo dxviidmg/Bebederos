@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
 from .models import *
@@ -136,7 +135,7 @@ def ExportCedulasIdentificacionZIP(request, pk):
 		cedulaIdentificacion = origen + str(visitaAcuerdo.cedula_identificacion.url)
 		filenames.append(cedulaIdentificacion)
 
-	zip_subdir = "Cédulas de identificación basica de " + str(entidad.nombre)
+	zip_subdir = "Cedulas de identificacion basica de " + str(entidad.nombre)
 	zip_filename = "%s.zip" % zip_subdir
 
 	s = BytesIO()
@@ -235,7 +234,7 @@ def ExportMemoriasCalculoZIP(request, pk):
 		memoriaCalculo = origen + str(visitaAcuerdo.memoria_calculo.url)
 		filenames.append(memoriaCalculo)
 
-	zip_subdir = "Memorias de cálculo hidrosanitarias y eléctricas de " + str(entidad.nombre)
+	zip_subdir = "Memorias de calculo hidrosanitarias y electricas de " + str(entidad.nombre)
 	zip_filename = "%s.zip" % zip_subdir
 
 	s = BytesIO()
@@ -268,7 +267,7 @@ def ExportPlanosInstalacionElectricaZIP(request, pk):
 		planoInstalacionElectrica = origen + str(visitaAcuerdo.plano_instalacion_electrica.url)
 		filenames.append(planoInstalacionElectrica)
 
-	zip_subdir = "Planos de instalaciónes eléctricas de " + str(entidad.nombre)
+	zip_subdir = "Planos de instalaciones electricas de " + str(entidad.nombre)
 	zip_filename = "%s.zip" % zip_subdir
 
 	s = BytesIO()
@@ -301,7 +300,7 @@ def ExportPlanosInstalacionHidraculicaZIP(request, pk):
 		planoInstalacionHidraulica = origen + str(visitaAcuerdo.plano_instalacion_hidraulica.url)
 		filenames.append(planoInstalacionHidraulica)
 
-	zip_subdir = "Planos de instalaciónes hidráulicas de " + str(entidad.nombre)
+	zip_subdir = "Planos de instalaciones hidraulicas de " + str(entidad.nombre)
 	zip_filename = "%s.zip" % zip_subdir
 
 	s = BytesIO()
@@ -334,7 +333,7 @@ def ExportPlanosInstalacionSanitariaZIP(request, pk):
 		planoInstalacionSanitaria = origen + str(visitaAcuerdo.plano_instalacion_sanitaria.url)
 		filenames.append(planoInstalacionSanitaria)
 
-	zip_subdir = "Planos de instalaciónes sanitarias de " + str(entidad.nombre)
+	zip_subdir = "Planos de instalaciones sanitarias de " + str(entidad.nombre)
 	zip_filename = "%s.zip" % zip_subdir
 
 	s = BytesIO()
@@ -383,4 +382,4 @@ def ExportActasFuncionamietoZIP(request, pk):
 	response = HttpResponse(s.getvalue(), content_type = "application/x-zip-compressed")
 	response['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
 
-	return response	
+	return response
