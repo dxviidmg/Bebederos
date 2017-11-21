@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
 from .models import *
@@ -7,7 +8,6 @@ from .forms import *
 from django.contrib.auth.models import User
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from __future__ import unicode_literals
 
 #Librerias para generar ZIP
 import zipfile
