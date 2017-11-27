@@ -115,7 +115,6 @@ class Perfil(models.Model):
 		("Escuela", "Escuela"),
 		("Laboratorio", "Laboratorio"),
 		("INIFED", "INIFED"), #INIFED Federal
-		("IMTA", "IMTA"),
 		("PQ", "Procesos Químicos (Calidad de Agua)"), #Pilar, #Isauri
 		("PM", "Planta y Manufactura"), #Raúl, Héctor
 	)

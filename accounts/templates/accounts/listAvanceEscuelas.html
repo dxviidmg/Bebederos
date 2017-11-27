@@ -35,7 +35,7 @@
 					{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
-					<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%} colspan="5" {%elif request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "IMTA"%} colspan="2"{%endif%}>Primer prueba</th>
+					<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%} colspan="4" {%elif request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "IMTA"%} colspan="2"{%endif%}>Primer prueba</th>
 					{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}
@@ -85,11 +85,8 @@
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
 					<th>Propuesta de sistema potabilizador</th>{%endif%}
 
-					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
-					<th>Validación de sistema potabilizador</th>{%endif%}
-
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
-					<th>Resultado de validación</th>{%endif%}
+					<th>Status de validación</th>{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
 					<th>Asignación de sistema potabilizador</th>{%endif%}
@@ -165,15 +162,11 @@
 					{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
-					<td>{%if avanceEscuela.primerPrueba.propuesta_sistema_potabilizador%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
-					{%endif%}
-
-					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
-					<td>{%if avanceEscuela.primerPrueba.dictamen_sistema_potabilizador%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					<td>{%if avanceEscuela.sistemaBebedero.sistema_potabilizacion%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
-					<td>{%if avanceEscuela.primerPrueba.aprobacion%}{{avanceEscuela.primerPrueba.aprobacion}}{%endif%}</td>
+					<td>{%if avanceEscuela.sistemaBebedero.sistema_potabilizacion%}{{avanceEscuela.primerPrueba.validacion}}{%endif%}</td>
 					{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}

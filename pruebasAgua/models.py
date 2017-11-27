@@ -4,9 +4,9 @@ from django.utils import timezone
 from bebederos.models import *
 
 class PrimerPrueba(models.Model):
-	aprobacion_choices = (
-		("Aprobado", "Aprobado"),
-		("No aprobado", "No aprobado"),
+	validacion_choices = (
+		("Validado", "Validado"),
+		("No validado", "No validado"),
 		("En espera", "En espera"),
 	)
 	comparacion_choices = (
@@ -17,6 +17,8 @@ class PrimerPrueba(models.Model):
 	)
 
 	escuela = models.OneToOneField(User, related_name="escuela_primer_prueba")
+	creacion = models.DateField(default=timezone.now, verbose_name="Fecha de creación")
+
 	#Fase de Toma de Agua / SI
 	reporte_toma_agua = models.FileField(upload_to='pruebas/1/reportes/%Y/%m/%d/', verbose_name="Reporte de toma de muestra")
 	foto_toma_agua_1 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía 1", null=True, blank=True)
@@ -28,16 +30,10 @@ class PrimerPrueba(models.Model):
 	registro_campo = models.FileField(upload_to='pruebas/1/hojasCampo/%Y/%m/%d/', verbose_name="Registro de campo", null=True, blank=True)
 	cadena_custodia = models.FileField(upload_to='pruebas/1/cadenasCustioda/%Y/%m/%d/', verbose_name="Cadena de custodia", null=True, blank=True)
 
-	#Fase de Sugerencias / ECA(Pilar)
-	propuesta_sistema_potabilizador = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Propuesta de sistema potabilizador", null=True, blank=True)
-
-	#Fase de confirmación de IMTA
-	dictamen_sistema_potabilizador = models.FileField(upload_to='pruebas/1/dictamenes/%Y/%m/%d/', verbose_name="Dictamen del sistema potabilizador a utilizar", null=True, blank=True)
-	aprobacion = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación")
-
-	creacion = models.DateField(default=timezone.now, verbose_name="Fecha de creación")
+	#Fase de confirmación / ECA
+	validacion = models.CharField(max_length=11, default="En espera", choices=validacion_choices, verbose_name="Validación")
 		
-	#Datos del analísis
+	#Información del analísis
 	no_registro = models.CharField(max_length=30, null=True, blank=True, verbose_name="Número de registro (Orden de Trabajo)")
 	creacion_reporte_analisis = models.DateField(null=True, blank=True, verbose_name="Fecha del reporte de análisis")
 
@@ -80,7 +76,7 @@ class PrimerPrueba(models.Model):
 	solidos_disueltos  = models.FloatField(null=True, blank=True, verbose_name="Sólidos disueltos totales (mg/L)")
 
 	def DeleteSB(self):
-		if self.aprobacion == "No aprobado":
+		if self.validacion == "No validado":
 			SistemaBebedero.objects.get(escuela=self.escuela).delete()
 
 	def __str__(self):

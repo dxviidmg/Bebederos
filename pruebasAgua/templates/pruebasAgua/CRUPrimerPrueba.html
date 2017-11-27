@@ -173,7 +173,7 @@
 
 		{%if request.user.perfil.tipo == "PQ"%}
 
-		{%if prueba.no_registro and prueba.aprobacion == "En espera"%}
+		{%if prueba.no_registro and prueba.validacion == "En espera"%}
 	
 
 	<div class="row espacio2">
@@ -401,54 +401,45 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-12">
-			<form action="." method="post" enctype="multipart/form-data">
+		<div class="col-12 col-md-12">
 			<h4>Sugerencia de sistema potabilizador</h4>
+
+			<form action="." method="post" enctype="multipart/form-data">			
 				{%csrf_token%}			
-				{{EdicionPruebaForm7 | bootstrap}}
+				<div class="row">
+					<div class="col-md-6">
+					{{EdicionBebederoForm | bootstrap}}
+					</div>
+					<div class="col-md-6">
+					<br>
+						  <!-- Trigger the modal with a button -->
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Sugerir sistema potabilizador</button>
 
-		<div class="offset-md-3 col-md-6">
-			  <!-- Trigger the modal with a button -->
-			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Sugerir sistema potabilizador</button>
-
-			<!-- Modal -->
-			<div class="modal fade" id="myModal" role="dialog">
-				<div class="modal-dialog">
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-						<h4 class="modal-title">Recomendación de sistema potabilizador</h4>
-						</div>
-						<div class="modal-body">
-							<h3>{{sistemaPotabilizadorCalculado}}</h3>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						<!-- Modal -->
+						<div class="modal fade" id="myModal" role="dialog">
+							<div class="modal-dialog">
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+									<h4 class="modal-title">Recomendación de sistema potabilizador</h4>
+									</div>
+									<div class="modal-body">
+										<h3>{{sistemaPotabilizadorCalculado}}</h3>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
 
-				{{EdicionBebederoForm | bootstrap}}
-				<a href=""><input type="submit" value="Guardar cambios"></a>
-			</form>
-		</div>
-	</div>
-	
-		{%endif%}
-		{%endif%}
+				{{EdicionPruebaForm7 | bootstrap}}
 
-		{%if request.user.perfil.tipo == "IMTA"%}
-		{%if prueba.propuesta_sistema_potabilizador and prueba.aprobacion == "En espera"%}
-		
 
-	<div class="row">
-		<div class="col-12">
-			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Confirmación de Sistema potabilizador</h4>
-				{%csrf_token%}
-				{{EdicionPruebaForm8 | bootstrap}}
+
+
 				<a href=""><input type="submit" value="Guardar cambios"></a>
 			</form>
 		</div>
@@ -460,6 +451,7 @@
 	{%else%}
 	
 		{%if request.user.perfil.tipo == "Ejecutora"%}
+
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
@@ -469,7 +461,9 @@
 				<a href=""><input type="submit" value="Crear registro"></a>
 			</form>
 		</div>
+
 			{%endif%}
+
 	</div>
 	
 	{%endif%}

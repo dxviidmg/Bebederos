@@ -54,7 +54,7 @@
 					<tr>
 
 						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM"%}
-						<th rowspan="2">Zona</th>
+						<th rowspan="2">Localidad</th>
 						{%endif%}
 			
 						<th rowspan="2">C. C. T</th>
@@ -156,7 +156,7 @@
 						<th>Validación de sistema potabilizador</th>{%endif%}
 
 						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
-						<th>Resultado de validación</th>	{%endif%}
+						<th>Resultado de validación</th>{%endif%}
 
 					</tr>
 
@@ -272,7 +272,7 @@
 					{%empty%}
 					
 						<tr>
-							<td colspan="8">No hay escuelas registradas</td>
+							<td colspan="24">No hay escuelas registradas</td>
 						</tr>
 
 					{%endfor%}
