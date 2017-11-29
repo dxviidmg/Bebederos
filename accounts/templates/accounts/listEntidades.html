@@ -2,26 +2,27 @@
 
 {%block content%}
 
-<h1>Lista de Entidades {%if request.user.perfil.tipo == "Admistrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.cargo == "CRINIFED" or request.user.perfil.tipo == "Administrador" or request.user.perfil.cargo == "EIINIFED"%} de la Región {{region.numero}}: {{region.nombre}} {%endif%}</h1>
+<h1>Entidades {%if request.user.perfil.tipo == "Admistrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.cargo == "CRINIFED" or request.user.perfil.tipo == "Administrador" or request.user.perfil.cargo == "EIINIFED"%} de la Región {{region.numero}}: {{region.nombre}} {%endif%}</h1>
 
-{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
+{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ"%}
 <p><a href="{%url 'accounts:ListViewRegiones'%}">Regresar</a></p>
 {%endif%}
+
 <div class="table-responsive">
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				{%if request.user.perfil.cargo == "SIM"%}
-				<th>Región</th>
+				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.cargo == "Administrador"%}
+				<th rowspan="2">Región</th>
 				{%endif%}
-				<th>Partida</th>
-				<th>Estado</th>
-				<th colspan="2">Listas</th>
+				<th rowspan="2">Partida</th>
+				<th rowspan="2" >Estado</th>
+				<th rowspan="2" colspan="2">Ver</th>
+				<th colspan="2">Escuelas</th>
+			</tr>
+			<tr>
 				<th>Asignadas</th>
-				<th>Registradas</th>
-				<th>Aceptadas</th>
-				<th>Pendientes</th>
-				<th>Rechazadas</th>					
+				<th>Registradas</th>				
 			</tr>
 		</thead>
 		<tbody>
@@ -29,19 +30,16 @@
 	{%for entidad in entidades%}
 	
 			<tr>
-				{%if request.user.perfil.cargo == "SIM"%}
+				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.cargo == "Administrador"%}
 				<td>{{entidad.region}}</td>
 				{%endif%}
 				<td>{{entidad.partida}}</td>
 				<td>{{entidad}}</td>	
-				<td><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">Por zonas</a></td>	
-				<td><a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.slug%}">Reporte de avance por escuela</a></td>
+				<td><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">Zonas</a></td>	
+				<td><a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.slug%}">Reporte general</a></td>
 			
 				<td>{{entidad.escuelas_asignadas}}</td>
-				<td>{{entidad.escuelas_registradas}}</td>
-				<td>{{entidad.escuelas_aceptadas}}</td>
-				<td>{{entidad.escuelas_pendientes}}</td>
-				<td>{{entidad.escuelas_rechazadas}}</td>								
+				<td>{{entidad.escuelas_registradas}}</td>								
 			</tr>
 	{%empty%}
 

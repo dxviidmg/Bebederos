@@ -38,25 +38,15 @@ class Entidad(models.Model):
 	abreviatura = models.CharField(max_length=4)
 	escuelas_asignadas = models.IntegerField(default=0)
 	escuelas_registradas = models.IntegerField(default=0)
-	escuelas_aceptadas = models.IntegerField(default=0)
-	escuelas_pendientes = models.IntegerField(default=0)
-	escuelas_rechazadas = models.IntegerField(default=0)
 	imagen = models.ImageField(upload_to='estados/%Y/%m/%d/', default='img_no_disponible.jpg')
 	slug = models.SlugField(null=True)
 
-	def EscuelasCount(self):
+	def CountEscuelas(self):
 		entidad = Entidad.objects.get(pk=self.pk)
 		zonas = Zona.objects.filter(entidad=entidad)
 		municipios = Municipio.objects.filter(zona__in=zonas)
-		escuelas_registradas_count = Perfil.objects.filter(municipio__in=municipios).count()
-		escuelas_aceptadas_count = Perfil.objects.filter(municipio__in=municipios, status="Aceptado").count()
-		escuelas_pendientes_count = Perfil.objects.filter(municipio__in=municipios, status__isnull=True).count()
-		escuelas_rechazadas_count = Perfil.objects.filter(municipio__in=municipios, status="Rechazado").count()
-	
+		escuelas_registradas_count = Perfil.objects.filter(municipio__in=municipios).count()	
 		self.escuelas_registradas = escuelas_registradas_count
-		self.escuelas_aceptadas = escuelas_aceptadas_count
-		self.escuelas_pendientes = escuelas_pendientes_count
-		self.escuelas_rechazadas = escuelas_rechazadas_count
 		self.save()
 
 	def __str__(self):
@@ -84,22 +74,12 @@ class Municipio(models.Model):
 	zona = models.ForeignKey(Zona, null=True)
 	nombre = models.CharField(max_length=100)
 	escuelas_registradas = models.IntegerField(default=0)
-	escuelas_aceptadas = models.IntegerField(default=0)
-	escuelas_pendientes = models.IntegerField(default=0)
-	escuelas_rechazadas = models.IntegerField(default=0)
 	slug = models.SlugField(null=True)
 
-	def EscuelasCount(self):
+	def CountEscuelas(self):
 		municipio = Municipio.objects.get(pk=self.pk)
 		escuelas_registradas_count = Perfil.objects.filter(municipio=municipio).count()
-		escuelas_aceptadas_count = Perfil.objects.filter(municipio=municipio, status="Aceptado").count()
-		escuelas_pendientes_count = Perfil.objects.filter(municipio=municipio, status__isnull=True).count()
-		escuelas_rechazadas_count = Perfil.objects.filter(municipio=municipio, status="Rechazado").count()
-
 		self.escuelas_registradas = escuelas_registradas_count
-		self.escuelas_aceptadas = escuelas_aceptadas_count
-		self.escuelas_pendientes = escuelas_pendientes_count
-		self.escuelas_rechazadas = escuelas_rechazadas_count
 		self.save()
 
 	def __str__(self):
@@ -159,7 +139,6 @@ class Perfil(models.Model):
 	nivel_educativo = models.CharField(max_length=20, blank=True, null=True, choices=nivel_choices)
 	turno = models.CharField(max_length=20, blank=True, null=True, choices=turno_choices)
 	plantilla_escolar = models.IntegerField(blank=True, null=True)
-	status = models.CharField(max_length=20, blank=True, null=True)
 	avance = models.IntegerField(blank=True, null=True)
 	domicilio = models.CharField(max_length=400, blank=True, null=True)
 	localidad = models.CharField(max_length=200, blank=True, null=True)
@@ -172,17 +151,6 @@ class Perfil(models.Model):
 	#Llave foranea para Residentes Técnicos de INIFED
 	residente_tecnico_inifed = models.ForeignKey(Entidad, verbose_name="Es residente estatal INIFED de", null=True, blank=True, related_name="residente_tecnico_estatal")
 	
-	def UpdateStatus(self):
-		perfil = Perfil.objects.get(pk=self.pk)
-		escuela = User.objects.get(perfil=perfil)
-		primerPrueba = PrimerPrueba.objects.get(escuela=escuela)
-		
-		if primerPrueba.aprobacion == "Aprobado":
-			self.status = "Aceptado"
-		elif primerPrueba.aprobacion == "No aprobado":
-			self.status = "Rechazado"
-			self.save()
-
 	def UpdateAvance(self):
 		perfil = Perfil.objects.get(pk=self.pk)
 		escuela = User.objects.get(perfil=perfil)

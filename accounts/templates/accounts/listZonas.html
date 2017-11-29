@@ -5,13 +5,11 @@
 
 	<h1>{{entidad}}</h1>
 
-	{%if entidad.EscuelasCount%}{%endif%}
-
 		{%if request.user.perfil.cargo == "SIM" or request.user.perfil.tipo == "Laboratorio"%}
 
 		<a href="{%url 'accounts:ListViewEntidades'%}">Regresar</a>
 
-		{%elif request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.cargo == "CRINIFED"%}
+		{%elif request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.cargo == "CRINIFED"%}
 
 		<a href="{%url 'accounts:ListViewEntidades' entidad.region.numero%}">Regresar</a>
 
@@ -27,14 +25,11 @@
 					<tr>
 						<th rowspan="2">Región</th>
 						<th rowspan="2">Partida</th>
-						<th colspan="5">Escuelas</th>
+						<th colspan="2">Escuelas</th>
 					</tr>
 					<tr>
 						<th>Asignadas</th>
 						<th>Registradas</th>
-						<th>Aceptadas</th>
-						<th>Pendientes</th>
-						<th>Rechazadas</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -43,9 +38,6 @@
 					<td>{{entidad.partida}}</td>
 						<td>{{entidad.escuelas_asignadas}}</td>
 						<td>{{entidad.escuelas_registradas}}</td>
-						<td>{{entidad.escuelas_aceptadas}}</td>
-						<td>{{entidad.escuelas_pendientes}}</td>
-						<td>{{entidad.escuelas_rechazadas}}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -59,15 +51,9 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th rowspan="2">Zona</th>
-						<th rowspan="2">Municipio</th>
-						<th colspan="4">Escuelas</th>
-					</tr>
-					<tr>
-						<th>Registradas</th>
-						<th>Aceptadas</th>
-						<th>Pendientes</th>
-						<th>Rechazadas</th>
+						<th>Zona</th>
+						<th>Municipio</th>
+						<th>Escuelas registradas</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -87,10 +73,7 @@
 
 						<td><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">{{municipio.nombre}}</a> 
 						</td>
-						<td>{{municipio.escuelas_registradas}} {%if municipio.EscuelasCount %}{%endif%}</td>
-						<td>{{municipio.escuelas_aceptadas}}</td>
-						<td>{{municipio.escuelas_pendientes}}</td>
-						<td>{{municipio.escuelas_rechazadas}}</td>						
+						<td>{{municipio.escuelas_registradas}}</td>						
 						{%empty%}
 
 							<td>{{MunicipiosPorZona.zona}}</td>

@@ -56,9 +56,9 @@ admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 
 class PerfilAdmin(admin.ModelAdmin):
-    list_display = ['tipo', 'user', 'telefono', 'status']
+    list_display = ['tipo', 'user', 'telefono']
     search_fields = ['user__username', 'user__first_name', 'user__last_name', 'telefono']
-    list_filter = ['tipo', 'nivel_educativo', 'status']
+    list_filter = ['tipo', 'nivel_educativo']
 
 admin.site.register(Perfil, PerfilAdmin)
 

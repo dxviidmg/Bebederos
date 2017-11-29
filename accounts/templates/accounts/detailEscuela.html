@@ -15,7 +15,7 @@
 			{%endif%}
 			{%endif%}
 
-			{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Administrador"%}
+			{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Administrador"%}
 			<p><a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.slug%}">Regresar a lista de escuelas</a></p>			
 			{%endif%}
 
@@ -177,6 +177,7 @@
 			</div>
 
 			<h3>Ejecutora</h3>
+
 			<div class="table-responsive text-center">
 				<table class="table table-bordered">
 					<thead>
@@ -210,7 +211,27 @@
 		</div>
 	</div>
 
+	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED"%}
 
+	<h2>Espedificaciones de Sistema Bebedero</h2>
+	<div class="table-responsive">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Mueble</th>
+					<th>Sistema bebedero</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{escuela.escuela.mueble}}</td>
+					<td>{{escuela.escuela.sistema_potabilizacion}}</td>			
+				</tr>	
+			</tbody>
+		</table>
+	</div>
+
+	{%endif%}
 	<!--Tabla de cronologia-->
 	<div class="row justify-content-center">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-12 espacio2">
@@ -224,7 +245,7 @@
 		</div>
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if primerPrueba.validacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif primerPrueba.validacion == "No validado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif primerPrueba.validacion == "Validado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad. 
@@ -267,7 +288,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"  or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"  or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
 		{%if evidenciaFinal%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>

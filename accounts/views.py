@@ -265,6 +265,9 @@ class CreateViewEscuela(View):
 			NuevoBebedero.escuela = NuevaEscuelaUser
 			NuevoBebedero.save()
 			NuevoBebedero.CalculaCTP()
+			municipio.CountEscuelas()
+			entidad.CountEscuelas()
+			
 		else:
 			context = {
 				'municipio': municipio,

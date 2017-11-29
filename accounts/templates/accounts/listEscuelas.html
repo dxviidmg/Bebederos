@@ -12,17 +12,11 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th rowspan="2">Región</th>
-						<th rowspan="2">Partida</th>
-						<th rowspan="2">Entidad</th>
-						<th rowspan="2">Zona</th>
-						<th colspan="4">Escuelas</th>
-					</tr>
-					<tr>
-						<th>Registradas</th>
-						<th>Aceptadas</th>
-						<th>Pendientes</th>
-						<th>Rechazadas</th>
+						<th>Región</th>
+						<th>Partida</th>
+						<th>Entidad</th>
+						<th>Zona</th>
+						<th>Escuelas registradas</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -32,9 +26,6 @@
 						<td>{{entidad.nombre}}</td>
 						<td>{{municipio.zona.nombre}}</td>
 						<td>{{municipio.escuelas_registradas}}</td>
-						<td>{{municipio.escuelas_aceptadas}}</td>
-						<td>{{municipio.escuelas_pendientes}}</td>
-						<td>{{municipio.escuelas_rechazadas}}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -71,8 +62,8 @@
 						<th rowspan="2">Sistema potabilizador</th>
 						{%endif%}
 
-						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
-						<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%} colspan="5" {%elif request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "IMTA"%} colspan="2"{%endif%}>Primer prueba</th>
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+						<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%} colspan="5" {%elif request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"%} colspan="2"{%endif%}>Primer prueba</th>
 						{%endif%}
 
 						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}
@@ -91,8 +82,8 @@
 						<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%} colspan="2"{%endif%}>Construcción</th>
 						{%endif%}
 
-						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
-						<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%} colspan="5" {% elif request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "IMTA"%} colspan="2"{%endif%}>Segunda prueba</th>
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
+						<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%} colspan="5" {% elif request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"%} colspan="2"{%endif%}>Segunda prueba</th>
 						{%endif%}
 
 						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}
@@ -119,10 +110,10 @@
 						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
 						<th>Análisis de laboratorio</th>{%endif%}
 
-						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%}
 						<th>Propuesta de sistema potabilizador</th>{%endif%}
 
-						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%}
 						<th>Validación de sistema potabilizador</th>{%endif%}
 
 						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
@@ -149,10 +140,10 @@
 						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED"  or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
 						<th>Análisis de laboratorio</th>{%endif%}
 
-						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%}
 						<th>Confirmación de funcionamiento de sistema potabilizador</th>{%endif%}
 						
-						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%}
 						<th>Validación de sistema potabilizador</th>{%endif%}
 
 						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
@@ -191,11 +182,11 @@
 							<td>{%if escuela.escuela_primer_prueba.no_registro%}<i class="fa fa-check" aria-hidden="true">{%endif%}</td>
 							{%endif%}
 
-							{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}		
+							{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%}		
 							<td>{%if escuela.escuela_primer_prueba.propuesta_sistema_potabilizador%}<i class="fa fa-check" aria-hidden="true">{%endif%}</td>
 							{%endif%}
 
-							{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
+							{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%}
 							<td>{%if escuela.escuela_primer_prueba.dictamen_sistema_potabilizador%}<i class="fa fa-check" aria-hidden="true">{%endif%}</td>
 							{%endif%}
 							
@@ -239,11 +230,11 @@
 							<td>{%if escuela.escuela_segunda_prueba.no_registro%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 							{%endif%}
 
-							{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
+							{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%}
 							<td>{%if escuela.escuela_segunda_prueba.resultados_laboratorio%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 							{%endif%}
 
-							{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA"%}
+							{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%}
 							<td>{%if escuela.escuela_segunda_prueba.dictamen_validacion%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 							{%endif%}
 

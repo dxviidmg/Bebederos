@@ -9,7 +9,7 @@ admin.site.register(Mueble, MuebleAdmin)
 
 #Filtros
 class SistemaPotabilizacionAdmin(admin.ModelAdmin):
-	model = SistemaPotabilizacion
+	modelo = SistemaPotabilizacion
 	list_display = ['tipo']
 
 admin.site.register(SistemaPotabilizacion, SistemaPotabilizacionAdmin)
@@ -18,6 +18,6 @@ admin.site.register(SistemaPotabilizacion, SistemaPotabilizacionAdmin)
 class SistemaBebederoAdmin(admin.ModelAdmin):
 	model = SistemaBebedero
 	list_display = ['escuela', 'no_trazabilidad','sistema_potabilizacion', 'mueble']
-	search_fields = ['escuela__username', 'escuela__first_name', 'escuela__last_name', 'no_trazabilidad', 'sistema_potabilizacion__modelo']
+	search_fields = ['escuela__username', 'escuela__first_name', 'escuela__last_name', 'no_trazabilidad', 'sistema_potabilizacion__tipo']
 	list_filter = [ 'mueble',]
 admin.site.register(SistemaBebedero, SistemaBebederoAdmin)
