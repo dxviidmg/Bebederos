@@ -9,8 +9,8 @@ class PrimerPruebaAdmin(admin.ModelAdmin):
 admin.site.register(PrimerPrueba, PrimerPruebaAdmin)
 
 class SegundaPruebaAdmin(admin.ModelAdmin):
-    list_display = ['escuela', 'aprobacion']
+    list_display = ['escuela', 'validacion']
     search_fields = ['escuela__first_name', 'escuela__username']
-    list_filter = ['aprobacion']
+    list_filter = ['validacion']
 
 admin.site.register(SegundaPrueba, SegundaPruebaAdmin)

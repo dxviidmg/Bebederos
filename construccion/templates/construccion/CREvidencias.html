@@ -43,7 +43,7 @@
 						<th>Video</th>
 						<th>Aprobación de Superintendente</th>
 
-						{%if request.user.perfil.cargo == "SIM"%}
+						{%if request.user.perfil.cargo == "SIM" or request.user.perfil.tipo == "Administrador"%}
 						<th>Acciones</th>
 						{%endif%}
 					</thead>
@@ -57,7 +57,7 @@
 							<td>{{evidencia.creacion}}</td>
 							<td><a href="{{evidencia.video.url}}">Ver</a></td>							
 							<td>{{evidencia.aprobacion_SI}}</td>
-							{%if request.user.perfil.cargo == "SIM"%}
+							{%if request.user.perfil.cargo == "SIM" or request.user.perfil.tipo == "Administrador"%}
 							<td><a href="{%url 'construccion:UpdateViewEvidencia' evidencia.pk%}">Revisar</a></td>
 							{%endif%}
 						</tr>

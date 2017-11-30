@@ -64,7 +64,7 @@
 		{%endif%}		
 
 		</div>
-		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Laboratorio"%}
+		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Administrador"%}
 		<div class="col-md-5">
 
 		{%if prueba.registro_campo%}
@@ -96,24 +96,6 @@
 
 		{%endif%}
 		
-		</div>
-		<div class="col-md-5">
-
-		{%if prueba.propuesta_sistema_potabilizador%}
-
-			<a href="{{prueba.propuesta_sistema_potabilizador.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Propuesta de sistema potabilizador</a>
-
-		{%endif%}
-
-		</div>
-		<div class="col-md-5">
-
-		{%if prueba.dictamen_sistema_potabilizador%}
-
-			<a href="{{prueba.dictamen_sistema_potabilizador.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Dictamen de sistema potabilizador</a>
-
-		{%endif%}
-
 		</div>
 	</div>
 

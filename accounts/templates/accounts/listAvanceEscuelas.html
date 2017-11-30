@@ -1,3 +1,4 @@
+
 {%extends 'base.html'%}
 
 {%block content%}
@@ -55,7 +56,7 @@
 					{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
-					<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%} colspan="5" {% elif request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"%} colspan="2"{%endif%}>Segunda prueba</th>
+					<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%} colspan="4" {% elif request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"%} colspan="2"{%endif%}>Segunda prueba</th>
 					{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}
@@ -101,7 +102,7 @@
 					<th>Evidencias</th>{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
-					<th>Etapa</th>{%endif%}
+					<th>Status</th>{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"  or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
 					<th>Muestreo</th>{%endif%}
@@ -111,12 +112,9 @@
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%}
 					<th>Confirmación de funcionamiento de sistema potabilizador</th>{%endif%}
-					
-					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%}
-					<th>Validación de sistema potabilizador</th>{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
-					<th>Resultado de validación</th>	{%endif%}
+					<th>Status de validación</th>	{%endif%}
 
 				</tr>
 
@@ -194,7 +192,7 @@
 					{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
-					<td>{%if  avanceEscuela.escuela.perfil.avance == 100%}Finalizado{%elif  avanceEscuela.escuela.perfil.avance < 100%}En proceso o revisión{%endif%}</td>
+					<td>{%if  avanceEscuela.escuela.perfil.avance == 100%}Finalizado{%elif  avanceEscuela.escuela.perfil.avance < 100%}En proceso de construcción o revisión{%endif%}</td>
 					{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ"%}
@@ -209,12 +207,8 @@
 					<td>{%if avanceEscuela.segundaPrueba.resultados_laboratorio%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"%}
-					<td>{%if avanceEscuela.segundaPrueba.dictamen_validacion%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
-					{%endif%}
-
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"%}
-					<td>{%if avanceEscuela.segundaPrueba.aprobacion%}{{avanceEscuela.segundaPrueba.aprobacion}}{%endif%}</td>
+					<td>{%if avanceEscuela.segundaPrueba.creacion_reporte_analisis%}{{avanceEscuela.segundaPrueba.validacion}}{%endif%}</td>
 					{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"%}

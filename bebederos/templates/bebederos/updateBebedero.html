@@ -30,7 +30,7 @@
 				{{EdicionBebederoForm1 | bootstrap}}
 				{%elif request.user.perfil.tipo == "PM"%}
 				<p>Sistema potabilizador: {{sistemaBebedero.sistema_potabilizacion}}</p>
-				<p>Identificador del sistema potabilizador (No. de serie): {{sistemaBebedero.identificador_sp}}</p>
+				<p>Identificador del sistema potabilizador (No. de serie): {{sistemaBebedero.no_serie_sp}}</p>
 				<p>Etapas del sistema  potabilizador: {{sistemaBebedero.etapas_sp}}</p>
 				<p>Capacidad de tanque presurizador: {{sistemaBebedero.capacidad_tanque_presurizador}}</p>
 				{{EdicionBebederoForm2 | bootstrap}}

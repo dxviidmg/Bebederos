@@ -19,7 +19,7 @@
 		</div>
 	</div>
 
-	{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Escuela"%}
+	{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "Administrador"%}
 		{%if mantenimientos.count < 24%}
 
 	<div class="row espacio2">

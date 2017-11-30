@@ -158,7 +158,7 @@ class Perfil(models.Model):
 		primerPrueba = PrimerPrueba.objects.get(escuela=escuela)
 		ultimaEvidencia = EvidenciaConstruccion.objects.filter(escuela=escuela).order_by('pk').last()
 
-		if primerPrueba.aprobacion == "Aprobado": 
+		if primerPrueba.validacion == "Validado": 
 			if ultimaEvidencia == None:
 				self.avance = 0
 				self.save()

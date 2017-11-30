@@ -87,9 +87,10 @@ class PrimerPrueba(models.Model):
 		verbose_name_plural = 'Primeras pruebas'
 
 class SegundaPrueba(models.Model):
-	aprobacion_choices = (
-		("Aprobado", "Aprobado"),
-		("No aprobado", "No aprobado"),
+	validacion_choices = (
+		("Validado", "Validado"),
+		("No validado", "No validado"),
+		("En espera", "En espera"),
 	)
 	comparacion_choices = (
 		("=", "="),
@@ -113,7 +114,7 @@ class SegundaPrueba(models.Model):
 
 	#Fase de confirmación de IMTA
 	dictamen_validacion = models.FileField(upload_to='pruebas/2/dictamenes/%Y/%m/%d/', verbose_name="Dictamen de validación", null=True, blank=True)
-	aprobacion = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación")
+	validacion = models.CharField(max_length=11, default="En espera", choices=validacion_choices, verbose_name="Validación")
 
 	creacion = models.DateField(default=timezone.now, verbose_name="Fecha de creación")
 
