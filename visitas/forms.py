@@ -9,21 +9,21 @@ my_default_errors = {
 class VisitaDeAcuerdoCreateForm(forms.ModelForm):
 	class Meta:
 		model = VisitaDeAcuerdo
-		fields = ('convenio_concertacion', 'cedula_identificacion', 'acta_acuerdos', 'croquis_modulo', 'constancia_integracion_comite', 'plano_conjunto', 'distribucion_planta', 'memoria_calculo', 'plano_instalacion_electrica', 'plano_instalacion_hidraulica', 'plano_instalacion_sanitaria')
+		fields = ('convenio_concertacion', 'croquis_modulo', 'constancia_integracion_comite', 'plano_conjunto', 'distribucion_planta', 'memoria_calculo', 'plano_instalacion_electrica', 'plano_instalacion_hidraulica', 'plano_instalacion_sanitaria')
 		#fields = ()
-	def __init__(self, *args, **kwargs):
-		super(VisitaDeAcuerdoCreateForm, self).__init__(*args, **kwargs)
-		self.fields['convenio_concertacion'].required = True
-		self.fields['cedula_identificacion'].required = True
-		self.fields['acta_acuerdos'].required = True
-		self.fields['croquis_modulo'].required = True	
-		self.fields['convenio_concertacion'].required = True
-		self.fields['memoria_calculo'].required = True
-		self.fields['plano_conjunto'].required = True
-		self.fields['distribucion_planta'].required = True
-		self.fields['plano_instalacion_electrica'].required = True
-		self.fields['plano_instalacion_hidraulica'].required = True
-		self.fields['plano_instalacion_sanitaria'].required = True
+#	def __init__(self, *args, **kwargs):
+#		super(VisitaDeAcuerdoCreateForm, self).__init__(*args, **kwargs)
+#		self.fields['convenio_concertacion'].required = True
+#		self.fields['cedula_identificacion'].required = True
+#		self.fields['acta_acuerdos'].required = True
+#		self.fields['croquis_modulo'].required = True	
+#		self.fields['convenio_concertacion'].required = True
+#		self.fields['memoria_calculo'].required = True
+#		self.fields['plano_conjunto'].required = True
+#		self.fields['distribucion_planta'].required = True
+#		self.fields['plano_instalacion_electrica'].required = True
+#		self.fields['plano_instalacion_hidraulica'].required = True
+#		self.fields['plano_instalacion_sanitaria'].required = True
 
 class InicioFuncionamientoCreateForm(forms.ModelForm):
 	class Meta:

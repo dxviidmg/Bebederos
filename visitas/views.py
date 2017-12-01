@@ -7,6 +7,7 @@ from .forms import *
 from django.contrib.auth.models import User
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 #Librerias para generar ZIP
 import zipfile
@@ -22,18 +23,21 @@ class CRViewVisitaDeAcuerdo(View):
 		template_name = "visitas/CRVisitaDeAcuerdo.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
-		NuevaVisitaForm=VisitaDeAcuerdoCreateForm()
+		NuevaVisitaForm = VisitaDeAcuerdoCreateForm()
 
 		try:
 			visita = VisitaDeAcuerdo.objects.get(escuela=escuela)
+			EdicionVisitaForm = VisitaDeAcuerdoCreateForm(instance=visita)
 		except VisitaDeAcuerdo.DoesNotExist:
 			visita = None
+			EdicionVisitaForm= None
 
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
 			'NuevaVisitaForm': NuevaVisitaForm,
 			'visita': visita,
+			'EdicionVisitaForm': EdicionVisitaForm,
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -48,10 +52,15 @@ class CRViewVisitaDeAcuerdo(View):
 
 		try:
 			visita = VisitaDeAcuerdo.objects.get(escuela=escuela)
-	
+			EdicionVisitaForm = VisitaDeAcuerdoCreateForm(instance=visita, files=request.FILES)
+
+			if EdicionVisitaForm.is_valid():
+				EdicionVisitaForm.save()
+				messages.success(request, "Se cambió el estatus correctamente")	
+
 		except VisitaDeAcuerdo.DoesNotExist:
 			visita = None
-
+			EdicionVisitaForm = None
 		return redirect("visitas:CRViewVisitaDeAcuerdo", pk=perfil.pk)
 
 #Creación y consulta de inicio de funcionamiento

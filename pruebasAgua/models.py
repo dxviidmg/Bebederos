@@ -20,10 +20,9 @@ class PrimerPrueba(models.Model):
 	creacion = models.DateField(default=timezone.now, verbose_name="Fecha de creación")
 
 	#Fase de Toma de Agua / SI
-	reporte_toma_agua = models.FileField(upload_to='pruebas/1/reportes/%Y/%m/%d/', verbose_name="Reporte de toma de muestra")
+	reporte_toma_agua = models.FileField(upload_to='pruebas/1/reportes/%Y/%m/%d/', verbose_name="Etiqueta de muestra")
 	foto_toma_agua_1 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía 1", null=True, blank=True)
 	foto_toma_agua_2 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía 2", null=True, blank=True)
-	video_toma_agua = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Video", null=True, blank=True)
 
 	#Fase de analisis / LAB
 	resultados_laboratorio = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis de laboratorio", null=True, blank=True)
@@ -99,11 +98,11 @@ class SegundaPrueba(models.Model):
 		("≤", "≤"),		
 	)	
 	escuela = models.OneToOneField(User, related_name="escuela_segunda_prueba")	
+
 	#Fase de Toma de Agua / SI
-	reporte_toma_agua = models.FileField(upload_to='pruebas/2/reportes_de_toma/%Y/%m/%d/', verbose_name="Reporte de toma de muestra")
+	reporte_toma_agua = models.FileField(upload_to='pruebas/2/reportes_de_toma/%Y/%m/%d/', verbose_name="Etiqueta de muestra")
 	foto_toma_agua_1 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía 1", null=True, blank=True)
 	foto_toma_agua_2 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía 2", null=True, blank=True)
-	video_toma_agua = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Video", null=True, blank=True)
 
 	#Fase de analisis / LAB
 	registro_campo = models.FileField(upload_to='pruebas/1/hojasCampo/%Y/%m/%d/', verbose_name="Registro de campo", null=True, blank=True)

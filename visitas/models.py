@@ -4,11 +4,9 @@ from django.utils import timezone
 
 class VisitaDeAcuerdo(models.Model):
 	escuela = models.OneToOneField(User, related_name="escuela_visita_acuerdo")
-	convenio_concertacion = models.FileField(upload_to='visita/concertaciones/%Y/%m/%d/', verbose_name="Convenio de concertación de aplicación de recurso")
-	cedula_identificacion = models.FileField(upload_to='visita/identificaciones/%Y/%m/%d/', verbose_name="Cédula de identificación básica")
-	acta_acuerdos = models.FileField(upload_to='visitas/actas/%Y/%m/%d/', verbose_name="Acta de acuerdos")
-	croquis_modulo = models.FileField(upload_to='visitas/croquis/%Y/%m/%d/', verbose_name="Croquis de ubicación de módulo", default="default.pdf")	
-	constancia_integracion_comite = models.FileField(upload_to='visitas/comites/%Y/%m/%d/', verbose_name="Constancia de integración de comité")
+	convenio_concertacion = models.FileField(upload_to='visita/concertaciones/%Y/%m/%d/', verbose_name="Convenio de concertación de aplicación de recurso", null=True, blank=True)
+	croquis_modulo = models.FileField(upload_to='visitas/croquis/%Y/%m/%d/', verbose_name="Croquis de ubicación de módulo", null=True, blank=True)	
+	constancia_integracion_comite = models.FileField(upload_to='visitas/comites/%Y/%m/%d/', verbose_name="Constancia de integración de comité", null=True, blank=True)
 	plano_conjunto = models.FileField(upload_to='visitas/planosConjunto/%Y/%m/%d/', verbose_name="Plano de conjunto", null=True, blank=True)
 	distribucion_planta = models.FileField(upload_to='visitas/distribuciones/%Y/%m/%d/', verbose_name="Distribución en planta", null=True, blank=True)	
 	memoria_calculo = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Memoria de cálculo hidrosanitario y eléctrico", null=True, blank=True)

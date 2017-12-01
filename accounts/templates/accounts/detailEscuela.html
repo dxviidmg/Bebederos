@@ -252,7 +252,16 @@
 		</div>
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela"%} {%if primerPrueba.validacion == "Validado"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "INIFED"%}
+		{%if primerPrueba%}
+		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<a {%if visitaDeAcuerdo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a>
+		</div>
+		{%endif%}
+		{%endif%}
+
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela"%} {%if visitaDeAcuerdo%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if inicioDeTrabajo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajo</a>
@@ -260,17 +269,10 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "INIFED"%}
-		{%if inicioDeTrabajo%}
-		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
-			<div class="dummy"></div>
-			<a {%if visitaDeAcuerdo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a>
-		</div>
-		{%endif%}
-		{%endif%}
+
 		
 		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "Ejecutora"%}
-		{%if visitaDeAcuerdo%}
+		{%if inicioDeTrabajo%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if sistemaBebedero.no_trazabilidad%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'bebederos:UpdateViewBebedero' perfil.pk%}"> Asignación de componentes del Sistema bebedero</a>

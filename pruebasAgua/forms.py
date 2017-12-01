@@ -5,14 +5,13 @@ from django.contrib.admin.widgets import AdminDateWidget
 class PrimerPruebaCreateForm(forms.ModelForm):
 	class Meta:
 		model = PrimerPrueba
-		fields = ('reporte_toma_agua', 'foto_toma_agua_1', 'foto_toma_agua_2', 'video_toma_agua')
+		fields = ('reporte_toma_agua', 'foto_toma_agua_1', 'foto_toma_agua_2')
 #		fields = ()
 	def __init__(self, *args, **kwargs):
 		super(PrimerPruebaCreateForm, self).__init__(*args, **kwargs)
 		self.fields['reporte_toma_agua'].required = True
 		self.fields['foto_toma_agua_1'].required = True
 		self.fields['foto_toma_agua_2'].required = True
-		self.fields['video_toma_agua'].required = True
 
 class PrimerPruebaUpdateForm1(forms.ModelForm):
 	class Meta:
@@ -158,14 +157,13 @@ class PrimerPruebaUpdateForm12(forms.ModelForm):
 class SegundaPruebaCreateForm(forms.ModelForm):
 	class Meta:
 		model = SegundaPrueba
-		fields = ('reporte_toma_agua', 'foto_toma_agua_1', 'foto_toma_agua_2', 'video_toma_agua')
+		fields = ('reporte_toma_agua', 'foto_toma_agua_1', 'foto_toma_agua_2')
 #		fields = ()
 	def __init__(self, *args, **kwargs):
 		super(SegundaPruebaCreateForm, self).__init__(*args, **kwargs)
 		self.fields['reporte_toma_agua'].required = True
 		self.fields['foto_toma_agua_1'].required = True
 		self.fields['foto_toma_agua_2'].required = True
-		self.fields['video_toma_agua'].required = True
 
 class SegundaPruebaUpdateForm1(forms.ModelForm):
 	class Meta:
