@@ -36,7 +36,7 @@
 	<a href="{%url 'accounts:CreateViewEscuela' municipio.pk%}">Crear escuela</a>
 	{%endif%}
 	
-	<h3>Lista de escuelas</h3>
+	<h3>Escuelas</h3>
 
 	<div class="row justify-content-center">
 		<div class="table-responsive">
@@ -44,7 +44,7 @@
 				<thead>
 					<tr>
 
-						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM"%}
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"  or request.user.perfil.tipo == "Laboratorio"%}
 						<th rowspan="2">Localidad</th>
 						{%endif%}
 			

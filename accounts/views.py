@@ -68,7 +68,7 @@ class ListViewEntidades(View):
 			region = None
 			laboratorio = User.objects.get(pk=request.user.pk)
 			entidades = Entidad.objects.filter(laboratorio=laboratorio)
-		elif request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "IMTA" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.cargo == "CRINIFED" or request.user.perfil.cargo == "EIINIFED":
+		elif request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "INIFED":
 			region = Region.objects.get(numero=numero)
 			entidades = Entidad.objects.filter(region=region)			
 
@@ -81,28 +81,18 @@ class ListViewEntidades(View):
 #Lista de zonas
 class ListViewZonas(View):
 	@method_decorator(login_required)
-	def get(self, request, slug=None):
+	def get(self, request, slug):
 		template_name = "accounts/listZonas.html"
+
+		entidad = Entidad.objects.get(slug=slug)
+		entidad.CountEscuelas()
+		zonas = Zona.objects.filter(entidad=entidad)
+		municipios = Municipio.objects.filter(zona__in=zonas)
+		region = Region.objects.get(entidad=entidad)
+		
 		ListMunicipiosPorZona = []
-
-		if request.user.perfil.cargo == 'CEINIFED':
-			print(request.user.coordinador_estatal_inifed.nombre)
-			ceinided = User.objects.get(pk=request.user.pk)
-			entidad = Entidad.objects.get(coordinador_estatal_inifed=ceinided)
-			zonas = Zona.objects.filter(entidad=entidad)
-			municipios = Municipio.objects.filter(zona__in=zonas)			
-			region = None
-			for zona in zonas:
-				ListMunicipiosPorZona.append({'zona': zona.nombre, 'municipios': Municipio.objects.filter(zona=zona)})
-
-		elif slug:
-			entidad = Entidad.objects.get(slug=slug)
-			zonas = Zona.objects.filter(entidad=entidad)
-			municipios = Municipio.objects.filter(zona__in=zonas)
-			region = Region.objects.get(entidad=entidad)
-	
-			for zona in zonas:
-				ListMunicipiosPorZona.append({'zona': zona.nombre, 'municipios': Municipio.objects.filter(zona=zona)})
+		for zona in zonas:
+			ListMunicipiosPorZona.append({'zona': zona.nombre, 'municipios': Municipio.objects.filter(zona=zona)})
 		
 		context = {
 			'entidad': entidad,
@@ -122,6 +112,7 @@ class ListViewEscuelas(View):
 		escuelas = User.objects.filter(perfil__in=perfiles).order_by('perfil__localidad', 'perfil__nivel_educativo')
 		zona = Zona.objects.get(municipio=municipio)
 		entidad = Entidad.objects.get(zona=zona)
+		municipio.CountEscuelas()
 
 		context = {
 			'municipio': municipio,
