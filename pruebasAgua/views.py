@@ -24,6 +24,7 @@ class CRUViewPrimerPrueba(View):
 	
 		try:
 			prueba = PrimerPrueba.objects.get(escuela=escuela)
+			EdicionPruebaForm0 = PrimerPruebaCreateForm(instance=prueba)
 			EdicionPruebaForm1 = PrimerPruebaUpdateForm1(instance=prueba)
 			EdicionPruebaForm2 = PrimerPruebaUpdateForm2(instance=prueba)
 			EdicionPruebaForm3 = PrimerPruebaUpdateForm3(instance=prueba)
@@ -63,6 +64,7 @@ class CRUViewPrimerPrueba(View):
 
 		except PrimerPrueba.DoesNotExist:
 			prueba = None
+			EdicionPruebaForm0 = None
 			EdicionPruebaForm1 = None
 			EdicionPruebaForm2 = None
 			EdicionPruebaForm3 = None
@@ -81,6 +83,7 @@ class CRUViewPrimerPrueba(View):
 			'escuela': escuela,
 			'NuevaPruebaForm': NuevaPruebaForm,
 			'prueba': prueba,
+			'EdicionPruebaForm0': EdicionPruebaForm0,
 			'EdicionPruebaForm1': EdicionPruebaForm1,
 			'EdicionPruebaForm2': EdicionPruebaForm2,
 			'EdicionPruebaForm8': EdicionPruebaForm8,
@@ -117,6 +120,7 @@ class CRUViewPrimerPrueba(View):
 
 		try:
 			prueba = PrimerPrueba.objects.get(escuela=escuela)
+			EdicionPruebaForm0 = PrimerPruebaCreateForm(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm1 = PrimerPruebaUpdateForm1(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm2 = PrimerPruebaUpdateForm2(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm3 = PrimerPruebaUpdateForm3(instance=prueba, data=request.POST, files=request.FILES)
@@ -129,6 +133,9 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm10 = PrimerPruebaUpdateForm10(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm11 = PrimerPruebaUpdateForm11(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm12 = PrimerPruebaUpdateForm12(instance=prueba, data=request.POST, files=request.FILES)
+
+			if EdicionPruebaForm0.is_valid():
+				EdicionPruebaForm0.save()
 
 			if EdicionPruebaForm1.is_valid():
 				EdicionPruebaForm1.save()
@@ -167,6 +174,7 @@ class CRUViewPrimerPrueba(View):
 				EdicionPruebaForm12.save()
 		except PrimerPrueba.DoesNotExist:
 			prueba = None
+			EdicionPruebaForm0 = None
 			EdicionPruebaForm1 = None
 			EdicionPruebaForm2 = None
 			EdicionPruebaForm3 = None
@@ -179,6 +187,7 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm10 = None
 			EdicionPruebaForm11 = None
 			EdicionPruebaForm12 = None
+
 		return redirect("pruebas:CRUViewPrimerPrueba", pk=perfil.pk)
 
 #Creación, edición y detalle de una Segunda prueba

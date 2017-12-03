@@ -26,7 +26,7 @@
 
 		{%if prueba.reporte_toma_agua%}
 
-			<a href="{{prueba.reporte_toma_agua.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Reporte de toma de agua</a>
+			<a href="{{prueba.reporte_toma_agua.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Etiqueta de muestreo</a>
 
 		{%endif%}
 
@@ -51,15 +51,6 @@
 
 		</div>
 
-		<div class="col-md-5">
-		
-		{%if prueba.video_toma_agua%}
-
-			<a href="{{prueba.video_toma_agua.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Video</a>
-
-		{%endif%}		
-
-		</div>
 		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Administrador"%}
 		<div class="col-md-5">
 
@@ -94,6 +85,20 @@
 		
 		</div>
 	</div>
+
+		{%if request.user.perfil.tipo == "Ejecutora"%}
+		<div class="row espacio2">
+			<div class="col-12">
+				<form action="." method="post" enctype="multipart/form-data">
+					<h4>Actualización de documentación de la toma de agua</h4>
+					{%csrf_token%}
+					{{EdicionPruebaForm0 | bootstrap}}
+					<a href=""><input type="submit" value="Guardar cambios"></a>
+				</form>
+			</div>
+		</div>
+		
+		{%endif%}
 
 		{%if request.user.perfil.tipo == "Laboratorio"%}
 		{%if prueba.reporte_toma_agua and not prueba.resultados_laboratorio%}
