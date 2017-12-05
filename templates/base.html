@@ -67,12 +67,22 @@
         </div>
       </li>
 
+      {%elif request.user.perfil.cargo == "SI"%}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.superintendente.slug%}">Por municipios</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.superintendente.slug%}">Reporte general</a>          
+          <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
+        </div>
+      </li>
+
       {%elif request.user.perfil.cargo == "RO"%}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.residente_obra.slug%}">Por municipios</a>
-          <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.residente_obra.slug%}">Reporte general</a>          
+          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.perfil.residente_obra_ejecutora.slug%}">Por municipios</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.perfil.residente_obra_ejecutora.slug%}">Reporte general</a>          
           <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
         </div>
       </li>

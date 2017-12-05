@@ -29,7 +29,7 @@ class Entidad(models.Model):
 #	residente_tecnico_inifed = models.ForeignKey(User, null=True, blank=True, verbose_name="Residente Técnico de INIFED", related_name="residente_tecnico_inifed")
 
 	#Perfiles de Residente
-	residente_obra = models.OneToOneField(User, null=True, blank=True, verbose_name="Residente de Obra", related_name="residente_obra")
+	superintendente = models.OneToOneField(User, null=True, blank=True, verbose_name="Superintendente", related_name="superintendente")
 	sim = models.ForeignKey(User, null=True, blank=True, verbose_name="Superintendente de mantenimiento", related_name="sim")
 
 	laboratorio = models.ForeignKey(User, null=True, blank=True, verbose_name="Laboratorio", related_name="laboratorio")
@@ -119,8 +119,9 @@ class Perfil(models.Model):
 			)
 		),
 		('Ejecutora', (
-				('RO', 'Residente de Obra'),
-				('SIM', 'Superintendente'),
+				('SIM', 'Superintendente de Mantenimiento'),			
+				('SI', 'Superintendente'),
+				('RO', 'Residente de Obra'),				
 			)
 		)
 	)
@@ -149,8 +150,9 @@ class Perfil(models.Model):
 	mantenimientos = models.IntegerField(null=True, blank=True)
 
 	#Llave foranea para Residentes Técnicos de INIFED
-	residente_tecnico_inifed = models.ForeignKey(Entidad, verbose_name="Es residente estatal INIFED de", null=True, blank=True, related_name="residente_tecnico_estatal")
-	
+	residente_tecnico_inifed = models.ForeignKey(Entidad, verbose_name="Es residente estatal de INIFED del estado de", null=True, blank=True, related_name="residente_tecnico_inifed")
+	residente_obra_ejecutora = models.ForeignKey(Entidad, verbose_name="Es residente de obra de la ejecutora del estado de", null=True, blank=True, related_name="residente_obra_ejecutora")
+
 	def UpdateAvance(self):
 		perfil = Perfil.objects.get(pk=self.pk)
 		escuela = User.objects.get(perfil=perfil)

@@ -12,7 +12,7 @@ admin.site.register(Region, RegionAdmin)
 
 #Entidades
 class EntidadAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'partida', 'coordinador_estatal_inifed', 'residente_obra', 'sim', 'laboratorio']
+    list_display = ['nombre', 'partida', 'coordinador_estatal_inifed', 'superintendente', 'sim', 'laboratorio']
     search_fields = ['nombre', 'coordinador_estatal_inifed__first_name', 'coordinador_estatal_inifed__last_name', 'laboratorio__first_name', 'laboratorio__last_name']
     list_filter = ['partida']
     prepopulated_fields = {"slug": ("nombre",)}
@@ -33,7 +33,7 @@ class MunicipiodAdmin(admin.ModelAdmin):
 
 admin.site.register(Municipio, MunicipiodAdmin)
 
-#Usuarios (Constructoras, escuelas, SIM, Residentes, etc)
+#Usuarios (Constructoras, escuelas, INIFED, ejecutora etc)
 class SistemaBebederosInline(admin.StackedInline):
     model = SistemaBebedero
     can_delete = False

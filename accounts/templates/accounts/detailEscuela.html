@@ -176,33 +176,48 @@
 			</div>
 
 			<h3>Ejecutora</h3>
-
 			<div class="table-responsive text-center">
 				<table class="table table-bordered">
 					<thead>
 						<tr>
 							<th>Cargo</th>
-							<th>Residente de Obra</th>
-							<th colspan="{{rts|length}}">
+							<th>
 								Superintendente de Mantenimiento
-							</th>
+							</th>						
+							<th>Superintendente</th>
+							<th colspan="{{ros|length}}"> {%if ros|length > 1%}Residentes de Obra{%else%}Residente de Obra{%endif%}</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td class="titulo-tabla">Nombre</td>
-							<td>{{perfil.municipio.zona.entidad.residente_obra.get_full_name}}</td>
 							<td>{{perfil.municipio.zona.entidad.sim.get_full_name}}</td>
+							<td>{{perfil.municipio.zona.entidad.superintendente.get_full_name}}</td>
+							{%for ro in ros%}
+							<td>{{ro.get_full_name}}</td>
+							{%empty%}
+							<td></td>
+							{%endfor%}
 						</tr>
 						<tr>
 							<td class="titulo-tabla" ">Teléfono</td>
-							<td>{%if perfil.municipio.zona.entidad.residente_obra.perfil.telefono%}{{perfil.municipio.zona.entidad.residente_obra.perfil.telefono}}{%endif%}</td>
-							<td>{% if perfil.municipio.zona.entidad.sim.perfil.telefono%}{{perfil.municipio.zona.entidad.sim.perfil.telefono}}{%endif%}</td>
+							<td>{% if perfil.municipio.zona.entidad.sim.perfil.telefono%}{{perfil.municipio.zona.entidad.sim.perfil.telefono}}{%endif%}</td>	
+							<td>{%if perfil.municipio.zona.entidad.superintendente.perfil.telefono%}{{perfil.municipio.zona.entidad.superintendente.perfil.telefono}}{%endif%}</td>
+							{%for ro in ros%}
+							<td>{%if ro.perfil.telefono%}{{ro.perfil.telefono}}{%endif%}</td>
+							{%empty%}
+							<td></td>
+							{%endfor%}
 						</tr>
 						<tr>
 							<td class="titulo-tabla" ">Correo electrónico</td>
-							<td>{%if perfil.municipio.zona.entidad.residente_obra.perfil.telefono%}{{perfil.municipio.zona.entidad.residente_obra.email}}{%endif%}</td>
+							<td>{%if perfil.municipio.zona.entidad.superintendente.perfil.telefono%}{{perfil.municipio.zona.entidad.superintendente.email}}{%endif%}</td>
 							<td>{% if perfil.municipio.zona.entidad.sim.perfil.telefono%}{{perfil.municipio.zona.entidad.sim.email}}{%endif%}</td>
+							{%for ro in ros%}
+							<td>{%if ro.email%}{{ro.email}}{%endif%}</td>
+							{%empty%}
+							<td></td>
+							{%endfor%}
 						</tr>						
 					</tbody>
 				</table>

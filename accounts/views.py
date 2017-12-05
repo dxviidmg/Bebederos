@@ -84,7 +84,6 @@ class ListViewZonas(View):
 	@method_decorator(login_required)
 	def get(self, request, slug):
 		template_name = "accounts/listZonas.html"
-
 		entidad = Entidad.objects.get(slug=slug)
 		entidad.CountEscuelas()
 		zonas = Zona.objects.filter(entidad=entidad)
@@ -137,9 +136,15 @@ class DetailViewEscuela(View):
 		try: 
 			perfilesRTs = Perfil.objects.filter(residente_tecnico_inifed=entidad)
 			rts = User.objects.filter(perfil__in=perfilesRTs)
+
+			perfilesROs = Perfil.objects.filter(residente_obra_ejecutora=entidad)
+			ros = User.objects.filter(perfil__in=perfilesROs)
+
 		except Perfil.DoesNotExist:
 			perfilesRTs = None
 			rts = None
+			perfilesROs = None
+			ros = None
 
 		try:
 			visitaDeAcuerdo = VisitaDeAcuerdo.objects.get(escuela=escuela)
@@ -205,7 +210,8 @@ class DetailViewEscuela(View):
 			'zona': zona,
 			'entidad': entidad,
 			'region': region,
-			'rts': rts
+			'rts': rts,
+			'ros': ros,
 		}
 		return render(request,template_name, context)
 
