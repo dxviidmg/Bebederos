@@ -7,11 +7,11 @@ class InicioDeTrabajoAdmin(admin.ModelAdmin):
 
 admin.site.register(InicioDeTrabajo, InicioDeTrabajoAdmin)
 
-class InstalacionBebederoAdmin(admin.ModelAdmin):
+class EnvolventeTerminadaAdmin(admin.ModelAdmin):
     list_display = ['escuela']
     search_fields = ['escuela__get_full_name', 'escuela__username']
 
-admin.site.register(InstalacionBebedero, InstalacionBebederoAdmin)
+admin.site.register(EnvolventeTerminada, EnvolventeTerminadaAdmin)
 
 class EvidenciaAdmin(admin.ModelAdmin):
     list_display = ['escuela', 'fase', 'aprobacion_SI']

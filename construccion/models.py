@@ -13,24 +13,29 @@ class InicioDeTrabajo(models.Model):
 		ordering = ['escuela']
 		verbose_name_plural = 'Inicio de trabajos'
 
-class InstalacionBebedero(models.Model):
+class EnvolventeTerminada(models.Model):
 	escuela = models.OneToOneField(User, related_name="escuela_instalacion_bebedero")
-	reporte = models.FileField(upload_to='instalaciones/reportes/%Y/%m/%d/', verbose_name="Reporte de instalación")
-	recepcion_mueble_bebedero = models.FileField(upload_to='instalaciones/recepciones/%Y/%m/%d/', verbose_name="Recepción del mueble bebedero y sus componentes")
+	video = models.FileField(upload_to='evidencia/envolvente/%Y/%m/%d/', verbose_name="Video")
 
 	def __str__(self):
 		return '{}'.format(self.escuela)
 
 	class Meta:
 		ordering = ['escuela']
-		verbose_name_plural = 'Instalaciones de Sistemas Bebedero'
+		verbose_name_plural = 'Envolventes terminadas'
 
 class EvidenciaConstruccion(models.Model):
 	fase_choices = (
-		("Firme", "Firme"),
-		("Muro", "Muro"),
-		("Techumbre y puerta", "Techumbre y puerta"),
-		("Instalación de Mueble Bebedero", "Instalación de Mueble Bebedero")
+		("1° Trazo", "1° Trazo"),
+		("2° Excavación, corte y demolición", "2° Excavación, corte y demolición"),
+		("3° Cimbra y habilitado de firme", "3° Cimbra y habilitado de firme"),
+		("4° Colado de firme", "4° Colado de firme"),
+		("5° Muros, castillos y cadenas" , "5° Muros, castillos y cadenas"),
+		("6° Aplanados, pinturas y rampa", "6° Aplanados, pinturas y rampa"),
+		("7° Estructura y puerta", "7° Estructura y puerta"),
+		("8° Policarbonato", "8° Policarbonato"),
+		("9° Mueble bebedero", "9° Mueble bebedero"),
+		("10° Placa de identidad", "10° Placa de identidad"),
 	)
 
 	aprobacion_choices = (
@@ -40,8 +45,8 @@ class EvidenciaConstruccion(models.Model):
 	)
 
 	escuela = models.ForeignKey(User, related_name="escuela_evidencia")
-	fase = models.CharField(max_length=30, choices=fase_choices)
-	video = models.FileField(upload_to='instalaciones/video/%Y/%m/%d/', verbose_name="Evidencia audio visual")
+	fase = models.CharField(max_length=50, choices=fase_choices)
+	foto = models.FileField(upload_to='evidencia/foto/%Y/%m/%d/', verbose_name="Fotografía")
 	aprobacion_SI = models.CharField(max_length=11, default="En espera", choices=aprobacion_choices, verbose_name="Aprobación del Superintendente")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 
@@ -51,4 +56,5 @@ class EvidenciaConstruccion(models.Model):
 	class Meta:
 		ordering = ['escuela']
 		verbose_name_plural = 'Evidencias de construcción'
+
 

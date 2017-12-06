@@ -99,7 +99,7 @@
 							<td colspan="12">{{perfil.municipio.nombre}}</td>
 							<td colspan="12">{{zona.nombre}}</td>
 							<td colspan="12">{{entidad}}</td>
-							<td colspan="12">{{entidad.partida.numero}}</td>
+							<td colspan="12">{{entidad.partida}}</td>
 							<td colspan="12">{{region}}</td>
 						</tr>
 					</tbody>
@@ -299,7 +299,7 @@
 		{%if sistemaBebedero.no_trazabilidad%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
-			<a {%if evidenciaFinal%} class="thumbnail thumbnail-prueba-aprobado container" {%elif evidenciasConstruccion%} class="thumbnail thumbnail-prueba-en-espera" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewEvidencias' perfil.pk%}">Evidencias de construccíón e instalación de mueble bebedero. <br>Status: {%if evidenciaFinal%}<br>Construcción finalizada{%else%}En proceso de construción o revisión{%endif%}</a>
+			<a {%if perfil.avance == 100%} class="thumbnail thumbnail-prueba-aprobado container" {%elif evidenciasConstruccion%} class="thumbnail thumbnail-prueba-en-espera" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewEvidencias' perfil.pk%}">Evidencias de construccíón e instalación de mueble bebedero. <br>Status: {%if perfil.avance == 100%}<br>Construcción finalizada{%else%}En proceso de construción o revisión{%endif%}</a>
 		</div>
 		{%endif%}
 		{%endif%}

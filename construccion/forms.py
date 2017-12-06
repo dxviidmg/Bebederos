@@ -6,16 +6,16 @@ class InicioDeTrabajoCreateForm(forms.ModelForm):
 		model = InicioDeTrabajo
 		fields = ('acta_inicio',)
 
-class InstalacionBebederoCreateForm(forms.ModelForm):
+class EnvolventeTerminadaCreateForm(forms.ModelForm):
 	class Meta:
-		model = InstalacionBebedero
-		fields = ('recepcion_mueble_bebedero', 'reporte',)
+		model = EnvolventeTerminada
+		fields = ('video',)
 #		fields = ()
 
 class EvidenciaConstruccionCreateForm(forms.ModelForm):
 	class Meta:
 		model = EvidenciaConstruccion
-		fields = ('fase', 'video')
+		fields = ('fase', 'foto')
 
 class EvidenciaConstruccionEditForm(forms.ModelForm):
 	class Meta:

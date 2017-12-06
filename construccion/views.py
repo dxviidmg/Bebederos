@@ -86,24 +86,22 @@ class CRViewEvidencias(View):
 		escuela = User.objects.get(perfil=perfil)
 
 		evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela)
-		evidenciaFinal = evidencias.filter(fase="Instalación de Mueble Bebedero", aprobacion_SI="Aprobado")
 
 		NuevaEvidenciaForm = EvidenciaConstruccionCreateForm()
-		NuevaInstalacionForm = InstalacionBebederoCreateForm()
+		NuevaEnvolventeForm = EnvolventeTerminadaCreateForm()
 		
 		try:
-			instalacion = InstalacionBebedero.objects.get(escuela=escuela)
-		except InstalacionBebedero.DoesNotExist:
-			instalacion = None
+			envolvente = EnvolventeTerminada.objects.get(escuela=escuela)
+		except EnvolventeTerminada.DoesNotExist:
+			envolvente = None
 
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
 			'evidencias': evidencias,
 			'NuevaEvidenciaForm': NuevaEvidenciaForm,
-			'NuevaInstalacionForm': NuevaInstalacionForm,
-			'instalacion': instalacion,
-			'evidenciaFinal': evidenciaFinal,
+			'NuevaEnvolventeForm': NuevaEnvolventeForm,
+			'envolvente': envolvente,
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -111,23 +109,21 @@ class CRViewEvidencias(View):
 		escuela = User.objects.get(perfil=perfil)
 
 		NuevaEvidenciaForm = EvidenciaConstruccionCreateForm(data=request.POST, files=request.FILES)
-		ejecutora = User.objects.get(pk=request.user.pk)
 		
 		if NuevaEvidenciaForm.is_valid():
 			NuevaEvidencia = NuevaEvidenciaForm.save(commit=False)
 			NuevaEvidencia.escuela = escuela
-			NuevaEvidencia.ejecutora = ejecutora
 			NuevaEvidencia.save()
 			messages.success(request, "Actualización exitosa")			
 	
-		NuevaInstalacionForm = InstalacionBebederoCreateForm(data=request.POST, files=request.FILES)
+		NuevaEnvolventeForm = EnvolventeTerminadaCreateForm(data=request.POST, files=request.FILES)
 		si = User.objects.get(pk=request.user.pk)
 
-		if NuevaInstalacionForm.is_valid():
-			NuevaInstalacion = NuevaInstalacionForm.save(commit=False)
-			NuevaInstalacion.escuela = escuela
-			NuevaInstalacion.si = si
-			NuevaInstalacion.save()
+		if NuevaEnvolventeForm.is_valid():
+			NuevaEnvolvente = NuevaEnvolventeForm.save(commit=False)
+			NuevaEnvolvente.escuela = escuela
+			NuevaEnvolvente.si = si
+			NuevaEnvolvente.save()
 			messages.success(request, "Actualización exitosa")
 
 		return redirect("construccion:CRViewEvidencias", pk=perfil.pk)
@@ -138,13 +134,15 @@ class UpdateViewEvidencia(View):
 	def get(self, request, pk):
 		template_name = "construccion/updateEvidencia.html"
 		evidencia = get_object_or_404(EvidenciaConstruccion, pk=pk)
-		EdicionEvidenciaForm = EvidenciaConstruccionEditForm(instance=evidencia)
+		EdicionEvidenciaForm = EvidenciaConstruccionCreateForm(instance=evidencia)
+		EdicionEvidenciaForm2 = EvidenciaConstruccionEditForm(instance=evidencia)
 		escuela = User.objects.get(escuela_evidencia=evidencia)
 		perfil = Perfil.objects.get(user_id=escuela)
 
 		context = {
 			'evidencia': evidencia,
 			'EdicionEvidenciaForm': EdicionEvidenciaForm,
+			'EdicionEvidenciaForm2': EdicionEvidenciaForm2,	
 			'escuela': escuela,
 			'perfil': perfil,
 		}
@@ -155,8 +153,12 @@ class UpdateViewEvidencia(View):
 		escuela = User.objects.get(escuela_evidencia=evidencia)
 		perfil = Perfil.objects.get(user_id=escuela)
 
-		EdicionEvidenciaForm=EvidenciaConstruccionEditForm(instance=evidencia, data=request.POST)
+		EdicionEvidenciaForm=EvidenciaConstruccionCreateForm(instance=evidencia, data=request.POST)
 		if EdicionEvidenciaForm.is_valid:
 			EdicionEvidenciaForm.save()
+
+		EdicionEvidenciaForm2=EvidenciaConstruccionEditForm(instance=evidencia, data=request.POST)
+		if EdicionEvidenciaForm2.is_valid:
+			EdicionEvidenciaForm2.save()
 			perfil.UpdateAvance()
 		return redirect("construccion:CRViewEvidencias", pk=perfil.pk)

@@ -20,32 +20,27 @@
 		</div>
 	</div>
 
-	
 	<div class="row">
 		<div class="col-12">
 
-	{%if not evidenciaFinal%}
+	{%if evidencias.count < 10%}
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Registro de evidencias de construcción</h4>	
+				<h4>Registro de evidencia de construcción</h4>	
 				{%csrf_token%}
 				{{NuevaEvidenciaForm | bootstrap}}
 				<a href=""><input type="submit" value="Registrar"></a>
 			</form>
 	{%endif%}
 
-			<h4>Lista de evidencias de construcción</h4>
+			<h4>Evidencias de construcción</h4>
 			<div class="table-responsive">
 				<table class="table table-bordered">
 					<thead>
 						<th>Folio</th>
 						<th>Fase</th>
 						<th>Hora y fecha de registro</th>
-						<th>Video</th>
-						<th>Aprobación de Superintendente</th>
-
-						{%if request.user.perfil.cargo == "SIM" or request.user.perfil.tipo == "Administrador"%}
-						<th>Acciones</th>
-						{%endif%}
+						<th>Aprobación de SIM</th>
+						<th>Opciones</th>
 					</thead>
 					<tbody>
 					
@@ -55,17 +50,18 @@
 							<td>{{evidencia.pk}}</td>
 							<td>{{evidencia.fase}}</td>
 							<td>{{evidencia.creacion}}</td>
-							<td><a href="{{evidencia.video.url}}">Ver</a></td>							
 							<td>{{evidencia.aprobacion_SI}}</td>
 							{%if request.user.perfil.cargo == "SIM" or request.user.perfil.tipo == "Administrador"%}
 							<td><a href="{%url 'construccion:UpdateViewEvidencia' evidencia.pk%}">Revisar</a></td>
+							{%else%}
+							<td><a href="{%url 'construccion:UpdateViewEvidencia' evidencia.pk%}">Editar</a></td>
 							{%endif%}
 						</tr>
 
 					{%empty%}
 
 						<tr>
-							<td colspan="7">Sin registro</td>
+							<td colspan="5">Sin registro</td>
 						</tr>
 
 					{%endfor%}
@@ -78,44 +74,36 @@
 		</div>
 	</div>
 
-	{%if instalacion%}
+	{%if evidencias.count == 10%}
+		{%if envolvente%}
 
 	<div class="row">
 		<div class="col-12">
-			<h4>Consulta de evidencias de instalación</h4>
+			<h4>Envolvente terminada</h4>
 		</div>
 	</div>
 	
 	<div class="row justify-content-center ">
 		<div class="col-md-5">
 
-			<a href="{{instalacion.reporte.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Reporte de instalación</a>
-		</div>
-
-		<div class="col-md-5">
-	
-		{%if instalacion.recepcion_mueble_bebedero%}
-			
-			<a href="{{instalacion.recepcion_mueble_bebedero.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Recepción de mueble bebedero</a>
-
-		{%endif%}
-	
+			<a href="{{envolvente.video.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Video</a>
 		</div>
 	</div>
 
-	{%else%}
+		{%else%}
 
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-			<h4>Registro de evidencias de Instalación</h4>
+			<h4>Registro de video de envolvente terminada</h4>
 			{%csrf_token%}
-			{{NuevaInstalacionForm | bootstrap}}
+			{{NuevaEnvolventeForm | bootstrap}}
 			<a href=""><input type="submit" value="Crear registro"></a>
 			</form>
 		</div>
 	</div>
 
+		{%endif%}
 	{%endif%}
 	
 {%endblock content%}
