@@ -135,7 +135,6 @@ class Perfil(models.Model):
 	#Atributos exclusivos de escuelas
 	municipio = models.ForeignKey(Municipio, null=True, blank=True)
 	director = models.CharField(max_length=100, blank=True, null=True)
-	foto_director = models.ImageField(upload_to='fotos/director/%Y/%m/%d/', null=True, blank=True, verbose_name="Foto del director")
 	foto_escuela = models.ImageField(upload_to='fotos/escuela/%Y/%m/%d/', null=True, blank=True, verbose_name="Foto de la entrada de la escuela")
 	nivel_educativo = models.CharField(max_length=20, blank=True, null=True, choices=nivel_choices)
 	turno = models.CharField(max_length=20, blank=True, null=True, choices=turno_choices)

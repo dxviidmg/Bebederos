@@ -6,8 +6,8 @@
 
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-			<h1>Escuela {{escuela.get_full_name}}</h1>
-			
+			<h1>Nombre: {{escuela.get_full_name}}</h1>
+			<h2>CCT: {{escuela.username}}</h2>
 			{%if request.user.perfil.tipo != "Laboratorio" or request.user.perfil.tipo != "CEstatal"%}
 				{%if request.user.perfil.tipo != "Escuela"%}
 				<p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}">Regresar a municipio</a></p>
@@ -35,36 +35,21 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<th colspan="12">C. C. T.</th>
-							<th colspan="12">Nombre</th>
 							<th colspan="12">Nivel educativo</th>
-							<th colspan="12">Status</th>
-							<th colspan="12">Avance</th>
+							<th colspan="12">Avance de construcción</th>
+							<th colspan="12">Turno</th>
+							<th colspan="12">Matrícula</th>
+							<th colspan="12">Director</th>
+
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td colspan="12">{{escuela.username}}</td>
-							<td colspan="12">{{escuela.get_full_name}}</td>
 							<td colspan="12">{{perfil.nivel_educativo}}</td>
-							<td colspan="12">{%if perfil.status%}{{perfil.status}}{%else%}Pendiente{%endif%}</td>
 							<td colspan="12">{%if perfil.avance%}{{perfil.avance}}%{%endif%}</td>
-						</tr>
-					</tbody>
-					<thead>
-						<tr>
-							<th colspan="15">Turno</th>
-							<th colspan="15">Matrícula</th>
-							<th colspan="15">Director</th>
-							<th colspan="15">Foto</th>
-						</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<td colspan="15">{%if perfil.turno%}{{perfil.turno}}{%endif%}</td>
-						<td colspan="15">{{perfil.plantilla_escolar}}</td>
-						<td colspan="15">{%if perfil.director%}{{perfil.director}}{%endif%}</td>
-						<td colspan="15">{%if perfil.foto_director%}<a href="{{perfil.foto_director.url}}">Ver</a>{%endif%}</td>
+							<td colspan="12">{%if perfil.turno%}{{perfil.turno}}{%endif%}</td>
+							<td colspan="12">{{perfil.plantilla_escolar}}</td>
+							<td colspan="12">{%if perfil.director%}{{perfil.director}}{%endif%}</td>							
 						</tr>
 					</tbody>
 					<thead>
