@@ -21,7 +21,7 @@ class CRViewIncidencias(View):
 			NuevaIncidenciaForm = IncidenciaCreateForm()
 			incidencias = Incidencia.objects.filter(escuela=escuela)
 
-		elif request.user.perfil.tipo == "Ejecutora":
+		elif request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED":
 			if request.user.perfil.cargo == "SIM":
 				entidades = Entidad.objects.filter(sim=request.user.pk)
 				zonas = Zona.objects.filter(entidad__in=entidades)
@@ -30,6 +30,17 @@ class CRViewIncidencias(View):
 				zonas = Zona.objects.filter(entidad=entidad)
 			elif request.user.perfil.cargo == "RO":
 				entidad = Entidad.objects.filter(residente_obra_ejecutora=request.user.perfil.pk)
+				zonas = Zona.objects.filter(entidad=entidad)
+			elif request.user.perfil.cargo == "CRINIFED":
+				region = Region.objects.filter(coordinador_regional_inifed=request.user.pk)
+				entidades = Entidad.objects.filter(region=region)
+				zonas = Zona.objects.filter(entidad__in=entidades)
+			elif request.user.perfil.cargo == "EIINIFED":
+				region = Region.objects.filter(enlace_institucional_inifed=request.user.pk)
+				entidades = Entidad.objects.filter(region=region)
+				zonas = Zona.objects.filter(entidad__in=entidades)
+			elif request.user.perfil.cargo == "CEINIFED":
+				entidad = Entidad.objects.filter(coordinador_estatal_inifed=request.user.pk)
 				zonas = Zona.objects.filter(entidad=entidad)
 
 			municipios = Municipio.objects.filter(zona__in=zonas)

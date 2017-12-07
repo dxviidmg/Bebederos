@@ -58,7 +58,9 @@
 							<th>Status</th>
 							<th>Hora y fecha de registro</th>
 							<th>Prioridad</th>
+							{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora"%}
 							<th>Opciones</th>
+							{%endif%}
 						</tr>	
 					</thead>
 					<tbody>
@@ -84,7 +86,10 @@
 							<td>{{incidencia.creacion}}</td>
 							<td {%if incidencia.prioridad == "Baja"%}class="thumbnail-prueba-en-espera" {%elif incidencia.prioridad == "Media"%}
 							class="thumbnail-advertencia" {%elif incidencia.prioridad == "Alta"%} class="thumbnail-prueba-no-aprobado" {%else%}class="thumbnail-prueba-aprobado"{%endif%}> {{incidencia.prioridad}}</td>
+							
+							{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora"%}
 							<td><a href="{%url 'incidencias:UpdateViewIncidencia' incidencia.pk%}">Actualizar</a></td>
+							{%endif%}
 						</tr>
 
 					{%empty%}
