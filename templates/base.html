@@ -137,7 +137,7 @@
 
       {%endif%}
 
-      {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Ejecutora" %}
+      {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Ejecutora" or  request.user.perfil.tipo == "INIFED" %}
 
       <li class="nav-item">
         <a class="nav-link" href="{%url 'incidencias:ListViewIncidencias'%}">Incidencias</a>

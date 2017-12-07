@@ -25,8 +25,11 @@ class CRViewIncidencias(View):
 			if request.user.perfil.cargo == "SIM":
 				entidades = Entidad.objects.filter(sim=request.user.pk)
 				zonas = Zona.objects.filter(entidad__in=entidades)
-			if request.user.perfil.cargo == "RO":
-				entidad = Entidad.objects.filter(residente_obra=request.user.pk)
+			elif request.user.perfil.cargo == "SI":
+				entidad = Entidad.objects.filter(superintendente=request.user.pk)
+				zonas = Zona.objects.filter(entidad=entidad)
+			elif request.user.perfil.cargo == "RO":
+				entidad = Entidad.objects.filter(residente_obra_ejecutora=request.user.perfil.pk)
 				zonas = Zona.objects.filter(entidad=entidad)
 
 			municipios = Municipio.objects.filter(zona__in=zonas)
