@@ -43,23 +43,19 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-
-						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"  or request.user.perfil.tipo == "Laboratorio"%}
-						<th rowspan="2">Localidad</th>
-						{%endif%}
-			
-						<th rowspan="2">C. C. T</th>
-						<th rowspan="2">Nombre</th>
-						<th rowspan="2">Nivel educativo</th>
+						<th>Localidad</th>
+						<th>C. C. T</th>
+						<th>Nombre</th>
+						<th>Nivel educativo</th>
 						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM"%}
-						<th rowspan="2">Plantilla</th>
+						<th>Plantilla</th>
 						{%endif%}
 						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM"%}
-						<th rowspan="2">Mueble</th>
+						<th>Mueble</th>
 						{%endif%}
 
 						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
-						<th rowspan="2">Sistema potabilizador</th>
+						<th>Sistema potabilizador</th>
 						{%endif%}
 
 					</tr>

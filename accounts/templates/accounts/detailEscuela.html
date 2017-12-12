@@ -290,7 +290,7 @@
 		{%endif%}
 
 		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"  or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
-		{%if evidenciaFinal%}
+		{%if perfil.avance == 100%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if segundaPrueba.validacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif segundaPrueba.validacion == "No validado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif segundaPrueba.validacion == "Validado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewSegundaPrueba' perfil.pk%}">Segunda prueba de calidad.<br>Veredicto de calidad de agua: {{segundaPrueba.validacion}}</a>

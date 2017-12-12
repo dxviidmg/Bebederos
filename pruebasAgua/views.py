@@ -55,7 +55,7 @@ class CRUViewPrimerPrueba(View):
 			solidos_disueltos  = prueba.solidos_disueltos
 
 			if manganeso is not None:
-				if manganeso > 0.165 or plomo > 0.011 or floururos > 1.265:
+				if manganeso > 0.165 or plomo > 0.011 or floururos > 0.7:
 					sistemaPotabilizadorCalculado = "Robusto"
 				elif arsenico > 0.0275 or hierro > 0.2 or nitratos > 11 or sulfatos > 440:
 					sistemaPotabilizadorCalculado = "Intermedio"

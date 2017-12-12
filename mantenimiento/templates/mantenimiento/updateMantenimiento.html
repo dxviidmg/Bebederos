@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+
+{%load bootstrap%}
+
+{%block content%}
+
+
+	<div class="row">
+		<div class="col-12">
+
+		{% for message in messages %}
+	
+			<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+
+		{% endfor %}
+		
+			<h1>Mantenimiento</h1>
+			<a href="{%url 'mantenimiento:CRViewMantenimientos' perfil.pk%}">Regresar</a>
+			<h3>Escuela {{escuela.get_full_name}}</h3>
+		</div>
+	</div>
+
+	{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "Administrador"%}
+
+	<div class="row espacio2">
+		<div class="col-12">
+			<form action="." method="post" enctype="multipart/form-data">
+				<h5>Registro</h5>	
+				{%csrf_token%}
+				{{EdicionMantenimientoForm | bootstrap}}
+				<a href=""><input type="submit" value="Guardar cambios"></a>
+			</form>
+		</div>
+	</div>
+	
+	{%endif%}
+
+{%endblock content%}

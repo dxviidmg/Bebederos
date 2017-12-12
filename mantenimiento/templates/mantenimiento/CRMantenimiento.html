@@ -48,6 +48,7 @@
 						<th>Tipo</th>
 						<th>Descripción</th>
 						<th>Fecha y hora de registro</th>
+						<th>Opciones</th>
 					</thead>
 					<tbody>
 					
@@ -58,14 +59,15 @@
 							<td>{{mantenimiento.volumen}}</td>
 							<td><a href="{{mantenimiento.carnet.url}}">Descargar</a></td>
 							<td>{{mantenimiento.tipo}}</td>
-							<td> {%if mantenimiento.descripcion%}{{mantenimiento.descripcion}}{%endif%}</td>
+							<td>{%if mantenimiento.descripcion%}{{mantenimiento.descripcion}}{%endif%}</td>
 							<td>{{mantenimiento.creacion}}</td>
+							<td><a href="{%url 'mantenimiento:UpdateViewMantenimiento' mantenimiento.pk%}">Actualizar</a></td>
 						</tr>
 
 					{%empty%}
 
 						<tr>
-							<td colspan="6">Sin registro</td>
+							<td colspan="7">Sin registro</td>
 						</tr>
 
 					{%endfor%}
