@@ -152,13 +152,14 @@ class UpdateViewEvidencia(View):
 
 		escuela = User.objects.get(escuela_evidencia=evidencia)
 		perfil = Perfil.objects.get(user_id=escuela)
-
+		
 		EdicionEvidenciaForm=EvidenciaConstruccionCreateForm(instance=evidencia, data=request.POST)
 		if EdicionEvidenciaForm.is_valid:
 			EdicionEvidenciaForm.save()
 
 		EdicionEvidenciaForm2=EvidenciaConstruccionEditForm(instance=evidencia, data=request.POST)
 		if EdicionEvidenciaForm2.is_valid:
-			EdicionEvidenciaForm2.save()
 			perfil.UpdateAvance()
+			EdicionEvidenciaForm2.save()
+			
 		return redirect("construccion:CRViewEvidencias", pk=perfil.pk)

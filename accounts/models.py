@@ -155,36 +155,38 @@ class Perfil(models.Model):
 	def UpdateAvance(self):
 		perfil = Perfil.objects.get(pk=self.pk)
 		escuela = User.objects.get(perfil=perfil)
-
-		primerPrueba = PrimerPrueba.objects.get(escuela=escuela)
 		ultimaEvidencia = EvidenciaConstruccion.objects.filter(escuela=escuela).order_by('pk').last()
 
-		if primerPrueba.validacion == "Validado": 
-			if ultimaEvidencia == None:
-				self.avance = 0
-				self.save()
-			else:
-				if ultimaEvidencia.fase == "1° Trazo" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-					self.avance = 10
-				elif ultimaEvidencia.fase == "2° Excavación, corte y demolición" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-					self.avance = 20
-				elif ultimaEvidencia.fase == "3° Cimbra y habilitado de firme" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-					self.avance = 30
-				elif ultimaEvidencia.fase == "4° Colado de firme" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-					self.avance = 40
-				elif ultimaEvidencia.fase == "5° Muros, castillos y cadenas" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-					self.avance = 50
-				elif ultimaEvidencia.fase == "6° Aplanados, pinturas y rampa" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-					self.avance = 60
-				elif ultimaEvidencia.fase == "7° Estructura y puerta" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-					self.avance = 70
-				elif ultimaEvidencia.fase == "8° Policarbonato" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-					self.avance = 80			
-				elif ultimaEvidencia.fase == "9° Mueble bebedero" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-					self.avance = 90
-				elif ultimaEvidencia.fase == "10° Placa de identidad" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-					self.avance = 100
-				self.save()
+		if ultimaEvidencia.fase == "1° Trazo" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+			self.avance = 10
+			self.save()
+		elif ultimaEvidencia.fase == "2° Excavación, corte y demolición" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+			self.avance = 20
+			self.save()
+		elif ultimaEvidencia.fase == "3° Cimbra y habilitado de firme" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+			self.avance = 30
+			self.save()
+		elif ultimaEvidencia.fase == "4° Colado de firme" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+			self.avance = 40
+			self.save()
+		elif ultimaEvidencia.fase == "5° Muros, castillos y cadenas" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+			self.avance = 50
+			self.save()
+		elif ultimaEvidencia.fase == "6° Aplanados, pinturas y rampa" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+			self.avance = 60
+			self.save()
+		elif ultimaEvidencia.fase == "7° Estructura y puerta" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+			self.avance = 70
+			self.save()
+		elif ultimaEvidencia.fase == "8° Policarbonato" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+			self.avance = 80
+			self.save()			
+		elif ultimaEvidencia.fase == "9° Mueble bebedero" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+			self.avance = 90
+			self.save()
+		elif ultimaEvidencia.fase == "10° Placa de identidad" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+			self.avance = 100
+			self.save()
 
 	def UpdateMantenimientosCount(self):
 		perfil = Perfil.objects.get(pk=self.pk)
