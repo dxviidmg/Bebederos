@@ -261,7 +261,8 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela"%} {%if visitaDeAcuerdo%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela"%}
+		{%if primerPrueba%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if inicioDeTrabajo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajo</a>
@@ -270,7 +271,7 @@
 		{%endif%}
 
 		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
-		{%if visitaDeAcuerdo%}
+		{%if primerPrueba%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if perfil.avance == 100%} class="thumbnail thumbnail-prueba-aprobado container" {%elif evidenciasConstruccion%} class="thumbnail thumbnail-prueba-en-espera" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewEvidencias' perfil.pk%}">Evidencias de construccíón e instalación de mueble bebedero. <br>{%if perfil.avance%}Status: {%if perfil.avance == 100%}Finalizado{%else%}En construcción o revisión{%endif%}{%endif%}</a>
@@ -280,7 +281,7 @@
 
 
 		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "Ejecutora"%}
-		{%if visitaDeAcuerdo%}
+		{%if primerPrueba%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if sistemaBebedero.no_trazabilidad%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'bebederos:UpdateViewBebedero' perfil.pk%}"> Asignación de componentes del Sistema bebedero</a>
@@ -288,7 +289,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"  or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"  or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Escuela"%}
 		{%if perfil.avance == 100%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -297,7 +298,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Escuela"%}
 		{%if segundaPrueba.validacion == "Validado"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -306,7 +307,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO"  or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "PQ"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "PQ"%}
 		{%if funcionamiento%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -316,7 +317,7 @@
 		{%endif%}
 
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Escuela"%}
 		{%if mantenimientos.count == 24%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>

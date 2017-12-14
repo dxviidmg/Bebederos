@@ -406,7 +406,7 @@ class ListViewAvanceEscuelas(View):
 
 			data = {'escuela' : escuela, 'primerPrueba': primerPrueba, 'inicioDeTrabajo': inicioDeTrabajo, 'visitaDeAcuerdo': visitaDeAcuerdo, 'sistemaBebedero': sistemaBebedero, 'evidencias': evidencias, 'segundaPrueba': segundaPrueba, 'inicioFuncionamiento': inicioFuncionamiento, 'mantenimientos': mantenimientos, 'actaEntrega': actaEntrega}
 			AvancePorEscuelas.append(data)
-			paginator = Paginator(AvancePorEscuelas, 15)
+			paginator = Paginator(AvancePorEscuelas, 12)
 			page = request.GET.get('page')
 			try:
 				escuelas = paginator.page(page)
