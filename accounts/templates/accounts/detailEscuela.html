@@ -185,9 +185,10 @@
 							{%endfor%}
 						</tr>
 						<tr>
-							<td class="titulo-tabla" ">Teléfono</td>
+							<td class="titulo-tabla" ">Teléfono</td>		
 							<td>{% if perfil.municipio.zona.entidad.sim.perfil.telefono%}{{perfil.municipio.zona.entidad.sim.perfil.telefono}}{%endif%}</td>	
 							<td>{%if perfil.municipio.zona.entidad.superintendente.perfil.telefono%}{{perfil.municipio.zona.entidad.superintendente.perfil.telefono}}{%endif%}</td>
+			
 							{%for ro in ros%}
 							<td>{%if ro.perfil.telefono%}{{ro.perfil.telefono}}{%endif%}</td>
 							{%empty%}
@@ -196,8 +197,9 @@
 						</tr>
 						<tr>
 							<td class="titulo-tabla" ">Correo electrónico</td>
-							<td>{%if perfil.municipio.zona.entidad.superintendente.perfil.telefono%}{{perfil.municipio.zona.entidad.superintendente.email}}{%endif%}</td>
-							<td>{% if perfil.municipio.zona.entidad.sim.perfil.telefono%}{{perfil.municipio.zona.entidad.sim.email}}{%endif%}</td>
+							<td>{%if perfil.municipio.zona.entidad.sim.perfil.telefono%}{{perfil.municipio.zona.entidad.sim.email}}{%endif%}</td>
+
+							<td>{%if perfil.municipio.zona.entidad.superintendente.perfil.telefono%}{{perfil.municipio.zona.entidad.superintendente.email}}{%endif%}</td>							
 							{%for ro in ros%}
 							<td>{%if ro.email%}{{ro.email}}{%endif%}</td>
 							{%empty%}

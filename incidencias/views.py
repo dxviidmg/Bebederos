@@ -42,6 +42,9 @@ class CRViewIncidencias(View):
 			elif request.user.perfil.cargo == "CEINIFED":
 				entidad = Entidad.objects.filter(coordinador_estatal_inifed=request.user.pk)
 				zonas = Zona.objects.filter(entidad=entidad)
+			elif request.user.perfil.cargo == "RTINIFED":
+				entidad = Entidad.objects.filter(residente_tecnico_inifed=request.user.perfil.pk)
+				zonas = Zona.objects.filter(entidad=entidad)
 
 			municipios = Municipio.objects.filter(zona__in=zonas)
 			perfiles = Perfil.objects.filter(municipio__in=municipios)
