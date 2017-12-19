@@ -28,7 +28,7 @@
   </button>
 
   {%endif%}
-  <a class="navbar-brand" href="#" style="color: white;">TEASIB 5.4.1.1</a>
+  <a class="navbar-brand" href="#" style="color: white;">TEASIB 5.5</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
@@ -125,7 +125,7 @@
         </div>
       </li>
 
-      {%elif request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "IMTA"%}
+      {%elif request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "IMTA" or  request.user.perfil.tipo == "Invitado"%}
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
@@ -137,7 +137,7 @@
 
       {%endif%}
 
-      {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Ejecutora" or  request.user.perfil.tipo == "INIFED" %}
+      {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Ejecutora" or  request.user.perfil.tipo == "INIFED" or  request.user.perfil.tipo == "Invitado"%}
 
       <li class="nav-item">
         <a class="nav-link" href="{%url 'incidencias:ListViewIncidencias'%}">Incidencias</a>

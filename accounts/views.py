@@ -69,7 +69,7 @@ class ListViewEntidades(View):
 			region = None
 			laboratorio = User.objects.get(pk=request.user.pk)
 			entidades = Entidad.objects.filter(laboratorio=laboratorio)
-		elif request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "INIFED":
+		elif request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "INIFED"  or  request.user.perfil.tipo == "Invitado":
 			region = Region.objects.get(numero=numero)
 			entidades = Entidad.objects.filter(region=region)			
 

@@ -97,6 +97,7 @@ class Perfil(models.Model):
 		("INIFED", "INIFED"), #INIFED Federal
 		("PQ", "Procesos Químicos (Calidad de Agua)"), #Pilar, #Isauri
 		("PM", "Planta y Manufactura"), #Raúl, Héctor
+		("Invitado", "Invitado"), #Raúl, Héctor
 	)
 
 	nivel_choices = (

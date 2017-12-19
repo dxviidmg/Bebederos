@@ -8,13 +8,11 @@
 		<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 			<h1>Nombre: {{escuela.get_full_name}}</h1>
 			<h2>CCT: {{escuela.username}}</h2>
-			{%if request.user.perfil.tipo != "Laboratorio" or request.user.perfil.tipo != "CEstatal"%}
-				{%if request.user.perfil.tipo != "Escuela"%}
+			{%if request.user.perfil.tipo != "Laboratorio" or request.user.perfil.tipo != "Escuela"%}
 				<p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}"><i class="fa fa-angle-double-left" aria-hidden="true"></i>Regresar a municipio</a></p>
-				{%endif%}
 			{%endif%}
 
-			{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Administrador"%}
+			{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Administrador" or  request.user.perfil.tipo == "Invitado"%}
 			<p><a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.slug%}"><i class="fa fa-angle-double-left" aria-hidden="true"></i>Regresar a reporte general</a></p>			
 			{%endif%}
 
@@ -212,7 +210,7 @@
 		</div>
 	</div>
 
-	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED"%}
+	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED"  or  request.user.perfil.tipo == "Invitado"%}
 
 	<h2>Especificaciones de Sistema Bebedero</h2>
 	<div class="table-responsive">
@@ -239,14 +237,14 @@
 			<h2>Cronología general de la gestión, construcción, instalación y mantenimiento de un sistema bebedero</h2>
 		</div>
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or  request.user.perfil.tipo == "Invitado"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a class="thumbnail thumbnail-available container" href="{%url 'incidencias:CRViewIncidencias' perfil.pk%}">Bitácora de incidencias y notas</a>
 		</div>
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela"  or  request.user.perfil.tipo == "Invitado"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a {%if primerPrueba.validacion == "En espera"%} class=" thumbnail container thumbnail-prueba-en-espera" {%elif primerPrueba.validacion == "No validado"%} class=" thumbnail container thumbnail-prueba-no-aprobado" {%elif primerPrueba.validacion == "Validado"%} class=" thumbnail container thumbnail-prueba-aprobado" {%else%} class="thumbnail container" {%endif%} href="{%url 'pruebas:CRUViewPrimerPrueba' perfil.pk%}">Primer prueba de calidad. 
@@ -254,7 +252,7 @@
 		</div>
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "INIFED"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "INIFED" or  request.user.perfil.tipo == "Invitado"%}
 		{%if primerPrueba%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -263,7 +261,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela" or  request.user.perfil.tipo == "Invitado"%}
 		{%if primerPrueba%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -272,7 +270,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "CEO" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela" or  request.user.perfil.tipo == "Invitado"%}
 		{%if primerPrueba%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -282,7 +280,7 @@
 		{%endif%}
 
 
-		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "Ejecutora"%}
+		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "Ejecutora" or  request.user.perfil.tipo == "Invitado"%}
 		{%if primerPrueba%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -291,7 +289,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"  or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"  or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Escuela" or  request.user.perfil.tipo == "Invitado"%}
 		{%if perfil.avance == 100%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -300,7 +298,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Escuela" or  request.user.perfil.tipo == "Invitado"%}
 		{%if segundaPrueba.validacion == "Validado"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -309,7 +307,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "PQ"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "PQ" or  request.user.perfil.tipo == "Invitado"%}
 		{%if funcionamiento%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -319,7 +317,7 @@
 		{%endif%}
 
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Escuela"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Escuela" or  request.user.perfil.tipo == "Invitado"%}
 		{%if mantenimientos.count == 24%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>

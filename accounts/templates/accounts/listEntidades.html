@@ -2,9 +2,9 @@
 
 {%block content%}
 
-<h1>Entidades {%if request.user.perfil.tipo == "Admistrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.cargo == "CRINIFED" or request.user.perfil.tipo == "Administrador" or request.user.perfil.cargo == "EIINIFED"%} de la Región {{region.numero}}: {{region.nombre}} {%endif%}</h1>
+<h1>Entidades {%if request.user.perfil.tipo == "Admistrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or request.user.perfil.cargo == "CRINIFED" or request.user.perfil.tipo == "Administrador" or request.user.perfil.cargo == "EIINIFED"  or  request.user.perfil.tipo == "Invitado"%} de la Región {{region.numero}}: {{region.nombre}} {%endif%}</h1>
 
-{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ"%}
+{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "PQ" or  request.user.perfil.tipo == "Invitado"%}
 <p><a href="{%url 'accounts:ListViewRegiones'%}">Regresar</a></p>
 {%endif%}
 
