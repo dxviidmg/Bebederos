@@ -109,15 +109,6 @@ class CRUViewPrimerPrueba(View):
 		sistemaBebedero = SistemaBebedero.objects.get(escuela=escuela)
 		EdicionBebederoForm = BebederoUpdateForm5(instance=sistemaBebedero, data=request.POST, files=request.FILES)
 
-		if NuevaPruebaForm.is_valid():
-			NuevaPrueba = NuevaPruebaForm.save(commit=False)
-			NuevaPrueba.escuela = escuela
-			NuevaPrueba.laboratorio = laboratorio
-			NuevaPrueba.save()
-
-		if EdicionBebederoForm.is_valid():
-			EdicionBebederoForm.save()
-
 		try:
 			prueba = PrimerPrueba.objects.get(escuela=escuela)
 			EdicionPruebaForm0 = PrimerPruebaCreateForm(instance=prueba, data=request.POST, files=request.FILES)
@@ -188,6 +179,15 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm11 = None
 			EdicionPruebaForm12 = None
 
+			if NuevaPruebaForm.is_valid():
+				NuevaPrueba = NuevaPruebaForm.save(commit=False)
+				NuevaPrueba.escuela = escuela
+				NuevaPrueba.laboratorio = laboratorio
+				NuevaPrueba.save()
+
+			if EdicionBebederoForm.is_valid():
+				EdicionBebederoForm.save()
+			
 		return redirect("pruebas:CRUViewPrimerPrueba", pk=perfil.pk)
 
 #Creación, edición y detalle de una Segunda prueba
