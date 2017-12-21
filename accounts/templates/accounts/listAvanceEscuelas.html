@@ -271,7 +271,7 @@
   </ul>
 </nav>
 
-	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" %}
+	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Ejecutora"%}
 
 	<div class="table-responsive espacio2">
 		<table class="table table-bordered">
@@ -281,12 +281,18 @@
 				</tr>
 			</thead>
 			<tbody>
-				{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED"%}
+				
+
+				{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED"%}
 				<tr>
 					<td colspan="4">
 						<a href="{%url 'accounts:ExportAvancePorEscuelasCSV' entidad.pk%}">Reporte general en excel</a>
 					</td>
 				</tr>
+
+				{%endif%}
+				{%if request.user.perfil.tipo == "Administrador"%}
+
 				<tr>
 					<td><a href="{%url 'visitas:ExportCedulasIdentificacionZIP' entidad.pk%}">Cédulas de identificación</a></td>
 					<td><a href="{%url 'visitas:ExportPlanosConjuntoZIP' entidad.pk%}">Planos de conjunto</a></td>
