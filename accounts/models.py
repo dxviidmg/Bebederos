@@ -40,6 +40,7 @@ class Entidad(models.Model):
 	escuelas_registradas = models.IntegerField(default=0)
 	imagen = models.ImageField(upload_to='estados/%Y/%m/%d/', default='img_no_disponible.jpg')
 	slug = models.SlugField(null=True)
+	t7 = models.FileField(upload_to='t7/%Y/%m/%d/', verbose_name="Archivo(s) de T7", null=True, blank=True)
 
 	def CountEscuelas(self):
 		entidad = Entidad.objects.get(pk=self.pk)
@@ -109,6 +110,7 @@ class Perfil(models.Model):
 	turno_choices = (
 		("Matutino", "Matutino"),
 		("Vespertino", "Vespertino"),
+		("Tiempo Completo", "Tiempo Completo"),
 	)
 
 	cargo_choices = (

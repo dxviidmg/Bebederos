@@ -23,15 +23,16 @@
 	<div class="row">
 		<div class="col-12">
 
-	{%if evidencias.count < 10%}
+	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora"%}
+		{%if evidencias.count < 10%}
 			<form action="." method="post" enctype="multipart/form-data">
 				<h4>Registro de evidencia de construcción</h4>	
 				{%csrf_token%}
 				{{NuevaEvidenciaForm | bootstrap}}
 				<a href=""><input type="submit" value="Registrar"></a>
 			</form>
+		{%endif%}
 	{%endif%}
-
 			<h4>Evidencias de construcción</h4>
 			<div class="table-responsive">
 				<table class="table table-bordered">

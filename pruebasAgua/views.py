@@ -10,6 +10,13 @@ from bebederos.forms import BebederoUpdateForm5
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
+#Librerias para generar ZIP
+import zipfile
+import os
+from django.http import HttpResponse
+from django.conf import settings
+from io import BytesIO
+
 #Creación, edición y detalle de una Primer Prueba
 class CRUViewPrimerPrueba(View):
 	@method_decorator(login_required)
@@ -347,5 +354,38 @@ def ExportPruebasPorEscuelasCSV(request, pk):
 
 	for escuela in escuelas:
 		writer.writerow(escuela)
+
+	return response
+
+def ExportEtiquetasZIP(request, pk):
+	entidad = get_object_or_404(Entidad, pk=pk)
+	zonas = Zona.objects.filter(entidad=entidad)
+	municipios = Municipio.objects.filter(zona__in=zonas)
+	perfilesEscuelas = Perfil.objects.filter(municipio__in=municipios)
+	escuelas = User.objects.filter(perfil__in=perfilesEscuelas)
+	primerasPruebas = PrimerPrueba.objects.filter(escuela__in=escuelas)
+	origen = settings.BASE_DIR
+
+	filenames = []
+
+	for primerPrueba in primerasPruebas:
+		etiqueta = origen + str(primerPrueba.reporte_toma_agua.url)
+		filenames.append(etiqueta)
+
+	zip_subdir = "Etiquetas de muestras de " + str(entidad.nombre)
+	zip_filename = "%s.zip" % zip_subdir
+
+	s = BytesIO()
+	zf = zipfile.ZipFile(s, "w")
+
+	for fpath in filenames:
+		fdir, fname = os.path.split(fpath)
+		zip_path = os.path.join(zip_subdir, fname)
+		zf.write(fpath, zip_path)
+
+	zf.close()
+
+	response = HttpResponse(s.getvalue(), content_type = "application/x-zip-compressed")
+	response['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
 
 	return response

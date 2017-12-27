@@ -4,7 +4,8 @@ from django.utils import timezone
 
 class VisitaDeAcuerdo(models.Model):
 	escuela = models.OneToOneField(User, related_name="escuela_visita_acuerdo")
-	convenio_concertacion = models.FileField(upload_to='visita/concertaciones/%Y/%m/%d/', verbose_name="Convenio de concertación de aplicación de recurso", null=True, blank=True)
+	cedula_identificacion = models.FileField(upload_to='visita/cedulas/%Y/%m/%d/', verbose_name="Cédula de identificación", null=True, blank=True)
+	convenio_concertacion = models.FileField(upload_to='visitas/concertaciones/%Y/%m/%d/', verbose_name="Convenio de concertación de aplicación de recurso", null=True, blank=True)
 	croquis_modulo = models.FileField(upload_to='visitas/croquis/%Y/%m/%d/', verbose_name="Croquis de ubicación de módulo", null=True, blank=True)	
 	constancia_integracion_comite = models.FileField(upload_to='visitas/comites/%Y/%m/%d/', verbose_name="Constancia de integración de comité", null=True, blank=True)
 	plano_conjunto = models.FileField(upload_to='visitas/planosConjunto/%Y/%m/%d/', verbose_name="Plano de conjunto", null=True, blank=True)
@@ -26,6 +27,7 @@ class InicioFuncionamiento(models.Model):
 	escuela = models.OneToOneField(User, related_name="escuela_inicio_funcionamiento")
 	acta_funcionamiento = models.FileField(upload_to='funcionamiento/actas/%Y/%m/%d/', verbose_name="Acta")
 	video = models.FileField(upload_to='funcionamiento/videos/%Y/%m/%d/', verbose_name="Video")
+	recibo_llaves = models.FileField(upload_to='funcionamiento/recibos/%Y/%m/%d/', verbose_name="Recibo de llaves", null=True, blank=True)	
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 
 	def __str__(self):

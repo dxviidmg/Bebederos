@@ -45,11 +45,6 @@ class CRViewVisitaDeAcuerdo(View):
 		escuela = User.objects.get(perfil=perfil)
 		NuevaVisitaForm = VisitaDeAcuerdoCreateForm(data=request.POST, files=request.FILES)
 
-		if NuevaVisitaForm.is_valid():
-			NuevaVisita = NuevaVisitaForm.save(commit=False)
-			NuevaVisita.escuela = escuela
-			NuevaVisita.save()
-
 		try:
 			visita = VisitaDeAcuerdo.objects.get(escuela=escuela)
 			EdicionVisitaForm = VisitaDeAcuerdoCreateForm(instance=visita, files=request.FILES)
@@ -61,6 +56,12 @@ class CRViewVisitaDeAcuerdo(View):
 		except VisitaDeAcuerdo.DoesNotExist:
 			visita = None
 			EdicionVisitaForm = None
+
+			if NuevaVisitaForm.is_valid():
+				NuevaVisita = NuevaVisitaForm.save(commit=False)
+				NuevaVisita.escuela = escuela
+				NuevaVisita.save()
+
 		return redirect("visitas:CRViewVisitaDeAcuerdo", pk=perfil.pk)
 
 #Creación y consulta de inicio de funcionamiento
