@@ -73,6 +73,10 @@
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Invitado"%}
 					<th rowspan="2">Expediente técnico</th>
 					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Invitado"%}
+					<th rowspan="2">Reporte fotográfico</th>
+					{%endif%}					
 				</tr>
 				<tr>
 
@@ -226,6 +230,9 @@
 					<td>{%if avanceEscuela.inicioFuncionamiento%}<a href="{%url 'accounts:ExportExpedienteZIP' avanceEscuela.escuela.pk%}">Descargar</a>{%endif%}</td>
 					{%endif%}
 
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if  avanceEscuela.escuela.perfil.avance == 100%}<a href="{%url 'accounts:ExportFotosEvidenciaZIP'  avanceEscuela.escuela.pk%}">Descargar</a>{%endif%}</td>
+					{%endif%}
 				</tr>
 
 	{%empty%}
@@ -277,7 +284,7 @@
 		<table class="table table-bordered">
 			<thead>
 				<tr>
-					<th colspan="4">Descarga masiva de documentos</th>
+					<th colspan="5">Descarga masiva de documentos</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -285,8 +292,8 @@
 
 				{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Administrador"%}
 				<tr>
-					<td colspan="4">
-						<a href="{%url 'accounts:ExportAvancePorEscuelasCSV' entidad.pk%}">Reporte general en excel</a>
+					<td colspan="5">
+						<a href="{%url 'accounts:ExportAvancePorEscuelasCSV' entidad.pk%}">Reporte general</a>
 					</td>
 				</tr>
 
@@ -297,7 +304,8 @@
 					<td><a href="{%url 'visitas:ExportCedulasIdentificacionZIP' entidad.pk%}">Cédulas de identificación</a></td>
 					<td><a href="{%url 'visitas:ExportPlanosConjuntoZIP' entidad.pk%}">Planos de conjunto</a></td>
 					<td><a href="{%url 'visitas:ExportDistribucionesPlantaZIP' entidad.pk%}">Distribuciones de planta</a></td>
-					<td><a href="{%url 'visitas:ExportMemoriasCalculoZIP' entidad.pk%}">Memorias de cálculo</a></td>			
+					<td><a href="{%url 'visitas:ExportMemoriasCalculoZIP' entidad.pk%}">Memorias de cálculo</a></td>
+					<td><a href="{{entidad.t7.url}}">T7</a></td>
 				</tr>
 				<tr>
 					<td><a href="{%url 'visitas:ExportPlanosInstalacionElectricaZIP' entidad.pk%}">Planos de instalación eléctrica</a></td>
@@ -309,7 +317,7 @@
 				</tr>
 				<tr>
 					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
-					<td colspan="4"><a href="{% url 'pruebas:ExportPruebasPorEscuelasCSV' entidad.pk%}">Base de formato T7</a>
+					<td colspan="5"><a href="{% url 'pruebas:ExportPruebasPorEscuelasCSV' entidad.pk%}">Base de formato T7</a>
 					</td>
 					{%endif%}
 				</tr>

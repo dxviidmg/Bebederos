@@ -90,6 +90,8 @@ class ListViewZonas(View):
 		municipios = Municipio.objects.filter(zona__in=zonas)
 		region = Region.objects.get(entidad=entidad)
 		
+		EdicionEntidadForm = EntidadUpdateForm(instance=entidad)
+
 		ListMunicipiosPorZona = []
 		for zona in zonas:
 			ListMunicipiosPorZona.append({'zona': zona, 'municipios': Municipio.objects.filter(zona=zona)})
@@ -97,9 +99,19 @@ class ListViewZonas(View):
 		context = {
 			'entidad': entidad,
 			'ListMunicipiosPorZona': ListMunicipiosPorZona,
-			'region': region
+			'region': region,
+			'EdicionEntidadForm': EdicionEntidadForm,
 		}
 		return render(request,template_name, context)
+	def post(self, request, slug):
+		entidad = Entidad.objects.get(slug=slug)
+		EdicionEntidadForm = EntidadUpdateForm(instance=entidad, files=request.FILES)
+
+		if EdicionEntidadForm.is_valid():
+			EdicionEntidadForm.save()
+			messages.success(request, "Actualización exitosa")
+
+		return redirect("accounts:ListViewZonas", slug=entidad.slug)
 
 #Lista de escuelas
 class ListViewEscuelas(View):
@@ -302,11 +314,11 @@ class UpdateViewEscuela(View):
 		EdicionEscuelaUserForm = EscuelaUserUpdateForm(instance=escuela, data=request.POST)
 		EdicionEscuelaPerfilForm = EscuelaPerfilUpdateForm(instance=perfil, data=request.POST, files=request.FILES)		
 
-		if EdicionEscuelaUserForm.is_valid:
+		if EdicionEscuelaUserForm.is_valid():
 			EdicionEscuelaUserForm.save()
 			messages.success(request, "Actualización exitosa")
 
-		if EdicionEscuelaPerfilForm.is_valid:
+		if EdicionEscuelaPerfilForm.is_valid():
 			EdicionEscuelaPerfilForm.save()
 
 		return redirect("accounts:UpdateViewEscuela", username=escuela.username)
@@ -428,8 +440,6 @@ def ExportExpedienteZIP(request, pk):
 	visitaDeAcuerdo = VisitaDeAcuerdo.objects.get(escuela=escuela)	
 	primerPrueba = PrimerPrueba.objects.get(escuela=escuela)
 	segundaPrueba = SegundaPrueba.objects.get(escuela=escuela)
-	PrimerEvidenciaConstruccion = EvidenciaConstruccion.objects.filter(escuela=escuela).first()
-	UltimaEvidenciaConstruccion = EvidenciaConstruccion.objects.filter(escuela=escuela).last()	
 	inicioFuncionamiento = InicioFuncionamiento.objects.get(escuela=escuela)
 
 	#Archivos
@@ -442,17 +452,84 @@ def ExportExpedienteZIP(request, pk):
 	planoInstalacionSanitaria = origen + str(visitaDeAcuerdo.plano_instalacion_sanitaria.url)
 	foto1PrimerPrueba = origen + str(primerPrueba.foto_toma_agua_1.url)
 	foto2PrimerPrueba = origen + str(primerPrueba.foto_toma_agua_2.url)
-	videoPrimerPrueba = origen + str(primerPrueba.video_toma_agua.url)
 	foto1SegundaPrueba = origen + str(segundaPrueba.foto_toma_agua_1.url)
 	foto2SegundaPrueba = origen + str(segundaPrueba.foto_toma_agua_2.url)
-	videoSegundaPrueba = origen + str(segundaPrueba.video_toma_agua.url)
-	primerVideoConstrucion = origen + str(PrimerEvidenciaConstruccion.video.url)
-	ultimoVideoConstrucion = origen + str(UltimaEvidenciaConstruccion.video.url)	
 	videoInicioFuncionamiento = origen + str(inicioFuncionamiento.video.url)
 
-	filenames = [	cedulaIdentificacion, planoConjunto, distribucionPlanta, memoriaCalculo, planoInstalacionElectrica, planoInstalacionHidraulica, planoInstalacionSanitaria, foto1PrimerPrueba, foto2PrimerPrueba, videoPrimerPrueba, foto1SegundaPrueba, foto2SegundaPrueba, videoSegundaPrueba, primerVideoConstrucion, ultimoVideoConstrucion,	videoInicioFuncionamiento]
+	filenames = [cedulaIdentificacion, planoConjunto, distribucionPlanta, memoriaCalculo, planoInstalacionElectrica, planoInstalacionHidraulica, planoInstalacionSanitaria, foto1PrimerPrueba, foto2PrimerPrueba, foto1SegundaPrueba, foto2SegundaPrueba, videoInicioFuncionamiento]
 
 	zip_subdir = "Expediente técnico " + str(escuela.username)
+	zip_filename = "%s.zip" % zip_subdir
+
+	s = BytesIO()
+	zf = zipfile.ZipFile(s, "w")
+
+	for fpath in filenames:
+		fdir, fname = os.path.split(fpath)
+		zip_path = os.path.join(zip_subdir, fname)
+		zf.write(fpath, zip_path)
+
+	zf.close()
+
+	response = HttpResponse(s.getvalue(), content_type = "application/x-zip-compressed")
+	response['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
+
+	return response
+
+def ExportExpedienteZIP(request, pk):
+	escuela = get_object_or_404(User, pk=pk)
+	origen = settings.BASE_DIR
+	visitaDeAcuerdo = VisitaDeAcuerdo.objects.get(escuela=escuela)	
+	primerPrueba = PrimerPrueba.objects.get(escuela=escuela)
+	segundaPrueba = SegundaPrueba.objects.get(escuela=escuela)
+	inicioFuncionamiento = InicioFuncionamiento.objects.get(escuela=escuela)
+
+	#Archivos
+	cedulaIdentificacion = origen + str(visitaDeAcuerdo.cedula_identificacion.url)
+	planoConjunto = origen + str(visitaDeAcuerdo.plano_conjunto.url)
+	distribucionPlanta = origen + str(visitaDeAcuerdo.distribucion_planta.url)
+	memoriaCalculo = origen + str(visitaDeAcuerdo.memoria_calculo.url)
+	planoInstalacionElectrica = origen + str(visitaDeAcuerdo.plano_instalacion_electrica.url)
+	planoInstalacionHidraulica = origen + str(visitaDeAcuerdo.plano_instalacion_hidraulica.url)
+	planoInstalacionSanitaria = origen + str(visitaDeAcuerdo.plano_instalacion_sanitaria.url)
+	foto1PrimerPrueba = origen + str(primerPrueba.foto_toma_agua_1.url)
+	foto2PrimerPrueba = origen + str(primerPrueba.foto_toma_agua_2.url)
+	foto1SegundaPrueba = origen + str(segundaPrueba.foto_toma_agua_1.url)
+	foto2SegundaPrueba = origen + str(segundaPrueba.foto_toma_agua_2.url)
+	videoInicioFuncionamiento = origen + str(inicioFuncionamiento.video.url)
+
+	filenames = [cedulaIdentificacion, planoConjunto, distribucionPlanta, memoriaCalculo, planoInstalacionElectrica, planoInstalacionHidraulica, planoInstalacionSanitaria, foto1PrimerPrueba, foto2PrimerPrueba, foto1SegundaPrueba, foto2SegundaPrueba, videoInicioFuncionamiento]
+
+	zip_subdir = "Expediente técnico " + str(escuela.username)
+	zip_filename = "%s.zip" % zip_subdir
+
+	s = BytesIO()
+	zf = zipfile.ZipFile(s, "w")
+
+	for fpath in filenames:
+		fdir, fname = os.path.split(fpath)
+		zip_path = os.path.join(zip_subdir, fname)
+		zf.write(fpath, zip_path)
+
+	zf.close()
+
+	response = HttpResponse(s.getvalue(), content_type = "application/x-zip-compressed")
+	response['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
+
+	return response
+
+def ExportFotosEvidenciaZIP(request, pk):
+	escuela = get_object_or_404(User, pk=pk)
+	evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela).order_by('creacion')
+	origen = settings.BASE_DIR
+
+	filenames = []
+
+	for evidencia in evidencias:
+		foto = origen + str(evidencia.foto.url)
+		filenames.append(foto)
+
+	zip_subdir = "Reporte fotográfico de " + str(escuela.username)
 	zip_filename = "%s.zip" % zip_subdir
 
 	s = BytesIO()

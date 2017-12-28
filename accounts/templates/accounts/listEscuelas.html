@@ -43,23 +43,106 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th>Localidad</th>
-						<th>C. C. T</th>
-						<th>Nombre</th>
-						<th>Nivel educativo</th>
-						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM"%}
-						<th>Plantilla</th>
+						<th rowspan="2">Localidad</th>
+						<th rowspan="2">C. C. T</th>
+						<th rowspan="2">Nombre</th>
+						<th rowspan="2">Nivel educativo</th>
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%}
+						<th rowspan="2">Plantilla</th>
 						{%endif%}
-						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM"%}
-						<th>Mueble</th>
-						{%endif%}
-
-						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
-						<th>Sistema potabilizador</th>
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%}
+						<th rowspan="2">Mueble</th>
 						{%endif%}
 
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%}
+						<th rowspan="2">Sistema potabilizador</th>
+						{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+						<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%} colspan="4" {%elif request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"%} colspan="2"{%endif%}>Primer prueba</th>
+						{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+						<th rowspan="2">Visita de acuerdos</th>
+						{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Invitado"%}
+						<th rowspan="2">Inicio de trabajo</th>
+						{%endif%}
+						
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%}
+						<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%} colspan="3"{%endif%}>Manufactura</th>
+						{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"  or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+						<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Invitado"%} colspan="2"{%endif%}>Construcción</th>
+						{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+						<th {%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%} colspan="4" {% elif request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"%} colspan="2"{%endif%}>Segunda prueba</th>
+						{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Invitado"%}
+						<th rowspan="2">Inicio de funcionamiento</th>
+						{%endif%}
+		
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Invitado"%}
+						<th rowspan="2">Mantenimientos</th>
+						{%endif%}
+						
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Invitado"%}
+						<th rowspan="2">Acta de entrega</th>
+						{%endif%}
+						
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Invitado"%}
+						<th rowspan="2">Expediente técnico</th>
+						{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Invitado"%}
+						<th rowspan="2">Reporte fotográfico</th>
+						{%endif%}
 					</tr>
+					<tr>
 
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+						<th>Muestreo</th>{%endif%}
+						
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+						<th>Análisis de laboratorio</th>{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "Invitado"%}
+						<th>Propuesta de sistema potabilizador</th>{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+						<th>Status de validación</th>{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%}
+						<th>Asignación de sistema potabilizador</th>{%endif%}
+						
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%}
+						<th>Asignación de mueble</th>{%endif%}
+						
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%}
+						<th>Guía de trazabilidad)</th>{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Invitado"%}
+						<th>Evidencias</th>{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+						<th>Status</th>{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora"  or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+						<th>Muestreo</th>{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED"  or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+						<th>Análisis de laboratorio</th>{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+						<th>Confirmación de funcionamiento de sistema potabilizador</th>{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+						<th>Status de validación</th>{%endif%}
+					</tr>
 				</thead>
 				<tbody>
 					
@@ -82,6 +165,88 @@
 							{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM"%}
 							<td>{%if escuela.escuela.sistema_potabilizacion and escuela.escuela_primer_prueba.validacion == "Validado"%}{{escuela.escuela.sistema_potabilizacion}}{%endif%}</td>
 							{%endif%}
+
+						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+						<td>{%if escuela.escuela_primer_prueba.reporte_toma_agua%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+						{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.escuela_primer_prueba.no_registro%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.escuela.sistema_potabilizacion%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.escuela.sistema_potabilizacion%}{{escuela.escuela_primer_prueba.validacion}}{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.escuela_visita_acuerdo%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+					
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.escuela_inicio_trabajo%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.escuela.no_serie_sp%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.escuela.linea_ensamblaje%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.escuela.asignacion%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.perfil.avance%}{{escuela.perfil.avance}}%</i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.perfil.avance == 100%}Finalizado{%elif escuela.perfil.avance < 100%}En proceso de construcción o revisión{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.escuela_segunda_prueba.reporte_toma_agua%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.escuela_segunda_prueba.no_registro%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.escuela_segunda_prueba.resultados_laboratorio%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.escuela_segunda_prueba.creacion_reporte_analisis%}{{escuela.escuela_segunda_prueba.validacion}}{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Invitado"%}
+					<td>{% if escuela.escuela_inicio_funcionamiento%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.perfil.mantenimientos%}{{escuela.perfil.mantenimientos}}{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.escuela_acta_entrega%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.escuela_inicio_funcionamiento%}<a href="{%url 'accounts:ExportExpedienteZIP' escuela.pk%}">Descargar</a>{%endif%}</td>
+					{%endif%}
+
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Invitado"%}
+					<td>{%if escuela.perfil.avance == 100%}<a href="{%url 'accounts:ExportFotosEvidenciaZIP' escuela.pk%}">Descargar</a>{%endif%}</td>
+					{%endif%}
+
+
 
 						</tr>
 

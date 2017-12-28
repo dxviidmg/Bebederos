@@ -1,5 +1,7 @@
 {%extends 'base.html'%}
 
+{%load bootstrap%}
+
 {%block content%}
 
 
@@ -95,5 +97,64 @@
 			</table>
 		</div>
 	</div>
+
+	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ"%}
+	<div class="espacio2">
+		<form action="." method="post" enctype="multipart/form-data">
+			<p>Actualización de documentación</p>
+			{%csrf_token%}
+			{{EdicionEntidadForm | bootstrap}}
+			<a href=""><input type="submit" value="Guardar"></a>
+		</form>
+	</div>
+	{%endif%}
+
+	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Ejecutora"%}
+
+	<div class="table-responsive espacio2">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th colspan="5">Descarga masiva de documentos</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+
+				{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Administrador"%}
+				<tr>
+					<td colspan="5">
+						<a href="{%url 'accounts:ExportAvancePorEscuelasCSV' entidad.pk%}">Reporte general</a>
+					</td>
+				</tr>
+
+				{%endif%}
+				{%if request.user.perfil.tipo == "Administrador"%}
+
+				<tr>
+					<td><a href="{%url 'visitas:ExportCedulasIdentificacionZIP' entidad.pk%}">Cédulas de identificación</a></td>
+					<td><a href="{%url 'visitas:ExportPlanosConjuntoZIP' entidad.pk%}">Planos de conjunto</a></td>
+					<td><a href="{%url 'visitas:ExportDistribucionesPlantaZIP' entidad.pk%}">Distribuciones de planta</a></td>
+					<td><a href="{%url 'visitas:ExportMemoriasCalculoZIP' entidad.pk%}">Memorias de cálculo</a></td>
+					<td><a href="{{entidad.t7.url}}">T7</a></td>
+				</tr>
+				<tr>
+					<td><a href="{%url 'visitas:ExportPlanosInstalacionElectricaZIP' entidad.pk%}">Planos de instalación eléctrica</a></td>
+					<td><a href="{%url 'visitas:ExportPlanosInstalacionHidraculicaZIP' entidad.pk%}">Planos de instalación hidráulica</a></td>
+					<td><a href="{%url 'visitas:ExportPlanosInstalacionSanitariaZIP' entidad.pk%}">Planos de instalación sanitaria</a></td>
+					<td><a href="{%url 'visitas:ExportActasFuncionamietoZIP' entidad.pk%}">Actas de inicio de funcionamieto</a></td>
+					<td><a href="{%url 'pruebas:ExportEtiquetasZIP' entidad.pk%}">Etiquetas</a></td>
+					{%endif%}
+				</tr>
+				<tr>
+					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
+					<td colspan="5"><a href="{% url 'pruebas:ExportPruebasPorEscuelasCSV' entidad.pk%}">Base de formato T7</a>
+					</td>
+					{%endif%}
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	{%endif%}
 
 {%endblock content%}
