@@ -305,7 +305,7 @@
 					<td><a href="{%url 'visitas:ExportPlanosConjuntoZIP' entidad.pk%}">Planos de conjunto</a></td>
 					<td><a href="{%url 'visitas:ExportDistribucionesPlantaZIP' entidad.pk%}">Distribuciones de planta</a></td>
 					<td><a href="{%url 'visitas:ExportMemoriasCalculoZIP' entidad.pk%}">Memorias de cálculo</a></td>
-					<td><a href="{{entidad.t7.url}}">T7</a></td>
+					<td>{%if entidad.t7%}<a href="{{entidad.t7.url}}">T7</a>{%else%}No se ha subido el archivo T7{%endif%}</td>
 				</tr>
 				<tr>
 					<td><a href="{%url 'visitas:ExportPlanosInstalacionElectricaZIP' entidad.pk%}">Planos de instalación eléctrica</a></td>
