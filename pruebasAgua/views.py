@@ -350,7 +350,7 @@ def ExportPruebasPorEscuelasCSV(request, pk):
 	response = HttpResponse(content_type='text/csv')
 	response['Content-Disposition'] = 'attachment; filename="Base de formato T7 de '+ entidad.nombre + ' ' + ahora + '.csv"'
 
-#	writer = csv.writer(response)
+	writer = csv.writer(response)
 	writer.writerow(['Laboratorio', 'No. de registro','C. C. T.','Nombre del plantel', 'Municipio', 'Localidad', 'Domicilio', 'Nivel Educativo', 'Plantilla escolar', 'Boquillas regulares', 'Boquilla para discapacitados', 'Llave de llenado para botella', 'Total de salidas', 'Tipo de bebedero', 'Fecha de muestreo', 'Fecha de reporte de análisis', 'Color verdadero (U PT-Co)', 'Turbiedad (UTN o equivalente)', 'pH (unidades de pH)', 'Conductividad eléctrica (µS/cm)', 'Coliformes fecales (Unidades)', 'Coliformes totales (Unidades)', 'Arsénico', 'Hierro', 'Manganeso', 'Plomo', 'Floururos', 'Nitratos', 'Sulfatos', 'Dureza total (CaCO3)', 'Sólidos disueltos totales', 'Equipo de potabilización', 'Validación IMTA', 'Fecha de muestreo', 'Fecha de reporte de análisis', 'Color verdadero (U Pt-Co)', 'Turbiedad (UTN o equivalente)', 'pH (unidades de pH)', 'Conductividad eléctrica (µS/cm)', 'Coliformes fecales (Unidades)', 'Coliformes totales (Unidades)', 'Arsénico', 'Hierro', 'Manganeso', 'Plomo', 'Floururos', 'Nitratos', 'Sulfatos', 'Dureza total (CaCO3)', 'Sólidos disueltos totales', 'Validación IMTA', 'Guía de trazabilidad'])
 
 	for escuela in escuelas:
