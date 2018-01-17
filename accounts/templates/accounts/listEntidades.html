@@ -12,10 +12,12 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.cargo == "Administrador"%}
+				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.cargo == "Administrador" or request.user.perfil.tipo == "PQ"%}
 				<th rowspan="2">Región</th>
 				{%endif%}
+				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.cargo == "Administrador" or request.user.perfil.tipo == "PQ"%}
 				<th rowspan="2">Partida</th>
+				{%endif%}
 				<th rowspan="2" >Estado</th>
 				<th rowspan="2" colspan="2">Ver</th>
 				<th colspan="2">Escuelas</th>
@@ -30,10 +32,12 @@
 	{%for entidad in entidades%}
 	
 			<tr>
-				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.cargo == "Administrador"%}
+				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.cargo == "Administrador" or request.user.perfil.tipo == "PQ"%}
 				<td>{{entidad.region}}</td>
 				{%endif%}
+				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.cargo == "Administrador" or request.user.perfil.tipo == "PQ"%}				
 				<td>{{entidad.partida}}</td>
+				{%endif%}
 				<td>{{entidad}}</td>	
 				<td><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">Municipios</a></td>	
 				<td><a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.slug%}">Reporte general</a></td>

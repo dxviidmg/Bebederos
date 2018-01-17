@@ -4,6 +4,7 @@ from django.utils import timezone
 
 class VisitaDeAcuerdo(models.Model):
 	escuela = models.OneToOneField(User, related_name="escuela_visita_acuerdo")
+	acta_ubicacion = models.FileField(upload_to='visita/actas/%Y/%m/%d/', verbose_name="Acta de ubicación de bebedero", null=True, blank=True)
 	cedula_identificacion = models.FileField(upload_to='visita/cedulas/%Y/%m/%d/', verbose_name="Cédula de identificación", null=True, blank=True)
 	convenio_concertacion = models.FileField(upload_to='visitas/concertaciones/%Y/%m/%d/', verbose_name="Convenio de concertación de aplicación de recurso", null=True, blank=True)
 	croquis_modulo = models.FileField(upload_to='visitas/croquis/%Y/%m/%d/', verbose_name="Croquis de ubicación de módulo", null=True, blank=True)	
