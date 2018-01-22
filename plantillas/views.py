@@ -9,7 +9,7 @@ class ListViewPlantillas(View):
 		template_name = "plantillas/listPlantillas.html"	
 		user = User.objects.get(pk=request.user.pk)
 		perfil = Perfil.objects.get(user=user)
-		plantillas = Plantilla.objects.filter(tipo_usuario=perfil.tipo)
+		plantillas = Plantilla.objects.filter(tipo_usuario=perfil.tipo).order_by("fase", "nombre")
 		context = {
 			'plantillas': plantillas,
 		}

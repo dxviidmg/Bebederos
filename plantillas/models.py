@@ -14,12 +14,13 @@ class Plantilla(models.Model):
 	)
 	
 	fase_choices = (
-		("Pruebas de calidad de agua", "Pruebas de calidad de agua"),
-		("Visita de acuerdos", "Visita de acuerdos"),
-		("Inicio de trabajo", "Inicio de trabajo"),	
-		("Construcción e instalación de Sistema bebedero", "Construcción e instalación de Sistema bebedero"),
-		("Inicio de funcionamiento", "Inicio de funcionamiento"),
-		("Mantenimiento", "Mantenimiento"),
+		("1", "Todas"),	
+		("2", "Pruebas de calidad de agua"),
+		("3", "Visita de acuerdos"),
+		("4", "Inicio de trabajo"),	
+		("5", "Construcción e instalación de Sistema bebedero"),
+		("6", "Inicio de funcionamiento"),
+		("7", "Mantenimiento"),
 	)
 
 	nombre = models.CharField(max_length=100)
