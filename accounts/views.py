@@ -558,9 +558,9 @@ def ExportAvancePorEscuelasCSV(request, pk):
 	response = HttpResponse(content_type='text/csv')
 	response['Content-Disposition'] = 'attachment; filename="Reporte general de ' + entidad.nombre + ' ' + ahora +'.csv"'
 	writer = csv.writer(response)
-	writer.writerow(['Municipio', 'Localidad', 'Domicilio', 'C. C. T.','Nombre del plantel', 'Nivel educativo', 'Plantilla', 'Mueble', 'Sistema potabilizador', 'Validación de primer prueba', 'Porcentaje de construcción', 'Validación de sistema potabilizador', 'Inicio de funcionamiento', 'Mantenimientos', 'Acta de entrega', 'Director', 'Teléfono'])
+	writer.writerow(['Municipio', 'Localidad', 'Domicilio', 'C. C. T.','Nombre del plantel', 'Nivel educativo', 'Plantilla', 'Mueble', 'Sistema potabilizador', 'Validación de primer prueba', 'Cedula de Identificación', 'Acta de Ubicación', 'Acta de Inicio de Trabajo', 'Porcentaje de construcción', 'Validación de sistema potabilizador', 'Inicio de funcionamiento', 'Mantenimientos', 'Acta de entrega', 'Director', 'Teléfono'])
 
-	escuelas = User.objects.filter(perfil__in=perfiles).values_list('perfil__municipio__nombre', 'perfil__localidad', 'perfil__domicilio', 'username', 'first_name', 'perfil__nivel_educativo', 'perfil__plantilla_escolar', 'escuela__mueble__modelo', 'escuela__sistema_potabilizacion__tipo', 'escuela_primer_prueba__validacion', 'perfil__avance', 'escuela_segunda_prueba__validacion', 'escuela_inicio_funcionamiento__creacion', 'perfil__mantenimientos', 'escuela_acta_entrega__creacion', 'perfil__director', 'perfil__telefono')
+	escuelas = User.objects.filter(perfil__in=perfiles).values_list('perfil__municipio__nombre', 'perfil__localidad', 'perfil__domicilio', 'username', 'first_name', 'perfil__nivel_educativo', 'perfil__plantilla_escolar', 'escuela__mueble__modelo', 'escuela__sistema_potabilizacion__tipo', 'escuela_primer_prueba__validacion', 'escuela_visita_acuerdo__cedula_identificacion', 'escuela_visita_acuerdo__acta_ubicacion', 'escuela_inicio_trabajo__acta_inicio', 'perfil__avance', 'escuela_segunda_prueba__validacion', 'escuela_inicio_funcionamiento__creacion', 'perfil__mantenimientos', 'escuela_acta_entrega__creacion', 'perfil__director', 'perfil__telefono')
 	for escuela in escuelas:
 		writer.writerow(escuela)
 
