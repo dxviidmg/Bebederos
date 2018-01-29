@@ -52,22 +52,6 @@
 
 	{%endif%}
 
-	{%if visita.acta_acuerdos%}
-		<div class="col-md-5">
-
-			<a href="{{visita.acta_acuerdos.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Acta de acuerdos</a>
-	
-		</div>
-	{%endif%}
-
-	{%if visita.croquis_modulo%}
-		<div class="col-md-5">
-
-			<a href="{{visita.croquis_modulo.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Croquis de modulo</a>
-	
-		</div>
-	{%endif%}	
-
 	{%if visita.constancia_integracion_comite%}
 	
 		<div class="col-md-5">
@@ -98,55 +82,46 @@
 	
 	{%endif%}
 
-	{%if visita.memoria_calculo%}
+	{%if visita.memoria_calculo_1%}
 	
 		<div class="col-md-5">
 	
-			<a href="{{visita.memoria_calculo.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Memoria de cálculo</a>
+			<a href="{{visita.memoria_calculo_1.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Memoria de cálculo hidráulico</a>
 
 		</div>
 	
 	{%endif%}
 
-	{%if visita.plano_instalacion_electrica%}
+	{%if visita.memoria_calculo_2%}
 	
 		<div class="col-md-5">
 	
-			<a href="{{visita.plano_instalacion_electrica.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Plano de instalación eléctrica</a>
+			<a href="{{visita.memoria_calculo_2.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Memoria de cálculo sanitario</a>
 
 		</div>
 	
 	{%endif%}
 
-	{%if visita.plano_instalacion_hidraulica%}
+	{%if visita.memoria_calculo_3%}
 	
 		<div class="col-md-5">
 	
-			<a href="{{visita.plano_instalacion_hidraulica.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Plano de instalación hidráulica</a>
+			<a href="{{visita.memoria_calculo_3.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Memoria de cálculo eléctrico</a>
 
 		</div>
 	
 	{%endif%}
 
-	{%if visita.plano_instalacion_sanitaria%}
+	{%if visita.isometrico_instalacion%}
 	
 		<div class="col-md-5">
 	
-			<a href="{{visita.plano_instalacion_sanitaria.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Plano de instalación sanitaria</a>
+			<a href="{{visita.isometrico_instalacion.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Isometricos de instalaciones</a>
 
 		</div>
 	
-	{%endif%}
-
-	{%if visita.estimacion%}
+	{%endif%}		
 	
-		<div class="col-md-5">
-	
-			<a href="{{visita.estimacion.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Estimación</a>
-
-		</div>
-	
-	{%endif%}	
 	</div>
 
 	<div class="row">

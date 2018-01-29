@@ -4,7 +4,7 @@ from django.utils import timezone
 
 class InicioDeTrabajo(models.Model):
 	escuela = models.OneToOneField(User, related_name="escuela_inicio_trabajo")
-	acta_inicio = models.FileField(upload_to='iniciosTrabajo/actas/%Y/%m/%d/', verbose_name="Acta de inicio de trabajo")
+	acta_inicio = models.FileField(upload_to='iniciosTrabajo/actas/%Y/%m/%d/', verbose_name="Acta de inicio de construcción")
 
 	def __str__(self):
 		return '{}'.format(self.escuela)

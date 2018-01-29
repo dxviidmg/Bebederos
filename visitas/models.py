@@ -7,14 +7,13 @@ class VisitaDeAcuerdo(models.Model):
 	acta_ubicacion = models.FileField(upload_to='visita/actas/%Y/%m/%d/', verbose_name="Acta de ubicación de bebedero", null=True, blank=True)
 	cedula_identificacion = models.FileField(upload_to='visita/cedulas/%Y/%m/%d/', verbose_name="Cédula de identificación", null=True, blank=True)
 	convenio_concertacion = models.FileField(upload_to='visitas/concertaciones/%Y/%m/%d/', verbose_name="Convenio de concertación de aplicación de recurso", null=True, blank=True)
-	croquis_modulo = models.FileField(upload_to='visitas/croquis/%Y/%m/%d/', verbose_name="Croquis de ubicación de módulo", null=True, blank=True)	
 	constancia_integracion_comite = models.FileField(upload_to='visitas/comites/%Y/%m/%d/', verbose_name="Constancia de integración de comité", null=True, blank=True)
 	plano_conjunto = models.FileField(upload_to='visitas/planosConjunto/%Y/%m/%d/', verbose_name="Plano de conjunto", null=True, blank=True)
 	distribucion_planta = models.FileField(upload_to='visitas/distribuciones/%Y/%m/%d/', verbose_name="Distribución en planta", null=True, blank=True)	
-	memoria_calculo = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Memoria de cálculo hidrosanitario y eléctrico", null=True, blank=True)
-	plano_instalacion_electrica = models.FileField(upload_to='visitas/pihs/%Y/%m/%d/', verbose_name="Plano de instalación eléctrica", null=True, blank=True)
-	plano_instalacion_hidraulica = models.FileField(upload_to='visitas/pies/%Y/%m/%d/', verbose_name="Plano de instalación hidráulica con isométrico", null=True, blank=True)
-	plano_instalacion_sanitaria = models.FileField(upload_to='visitas/piss/%Y/%m/%d/', verbose_name="Plano de instalación sanitaria  con isométrico", null=True, blank=True)
+	memoria_calculo_1 = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Memoria de cálculo hidráulico", null=True, blank=True)
+	memoria_calculo_2 = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Memoria de cálculo sanitario", null=True, blank=True)
+	memoria_calculo_3 = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Memoria de cálculo eléctrico", null=True, blank=True)		
+	isometrico_instalacion = models.FileField(upload_to='visitas/pihs/%Y/%m/%d/', verbose_name="Isometricos de instalaciones", null=True, blank=True)
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 
 	def __str__(self):

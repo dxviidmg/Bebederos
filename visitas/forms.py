@@ -9,7 +9,7 @@ my_default_errors = {
 class VisitaDeAcuerdoCreateForm(forms.ModelForm):
 	class Meta:
 		model = VisitaDeAcuerdo
-		fields = ('cedula_identificacion', 'acta_ubicacion', 'convenio_concertacion', 'croquis_modulo', 'constancia_integracion_comite', 'plano_conjunto', 'distribucion_planta', 'memoria_calculo', 'plano_instalacion_electrica', 'plano_instalacion_hidraulica', 'plano_instalacion_sanitaria')
+		fields = ('cedula_identificacion', 'acta_ubicacion', 'convenio_concertacion', 'constancia_integracion_comite', 'plano_conjunto', 'distribucion_planta', 'memoria_calculo_1', 'memoria_calculo_2', 'memoria_calculo_3', 'isometrico_instalacion',)
 		#fields = ()
 #	def __init__(self, *args, **kwargs):
 #		super(VisitaDeAcuerdoCreateForm, self).__init__(*args, **kwargs)
