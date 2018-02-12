@@ -114,9 +114,10 @@ class CRUViewPrimerPrueba(View):
 		NuevaPruebaForm = PrimerPruebaCreateForm(data=request.POST, files=request.FILES)
 		laboratorio = User.objects.get(pk=request.user.pk)
 		sistemaBebedero = SistemaBebedero.objects.get(escuela=escuela)
-		EdicionBebederoForm = BebederoUpdateForm5(instance=sistemaBebedero, data=request.POST, files=request.FILES)
+
 
 		try:
+			EdicionBebederoForm = BebederoUpdateForm5(instance=sistemaBebedero, data=request.POST, files=request.FILES)
 			prueba = PrimerPrueba.objects.get(escuela=escuela)
 			EdicionPruebaForm0 = PrimerPruebaCreateForm(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm1 = PrimerPruebaUpdateForm1(instance=prueba, data=request.POST, files=request.FILES)

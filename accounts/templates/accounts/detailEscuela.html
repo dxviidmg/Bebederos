@@ -237,7 +237,7 @@
 			<h2>Cronología general de la gestión, construcción, instalación y mantenimiento de un sistema bebedero</h2>
 		</div>
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or  request.user.perfil.tipo == "Invitado"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED"%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a class="thumbnail thumbnail-available container" href="{%url 'incidencias:CRViewIncidencias' perfil.pk%}">Bitácora de incidencias y notas</a>
@@ -270,7 +270,7 @@
 		{%endif%}
 		{%endif%}
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela" or  request.user.perfil.tipo == "Invitado"%}
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela"%}
 		{%if primerPrueba%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
@@ -280,7 +280,7 @@
 		{%endif%}
 
 
-		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "Ejecutora" or  request.user.perfil.tipo == "Invitado"%}
+		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "Ejecutora"%}
 		{%if primerPrueba%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
