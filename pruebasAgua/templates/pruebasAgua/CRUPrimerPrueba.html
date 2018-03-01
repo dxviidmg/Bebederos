@@ -198,12 +198,12 @@
 							</div>
 						<div style="padding-top: 30px;" >
 						{%if prueba.color_verdadero is not null%}
-						20
+						15
 						{%endif%}
 						</div>
 						<div class="padding-top-parametro-2">
 						{%if prueba.turbiedad  is not null%}
-						5
+						3
 						{%endif%}
 						</div>
 						<div class="padding-top-parametro-2">
@@ -228,12 +228,12 @@
 						</div>
 						<div class="padding-top-parametro-3">
 						{%if prueba.arsenico  is not null%}
-						0.025
+						0.01
 						{%endif%}
 						</div>
 						<div class="padding-top-parametro-2">
 						{%if prueba.hierro is not null%}
-						0.30
+						0.3
 						{%endif%}
 						</div>
 						<div class="padding-top-parametro-2">
@@ -277,16 +277,16 @@
 							<h5>P < LMP</h5>
 						</div>
 						<div style="padding-top: 30px;">
-						{%if prueba.color_verdadero <= 20%}
+						{%if prueba.color_verdadero <= 15%}
 						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
-						{%elif prueba.color_verdadero > 20%}
+						{%elif prueba.color_verdadero > 15%}
 						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
 						{%endif%}
 						</div>
 						<div class="padding-top-icon-2">
-						{%if prueba.turbiedad <= 5%}
+						{%if prueba.turbiedad <= 3%}
 						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
-						{%elif prueba.turbiedad > 5%}
+						{%elif prueba.turbiedad > 3%}
 						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
 						{%endif%}
 						</div>
@@ -314,9 +314,9 @@
 						{%endif%}
 						</div>
 						<div class="padding-top-icon-3">
-						{%if prueba.arsenico <= 0.025%}
+						{%if prueba.arsenico <= 0.01%}
 						<i class="fa fa-2x fa-check" aria-hidden="true"></i>
-						{%elif prueba.arsenico > 0.025%}
+						{%elif prueba.arsenico > 0.01%}
 						<i class="fa fa-2x fa-times" aria-hidden="true"></i>
 						{%endif%}
 						</div>

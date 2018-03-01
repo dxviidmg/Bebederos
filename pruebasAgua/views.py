@@ -64,7 +64,7 @@ class CRUViewPrimerPrueba(View):
 			if manganeso is not None:
 				if nitratos > 11 or sulfatos > 440  or dureza_total > 500 or solidos_disueltos > 1000:
 					sistemaPotabilizadorCalculado = "Robusto"
-				elif manganeso > 0.165  or arsenico > 0.0275  or floururos > 0.7:
+				elif manganeso > 0.165  or arsenico > 0.01  or floururos > 0.7:
 					sistemaPotabilizadorCalculado = "Intermedio"
 				else:
 					 sistemaPotabilizadorCalculado = "Basico"
