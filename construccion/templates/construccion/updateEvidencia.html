@@ -5,9 +5,8 @@
 {%block content%}
 	<div class="row">
 		<div class="col-12">
-			<h1>Incidencias</h1>
+			<h1>Evidencia de la escuela {{escuela.username}} {{evidencia.escuela.get_full_name}}</h1>
 			<a href="{%url 'construccion:CRViewEvidencias' evidencia.escuela.perfil.pk%}">Regresar</a>
-			<h3>Escuela {{evidencia.escuela.get_full_name}}</h3>
 
 			<form action="." method="post" enctype="multipart/form-data">
 				{%csrf_token%}
