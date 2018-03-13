@@ -278,7 +278,7 @@
   </ul>
 </nav>
 
-	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Ejecutora"%}
+	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"%}
 
 	<div class="table-responsive espacio2">
 		<table class="table table-bordered">
@@ -316,7 +316,7 @@
 					{%endif%}
 				</tr>
 				<tr>
-					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador"%}
+					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Laboratorio"%}
 					<td colspan="5"><a href="{% url 'pruebas:ExportPruebasPorEscuelasCSV' entidad.pk%}">Base de formato T7</a>
 					</td>
 					{%endif%}

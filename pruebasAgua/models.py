@@ -29,13 +29,11 @@ class PrimerPrueba(models.Model):
 	reporte_toma_agua = models.FileField(upload_to='pruebas/1/reportes/%Y/%m/%d/', verbose_name="Etiqueta de muestra")
 	foto_toma_agua_1 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía de fachada de la escuela donde se muestre el CCT", null=True, blank=True)
 	foto_toma_agua_2 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía de muestra en el punto de muestreo", null=True, blank=True)
-	rastreabilidad_interna_envio = models.FileField(upload_to='pruebas/1/rastreabilidad/%Y/%m/%d/', verbose_name="Rastreabilidad interna de envío", null=True, blank=True)
 
 	#Fase de analisis / LAB
 	resultados_laboratorio = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis de laboratorio", null=True, blank=True)
 	registro_campo = models.FileField(upload_to='pruebas/1/hojasCampo/%Y/%m/%d/', verbose_name="Registro de campo", null=True, blank=True)
 	cadena_custodia = models.FileField(upload_to='pruebas/1/cadenasCustioda/%Y/%m/%d/', verbose_name="Cadena de custodia", null=True, blank=True)
-	rastreabilidad_interna_recepcion = models.FileField(upload_to='pruebas/1/rastreabilidad/%Y/%m/%d/', verbose_name="Rastreabilidad de recepcíon de muestra", null=True, blank=True)
 	modalidad_envio = models.CharField(max_length=11, choices=modalidad_envio_choices, verbose_name="Modalidad de envío", null=True, blank=True)
 	empresa_envio = models.CharField(max_length=20, verbose_name="Empresa de envío" , null=True, blank=True)
 	no_rastreabilidad = models.CharField(max_length=50, verbose_name="No. de rastreabilidad", null=True, blank=True)
@@ -120,12 +118,10 @@ class SegundaPrueba(models.Model):
 	reporte_toma_agua = models.FileField(upload_to='pruebas/2/reportes_de_toma/%Y/%m/%d/', verbose_name="Etiqueta de muestra")
 	foto_toma_agua_1 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía de fachada de la escuela donde se muestre el CCT", null=True, blank=True)
 	foto_toma_agua_2 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía de muestra en el punto de muestro", null=True, blank=True)
-	rastreabilidad_interna_envio = models.FileField(upload_to='pruebas/1/rastreabilidad/%Y/%m/%d/', verbose_name="Rastreabilidad interna de envío", null=True, blank=True)
 
 	#Fase de analisis / LAB
 	registro_campo = models.FileField(upload_to='pruebas/1/hojasCampo/%Y/%m/%d/', verbose_name="Registro de campo", null=True, blank=True)
 	cadena_custodia = models.FileField(upload_to='pruebas/1/cadenasCustioda/%Y/%m/%d/', verbose_name="Cadena de custodia", null=True, blank=True)
-	rastreabilidad_interna_recepcion = models.FileField(upload_to='pruebas/1/rastreabilidad/%Y/%m/%d/', verbose_name="Rastreabilidad de recepcíon de muestra", null=True, blank=True)
 	modalidad_envio = models.CharField(max_length=11, choices=modalidad_envio_choices, verbose_name="Modalidad de envío", null=True, blank=True)
 	empresa_envio = models.CharField(max_length=20, verbose_name="Empresa de envío" , null=True, blank=True)
 	no_rastreabilidad = models.CharField(max_length=50, verbose_name="No. de rastreabilidad", null=True, blank=True)

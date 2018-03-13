@@ -5,25 +5,24 @@ from django.contrib.admin.widgets import AdminDateWidget
 class PrimerPruebaCreateForm(forms.ModelForm):
 	class Meta:
 		model = PrimerPrueba
-		fields = ('reporte_toma_agua', 'foto_toma_agua_1', 'foto_toma_agua_2', 'rastreabilidad_interna_envio')
+		fields = ('reporte_toma_agua', 'foto_toma_agua_1', 'foto_toma_agua_2')
 #		fields = ()
 	def __init__(self, *args, **kwargs):
 		super(PrimerPruebaCreateForm, self).__init__(*args, **kwargs)
 		self.fields['reporte_toma_agua'].required = True
 		self.fields['foto_toma_agua_1'].required = True
 		self.fields['foto_toma_agua_2'].required = True
-		self.fields['rastreabilidad_interna_envio'].required = True
 
 class PrimerPruebaUpdateForm1(forms.ModelForm):
 	class Meta:
 		model = PrimerPrueba
-		fields = ('modalidad_envio', 'empresa_envio', 'rastreabilidad_interna_recepcion', 'no_rastreabilidad',  'registro_campo', 'cadena_custodia')
+		fields = ('modalidad_envio', 'empresa_envio', 'no_rastreabilidad',  'registro_campo', 'cadena_custodia')
 #		fields = ()
 	def __init__(self, *args, **kwargs):
 		super(PrimerPruebaUpdateForm1, self).__init__(*args, **kwargs)
 		self.fields['registro_campo'].required = True
 		self.fields['cadena_custodia'].required = True
-		self.fields['rastreabilidad_interna_recepcion'].required = True
+
 class PrimerPruebaUpdateForm2(forms.ModelForm):
 	class Meta:
 		model = PrimerPrueba
@@ -158,7 +157,7 @@ class PrimerPruebaUpdateForm12(forms.ModelForm):
 class SegundaPruebaCreateForm(forms.ModelForm):
 	class Meta:
 		model = SegundaPrueba
-		fields = ('reporte_toma_agua', 'foto_toma_agua_1', 'foto_toma_agua_2', 'rastreabilidad_interna_envio')
+		fields = ('reporte_toma_agua', 'foto_toma_agua_1', 'foto_toma_agua_2')
 #		fields = ()
 	def __init__(self, *args, **kwargs):
 		super(SegundaPruebaCreateForm, self).__init__(*args, **kwargs)
@@ -169,7 +168,7 @@ class SegundaPruebaCreateForm(forms.ModelForm):
 class SegundaPruebaUpdateForm1(forms.ModelForm):
 	class Meta:
 		model = SegundaPrueba
-		fields = ('modalidad_envio', 'empresa_envio', 'rastreabilidad_interna_recepcion', 'no_rastreabilidad',  'registro_campo', 'cadena_custodia')
+		fields = ('modalidad_envio', 'empresa_envio', 'no_rastreabilidad',  'registro_campo', 'cadena_custodia')
 #		fields = ()
 	def __init__(self, *args, **kwargs):
 		super(SegundaPruebaUpdateForm1, self).__init__(*args, **kwargs)
