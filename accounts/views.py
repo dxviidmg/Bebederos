@@ -564,4 +564,9 @@ def ExportAvancePorEscuelasCSV(request, pk):
 	for escuela in escuelas:
 		writer.writerow(escuela)
 
-	return response	
+	return response
+
+class ViewHome(View):
+	def get(self, request):
+		template_name = "accounts/home.html"
+		return render(request, template_name)	

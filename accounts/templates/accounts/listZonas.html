@@ -129,7 +129,7 @@
 				</tr>
 
 				{%endif%}
-				{%if request.user.perfil.tipo == "Administrador"%}
+				{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora"%}
 
 				<tr>
 					<td><a href="{%url 'visitas:ExportCedulasIdentificacionZIP' entidad.pk%}">Cédulas de identificación</a></td>
