@@ -30,7 +30,7 @@ class Entidad(models.Model):
 
 	#Perfiles de Residente
 	superintendente = models.OneToOneField(User, null=True, blank=True, verbose_name="Superintendente", related_name="superintendente")
-	sim = models.ForeignKey(User, null=True, blank=True, verbose_name="Superintendente de mantenimiento", related_name="sim")
+	sim = models.OneToOneField(User, null=True, blank=True, verbose_name="Superintendente de mantenimiento", related_name="sim")
 
 	laboratorio = models.ForeignKey(User, null=True, blank=True, verbose_name="Laboratorio", related_name="laboratorio")
 
