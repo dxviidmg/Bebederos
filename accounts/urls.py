@@ -3,7 +3,6 @@ from . import views
 from django.contrib.auth.views import login, logout, password_reset, password_reset_done, password_reset_confirm, password_reset_complete
 
 urlpatterns = [
-	url(r'^$', views.ViewHome.as_view(), name="ViewHome"),
 	url(r'^login', login,name="login"),
 	url(r'^logout/$', logout, name="logout"),
 
@@ -35,4 +34,5 @@ urlpatterns = [
 	url(r'^estados/$', views.ListViewEntidades.as_view(), name="ListViewEntidades"),	
 	url(r'^region/(?P<numero>[-\w]+)/$', views.ListViewEntidades.as_view(), name="ListViewEntidades"),
 	url(r'^regiones/$', views.ListViewRegiones.as_view(), name="ListViewRegiones"),
+	url(r'^$', views.ViewHome.as_view(), name="ViewHome"),
     ]

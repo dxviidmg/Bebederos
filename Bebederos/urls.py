@@ -32,7 +32,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
-	url(r'^', include(accountsUrls, namespace="accounts")),
     url(r'^', include(visitasUrls, namespace="visitas")),
     url(r'^', include(construccionUrls, namespace="construccion")),
     url(r'^', include(pruebasAguaUrls, namespace="pruebas")),
@@ -40,6 +39,7 @@ urlpatterns = [
     url(r'^', include(mantenimientoUrls, namespace="mantenimiento")),
     url(r'^', include(bebederosUrls, namespace="bebederos")),
     url(r'^', include(plantillasUrls, namespace="plantillas")),    
+    url(r'^', include(accountsUrls, namespace="accounts")),
 ]
 
 #Media
