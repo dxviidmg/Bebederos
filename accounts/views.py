@@ -568,5 +568,8 @@ def ExportAvancePorEscuelasCSV(request, pk):
 
 class ViewHome(View):
 	def get(self, request):
-		template_name = "accounts/home.html"
-		return render(request, template_name)	
+		if request.user.is_authenticated == True:
+			return redirect('accounts:ViewProfile')
+		else:
+			template_name = "accounts/home.html"
+			return render(request, template_name)		
