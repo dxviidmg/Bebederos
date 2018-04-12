@@ -488,17 +488,17 @@ def ExportExpedienteZIP(request, pk):
 	cedulaIdentificacion = origen + str(visitaDeAcuerdo.cedula_identificacion.url)
 	planoConjunto = origen + str(visitaDeAcuerdo.plano_conjunto.url)
 	distribucionPlanta = origen + str(visitaDeAcuerdo.distribucion_planta.url)
-	memoriaCalculo = origen + str(visitaDeAcuerdo.memoria_calculo.url)
-	planoInstalacionElectrica = origen + str(visitaDeAcuerdo.plano_instalacion_electrica.url)
-	planoInstalacionHidraulica = origen + str(visitaDeAcuerdo.plano_instalacion_hidraulica.url)
-	planoInstalacionSanitaria = origen + str(visitaDeAcuerdo.plano_instalacion_sanitaria.url)
+	memoriaCalculo1 = origen + str(visitaDeAcuerdo.memoria_calculo_1.url)
+	memoriaCalculo2 = origen + str(visitaDeAcuerdo.memoria_calculo_2.url)
+	memoriaCalculo3 = origen + str(visitaDeAcuerdo.memoria_calculo_3.url)
+	isometricoInstalacion = origen + str(visitaDeAcuerdo.isometrico_instalacion.url)
 	foto1PrimerPrueba = origen + str(primerPrueba.foto_toma_agua_1.url)
 	foto2PrimerPrueba = origen + str(primerPrueba.foto_toma_agua_2.url)
 	foto1SegundaPrueba = origen + str(segundaPrueba.foto_toma_agua_1.url)
 	foto2SegundaPrueba = origen + str(segundaPrueba.foto_toma_agua_2.url)
 	videoInicioFuncionamiento = origen + str(inicioFuncionamiento.video.url)
 
-	filenames = [cedulaIdentificacion, planoConjunto, distribucionPlanta, memoriaCalculo, planoInstalacionElectrica, planoInstalacionHidraulica, planoInstalacionSanitaria, foto1PrimerPrueba, foto2PrimerPrueba, foto1SegundaPrueba, foto2SegundaPrueba, videoInicioFuncionamiento]
+	filenames = [cedulaIdentificacion, planoConjunto, distribucionPlanta, memoriaCalculo1, memoriaCalculo2, memoriaCalculo3, isometricoInstalacion, foto1PrimerPrueba, foto2PrimerPrueba, foto1SegundaPrueba, foto2SegundaPrueba, videoInicioFuncionamiento]
 
 	zip_subdir = "Expediente técnico " + str(escuela.username)
 	zip_filename = "%s.zip" % zip_subdir

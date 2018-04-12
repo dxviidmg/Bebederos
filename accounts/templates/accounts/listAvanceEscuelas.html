@@ -93,13 +93,13 @@
 					<th>Status de validación</th>{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%}
-					<th>Asignación de sistema potabilizador or request.user.perfil.tipo == "Invitado"</th>{%endif%}
+					<th>Asignación de sistema potabilizador</th>{%endif%}
 					
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%}
 					<th>Asignación de mueble</th>{%endif%}
 					
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%}
-					<th>Guía de trazabilidad)</th>{%endif%}
+					<th>Guía de trazabilidad</th>{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Invitado"%}
 					<th>Evidencias</th>{%endif%}
@@ -226,7 +226,7 @@
 					<td>{%if avanceEscuela.actaEntrega%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 					{%endif%}
 
-					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Invitado"%}
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Invitado" or request.user.perfil.tipo == "Ejecutora"%}
 					<td>{%if avanceEscuela.inicioFuncionamiento%}<a href="{%url 'accounts:ExportExpedienteZIP' avanceEscuela.escuela.pk%}">Descargar</a>{%endif%}</td>
 					{%endif%}
 
@@ -290,7 +290,7 @@
 			<tbody>
 				
 
-				{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Administrador"%}
+				{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ"%}
 				<tr>
 					<td colspan="5">
 						<a href="{%url 'accounts:ExportAvancePorEscuelasCSV' entidad.pk%}">Reporte general</a>
@@ -298,23 +298,12 @@
 				</tr>
 
 				{%endif%}
-				{%if request.user.perfil.tipo == "Administrador"%}
-
+				{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora"%}
+				
 				<tr>
-					<td><a href="{%url 'visitas:ExportCedulasIdentificacionZIP' entidad.pk%}">Cédulas de identificación</a></td>
-					<td><a href="{%url 'visitas:ExportPlanosConjuntoZIP' entidad.pk%}">Planos de conjunto</a></td>
-					<td><a href="{%url 'visitas:ExportDistribucionesPlantaZIP' entidad.pk%}">Distribuciones de planta</a></td>
-					<td><a href="{%url 'visitas:ExportMemoriasCalculoZIP' entidad.pk%}">Memorias de cálculo</a></td>
 					<td>{%if entidad.t7%}<a href="{{entidad.t7.url}}">T7</a>{%else%}No se ha subido el archivo T7{%endif%}</td>
 				</tr>
-				<tr>
-					<td><a href="{%url 'visitas:ExportPlanosInstalacionElectricaZIP' entidad.pk%}">Planos de instalación eléctrica</a></td>
-					<td><a href="{%url 'visitas:ExportPlanosInstalacionHidraculicaZIP' entidad.pk%}">Planos de instalación hidráulica</a></td>
-					<td><a href="{%url 'visitas:ExportPlanosInstalacionSanitariaZIP' entidad.pk%}">Planos de instalación sanitaria</a></td>
-					<td><a href="{%url 'visitas:ExportActasFuncionamietoZIP' entidad.pk%}">Actas de inicio de funcionamieto</a></td>
-					<td><a href="{%url 'pruebas:ExportEtiquetasZIP' entidad.pk%}">Etiquetas</a></td>
-					{%endif%}
-				</tr>
+				{%endif%}
 				<tr>
 					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Laboratorio"%}
 					<td colspan="5"><a href="{% url 'pruebas:ExportPruebasPorEscuelasCSV' entidad.pk%}">Base de formato T7</a>
