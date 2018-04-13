@@ -86,22 +86,6 @@
 							<td colspan="12">{{region}}</td>
 						</tr>
 					</tbody>
-					<thead>
-						<tr>
-							<th colspan="15">Coordenadas</th>
-							<th colspan="15">Geolocalización</th>
-							<th colspan="15">Nombre de SSID (Red Wifi)</th>
-							<th colspan="15">Contraseña de SSID</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td colspan="15">{%if perfil.coordenadas%}{{perfil.coordenadas}}{%endif%}</td>
-							<td colspan="15">{%if perfil.coordenadas%}<a href="{%url 'accounts:DetailViewMapa' perfil.pk%}" target="_blank">Ver mapa</a>{%endif%}</td>
-							<td colspan="15">{%if perfil.SSID%}{{perfil.SSID}}{%endif%}</td>
-							<td colspan="15">{%if perfil.clave_SSID%}{{perfil.clave_SSID}}{%endif%}</td>
-						</tr>
-					</tbody>
 				</table>
 			</div>
 

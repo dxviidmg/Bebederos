@@ -4,7 +4,7 @@
 	
 	<div class="row">
 		<div class="col-12 col-md-12 espacio">
-			<h3>Bienvenido(a): {%if request.user.perfil.tipo == "Escuela"%} Escuela {%endif%} {{request.user.get_full_name}}</h3>
+			<h3>Acceso a: {%if request.user.perfil.tipo == "Escuela"%} Escuela {%endif%} {{request.user.get_full_name}}</h3>
 		</div>
 	</div>
 

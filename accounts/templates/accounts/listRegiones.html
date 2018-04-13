@@ -7,29 +7,32 @@
         <h1>Regiones</h1>
     </div>
 
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Número</th>
+          <th>Nombre</th>          
+        </tr>
+      </thead>
+      <tbody>
     {%for region in regiones%}
+      <tr>
+        <td>{{region.numero}}</td>
+        <td><a href="{%url 'accounts:ListViewEntidades' region.numero%}">{{region.nombre}}</a></td>        
+      </tr>
 
-    <div class="col-12 col-sm-4 col-md-4">
 
-      <a href="{%url 'accounts:ListViewEntidades' region.numero%}"><div class='square-box' style="background-color: {{region.color}}">
-        <div class='square-content'>
-         <div>
-            <span>{{region.numero}}</span>
-          </div>
-        </div>
-      </div>
-      </a>
-    <h3>{{region.nombre}}</h3>
-    </div>
-
-  {%empty%}
+    {%empty%}
 
     <div class="col-12">
       <h3>Aún no se han registrado regiones</h3>
     </div>
 
   {%endfor%}
-
+     </tbody>
+    </table>
   </div>
+</div>  
 
 {%endblock content%}

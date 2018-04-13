@@ -1,11 +1,11 @@
 /*General*/
 html {
   height: 100%;
-  background-color: #FFFEFE;
 }
 
 body{
   padding-top: 80px;
+  background-color: yellow;
 }
 
 a {
