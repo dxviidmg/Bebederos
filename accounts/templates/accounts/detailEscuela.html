@@ -90,109 +90,6 @@
 			</div>
 
 		{%endif%}
-			<!-- Tabla de Contactos-->
-			<h2 class="espacio2">Contactos</h2>
-			<h3>INIFED</h3>
-			<div class="table-responsive text-center">
-				<table class="table table-bordered">
-					<thead>
-						<tr>
-							<th>Cargo</th>
-							<th>Coordinador Regional</th>
-							<th>Enlace Institucional</th>
-							<th>Coordinador Estatal</th>
-							<th colspan="{{rts|length}}"> {%if rts|length > 1%}Residentes Técnicos{%else%}Residente Técnico{%endif%}</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="titulo-tabla">Nombre</td>
-							<td>{{perfil.municipio.zona.entidad.region.coordinador_regional_inifed.get_full_name}}</td>
-							<td>{{perfil.municipio.zona.entidad.region.enlace_institucional_inifed.get_full_name}}</td>	
-							<td>{{perfil.municipio.zona.entidad.coordinador_estatal_inifed.get_full_name}}</td>
-							{%for rt in rts%}
-							<td>{{rt.get_full_name}}</td>
-							{%empty%}
-							<td></td>
-							{%endfor%}
-						</tr>
-						<tr>
-							<td class="titulo-tabla" ">Teléfono</td>
-							<td>{%if perfil.municipio.zona.entidad.region.coordinador_regional_inifed.perfil.telefono%}{{perfil.municipio.zona.entidad.region.coordinador_regional_inifed.perfil.telefono}}{%endif%}</td>
-							<td>{%if perfil.municipio.zona.entidad.region.enlace_institucional_inifed.perfil.telefono%}{{perfil.municipio.zona.entidad.region.enlace_institucional_inifed.perfil.telefono}}{%endif%}</td>
-							<td>{% if perfil.municipio.zona.entidad.coordinador_estatal_inifed.perfil.telefono%}{{perfil.municipio.zona.entidad.coordinador_estatal_inifed.perfil.telefono}}{%endif%}</td>
-							{%for rt in rts%}
-							<td>{%if rt.perfil.telefono%}{{rt.perfil.telefono}}{%endif%}</td>
-							{%empty%}
-							<td></td>
-							{%endfor%}
-						</tr>
-						<tr>
-							<td class="titulo-tabla" ">Correo electrónico</td>
-							<td>{{perfil.municipio.zona.entidad.region.coordinador_regional_inifed.email}}</td>
-							<td>{{perfil.municipio.zona.entidad.region.enlace_institucional_inifed.email}}</td>			
-							<td>{{perfil.municipio.zona.entidad.coordinador_estatal_inifed.email}}</td>
-							{%for rt in rts%}
-							<td>{{rt.email}} </td>
-							{%empty%}
-							<td></td>
-							{%endfor%}
-						</tr>						
-					</tbody>
-				</table>
-			</div>
-
-			<h3>Ejecutora</h3>
-			<div class="table-responsive text-center">
-				<table class="table table-bordered">
-					<thead>
-						<tr>
-							<th>Cargo</th>
-							<th>
-								Superintendente de Mantenimiento
-							</th>						
-							<th>Superintendente</th>
-							<th colspan="{{ros|length}}"> {%if ros|length > 1%}Residentes de Obra{%else%}Residente de Obra{%endif%}</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="titulo-tabla">Nombre</td>
-							<td>{{perfil.municipio.zona.entidad.sim.get_full_name}}</td>
-							<td>{{perfil.municipio.zona.entidad.superintendente.get_full_name}}</td>
-							{%for ro in ros%}
-							<td>{{ro.get_full_name}}</td>
-							{%empty%}
-							<td></td>
-							{%endfor%}
-						</tr>
-						<tr>
-							<td class="titulo-tabla" ">Teléfono</td>		
-							<td>{% if perfil.municipio.zona.entidad.sim.perfil.telefono%}{{perfil.municipio.zona.entidad.sim.perfil.telefono}}{%endif%}</td>	
-							<td>{%if perfil.municipio.zona.entidad.superintendente.perfil.telefono%}{{perfil.municipio.zona.entidad.superintendente.perfil.telefono}}{%endif%}</td>
-			
-							{%for ro in ros%}
-							<td>{%if ro.perfil.telefono%}{{ro.perfil.telefono}}{%endif%}</td>
-							{%empty%}
-							<td></td>
-							{%endfor%}
-						</tr>
-						<tr>
-							<td class="titulo-tabla" ">Correo electrónico</td>
-							<td>{%if perfil.municipio.zona.entidad.sim.perfil.telefono%}{{perfil.municipio.zona.entidad.sim.email}}{%endif%}</td>
-
-							<td>{%if perfil.municipio.zona.entidad.superintendente.perfil.telefono%}{{perfil.municipio.zona.entidad.superintendente.email}}{%endif%}</td>							
-							{%for ro in ros%}
-							<td>{%if ro.email%}{{ro.email}}{%endif%}</td>
-							{%empty%}
-							<td></td>
-							{%endfor%}
-						</tr>						
-					</tbody>
-				</table>
-			</div>			
-		</div>
-	</div>
 
 	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "INIFED"  or  request.user.perfil.tipo == "Invitado"%}
 
@@ -215,6 +112,7 @@
 	</div>
 
 	{%endif%}
+
 	<!--Tabla de cronologia-->
 	<div class="row justify-content-center">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-12 espacio2">
@@ -224,7 +122,7 @@
 		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED"  or  request.user.perfil.tipo == "Invitado"%}
 		<div class="col-lg-2 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
-			<a class="thumbnail thumbnail-available container" href="{%url 'incidencias:CRViewIncidencias' perfil.pk%}">Bitácora de incidencias y notas</a>
+			<a class="thumbnail thumbnail-available container" href="{%url 'incidencias:CRViewIncidencias' perfil.pk%}">Bitácora</a>
 		</div>
 		{%endif%}
 
@@ -240,7 +138,7 @@
 		{%if primerPrueba%}
 		<div class="col-lg-2 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
-			<a {%if visitaDeAcuerdo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewVisitaDeAcuerdo' perfil.pk%}">Visita de acuerdos</a>
+			<a {%if visitaDeAcuerdo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewVisitaDeAcuerdo' perfil.pk%}">Acta de ubicación</a>
 		</div>
 		{%endif%}
 		{%endif%}
@@ -249,7 +147,7 @@
 		{%if primerPrueba%}
 		<div class="col-lg-2 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
-			<a {%if inicioDeTrabajo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewInicioDeTrabajo' perfil.pk%}">Inicio de trabajo</a>
+			<a {%if inicioDeTrabajo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewInicioDeTrabajo' perfil.pk%}">Acta de inicio de construcción</a>
 		</div>
 		{%endif%}
 		{%endif%}
@@ -268,7 +166,7 @@
 		{%if primerPrueba%}
 		<div class="col-lg-2 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
-			<a {%if sistemaBebedero.no_trazabilidad%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'bebederos:UpdateViewBebedero' perfil.pk%}"> Asignación de componentes del Sistema bebedero</a>
+			<a {%if sistemaBebedero.no_trazabilidad%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'bebederos:UpdateViewBebedero' perfil.pk%}">Instalación de bebedero</a>
 		</div>
 		{%endif%}
 		{%endif%}
@@ -286,7 +184,7 @@
 		{%if segundaPrueba.validacion == "Validado"%}
 		<div class="col-lg-2 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
-			<a {%if funcionamiento%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewInicioFuncionamiento' perfil.pk%}"> Inicio de funcionamiento</a>
+			<a {%if funcionamiento%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewInicioFuncionamiento' perfil.pk%}">Acta de inicio de funcionamiento</a>
 		</div>
 		{%endif%}
 		{%endif%}

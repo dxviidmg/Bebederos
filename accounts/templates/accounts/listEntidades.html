@@ -19,11 +19,11 @@
 				<th rowspan="2">Partida</th>
 				{%endif%}
 				<th rowspan="2" >Estado</th>
-				<th rowspan="2" colspan="2">Ver</th>
-				<th colspan="2">Escuelas</th>
+				<th rowspan="2">Ver</th>
+				<th colspan="2">Bebederos</th>
 			</tr>
 			<tr>
-				<th>Asignadas</th>
+				<th>Contractuadas</th>
 				<th>Registradas</th>				
 			</tr>
 		</thead>
@@ -39,9 +39,7 @@
 				<td>{{entidad.partida}}</td>
 				{%endif%}
 				<td>{{entidad}}</td>	
-				<td><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">Municipios</a></td>	
-				<td><a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.slug%}">Reporte general</a></td>
-			
+				<td><a href="{%url 'accounts:ListViewZonas' entidad.slug%}">Lista de municipios</a></td>
 				<td>{{entidad.escuelas_asignadas}}</td>
 				<td>{{entidad.escuelas_registradas}}</td>								
 			</tr>

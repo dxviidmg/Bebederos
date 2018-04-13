@@ -6,7 +6,7 @@ html {
 body{
   padding-top: 80px;
   background-color: #ECEEEF;
-  font-family: 12px all;
+  font-family: Constantia, "Palatino Linotype", Palatino, Georgia, serif;
 }
 
 a {
@@ -293,4 +293,8 @@ table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
     color: #fff;
     background-color: #0060ac;
     border-color: #0060ac;
+}
+
+th {
+  color: white;
 }
