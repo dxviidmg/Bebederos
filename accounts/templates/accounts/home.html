@@ -1,11 +1,14 @@
 {%extends 'base.html'%}
 
+{%load static%}
 {%block content%}
-	<h1>Bienvenidos a TEASIB</h1>
 
 <div class="row justify-content-center">
-<div class="col-8 col-sm-6" style="padding-top: 50px;">
-	<a href="{%url 'accounts:login'%}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Inicia sesión</a>
+	<div class="col-7" style="padding-top: 50px;">
+		<img src="{%static 'img/logomk.jpg'%}" style="width: 100%;">
 	</div>
+	<div class="col-7" style="padding-top: 50px;">
+		<a href="{%url 'accounts:login'%}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Inicia sesión</a>
+	</div>	
 </div>
 {%endblock content%}
