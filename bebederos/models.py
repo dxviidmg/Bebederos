@@ -36,27 +36,33 @@ class SistemaPotabilizacion(models.Model):
 		verbose_name_plural = 'Sistemas de potabilización'
 
 class SistemaBebedero(models.Model):
-	linea_ensamblaje_choices = [(str(i), i) for i in range(1,9)]
-	
+	proveedor_choices = (
+		("CRG", "CRG"),
+		("KEVANCY", "KEVANCY"),
+		("TAMA", "TAMA"),
+	)
+
 	no_trazabilidad = models.CharField(max_length=100, null=True, blank=True)
 	escuela = models.OneToOneField(User, related_name="escuela")
 	mueble = models.ForeignKey(Mueble, related_name="mueble")
+	proveedor = models.CharField(max_length=10, choices=proveedor_choices, default="CRG")
+	no_serie_mueble = models.IntegerField(null=True, blank=True)
 	sistema_potabilizacion = models.ForeignKey(SistemaPotabilizacion, related_name="sistema_potabilizacion",  null=True, blank=True, verbose_name="Sistema potabilizador")
 	no_serie_sp = models.CharField(max_length=20, null=True, blank=True, verbose_name="No. de serie del sistema potabilizador ")
 	capacidad_tanque_presurizador = models.IntegerField(null=True, blank=True, )
-	linea_ensamblaje = models.CharField(max_length=5, choices=linea_ensamblaje_choices, null=True, blank=True, verbose_name="Línea de ensamblaje")
 	asignacion = models.BooleanField(default=False, verbose_name="Si ya se descargó. imprimió y asignó la guia de trazabilidad al mueble correspondiente, oprima el botón")
 
 	def GenerateId(self):
-		if self.sistema_potabilizacion and self.linea_ensamblaje:
-			cantidadCeros = 4-len(str(self.pk))
-			serie = cantidadCeros*"0" + str(self.pk)
+		if self.sistema_potabilizacion and self.proveedor:
+			cantidadCeros = 5-len(str(self.pk))
+			no_serie_mueble = cantidadCeros*"0" + str(self.no_serie_mueble)
 			hoy = datetime.today().strftime('%d%m%y')
 			sistemaBebedero = SistemaBebedero.objects.get(pk=self.pk)
 			escuela = User.objects.get(pk=sistemaBebedero.escuela.pk)
 			entidad = escuela.perfil.municipio.zona.entidad
-			no_trazabilidad = str(entidad.abreviatura) + str(sistemaBebedero.mueble) + str(sistemaBebedero.sistema_potabilizacion) + str(serie) + str(hoy) + "T304" + str(sistemaBebedero.linea_ensamblaje) + str(escuela.username)
+			no_trazabilidad = str(entidad.abreviatura) + "-" + str(sistemaBebedero.proveedor) + "-" + str(sistemaBebedero.mueble) + "-" + str(no_serie_mueble) + "-" + str(sistemaBebedero.sistema_potabilizacion) + "-" + str(hoy) + "-" + "T304" + "-" + str(escuela.username)
 			self.no_trazabilidad = no_trazabilidad
+			print(no_trazabilidad)
 			self.save()
 		
 	def CalculaCTP(self):
