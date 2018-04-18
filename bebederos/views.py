@@ -23,6 +23,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.units import inch
 
+import csv
 #Actualización de un Sistema Bebedero
 class UpdateViewBebedero(View):
 	@method_decorator(login_required)
@@ -192,5 +193,24 @@ def ExportComprobanteTrazabilidadPDF(request, pk):
 		response = HttpResponse(pdf, content_type='application/pdf')
 		response['Content-Disposition'] = 'attachment; filename='+str(sistemaBebedero.no_trazabilidad)+'.pdf'
 		return response
+
+	return response
+
+def ExportAvanceBebederosCSV(request, pk):
+	entidad = get_object_or_404(Entidad, pk=pk)
+	zonas = Zona.objects.filter(entidad=entidad)
+	municipios=Municipio.objects.filter(zona__in=zonas)
+	perfiles = Perfil.objects.filter(municipio__in=municipios)
+
+	ahora = datetime.now().strftime("%d-%m-%Y %H:%M")
+	
+	response = HttpResponse(content_type='text/csv')
+	response['Content-Disposition'] = 'attachment; filename="Reporte general de ' + entidad.nombre + ' ' + ahora +'.csv"'
+	writer = csv.writer(response)
+	writer.writerow(['Municipio', 'C. C. T.','Nombre del plantel', 'Nivel educativo', 'Mueble', 'Sistema potabilizador', 'Guia de trazabilidad', 'Status'])
+
+	escuelas = User.objects.filter(perfil__in=perfiles).values_list('perfil__municipio__nombre', 'username', 'first_name', 'perfil__nivel_educativo', 'escuela__mueble__modelo', 'escuela__sistema_potabilizacion__tipo', 'escuela__no_trazabilidad', 'escuela__status')
+	for escuela in escuelas:
+		writer.writerow(escuela)
 
 	return response

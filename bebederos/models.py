@@ -42,19 +42,25 @@ class SistemaBebedero(models.Model):
 		("TAMA", "TAMA"),
 	)
 
+	status_choices = (
+		("En proceso", "En proceso"),
+		("Terminado", "Terminado"),
+	)
+
 	no_trazabilidad = models.CharField(max_length=100, null=True, blank=True)
 	escuela = models.OneToOneField(User, related_name="escuela")
 	mueble = models.ForeignKey(Mueble, related_name="mueble")
 	proveedor = models.CharField(max_length=10, choices=proveedor_choices, default="CRG")
-	no_serie_mueble = models.IntegerField(null=True, blank=True)
+	no_serie_mueble = models.IntegerField(null=True, blank=True, verbose_name="No. de serie de mueble")
 	sistema_potabilizacion = models.ForeignKey(SistemaPotabilizacion, related_name="sistema_potabilizacion",  null=True, blank=True, verbose_name="Sistema potabilizador")
 	no_serie_sp = models.CharField(max_length=20, null=True, blank=True, verbose_name="No. de serie del sistema potabilizador ")
 	capacidad_tanque_presurizador = models.IntegerField(null=True, blank=True, )
 	asignacion = models.BooleanField(default=False, verbose_name="Si ya se descargó. imprimió y asignó la guia de trazabilidad al mueble correspondiente, oprima el botón")
-
+	status = models.CharField(max_length=10, default="En proceso", choices=status_choices)
+	
 	def GenerateId(self):
 		if self.sistema_potabilizacion and self.proveedor:
-			cantidadCeros = 5-len(str(self.pk))
+			cantidadCeros = 4-len(str(self.no_serie_mueble))
 			no_serie_mueble = cantidadCeros*"0" + str(self.no_serie_mueble)
 			hoy = datetime.today().strftime('%d%m%y')
 			sistemaBebedero = SistemaBebedero.objects.get(pk=self.pk)
@@ -62,7 +68,6 @@ class SistemaBebedero(models.Model):
 			entidad = escuela.perfil.municipio.zona.entidad
 			no_trazabilidad = str(entidad.abreviatura) + "-" + str(sistemaBebedero.proveedor) + "-" + str(sistemaBebedero.mueble) + "-" + str(no_serie_mueble) + "-" + str(sistemaBebedero.sistema_potabilizacion) + "-" + str(hoy) + "-" + "T304" + "-" + str(escuela.username)
 			self.no_trazabilidad = no_trazabilidad
-			print(no_trazabilidad)
 			self.save()
 		
 	def CalculaCTP(self):

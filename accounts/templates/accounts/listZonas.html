@@ -109,7 +109,7 @@
 	</div>
 	{%endif%}
 
-	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"%}
+	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"  or request.user.perfil.tipo == "PM"%}
 
 	<div class="table-responsive espacio2">
 		<table class="table table-bordered">
@@ -141,6 +141,20 @@
 					</td>
 					{%endif%}
 				</tr>
+				<tr>
+					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or  request.user.perfil.tipo == "Laboratorio"%}
+					<td colspan="5"><a href="{% url 'pruebas:ExportPruebasPorEscuelasCSV' entidad.pk%}">Base de formato T7</a>
+					</td>
+					{%endif%}
+				</tr>
+
+				<tr>
+					{%if request.user.perfil.tipo == "PM"%}
+					<td colspan="5"><a href="{% url 'bebederos:ExportAvanceBebederosCSV' entidad.pk%}">Avance de sistemas bebederos</a>
+					</td>
+					{%endif%}
+				</tr>
+
 			</tbody>
 		</table>
 	</div>
