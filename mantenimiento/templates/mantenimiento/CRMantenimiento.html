@@ -43,6 +43,7 @@
 				<table class="table table-bordered">
 					<thead>
 						<th>Mes y año</th>
+						<th>Fecha de mantenimiento</th>
 						<th>Volumen</th>
 						<th>Carnet</th>
 						<th>Tipo</th>
@@ -56,7 +57,10 @@
 
 						<tr>
 							<td>{{mantenimiento.mes}} {{mantenimiento.año}}</td>
-							<td>{{mantenimiento.volumen}}</td>
+							<td>
+							{{mantenimiento.fecha}}</td>
+							<td>
+							{{mantenimiento.volumen}}</td>
 							<td><a href="{{mantenimiento.carnet.url}}">Descargar</a></td>
 							<td>{{mantenimiento.tipo}}</td>
 							<td>{%if mantenimiento.descripcion%}{{mantenimiento.descripcion}}{%endif%}</td>

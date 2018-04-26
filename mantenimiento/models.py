@@ -38,10 +38,7 @@ class Mantenimiento (models.Model):
 	volumen = models.IntegerField(verbose_name="Volumen indicado en medidor (Litros)")
 	tipo = models.CharField(max_length=20, default="Preventivo", choices=tipo_choices)
 	descripcion = models.TextField(null=True, blank=True, verbose_name="Descripción")
+	fecha = models.DateField(default=timezone.now, verbose_name="Fecha de mantenimiento")
 
 	def __str__(self):
 		return '{} {} {}'.format(self.escuela, self.mes, self.año)
-
-	class Meta:
-		ordering = ['creacion']
-#		verbose_name_plural = 'Terminos de trabajo'
