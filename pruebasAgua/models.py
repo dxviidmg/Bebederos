@@ -34,9 +34,6 @@ class PrimerPrueba(models.Model):
 	resultados_laboratorio = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis de laboratorio", null=True, blank=True)
 	registro_campo = models.FileField(upload_to='pruebas/1/hojasCampo/%Y/%m/%d/', verbose_name="Registro de campo", null=True, blank=True)
 	cadena_custodia = models.FileField(upload_to='pruebas/1/cadenasCustioda/%Y/%m/%d/', verbose_name="Cadena de custodia", null=True, blank=True)
-	modalidad_envio = models.CharField(max_length=11, choices=modalidad_envio_choices, verbose_name="Modalidad de envío", null=True, blank=True)
-	empresa_envio = models.CharField(max_length=20, verbose_name="Empresa de envío" , null=True, blank=True)
-	no_rastreabilidad = models.CharField(max_length=50, verbose_name="No. de rastreabilidad", null=True, blank=True)
 
 	#Fase de confirmación / ECA
 	validacion = models.CharField(max_length=11, default="En espera", choices=validacion_choices, verbose_name="Validación")
@@ -122,9 +119,6 @@ class SegundaPrueba(models.Model):
 	#Fase de analisis / LAB
 	registro_campo = models.FileField(upload_to='pruebas/1/hojasCampo/%Y/%m/%d/', verbose_name="Registro de campo", null=True, blank=True)
 	cadena_custodia = models.FileField(upload_to='pruebas/1/cadenasCustioda/%Y/%m/%d/', verbose_name="Cadena de custodia", null=True, blank=True)
-	modalidad_envio = models.CharField(max_length=11, choices=modalidad_envio_choices, verbose_name="Modalidad de envío", null=True, blank=True)
-	empresa_envio = models.CharField(max_length=20, verbose_name="Empresa de envío" , null=True, blank=True)
-	no_rastreabilidad = models.CharField(max_length=50, verbose_name="No. de rastreabilidad", null=True, blank=True)
 
 	#Fase de Sugerencias / ECA(Pilar)
 	resultados_laboratorio = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis de laboratorio", null=True, blank=True)

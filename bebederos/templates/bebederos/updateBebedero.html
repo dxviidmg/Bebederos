@@ -41,7 +41,7 @@
 		{%if entidad.abreviatura and sistemaBebedero.mueble and sistemaBebedero.sistema_potabilizacion and sistemaBebedero.proveedor%}
 		<p>Numero de trazabilidad: {{sistemaBebedero.no_trazabilidad}}</p>
 
-		{%if sistemaBebedero.asignacion is False%}
+		{%if sistemaBebedero.packing_list is False%}
 
 		<div class="row">
 			<div class="col-md-4 col-sm-6 col-12">

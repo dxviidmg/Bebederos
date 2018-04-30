@@ -16,7 +16,7 @@ class PrimerPruebaCreateForm(forms.ModelForm):
 class PrimerPruebaUpdateForm1(forms.ModelForm):
 	class Meta:
 		model = PrimerPrueba
-		fields = ('modalidad_envio', 'empresa_envio', 'no_rastreabilidad',  'registro_campo', 'cadena_custodia')
+		fields = ('registro_campo', 'cadena_custodia')
 #		fields = ()
 	def __init__(self, *args, **kwargs):
 		super(PrimerPruebaUpdateForm1, self).__init__(*args, **kwargs)
@@ -168,7 +168,7 @@ class SegundaPruebaCreateForm(forms.ModelForm):
 class SegundaPruebaUpdateForm1(forms.ModelForm):
 	class Meta:
 		model = SegundaPrueba
-		fields = ('modalidad_envio', 'empresa_envio', 'no_rastreabilidad',  'registro_campo', 'cadena_custodia')
+		fields = ('registro_campo', 'cadena_custodia')
 #		fields = ()
 	def __init__(self, *args, **kwargs):
 		super(SegundaPruebaUpdateForm1, self).__init__(*args, **kwargs)

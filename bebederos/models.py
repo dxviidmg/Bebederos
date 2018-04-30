@@ -51,7 +51,8 @@ class SistemaBebedero(models.Model):
 	no_serie_sp = models.CharField(max_length=20, null=True, blank=True, verbose_name="No. de serie del sistema potabilizador ")
 	capacidad_tanque_presurizador = models.IntegerField(null=True, blank=True, )
 	asignacion = models.BooleanField(default=False, verbose_name="Si ya se descargó. imprimió y asignó la guia de trazabilidad al mueble correspondiente, oprima el botón")
-	
+	packing_list = models.BooleanField(default=False, verbose_name="Si el mueble ya salio del taller, oprima aquí")
+
 	def GenerateId(self):
 		if self.sistema_potabilizacion and self.proveedor:
 			cantidadCeros = 4-len(str(self.no_serie_mueble))
