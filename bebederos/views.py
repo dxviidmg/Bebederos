@@ -207,9 +207,9 @@ def ExportAvanceBebederosCSV(request, pk):
 	response = HttpResponse(content_type='text/csv')
 	response['Content-Disposition'] = 'attachment; filename="Reporte general de ' + entidad.nombre + ' ' + ahora +'.csv"'
 	writer = csv.writer(response)
-	writer.writerow(['Municipio', 'C. C. T.','Nombre del plantel', 'Nivel educativo', 'Mueble', 'Sistema potabilizador', 'Validación de primer prueba', 'Guia de trazabilidad'])
+	writer.writerow(['Municipio', 'C. C. T.','Nombre del plantel', 'Nivel educativo', 'Mueble', 'Sistema potabilizador', 'Validación de primer prueba', 'Guia de trazabilidad', 'Packing list (Mueble entregado)'])
 
-	escuelas = User.objects.filter(perfil__in=perfiles).values_list('perfil__municipio__nombre', 'username', 'first_name', 'perfil__nivel_educativo', 'escuela__mueble__modelo', 'escuela__sistema_potabilizacion__tipo', 'escuela_primer_prueba__validacion', 'escuela__no_trazabilidad')
+	escuelas = User.objects.filter(perfil__in=perfiles).values_list('perfil__municipio__nombre', 'username', 'first_name', 'perfil__nivel_educativo', 'escuela__mueble__modelo', 'escuela__sistema_potabilizacion__tipo', 'escuela_primer_prueba__validacion', 'escuela__no_trazabilidad', 'escuela__packing_list')
 	for escuela in escuelas:
 		writer.writerow(escuela)
 
