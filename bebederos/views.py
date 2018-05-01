@@ -146,11 +146,11 @@ def ExportComprobanteTrazabilidadPDF(request, pk):
 	Story.append(t13)
 	Story.append(Spacer(1,0.5*inch))
 
-	firman = "Firma"
+	firman = "Firman"
 	t14 = Paragraph(firman, styleText3)
 	Story.append(t14)
 
-	linea1 = "________________________"
+	linea1 = "__________________________"
 	t15 = Paragraph(linea1, styleText)
 	Story.append(t15)
 
@@ -178,7 +178,7 @@ def ExportComprobanteTrazabilidadPDF(request, pk):
 	t21 = Paragraph(linea3, styleText)
 	Story.append(t21)
 
-	nombre3 = "Ing. _________________________"
+	nombre3 = "Ing. ____________________________"
 	t22 = Paragraph(nombre3, styleText3)
 	Story.append(t22)
 
