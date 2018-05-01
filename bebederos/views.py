@@ -154,11 +154,11 @@ def ExportComprobanteTrazabilidadPDF(request, pk):
 	t15 = Paragraph(linea1, styleText)
 	Story.append(t15)
 
-	nombre1 = "Ing. Raúl Alexis Mejía Mejía"
+	nombre1 = "Ing. ______________________"
 	t16 = Paragraph(nombre1, styleText3)
 	Story.append(t16)
 
-	puesto1 = "Coordinador de Manufactura"
+	puesto1 = "Encargado de Taller"
 	t17 = Paragraph(puesto1, styleText3)
 	Story.append(t17)
 
@@ -166,25 +166,13 @@ def ExportComprobanteTrazabilidadPDF(request, pk):
 	t18 = Paragraph(linea2, styleText)
 	Story.append(t18)
 
-	nombre2 = "Ing. Pilar Nereida Velazquez Serna"
+	nombre2 = "Ing. Isauro Vázquez Teopa"
 	t19 = Paragraph(nombre2, styleText3)
 	Story.append(t19)
 
 	puesto2 = "Coordinador de Procesos Químicos"
 	t20 = Paragraph(puesto2, styleText3)
 	Story.append(t20)
-
-	linea3 = "________________________"
-	t21 = Paragraph(linea3, styleText)
-	Story.append(t21)
-
-	nombre3 = "Ing. Héctor Miguel Rios Sanchez"
-	t22 = Paragraph(nombre3, styleText3)
-	Story.append(t22)
-
-	puesto3 = "Coordinador de Planta"
-	t23 = Paragraph(puesto3, styleText3)
-	Story.append(t23)
 
 	doc.build(Story)
 
