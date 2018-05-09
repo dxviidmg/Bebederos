@@ -142,13 +142,6 @@
 					{%endif%}
 				</tr>
 				<tr>
-					{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or  request.user.perfil.tipo == "Laboratorio"%}
-					<td colspan="5"><a href="{% url 'pruebas:ExportPruebasPorEscuelasCSV' entidad.pk%}">Base de formato T7</a>
-					</td>
-					{%endif%}
-				</tr>
-
-				<tr>
 					{%if request.user.perfil.tipo == "PM"%}
 					<td colspan="5"><a href="{% url 'bebederos:ExportAvanceBebederosCSV' entidad.pk%}">Avance de sistemas bebederos</a>
 					</td>
