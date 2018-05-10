@@ -153,11 +153,11 @@ class UpdateViewEvidencia(View):
 		escuela = User.objects.get(escuela_evidencia=evidencia)
 		perfil = Perfil.objects.get(user_id=escuela)
 		
-		EdicionEvidenciaForm=EvidenciaConstruccionCreateForm(instance=evidencia, data=request.POST)
-		if EdicionEvidenciaForm.is_valid:
+		EdicionEvidenciaForm=EvidenciaConstruccionCreateForm(instance=evidencia, data=request.POST, files=request.FILES)
+		if EdicionEvidenciaForm.is_valid():
 			EdicionEvidenciaForm.save()
 
-		EdicionEvidenciaForm2=EvidenciaConstruccionEditForm(instance=evidencia, data=request.POST)
+		EdicionEvidenciaForm2=EvidenciaConstruccionEditForm(instance=evidencia, data=request.POST, files=request.FILES)
 		if EdicionEvidenciaForm2.is_valid():
 			EdicionEvidenciaForm2.save()
 			perfil.UpdateAvance()
