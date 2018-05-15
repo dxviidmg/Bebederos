@@ -83,6 +83,7 @@ class CRViewEvidencias(View):
 	def get(self, request, pk):
 		template_name = "construccion/CREvidencias.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
+		perfil.UpdateEvidenciasCount()
 		escuela = User.objects.get(perfil=perfil)
 
 		evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela)
@@ -115,7 +116,8 @@ class CRViewEvidencias(View):
 			NuevaEvidencia.escuela = escuela
 			NuevaEvidencia.save()
 			messages.success(request, "Actualización exitosa")			
-	
+			perfil.UpdateEvidenciasCount()
+			
 		NuevaEnvolventeForm = EnvolventeTerminadaCreateForm(data=request.POST, files=request.FILES)
 		si = User.objects.get(pk=request.user.pk)
 

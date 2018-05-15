@@ -150,6 +150,7 @@ class Perfil(models.Model):
 	clave_SSID = models.CharField(max_length=20, null=True, blank=True)
 	coordenadas = GeopositionField(null=True, blank=True)
 	mantenimientos = models.IntegerField(null=True, blank=True)
+	evidencias = models.IntegerField(null=True, blank=True)
 
 	#Llave foranea para Residentes Técnicos de INIFED
 	residente_tecnico_inifed = models.ForeignKey(Entidad, verbose_name="Es residente estatal de INIFED del estado de", null=True, blank=True, related_name="residente_tecnico_inifed")
@@ -197,6 +198,13 @@ class Perfil(models.Model):
 		mantenimientos = Mantenimiento.objects.filter(escuela=escuela).count()
 		self.mantenimientos = mantenimientos
 		self.save()
+
+	def UpdateEvidenciasCount(self):
+		perfil = Perfil.objects.get(pk=self.pk)
+		escuela = User.objects.get(perfil=perfil)
+		evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela).count()
+		self.evidencias = evidencias
+		self.save()		
 
 	def __str__(self):
 		return '{} {} {}'.format(self.tipo, self.user.first_name, self.user.last_name)
