@@ -309,10 +309,14 @@
 
 		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador"%}
 		{%if funcionamiento%}
-		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+		<div class="col-lg-1 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a class="thumbnail thumbnail-available container" href="{%url 'accounts:ExportExpedienteZIP' escuela.pk%}">Descargar expediente</a>
 		</div>
+		<div class="col-lg-1 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<a class="thumbnail thumbnail-available container" href="{%url 'accounts:ExportFotosEvidenciaZIP' escuela.pk%}">Descargar Fotos</a>
+		</div>		
 		{%endif%}
 		{%endif%}
 

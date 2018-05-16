@@ -486,20 +486,23 @@ def ExportExpedienteZIP(request, pk):
 	inicioFuncionamiento = InicioFuncionamiento.objects.get(escuela=escuela)
 
 	#Archivos
+	actaUbicacion = origen + str(visitaDeAcuerdo.acta_ubicacion.url)
 	cedulaIdentificacion = origen + str(visitaDeAcuerdo.cedula_identificacion.url)
+	convenioConcertacion =  origen + str(visitaDeAcuerdo.convenio_concertacion.url)
 	planoConjunto = origen + str(visitaDeAcuerdo.plano_conjunto.url)
+	constanciaIntegracionComite = origen + str(visitaDeAcuerdo.constancia_integracion_comite.url)
 	distribucionPlanta = origen + str(visitaDeAcuerdo.distribucion_planta.url)
 	memoriaCalculo1 = origen + str(visitaDeAcuerdo.memoria_calculo_1.url)
 	memoriaCalculo2 = origen + str(visitaDeAcuerdo.memoria_calculo_2.url)
 	memoriaCalculo3 = origen + str(visitaDeAcuerdo.memoria_calculo_3.url)
 	isometricoInstalacion = origen + str(visitaDeAcuerdo.isometrico_instalacion.url)
-	foto1PrimerPrueba = origen + str(primerPrueba.foto_toma_agua_1.url)
 	foto2PrimerPrueba = origen + str(primerPrueba.foto_toma_agua_2.url)
-	foto1SegundaPrueba = origen + str(segundaPrueba.foto_toma_agua_1.url)
 	foto2SegundaPrueba = origen + str(segundaPrueba.foto_toma_agua_2.url)
 	videoInicioFuncionamiento = origen + str(inicioFuncionamiento.video.url)
+	actaFuncionamiento = origen + str(inicioFuncionamiento.acta_funcionamiento.url)
+	reciboLlaves = origen + str(inicioFuncionamiento.recibo_llaves.url)
 
-	filenames = [cedulaIdentificacion, planoConjunto, distribucionPlanta, memoriaCalculo1, memoriaCalculo2, memoriaCalculo3, isometricoInstalacion, foto1PrimerPrueba, foto2PrimerPrueba, foto1SegundaPrueba, foto2SegundaPrueba, videoInicioFuncionamiento]
+	filenames = [actaUbicacion, cedulaIdentificacion, convenioConcertacion, planoConjunto, constanciaIntegracionComite, distribucionPlanta, memoriaCalculo1, memoriaCalculo2, memoriaCalculo3, isometricoInstalacion, foto2PrimerPrueba, foto2SegundaPrueba, videoInicioFuncionamiento, actaFuncionamiento, reciboLlaves]
 
 	zip_subdir = "Expediente técnico " + str(escuela.username)
 	zip_filename = "%s.zip" % zip_subdir
