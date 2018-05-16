@@ -213,6 +213,12 @@ class Perfil(models.Model):
 		ordering = ['user']
 		verbose_name_plural = "Perfiles"
 
+class Año(models.Model):
+	año = models.IntegerField()
+
+	def __str__(self):
+		return '{}'.format(self.año)
+
 #Muestra nombre completo	
 def get_full_name(self):
 	return '{} {}'.format(self.first_name, self.last_name)

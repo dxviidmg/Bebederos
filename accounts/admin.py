@@ -62,3 +62,4 @@ class PerfilAdmin(admin.ModelAdmin):
 
 admin.site.register(Perfil, PerfilAdmin)
 
+admin.site.register(Año)
