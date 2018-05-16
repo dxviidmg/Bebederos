@@ -1,4 +1,6 @@
 {%load static%}
+{% load año_tag %}
+
 <html>
 	<head>
 		<title>TEASIB</title>
@@ -13,10 +15,6 @@
     <link rel="stylesheet" type="text/css" href="{%static 'css/estilos.css'%}">
 	</head>
 
-  <style type="text/css">
-
-
-  </style>
 	<body>
 
 <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top" style="background-color: #44B036; border-bottom: solid 1px;">
@@ -28,7 +26,7 @@
   </button>
 
   {%endif%}
-  <a class="navbar-brand" href="#" style="color: white;">TEASIB 1.8.5 Convocatoria</a>
+  <a class="navbar-brand" href="#" style="color: white;">TEASIB 1.8.5.1 Convocatoria {%anio_convocatoria%}</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
