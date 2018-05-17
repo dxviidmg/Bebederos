@@ -5,5 +5,5 @@ register = template.Library()
 
 @register.assignment_tag
 def anio_convocatoria():
-    año = Año.objects.first()
-    return año
+    anio = Anio.objects.first()
+    return anio

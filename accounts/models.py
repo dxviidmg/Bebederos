@@ -213,11 +213,11 @@ class Perfil(models.Model):
 		ordering = ['user']
 		verbose_name_plural = "Perfiles"
 
-class Año(models.Model):
-	año = models.IntegerField()
+class Anio(models.Model):
+	anio = models.IntegerField()
 
 	def __str__(self):
-		return '{}'.format(self.año)
+		return '{}'.format(self.anio)
 
 #Muestra nombre completo	
 def get_full_name(self):
