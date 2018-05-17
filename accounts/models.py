@@ -151,6 +151,7 @@ class Perfil(models.Model):
 	coordenadas = GeopositionField(null=True, blank=True)
 	mantenimientos = models.IntegerField(null=True, blank=True)
 	evidencias = models.IntegerField(null=True, blank=True)
+	expediente_tecnico = models.BooleanField(default=False, verbose_name="Realización de expediente técnico")
 
 	#Llave foranea para Residentes Técnicos de INIFED
 	residente_tecnico_inifed = models.ForeignKey(Entidad, verbose_name="Es residente estatal de INIFED del estado de", null=True, blank=True, related_name="residente_tecnico_inifed")
