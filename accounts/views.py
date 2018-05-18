@@ -64,14 +64,14 @@ class ListViewEntidades(View):
 		if request.user.perfil.cargo == "SIM":
 			region = None
 			sim = User.objects.get(pk=request.user.pk)
-			entidades = Entidad.objects.filter(sim=sim)
+			entidades = Entidad.objects.filter(sim=sim).order_by("partida")
 		elif request.user.perfil.tipo == "Laboratorio":
 			region = None
 			laboratorio = User.objects.get(pk=request.user.pk)
 			entidades = Entidad.objects.filter(laboratorio=laboratorio)
 		elif request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "INIFED"  or  request.user.perfil.tipo == "Invitado":
 			region = Region.objects.get(numero=numero)
-			entidades = Entidad.objects.filter(region=region)			
+			entidades = Entidad.objects.filter(region=region).order_by("partida")
 
 		context = {
 			'region': region,

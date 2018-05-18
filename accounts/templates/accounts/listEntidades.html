@@ -12,10 +12,10 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.cargo == "Administrador" or request.user.perfil.tipo == "PQ"%}
+				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.tipo == "PQ"%}
 				<th rowspan="2">Región</th>
 				{%endif%}
-				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.cargo == "Administrador" or request.user.perfil.tipo == "PQ"%}
+				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ"%}
 				<th rowspan="2">Partida</th>
 				{%endif%}
 				<th rowspan="2" >Estado</th>
@@ -32,10 +32,10 @@
 	{%for entidad in entidades%}
 	
 			<tr>
-				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.cargo == "Administrador" or request.user.perfil.tipo == "PQ"%}
+				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.tipo == "PQ"%}
 				<td>{{entidad.region}}</td>
 				{%endif%}
-				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.cargo == "Administrador" or request.user.perfil.tipo == "PQ"%}				
+				{%if request.user.perfil.cargo == "SIM" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ"%}				
 				<td>{{entidad.partida}}</td>
 				{%endif%}
 				<td>{{entidad}}</td>	
