@@ -83,7 +83,7 @@ class PrimerPruebaUpdateForm6(forms.ModelForm):
 class PrimerPruebaUpdateForm7(forms.ModelForm):
 	class Meta:
 		model = PrimerPrueba
-		fields = ('creacion_reporte_analisis', 'resultados_laboratorio', 'validacion')
+		fields = ('creacion_reporte_analisis', 'resultados_laboratorio', 'dictamen', 'validacion')
 #		fields = ()
 
 		widgets = {
@@ -234,7 +234,7 @@ class SegundaPruebaUpdateForm6(forms.ModelForm):
 class SegundaPruebaUpdateForm7(forms.ModelForm):
 	class Meta:
 		model = SegundaPrueba
-		fields = ('creacion_reporte_analisis', 'resultados_laboratorio', 'validacion')
+		fields = ('creacion_reporte_analisis', 'resultados_laboratorio', 'dictamen', 'validacion')
 #		fields = ()
 
 		widgets = {
@@ -249,11 +249,11 @@ class SegundaPruebaUpdateForm7(forms.ModelForm):
 class SegundaPruebaUpdateForm8(forms.ModelForm):
 	class Meta:
 		model = SegundaPrueba
-		fields = ('dictamen_validacion', 'validacion')
+		fields = ('validacion',)
 #		fields = ()
 	def __init__(self, *args, **kwargs):
 		super(SegundaPruebaUpdateForm8, self).__init__(*args, **kwargs)
-		self.fields['dictamen_validacion'].required = True
+#		self.fields['dictamen_validacion'].required = True
 		self.fields['validacion'].required = True
 
 class SegundaPruebaUpdateForm9(forms.ModelForm):

@@ -3,6 +3,13 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from bebederos.models import *
 
+class DictamenIMTA(models.Model):
+	nombre = models.CharField(max_length=15)
+	fecha = models.DateField()
+
+	def __str__(self):
+		return '{}'.format(self.nombre)
+
 class PrimerPrueba(models.Model):
 	validacion_choices = (
 		("Validado", "Validado"),
@@ -37,7 +44,8 @@ class PrimerPrueba(models.Model):
 
 	#Fase de confirmación / ECA
 	validacion = models.CharField(max_length=11, default="En espera", choices=validacion_choices, verbose_name="Validación")
-		
+	dictamen = models.ForeignKey(DictamenIMTA, null=True, blank=True)
+
 	#Información del analísis
 	no_registro = models.CharField(max_length=30, null=True, blank=True, verbose_name="Número de registro (Orden de Trabajo)")
 	creacion_reporte_analisis = models.DateField(null=True, blank=True, verbose_name="Fecha del reporte de análisis")
@@ -124,7 +132,7 @@ class SegundaPrueba(models.Model):
 	resultados_laboratorio = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis de laboratorio", null=True, blank=True)
 
 	#Fase de confirmación de IMTA
-	dictamen_validacion = models.FileField(upload_to='pruebas/2/dictamenes/%Y/%m/%d/', verbose_name="Dictamen de validación", null=True, blank=True)
+	dictamen = models.ForeignKey(DictamenIMTA, null=True, blank=True)
 	validacion = models.CharField(max_length=11, default="En espera", choices=validacion_choices, verbose_name="Validación")
 
 	creacion = models.DateField(default=timezone.now, verbose_name="Fecha de creación")

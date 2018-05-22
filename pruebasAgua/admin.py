@@ -14,3 +14,5 @@ class SegundaPruebaAdmin(admin.ModelAdmin):
     list_filter = ['validacion']
 
 admin.site.register(SegundaPrueba, SegundaPruebaAdmin)
+
+admin.site.register(DictamenIMTA)
