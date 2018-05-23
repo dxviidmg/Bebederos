@@ -30,7 +30,7 @@ class PrimerPrueba(models.Model):
 	)
 
 	escuela = models.OneToOneField(User, related_name="escuela_primer_prueba")
-	creacion = models.DateField(default=timezone.now, verbose_name="Fecha de creación")
+	creacion = models.DateField(default=timezone.now, verbose_name="Fecha de muestreo")
 
 	#Fase de Toma de Agua / SI
 	reporte_toma_agua = models.FileField(upload_to='pruebas/1/reportes/%Y/%m/%d/', verbose_name="Etiqueta de muestra")

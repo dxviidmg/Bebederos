@@ -83,7 +83,7 @@ class PrimerPruebaUpdateForm6(forms.ModelForm):
 class PrimerPruebaUpdateForm7(forms.ModelForm):
 	class Meta:
 		model = PrimerPrueba
-		fields = ('creacion_reporte_analisis', 'resultados_laboratorio', 'dictamen', 'validacion')
+		fields = ('creacion', 'creacion_reporte_analisis', 'resultados_laboratorio', 'dictamen', 'validacion')
 #		fields = ()
 
 		widgets = {
