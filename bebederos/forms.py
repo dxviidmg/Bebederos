@@ -39,6 +39,6 @@ class BebederoUpdateForm5(forms.ModelForm):
 	class Meta:
 		model = SistemaBebedero
 		fields = ('sistema_potabilizacion',)
-	def __init__(self, *args, **kwargs):
-		super(BebederoUpdateForm5, self).__init__(*args, **kwargs)
-		self.fields['sistema_potabilizacion'].required = True
+#	def __init__(self, *args, **kwargs):
+#		super(BebederoUpdateForm5, self).__init__(*args, **kwargs)
+#		self.fields['sistema_potabilizacion'].required = True
