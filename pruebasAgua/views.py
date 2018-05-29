@@ -171,6 +171,10 @@ class CRUViewPrimerPrueba(View):
 
 			if EdicionPruebaForm12.is_valid():
 				EdicionPruebaForm12.save()
+
+			if EdicionBebederoForm.is_valid():
+				EdicionBebederoForm.save()
+
 		except PrimerPrueba.DoesNotExist:
 			prueba = None
 			EdicionPruebaForm0 = None
@@ -186,15 +190,13 @@ class CRUViewPrimerPrueba(View):
 			EdicionPruebaForm10 = None
 			EdicionPruebaForm11 = None
 			EdicionPruebaForm12 = None
-
+			EdicionBebederoForm = None
+			
 			if NuevaPruebaForm.is_valid():
 				NuevaPrueba = NuevaPruebaForm.save(commit=False)
 				NuevaPrueba.escuela = escuela
 				NuevaPrueba.laboratorio = laboratorio
 				NuevaPrueba.save()
-
-			if EdicionBebederoForm.is_valid():
-				EdicionBebederoForm.save()
 			
 		return redirect("pruebas:CRUViewPrimerPrueba", pk=perfil.pk)
 

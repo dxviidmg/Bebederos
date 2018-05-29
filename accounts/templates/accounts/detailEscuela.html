@@ -12,11 +12,6 @@
 				<p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}"><i class="fa fa-angle-double-left" aria-hidden="true"></i>Regresar a municipio</a></p>
 			{%endif%}
 
-			{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "CEstatal" or request.user.perfil.tipo == "Administrador" or  request.user.perfil.tipo == "Invitado"%}
-			<p><a href="{%url 'accounts:ListViewAvanceEscuelas' entidad.slug%}"><i class="fa fa-angle-double-left" aria-hidden="true"></i>Regresar a reporte general</a></p>			
-			{%endif%}
-
-
 			{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador"%}
 			<br>
 			<a href="{%url 'accounts:UpdateViewEscuela' escuela.username%}">Actualizar datos</a>

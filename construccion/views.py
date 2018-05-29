@@ -154,7 +154,7 @@ class UpdateViewEvidencia(View):
 		perfil = Perfil.objects.get(user_id=escuela)
 		
 		EdicionEvidenciaForm=EvidenciaConstruccionCreateForm(instance=evidencia, data=request.POST)
-		if EdicionEvidenciaForm.is_valid:
+		if EdicionEvidenciaForm.is_valid():
 			EdicionEvidenciaForm.save()
 
 		EdicionEvidenciaForm2=EvidenciaConstruccionEditForm(instance=evidencia, data=request.POST)

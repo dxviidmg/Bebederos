@@ -114,7 +114,7 @@ class UpdateViewIncidencia(View):
 		perfil = Perfil.objects.get(user_id=escuela)
 
 		EdicionIncidenciaForm=IncidenciaEditForm(instance=incidencia, data=request.POST)
-		if EdicionIncidenciaForm.is_valid:
+		if EdicionIncidenciaForm.is_valid():
 			EdicionIncidenciaForm.save()
 			messages.success(request, "Actualización exitosa")
 
