@@ -4,29 +4,33 @@
 
 	<div class="row justify-content-center">
 		<div class="col-12">
-			<h4>Plantillas de documentación</h4>		
-
+			<h2>Plantillas</h2>		
 			<div class="table responsive">
-				
 				<table class="table table-bordered">
 					<thead>
 						<tr>
 							<th>Fase</th>
-							<th>Nombre</th>		<th>Archivo</th>			
+							<th>Nombre</th>
+							<th>Archivo</th>			
 						</tr>
 					</thead>
 					<tbody>
+
 			{%for plantilla in plantillas%}
 						<tr>
 							<td>{{plantilla.fase}}</td>
 							<td>{{plantilla.nombre}}</td>
 							<td><a href="{{plantilla.archivo.url}}">Descargar</a></td>
 						</tr>
+			
 			{%empty%}
+			
 						<tr>
 							<td colspan="3">Lista de documentos vacia</td>
 						</tr>
+			
 			{%endfor%}
+			
 					</tbody>
 				</table>
 

@@ -13,6 +13,4 @@ class SegundaPruebaAdmin(admin.ModelAdmin):
     search_fields = ['escuela__first_name', 'escuela__username']
     list_filter = ['validacion']
 
-admin.site.register(SegundaPrueba, SegundaPruebaAdmin)
-
 admin.site.register(DictamenIMTA)

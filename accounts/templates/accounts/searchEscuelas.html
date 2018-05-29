@@ -2,7 +2,7 @@
 
 {%block content%}
 
-	<h3 class="text-center">Buscador de escuelas</h3>
+	<h3 class="text-center">Buscar escuelas</h3>
 
 	<form method="GET" action="">
 		<input type="text" name="query" placeholder="C. C. T." value="{{request.GET.query}}">
@@ -14,22 +14,20 @@
 			<thead>
 				<th>C. C. T.</th>
 				<th>Nombre</th>
-				<th>Opciones</th>
 			</thead>
 			<tbody>
 	
 	{%for escuela in escuelas%}
 	
 				<tr>
-					<td>{{escuela.username}}</td>
+					<td><a href="{%url 'accounts:DetailViewEscuela' escuela.username%}">{{escuela.username}}</a></td>
 					<td>{{escuela.get_full_name}}</td>
-					<td><a href="{%url 'accounts:DetailViewEscuela' escuela.username%}">Ver detalle</a></td>
 				</tr>
 
 			{%empty%}
 
 				<tr>
-					<td colspan="6">Lista de escuelas vacia</td>
+					<td colspan="2">Lista de escuelas vacia</td>
 				</tr>
 
 			{%endfor%}

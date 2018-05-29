@@ -26,7 +26,7 @@
   </button>
 
   {%endif%}
-  <a class="navbar-brand" href="#" style="color: white;">TEASIB 1.9.2 Convocatoria {%anio_convocatoria%}</a>
+  <a class="navbar-brand" href="#" style="color: white;">TEASIB 1.10 Convocatoria {%anio_convocatoria%}</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
@@ -50,7 +50,7 @@
               Escuelas
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{%url 'accounts:ListViewEntidades'%}">Por entidades</a>
+                <a class="dropdown-item" href="{%url 'accounts:ListViewEntidades'%}">entidades</a>
                 <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
               </div>
             </li>
@@ -59,7 +59,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.sim.slug%}">Por municipios</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.sim.slug%}">Municipios</a>
           <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.sim.slug%}">Reporte general</a>          
           <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
         </div>
@@ -69,7 +69,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.superintendente.slug%}">Por municipios</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.superintendente.slug%}">Municipios</a>
           <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.superintendente.slug%}">Reporte general</a>          
           <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
         </div>
@@ -79,7 +79,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.perfil.residente_obra_ejecutora.slug%}">Por municipios</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.perfil.residente_obra_ejecutora.slug%}">Municipios</a>
           <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.perfil.residente_obra_ejecutora.slug%}">Reporte general</a>          
           <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
         </div>
@@ -107,7 +107,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.coordinador_estatal_inifed.slug%}">Por municipios</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.coordinador_estatal_inifed.slug%}">Municipios</a>
           <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.coordinador_estatal_inifed.slug%}">Reporte general</a>          
           <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
         </div>
@@ -117,7 +117,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.perfil.residente_tecnico_inifed.slug%}">Por municipios</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewZonas' request.user.perfil.residente_tecnico_inifed.slug%}">Municipios</a>
           <a class="dropdown-item" href="{%url 'accounts:ListViewAvanceEscuelas' request.user.perfil.residente_tecnico_inifed.slug%}">Reporte general</a>          
           <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
         </div>
@@ -128,7 +128,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escuelas</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{%url 'accounts:ListViewRegiones'%}">Por regiones</a>
+          <a class="dropdown-item" href="{%url 'accounts:ListViewRegiones'%}">Regiones</a>
           <a class="dropdown-item" href="{%url 'accounts:SearchViewEscuelas'%}">Buscar</a>
         </div>
       </li>
