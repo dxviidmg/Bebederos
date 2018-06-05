@@ -167,7 +167,7 @@
 							{%endif%}
 
 						{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}
-						<td>{%if escuela.escuela_primer_prueba.reporte_toma_agua%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
+						<td>{%if escuela.escuela_primer_prueba.foto_toma_agua_1%}<i class="fa fa-check" aria-hidden="true"></i>{%endif%}</td>
 						{%endif%}
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Invitado"%}

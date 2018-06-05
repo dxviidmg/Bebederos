@@ -21,7 +21,7 @@ class BebederoUpdateForm1(forms.ModelForm):
 class BebederoUpdateForm2(forms.ModelForm):
 	class Meta:
 		model = SistemaBebedero
-		fields = ('no_serie_sp', 'proveedor', 'no_serie_mueble', 'packing_list')
+		fields = ('no_serie_sp', 'proveedor', 'no_serie_mueble', 'asignacion', 'packing_list')
 	def __init__(self, *args, **kwargs):
 		super(BebederoUpdateForm2, self).__init__(*args, **kwargs)
 #		self.fields['linea_ensamblaje'].required = True

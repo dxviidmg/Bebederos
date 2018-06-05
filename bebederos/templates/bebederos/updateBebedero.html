@@ -38,23 +38,23 @@
 				{%endif%}
 			</form>
 
-		{%if entidad.abreviatura and sistemaBebedero.mueble and sistemaBebedero.sistema_potabilizacion and sistemaBebedero.proveedor%}
-		<p>Numero de trazabilidad: {{sistemaBebedero.no_trazabilidad}}</p>
+		{%if request.user.perfil.tipo == "PM"%}
 
-		{%if sistemaBebedero.packing_list is False%}
+			{%if sistemaBebedero.no_serie_mueble%}
+
+		<p>Numero de trazabilidad: 	{{sistemaBebedero.no_trazabilidad}}</p>
+			{%endif%}
+
+			{%if sistemaBebedero.asignacion is False%}
 
 		<div class="row">
 			<div class="col-md-4 col-sm-6 col-12">
 		<a class="btn btn-primary" href="{%url 'bebederos:ExportComprobanteTrazabilidadPDF' sistemaBebedero.pk%}" role="button">Descargar guía de trazabilidad</a>
+			</div>
 		</div>
-		</div>
-			<form action="." method="post" enctype="multipart/form-data">
-				{%csrf_token%}
-				{{EdicionBebederoForm3 | bootstrap}}
-				<a href=""><input type="submit" value="Guardar cambios"></a>
-			</form>
-
-		{%endif%}
+	
+			{%endif%}
+	
 		{%endif%}
 
 		</div>

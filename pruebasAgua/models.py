@@ -24,18 +24,13 @@ class PrimerPrueba(models.Model):
 		("≤", "≤"),
 	)
 
-	modalidad_envio_choices = (
-		("Paqueteria", "Paqueteria"),
-		("Camión", "Camión"),
-	)
-
 	escuela = models.OneToOneField(User, related_name="escuela_primer_prueba")
 	creacion = models.DateField(default=timezone.now, verbose_name="Fecha de muestreo")
 
 	#Fase de Toma de Agua / SI
-	reporte_toma_agua = models.FileField(upload_to='pruebas/1/reportes/%Y/%m/%d/', verbose_name="Etiqueta de muestra")
 	foto_toma_agua_1 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía de fachada de la escuela donde se muestre el CCT", null=True, blank=True)
 	foto_toma_agua_2 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía de muestra en el punto de muestreo", null=True, blank=True)
+	foto_toma_agua_3 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Total de muestras", null=True, blank=True)
 
 	#Fase de analisis / LAB
 	resultados_laboratorio = models.FileField(upload_to='pruebas/1/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis de laboratorio", null=True, blank=True)
@@ -112,21 +107,16 @@ class SegundaPrueba(models.Model):
 		("≤", "≤"),		
 	)
 
-	modalidad_envio_choices = (
-		("Paqueteria", "Paqueteria"),
-		("Camión", "Camión"),
-	)
-		
 	escuela = models.OneToOneField(User, related_name="escuela_segunda_prueba")	
 
 	#Fase de Toma de Agua / SI
-	reporte_toma_agua = models.FileField(upload_to='pruebas/2/reportes_de_toma/%Y/%m/%d/', verbose_name="Etiqueta de muestra")
-	foto_toma_agua_1 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía de fachada de la escuela donde se muestre el CCT", null=True, blank=True)
-	foto_toma_agua_2 = models.FileField(upload_to='pruebas/1/fotos/%Y/%m/%d/', verbose_name="Fotografía de muestra en el punto de muestro", null=True, blank=True)
-
+	foto_toma_agua_1 = models.FileField(upload_to='pruebas/2/fotos/%Y/%m/%d/', verbose_name="Fotografía de fachada de la escuela donde se muestre el CCT", null=True, blank=True)
+	foto_toma_agua_2 = models.FileField(upload_to='pruebas/2/fotos/%Y/%m/%d/', verbose_name="Fotografía de muestra en el punto de muestro", null=True, blank=True)
+	foto_toma_agua_3 = models.FileField(upload_to='pruebas/2/fotos/%Y/%m/%d/', verbose_name="Total de muestras", null=True, blank=True)
+ 	
 	#Fase de analisis / LAB
-	registro_campo = models.FileField(upload_to='pruebas/1/hojasCampo/%Y/%m/%d/', verbose_name="Registro de campo", null=True, blank=True)
-	cadena_custodia = models.FileField(upload_to='pruebas/1/cadenasCustioda/%Y/%m/%d/', verbose_name="Cadena de custodia", null=True, blank=True)
+	registro_campo = models.FileField(upload_to='pruebas/2/hojasCampo/%Y/%m/%d/', verbose_name="Registro de campo", null=True, blank=True)
+	cadena_custodia = models.FileField(upload_to='pruebas/2/cadenasCustioda/%Y/%m/%d/', verbose_name="Cadena de custodia", null=True, blank=True)
 
 	#Fase de Sugerencias / ECA(Pilar)
 	resultados_laboratorio = models.FileField(upload_to='pruebas/2/resultados/%Y/%m/%d/', verbose_name="Resultados de análisis de laboratorio", null=True, blank=True)
@@ -135,7 +125,7 @@ class SegundaPrueba(models.Model):
 	dictamen = models.ForeignKey(DictamenIMTA, null=True, blank=True)
 	validacion = models.CharField(max_length=11, default="En espera", choices=validacion_choices, verbose_name="Validación")
 
-	creacion = models.DateField(default=timezone.now, verbose_name="Fecha de creación")
+	creacion = models.DateField(default=timezone.now, verbose_name="Fecha de muestreo")
 
 	#Datos de análisis
 	no_registro = models.CharField(max_length=30, null=True, blank=True, verbose_name="Número de registro")	
