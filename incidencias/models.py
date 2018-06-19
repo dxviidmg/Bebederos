@@ -32,7 +32,9 @@ class Incidencia(models.Model):
 	solucion = models.TextField(verbose_name="Solución", null=True, blank=True)
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	escuela = models.ForeignKey(User, related_name="escuela_incidencia", null=True, blank=True)
-	
+	evidencia = models.ImageField(upload_to="incidencias/%Y/%m/%d/", null=True, blank=True, verbose_name="Evidencia fotográfica de incidencia")
+	evidencia_2 = models.ImageField(upload_to="incidencias/%Y/%m/%d/", null=True, blank=True, verbose_name="Evidencia fotográfica de solución")
+
 	def __str__(self):
 		return '{}'.format(self.escuela)
 

@@ -137,9 +137,9 @@ def ExportIncidenciasCSV(request):
 	response = HttpResponse(content_type='text/csv')
 	response['Content-Disposition'] = 'attachment; filename="Reporte de incidencias del ' + ahora +'.csv"'
 	writer = csv.writer(response)
-	writer.writerow(['Entidad', 'Zona', 'Municipio', 'Localidad', 'Domicilio', 'C. C. T.','Nombre', 'Folio', 'Descripción', 'Status', 'Prioridad', 'Fase', 'Solución', 'Autor', 'Fecha de creacion'])
+	writer.writerow(['Entidad', 'Zona', 'Municipio', 'Localidad', 'Domicilio', 'C. C. T.','Nombre', 'Folio', 'Descripción', 'Status', 'Prioridad', 'Fase', 'Solución', 'Autor(Nombre)',  'Autor(Apellidos)', 'Fecha de creacion'])
 
-	inicidencias = Incidencia.objects.all().values_list('escuela__perfil__municipio__zona__entidad__nombre', 'escuela__perfil__municipio__zona__nombre', 'escuela__perfil__municipio__nombre', 'escuela__perfil__localidad', 'escuela__perfil__domicilio', 'escuela__username', 'escuela__first_name', 'pk', 'descripcion', 'status', 'prioridad', 'fase', 'solucion', 'autor', 'creacion')
+	inicidencias = Incidencia.objects.all().values_list('escuela__perfil__municipio__zona__entidad__nombre', 'escuela__perfil__municipio__zona__nombre', 'escuela__perfil__municipio__nombre', 'escuela__perfil__localidad', 'escuela__perfil__domicilio', 'escuela__username', 'escuela__first_name', 'pk', 'descripcion', 'status', 'prioridad', 'fase', 'solucion', 'autor__first_name', 'autor__last_name', 'creacion')
 
 	for incidencia in inicidencias:
 		writer.writerow(incidencia)

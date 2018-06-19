@@ -21,6 +21,11 @@
 			<h4>Actualización de Incidencia</h4>
 			<p>Folio: {{incidencia.pk}}</p>
 			<p>Descripcíon: {{incidencia.descripcion}}</p>
+
+			{%if incidencia.evidencia%}
+			<p>Evidencia fotográfica: <a href="{{incidencia.evidencia.url}}">Ver</a></p>
+			{%endif%}
+			<p>Autor: {{incidencia.autor}}</p>
 			<p>Fase: {{incidencia.fase}}</p>
 			<p>Prioridad: {{incidencia.prioridad}}</p>
 

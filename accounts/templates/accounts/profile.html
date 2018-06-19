@@ -20,19 +20,12 @@
 				<p>Cantidad de alumnos: {{request.user.perfil.plantilla_escolar}}</p>
 				{%endif%}
 
+				<h4>
+				{%if request.user.perfil.tipo == "INIFED"%}Personal de INIFED{%endif%}</h4>
+
 				{%if request.user.perfil.telefono%}
 				<p>Teléfono: {{request.user.perfil.telefono}}</p>
-				{%endif%}
-
-				{%if request.user.perfil.domicilio%}			
-				<p>Domicilio: {{request.user.perfil.domicilio}}</p>
-				{%endif%}
-
-
-				{%if request.user.perfil.conexion%}			
-				<p>Domicilio: {{request.user.perfil.conexion}}</p>
-				{%endif%}
-				
+				{%endif%}				
 			</div>
 		</div>
 	</div>

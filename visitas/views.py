@@ -75,14 +75,17 @@ class CRViewInicioFuncionamiento(View):
 
 		try:
 			funcionamiento = InicioFuncionamiento.objects.get(escuela=escuela)
+			EdicionFuncionamientoForm=InicioFuncionamientoCreateForm(instance=funcionamiento)
 		except InicioFuncionamiento.DoesNotExist:
 			funcionamiento = None
-
+			EdicionFuncionamientoForm = None
+	
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
 			'NuevoFuncionamientoForm': NuevoFuncionamientoForm,
 			'funcionamiento': funcionamiento,
+			'EdicionFuncionamientoForm': EdicionFuncionamientoForm,
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -90,10 +93,21 @@ class CRViewInicioFuncionamiento(View):
 		escuela = User.objects.get(perfil=perfil)
 		NuevoFuncionamientoForm=InicioFuncionamientoCreateForm(data=request.POST, files=request.FILES)
 
-		if NuevoFuncionamientoForm.is_valid():
-			NuevoFuncionamiento = NuevoFuncionamientoForm.save(commit=False)
-			NuevoFuncionamiento.escuela = escuela
-			NuevoFuncionamiento.save()
+		try:
+			funcionamiento = InicioFuncionamiento.objects.get(escuela=escuela)
+			EdicionFuncionamientoForm=InicioFuncionamientoCreateForm(instance=funcionamiento, files=request.FILES)
+
+			if EdicionFuncionamientoForm.is_valid():
+				EdicionFuncionamientoForm.save()
+
+		except InicioFuncionamiento.DoesNotExist:
+			funcionamiento = None
+			EdicionFuncionamientoForm = None
+			
+			if NuevoFuncionamientoForm.is_valid():
+				NuevoFuncionamiento = NuevoFuncionamientoForm.save(commit=False)
+				NuevoFuncionamiento.escuela = escuela
+				NuevoFuncionamiento.save()
 
 		return redirect("visitas:CRViewInicioFuncionamiento", pk=perfil.pk)
 

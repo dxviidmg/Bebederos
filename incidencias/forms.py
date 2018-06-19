@@ -4,9 +4,9 @@ from .models import *
 class IncidenciaCreateForm(forms.ModelForm):
 	class Meta:
 		model = Incidencia
-		fields = ('fase', 'prioridad', 'descripcion')
+		fields = ('fase', 'prioridad', 'descripcion', 'evidencia')
 
 class IncidenciaEditForm(forms.ModelForm):
 	class Meta:
 		model = Incidencia
-		fields = ('solucion', 'status')		
+		fields = ('solucion', 'status', 'evidencia_2')		

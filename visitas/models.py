@@ -25,9 +25,9 @@ class VisitaDeAcuerdo(models.Model):
 
 class InicioFuncionamiento(models.Model):
 	escuela = models.OneToOneField(User, related_name="escuela_inicio_funcionamiento")
-	acta_funcionamiento = models.FileField(upload_to='funcionamiento/actas/%Y/%m/%d/', verbose_name="Acta")
-	video = models.FileField(upload_to='funcionamiento/videos/%Y/%m/%d/', verbose_name="Video")
-	recibo_llaves = models.FileField(upload_to='funcionamiento/recibos/%Y/%m/%d/', verbose_name="Recibo de llaves", null=True, blank=True)	
+	acta_funcionamiento = models.FileField(upload_to='funcionamiento/actas/%Y/%m/%d/', verbose_name="Acta",  null=True, blank=True)
+	video = models.FileField(upload_to='funcionamiento/videos/%Y/%m/%d/', verbose_name="Video", null=True, blank=True)
+	recibo_llaves = models.FileField(upload_to='funcionamiento/recibos/%Y/%m/%d/', verbose_name="Recibo de llaves", null=True, blank=True)
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 
 	def __str__(self):
