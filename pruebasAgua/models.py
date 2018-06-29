@@ -110,9 +110,9 @@ class SegundaPrueba(models.Model):
 	escuela = models.OneToOneField(User, related_name="escuela_segunda_prueba")	
 
 	#Fase de Toma de Agua / SI
-	foto_toma_agua_1 = models.FileField(upload_to='pruebas/2/fotos/%Y/%m/%d/', verbose_name="Fotografía de fachada de la escuela donde se muestre el CCT", null=True, blank=True)
-	foto_toma_agua_2 = models.FileField(upload_to='pruebas/2/fotos/%Y/%m/%d/', verbose_name="Fotografía de muestra en el punto de muestro", null=True, blank=True)
-	foto_toma_agua_3 = models.FileField(upload_to='pruebas/2/fotos/%Y/%m/%d/', verbose_name="Total de muestras", null=True, blank=True)
+	foto_toma_agua_1 = models.FileField(upload_to='pruebas/2/fotos/%Y/%m/%d/', verbose_name="Etiqueta de muestra", null=True, blank=True)
+#	foto_toma_agua_2 = models.FileField(upload_to='pruebas/2/fotos/%Y/%m/%d/', verbose_name="Fotografía de muestra en el punto de muestro", null=True, blank=True)
+#	foto_toma_agua_3 = models.FileField(upload_to='pruebas/2/fotos/%Y/%m/%d/', verbose_name="Total de muestras", null=True, blank=True)
  	
 	#Fase de analisis / LAB
 	registro_campo = models.FileField(upload_to='pruebas/2/hojasCampo/%Y/%m/%d/', verbose_name="Registro de campo", null=True, blank=True)

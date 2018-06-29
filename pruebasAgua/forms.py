@@ -157,13 +157,13 @@ class PrimerPruebaUpdateForm12(forms.ModelForm):
 class SegundaPruebaCreateForm(forms.ModelForm):
 	class Meta:
 		model = SegundaPrueba
-		fields = ('foto_toma_agua_1', 'foto_toma_agua_2', 'foto_toma_agua_3', 'creacion')
+		fields = ('foto_toma_agua_1', 'creacion')
 #		fields = ()
 	def __init__(self, *args, **kwargs):
 		super(SegundaPruebaCreateForm, self).__init__(*args, **kwargs)
 		self.fields['foto_toma_agua_1'].required = True
-		self.fields['foto_toma_agua_2'].required = True
-		self.fields['foto_toma_agua_3'].required = True
+#		self.fields['foto_toma_agua_2'].required = True
+#		self.fields['foto_toma_agua_3'].required = True
 
 class SegundaPruebaUpdateForm1(forms.ModelForm):
 	class Meta:

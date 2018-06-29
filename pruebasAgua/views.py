@@ -194,7 +194,7 @@ class CRUViewPrimerPrueba(View):
 			if NuevaPruebaForm.is_valid():
 				NuevaPrueba = NuevaPruebaForm.save(commit=False)
 				NuevaPrueba.escuela = escuela
-				NuevaPrueba.laboratorio = laboratorio
+#				NuevaPrueba.laboratorio = laboratorio
 				NuevaPrueba.save()
 			
 		return redirect("pruebas:CRUViewPrimerPrueba", pk=perfil.pk)
