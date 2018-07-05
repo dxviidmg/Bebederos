@@ -19,7 +19,7 @@
 		</div>
 	</div>
 
-	{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "Administrador"%}
+	{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "Administrador"  or request.user.perfil.tipo == "INIFED"%}
 		{%if mantenimientos.count < 24%}
 
 	<div class="row espacio2">
@@ -46,10 +46,14 @@
 						<th>Fecha de mantenimiento</th>
 						<th>Volumen</th>
 						<th>Carnet</th>
+						<th>Mueble</th>
 						<th>Tipo</th>
 						<th>Descripción</th>
 						<th>Fecha y hora de registro</th>
+
+						{%if request.user.perfil.tipo != "INIFED"%}
 						<th>Opciones</th>
+						{%endif%}
 					</thead>
 					<tbody>
 					
@@ -62,16 +66,20 @@
 							<td>
 							{{mantenimiento.volumen}}</td>
 							<td><a href="{{mantenimiento.carnet.url}}">Descargar</a></td>
+							<td>{%if mantenimiento.foto_mueble%}<a href="{{mantenimiento.foto_mueble.url}}">Descargar</a> {%endif%}</td>
 							<td>{{mantenimiento.tipo}}</td>
 							<td>{%if mantenimiento.descripcion%}{{mantenimiento.descripcion}}{%endif%}</td>
 							<td>{{mantenimiento.creacion}}</td>
+
+							{%if request.user.perfil.tipo != "INIFED"%}
 							<td><a href="{%url 'mantenimiento:UpdateViewMantenimiento' mantenimiento.pk%}">Actualizar</a></td>
+							{%endif%}
 						</tr>
 
 					{%empty%}
 
 						<tr>
-							<td colspan="7">Sin registro</td>
+							<td colspan="9">Sin registro</td>
 						</tr>
 
 					{%endfor%}

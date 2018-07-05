@@ -27,7 +27,9 @@ class InicioFuncionamiento(models.Model):
 	escuela = models.OneToOneField(User, related_name="escuela_inicio_funcionamiento")
 	acta_funcionamiento = models.FileField(upload_to='funcionamiento/actas/%Y/%m/%d/', verbose_name="Acta",  null=True, blank=True)
 	recibo_llaves = models.FileField(upload_to='funcionamiento/recibos/%Y/%m/%d/', verbose_name="Recibo de llaves", null=True, blank=True)
-	foto = models.FileField(upload_to='funcionamiento/fotos/%Y/%m/%d/', verbose_name="Evidencia fotográfica", null=True, blank=True)
+	foto = models.FileField(upload_to='funcionamiento/fotos/%Y/%m/%d/', verbose_name="Evidencia fotográfica 1", null=True, blank=True)
+	foto_2 = models.FileField(upload_to='funcionamiento/fotos/%Y/%m/%d/', verbose_name="Evidencia fotográfica 2", null=True, blank=True)
+	foto_3 = models.FileField(upload_to='funcionamiento/fotos/%Y/%m/%d/', verbose_name="Evidencia fotográfica 3", null=True, blank=True)	
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 
 	def __str__(self):
