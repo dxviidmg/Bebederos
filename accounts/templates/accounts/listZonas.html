@@ -98,7 +98,7 @@
 		</div>
 	</div>
 
-	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ"%}
+	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Laboratorio"%}
 	<div class="espacio2">
 		<form action="." method="post" enctype="multipart/form-data">
 			<p>Actualización de documentación</p>
