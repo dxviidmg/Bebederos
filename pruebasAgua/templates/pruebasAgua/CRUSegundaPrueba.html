@@ -56,26 +56,6 @@
 		{%if request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora"%}
 		
 		<div class="col-md-5">
-		
-		{%if prueba.rastreabilidad_interna_envio%}
-
-			<a href="{{prueba.rastreabilidad_interna_envio.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Rastreabilidad interna de envío</a>
-
-		{%endif%}
-
-		</div>
-
-		<div class="col-md-5">
-		
-		{%if prueba.rastreabilidad_interna_recepcion%}
-
-			<a href="{{prueba.rastreabilidad_interna_recepcion.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Rastreabilidad interna de recepcion</a>
-
-		{%endif%}
-
-		</div>
-		
-		<div class="col-md-5">
 
 		{%if prueba.registro_campo%}
 
@@ -404,11 +384,11 @@
 
 	{%else%}
 	
-	{%if request.user.perfil.tipo == "Ejecutora"%}
+	{%if request.user.perfil.tipo == "Ejecutora"  or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "Administrador"%}
 	<div class="row">
 		<div class="col-12">
 			<form action="." method="post" enctype="multipart/form-data">
-				<h4>Registro de documentación de la toma de agua</h4>
+				<h4>Registro de documentación de la toma de agua sgsgsdf</h4>
 				{%csrf_token%}
 				{{NuevaPruebaForm | bootstrap}}
 				<a href=""><input type="submit" value="Crear registro"></a>
