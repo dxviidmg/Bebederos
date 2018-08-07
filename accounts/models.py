@@ -152,6 +152,7 @@ class Perfil(models.Model):
 	mantenimientos = models.IntegerField(null=True, blank=True)
 	evidencias = models.IntegerField(null=True, blank=True)
 	expediente_tecnico = models.BooleanField(default=False, verbose_name="Realización de expediente técnico")
+	prioridad = models.BooleanField(default=False, verbose_name="Prioridad de construcción")
 
 	#Llave foranea para Residentes Técnicos de INIFED
 	residente_tecnico_inifed = models.ForeignKey(Entidad, verbose_name="Es residente estatal de INIFED del estado de", null=True, blank=True, related_name="residente_tecnico_inifed")

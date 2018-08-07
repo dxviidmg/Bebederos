@@ -266,14 +266,9 @@ class CRUViewSegundaPrueba(View):
 		NuevaPruebaForm = SegundaPruebaCreateForm(data=request.POST, files=request.FILES)
 		laboratorio = User.objects.get(pk=request.user.pk)
 
-		if NuevaPruebaForm.is_valid():
-			NuevaPrueba = NuevaPruebaForm.save(commit=False)
-			NuevaPrueba.escuela = escuela
-			NuevaPrueba.laboratorio = laboratorio
-			NuevaPrueba.save()
-
 		try:
 			prueba = SegundaPrueba.objects.get(escuela=escuela)
+			EdicionPruebaForm0 = SegundaPruebaCreateForm(instance=prueba, data=request.POST, files=request.FILES)			
 			EdicionPruebaForm1 = SegundaPruebaUpdateForm1(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm2 = SegundaPruebaUpdateForm2(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm3 = SegundaPruebaUpdateForm3(instance=prueba, data=request.POST, files=request.FILES)
@@ -286,6 +281,9 @@ class CRUViewSegundaPrueba(View):
 			EdicionPruebaForm10 = SegundaPruebaUpdateForm10(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm11 = SegundaPruebaUpdateForm11(instance=prueba, data=request.POST, files=request.FILES)
 			EdicionPruebaForm12 = SegundaPruebaUpdateForm12(instance=prueba, data=request.POST, files=request.FILES)
+
+			if EdicionPruebaForm0.is_valid():
+				EdicionPruebaForm0.save()
 
 			if EdicionPruebaForm1.is_valid():
 				EdicionPruebaForm1.save()
@@ -325,6 +323,7 @@ class CRUViewSegundaPrueba(View):
 
 		except SegundaPrueba.DoesNotExist:
 			prueba = None
+			EdicionPruebaForm0 = None
 			EdicionPruebaForm1 = None
 			EdicionPruebaForm2 = None
 			EdicionPruebaForm3 = None
@@ -338,6 +337,12 @@ class CRUViewSegundaPrueba(View):
 			EdicionPruebaForm11 = None
 			EdicionPruebaForm12 = None
 
+			if NuevaPruebaForm.is_valid():
+				NuevaPrueba = NuevaPruebaForm.save(commit=False)
+				NuevaPrueba.escuela = escuela
+				NuevaPrueba.laboratorio = laboratorio
+				NuevaPrueba.save()
+			
 		return redirect("pruebas:CRUViewSegundaPrueba", pk=perfil.pk)
 
 def ExportPruebasPorEscuelasCSV(request, pk):
