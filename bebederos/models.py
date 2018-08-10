@@ -57,11 +57,10 @@ class SistemaBebedero(models.Model):
 		if self.sistema_potabilizacion and self.proveedor:
 			cantidadCeros = 4-len(str(self.no_serie_mueble))
 			no_serie_mueble = cantidadCeros*"0" + str(self.no_serie_mueble)
-			hoy = datetime.today().strftime('%d%m%y')
 			sistemaBebedero = SistemaBebedero.objects.get(pk=self.pk)
 			escuela = User.objects.get(pk=sistemaBebedero.escuela.pk)
 			entidad = escuela.perfil.municipio.zona.entidad
-			no_trazabilidad = str(entidad.abreviatura) + "-" + str(sistemaBebedero.proveedor) + "-" + str(sistemaBebedero.mueble) + "-" + str(no_serie_mueble) + "-" + str(sistemaBebedero.sistema_potabilizacion) + "-" + str(hoy) + "-" + "T304" + "-" + str(escuela.username)
+			no_trazabilidad = str(entidad.abreviatura) + "-" + str(sistemaBebedero.proveedor) + "-" + str(sistemaBebedero.mueble) + "-" + str(no_serie_mueble) + "-" + str(sistemaBebedero.sistema_potabilizacion) + "-" + "T304" + "-" + str(escuela.username)
 			self.no_trazabilidad = no_trazabilidad
 			self.save()
 		

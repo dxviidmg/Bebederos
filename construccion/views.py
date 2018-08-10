@@ -18,14 +18,17 @@ class CRViewInicioDeTrabajo(View):
 
 		try:
 			inicio = InicioDeTrabajo.objects.get(escuela=escuela)
+			EdicionInicioForm = InicioDeTrabajoCreateForm(instance=inicio)
 		except InicioDeTrabajo.DoesNotExist:
 			inicio = None
+			EdicionInicioForm = None
 
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
 			'NuevoInicioForm': NuevoInicioForm,
 			'inicio': inicio,
+			'EdicionInicioForm': EdicionInicioForm,
 		}
 		return render(request, template_name, context)
 	def post(self, request, pk):
@@ -34,11 +37,22 @@ class CRViewInicioDeTrabajo(View):
 		NuevoInicioForm = InicioDeTrabajoCreateForm(data=request.POST, files=request.FILES)
 		si = User.objects.get(pk=request.user.pk)
 
-		if NuevoInicioForm.is_valid():
-			NuevoInicio = NuevoInicioForm.save(commit=False)
-			NuevoInicio.escuela = escuela
-			NuevoInicio.si = si
-			NuevoInicio.save()
+		try:
+			inicio = InicioDeTrabajo.objects.get(escuela=escuela)
+			EdicionInicioForm = InicioDeTrabajoCreateForm(instance=inicio, files=request.FILES)
+
+			if EdicionInicioForm.is_valid():
+				EdicionInicioForm.save()
+
+		except InicioDeTrabajo.DoesNotExist:
+			inicio = None
+			EdicionInicioForm = None
+
+			if NuevoInicioForm.is_valid():
+				NuevoInicio = NuevoInicioForm.save(commit=False)
+				NuevoInicio.escuela = escuela
+				NuevoInicio.si = si
+				NuevoInicio.save()
 
 		return redirect("construccion:CRViewInicioDeTrabajo", pk=perfil.pk)
 

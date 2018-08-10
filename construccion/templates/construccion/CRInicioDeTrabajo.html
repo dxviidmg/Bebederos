@@ -6,7 +6,7 @@
 
 	<div class="row">
 		<div class="col-12">	
-			<h1>Inicio de trabajo</h1>
+			<h1>Inicio de Construcción</h1>
 			<a href="{%url 'accounts:DetailViewEscuela' perfil.user.username%}">Regresar</a>
 			<h3>Escuela {{escuela.get_full_name}}</h3>
 		</div>
@@ -25,16 +25,25 @@
 
 	{%if inicio.acta_inicio%}
 
-			<a href="{{inicio.acta_inicio.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Acta de inicio de trabajo</a>
-
-	{%else%}
-		
-		<p>Pendiente a subir</p>
+			<a href="{{inicio.acta_inicio.url}}" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Acta de inicio de contrucción</a>
 	
 	{%endif%}
 
 		</div>
 	</div>
+
+	{%if request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador"%}
+	<div class="row">
+		<div class="col-12">
+			<form action="." method="post" enctype="multipart/form-data">
+				<h4>Actualización de documentación</h4>
+				{%csrf_token%}
+				{{EdicionInicioForm | bootstrap}}
+				<a href=""><input type="submit" value="Crear registro"></a>
+			</form>
+		</div>
+	</div>
+	{%endif%}
 
 	{%else%}
 	
