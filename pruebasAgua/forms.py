@@ -5,13 +5,13 @@ from django.contrib.admin.widgets import AdminDateWidget
 class PrimerPruebaCreateForm(forms.ModelForm):
 	class Meta:
 		model = PrimerPrueba
-		fields = ('foto_toma_agua_1', 'foto_toma_agua_2', 'foto_toma_agua_3', 'creacion')
+		fields = ('foto_toma_agua_1', 'foto_toma_agua_2', 'foto_toma_agua_3', 'creacion', 'resultados_laboratorio')
 #		fields = ()
 	def __init__(self, *args, **kwargs):
 		super(PrimerPruebaCreateForm, self).__init__(*args, **kwargs)
 		self.fields['foto_toma_agua_1'].required = True
 		self.fields['foto_toma_agua_2'].required = True
-		self.fields['foto_toma_agua_3'].required = True
+#		self.fields['foto_toma_agua_3'].required = True
 
 class PrimerPruebaUpdateForm1(forms.ModelForm):
 	class Meta:

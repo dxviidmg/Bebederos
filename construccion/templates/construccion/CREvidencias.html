@@ -41,7 +41,7 @@
 						<th>Fase</th>
 						<th>Hora y fecha de registro</th>
 						<th>Aprobación de SIM</th>
-						<th>Opciones</th>
+						<th colspan="2">Opciones</th>
 					</thead>
 					<tbody>
 					
@@ -53,6 +53,7 @@
 							<td>{{evidencia.creacion}}</td>
 							<td>{{evidencia.aprobacion_SI}}</td>
 							{%if request.user.perfil.cargo == "SIM" or request.user.perfil.tipo == "Administrador"%}
+							<td><a href="{{evidencia.foto.url}}">Ver</a></td>
 							<td><a href="{%url 'construccion:UpdateViewEvidencia' evidencia.pk%}">Revisar</a></td>
 							{%else%}
 							<td><a href="{%url 'construccion:UpdateViewEvidencia' evidencia.pk%}">Editar</a></td>
