@@ -129,7 +129,7 @@ class SegundaPrueba(models.Model):
 
 	#Datos de análisis
 	no_registro = models.CharField(max_length=30, null=True, blank=True, verbose_name="Número de registro")	
-	creacion_reporte_analisis = models.DateField(null=True, verbose_name="Fecha de creación del reporte de análisis")
+	creacion_reporte_analisis = models.DateField(null=True, blank=True, verbose_name="Fecha de creación del reporte de análisis")
 
 	#Comparaciones
 	comparacion_color_verdadero = models.CharField(max_length=1, choices=comparacion_choices, default="=", verbose_name=".")
