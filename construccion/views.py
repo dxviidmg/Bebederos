@@ -101,7 +101,7 @@ class CRViewEvidencias(View):
 		escuela = User.objects.get(perfil=perfil)
 
 		evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela)
-		evidencias = evidencias.extra(select={'myinteger': 'CAST(fase AS INTEGER)'}).order_by('myinteger')
+#		evidencias = evidencias.extra(select={'myinteger': 'CAST(fase AS INTEGER)'}).order_by('myinteger')
 #		print(e2) 
 
 		NuevaEvidenciaForm = EvidenciaConstruccionCreateForm()
