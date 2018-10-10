@@ -37,26 +37,48 @@
 			<div class="table-responsive">
 				<table class="table table-bordered">
 					<thead>
+
+					{%if not request.user.perfil.tipo == "INIFED"%}
+
 						<th>Folio</th>
+
+					{%endif%}
 						<th>Fase</th>
-						<th>Hora y fecha de registro</th>
+
+					{%if not request.user.perfil.tipo == "INIFED"%}
+						
+						<th>Hora y fecha de registro</th>	
 						<th>Aprobación de SIM</th>
-						<th colspan="2">Opciones</th>
+
+						{%endif%}	
+						<th colspan="{%if not request.user.perfil.tipo == "INIFED"%}2{%else%}1{%endif%}">Opciones</th>
 					</thead>
 					<tbody>
 					
 					{% for evidencia in evidencias%}
 
 						<tr>
+						{%if not request.user.perfil.tipo == "INIFED"%}
+
 							<td>{{evidencia.pk}}</td>
+						
+						{%endif%}
+
 							<td>{{evidencia.fase}}</td>
+						
+						{%if not request.user.perfil.tipo == "INIFED"%}
 							<td>{{evidencia.creacion}}</td>
+						{%endif%}
+						{%if not request.user.perfil.tipo == "INIFED"%}
+
 							<td>{{evidencia.aprobacion_SI}}</td>
-							{%if request.user.perfil.cargo == "SIM" or request.user.perfil.tipo == "Administrador"%}
+						
+						{%endif%}	
 							<td><a href="{{evidencia.foto.url}}">Ver</a></td>
-							<td><a href="{%url 'construccion:UpdateViewEvidencia' evidencia.pk%}">Revisar</a></td>
-							{%else%}
-							<td><a href="{%url 'construccion:UpdateViewEvidencia' evidencia.pk%}">Editar</a></td>
+
+							{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador"%}
+
+							<td><a href="{%url 'construccion:UpdateViewEvidencia' evidencia.pk%}">{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.cargo == "SIM"%}Revisar{%else%}Editar{%endif%}</a></td>
 							{%endif%}
 						</tr>
 

@@ -153,6 +153,7 @@ class Perfil(models.Model):
 	evidencias = models.IntegerField(null=True, blank=True)
 	expediente_tecnico = models.BooleanField(default=False, verbose_name="Realización de expediente técnico")
 	prioridad = models.BooleanField(default=False, verbose_name="Prioridad de construcción")
+	nombre_ultima_evidencia = models.CharField(max_length=50, null=True, blank=True)
 
 	#Llave foranea para Residentes Técnicos de INIFED
 	residente_tecnico_inifed = models.ForeignKey(Entidad, verbose_name="Es residente estatal de INIFED del estado de", null=True, blank=True, related_name="residente_tecnico_inifed")
@@ -161,7 +162,9 @@ class Perfil(models.Model):
 	def UpdateAvance(self):
 		perfil = Perfil.objects.get(pk=self.pk)
 		escuela = User.objects.get(perfil=perfil)
-		ultimaEvidencia = EvidenciaConstruccion.objects.filter(escuela=escuela).order_by('pk').last()
+		evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela)
+		evidencias = evidencias.extra(select={'myinteger': 'CAST(fase AS INTEGER)'}).order_by('myinteger')
+		ultimaEvidencia = evidencias.last()
 
 		if ultimaEvidencia.fase == "1° Trazo" and ultimaEvidencia.aprobacion_SI == "Aprobado":
 			self.avance = 10
@@ -204,8 +207,12 @@ class Perfil(models.Model):
 	def UpdateEvidenciasCount(self):
 		perfil = Perfil.objects.get(pk=self.pk)
 		escuela = User.objects.get(perfil=perfil)
-		evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela).count()
-		self.evidencias = evidencias
+		evidencias_count = EvidenciaConstruccion.objects.filter(escuela=escuela).count()
+		evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela)
+		evidencias = evidencias.extra(select={'myinteger': 'CAST(fase AS INTEGER)'}).order_by('myinteger')
+		ultimaEvidencia = evidencias.last()		
+		self.evidencias = evidencias_count
+		self.nombre_ultima_evidencia = ultimaEvidencia.fase
 		self.save()		
 
 	def __str__(self):
