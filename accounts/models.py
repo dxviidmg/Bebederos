@@ -208,11 +208,14 @@ class Perfil(models.Model):
 		perfil = Perfil.objects.get(pk=self.pk)
 		escuela = User.objects.get(perfil=perfil)
 		evidencias_count = EvidenciaConstruccion.objects.filter(escuela=escuela).count()
-		evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela)
-		evidencias = evidencias.extra(select={'myinteger': 'CAST(fase AS INTEGER)'}).order_by('myinteger')
-		ultimaEvidencia = evidencias.last()		
+
 		self.evidencias = evidencias_count
-		self.nombre_ultima_evidencia = ultimaEvidencia.fase
+		
+		if evidencias_count > 0:
+			evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela)	
+			evidencias = evidencias.extra(select={'myinteger': 'CAST(fase AS INTEGER)'}).order_by('myinteger')
+			ultimaEvidencia = evidencias.last()		
+			self.nombre_ultima_evidencia = ultimaEvidencia.fase
 		self.save()		
 
 	def __str__(self):
