@@ -98,9 +98,11 @@ class CRViewEvidencias(View):
 		template_name = "construccion/CREvidencias.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
 		perfil.UpdateEvidenciasCount()
+		perfil.UpdateAvance()
+
 		escuela = User.objects.get(perfil=perfil)
 
-		evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela)
+		evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela).order_by("fase")
 #		evidencias = evidencias.extra(select={'myinteger': 'CAST(fase AS INTEGER)'}).order_by('myinteger')
 #		print(e2) 
 

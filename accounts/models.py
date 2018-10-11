@@ -163,39 +163,47 @@ class Perfil(models.Model):
 		perfil = Perfil.objects.get(pk=self.pk)
 		escuela = User.objects.get(perfil=perfil)
 		evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela)
-		evidencias = evidencias.extra(select={'myinteger': 'CAST(fase AS INTEGER)'}).order_by('myinteger')
-		ultimaEvidencia = evidencias.last()
+#		ultimaEvidencia = evidencias.last()
 
-		if ultimaEvidencia.fase == "1° Trazo" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-			self.avance = 10
-			self.save()
-		elif ultimaEvidencia.fase == "2° Excavación, corte y demolición" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-			self.avance = 20
-			self.save()
-		elif ultimaEvidencia.fase == "3° Cimbra y habilitado de firme" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-			self.avance = 30
-			self.save()
-		elif ultimaEvidencia.fase == "4° Colado de firme" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-			self.avance = 40
-			self.save()
-		elif ultimaEvidencia.fase == "5° Muros, castillos y cadenas" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-			self.avance = 50
-			self.save()
-		elif ultimaEvidencia.fase == "6° Aplanados, pinturas y rampa" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-			self.avance = 60
-			self.save()
-		elif ultimaEvidencia.fase == "7° Estructura y puerta" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-			self.avance = 70
-			self.save()
-		elif ultimaEvidencia.fase == "8° Policarbonato" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-			self.avance = 80
-			self.save()			
-		elif ultimaEvidencia.fase == "9° Mueble bebedero" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-			self.avance = 90
-			self.save()
-		elif ultimaEvidencia.fase == "10° Placa de identidad" and ultimaEvidencia.aprobacion_SI == "Aprobado":
-			self.avance = 100
-			self.save()
+		if evidencias.filter(fase="10° Placa de identidad"):
+			self.avance = "100"
+#			print("100")
+		else:
+			ultimaEvidencia = evidencias.order_by("fase").last()
+#			print(ultimaEvidencia.fase[0:1])
+			self.avance = ultimaEvidencia.fase[0:1] + "0"
+		self.save()
+		
+#		if ultimaEvidencia.fase == "1° Trazo" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+#			self.avance = 10
+#			self.save()
+#		elif ultimaEvidencia.fase == "2° Excavación, corte y demolición" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+#			self.avance = 20
+#			self.save()
+#		elif ultimaEvidencia.fase == "3° Cimbra y habilitado de firme" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+#			self.avance = 30
+#			self.save()
+#		elif ultimaEvidencia.fase == "4° Colado de firme" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+#			self.avance = 40
+#			self.save()
+#		elif ultimaEvidencia.fase == "5° Muros, castillos y cadenas" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+#			self.avance = 50
+#			self.save()
+#		elif ultimaEvidencia.fase == "6° Aplanados, pinturas y rampa" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+#			self.avance = 60
+#			self.save()
+#		elif ultimaEvidencia.fase == "7° Estructura y puerta" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+#			self.avance = 70
+#			self.save()
+#		elif ultimaEvidencia.fase == "8° Policarbonato" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+#			self.avance = 80
+#			self.save()			
+#		elif ultimaEvidencia.fase == "9° Mueble bebedero" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+#			self.avance = 90
+#			self.save()
+#		elif ultimaEvidencia.fase == "10° Placa de identidad" and ultimaEvidencia.aprobacion_SI == "Aprobado":
+#			self.avance = 100
+#			self.save()
 
 	def UpdateMantenimientosCount(self):
 		perfil = Perfil.objects.get(pk=self.pk)
@@ -207,12 +215,17 @@ class Perfil(models.Model):
 	def UpdateEvidenciasCount(self):
 		perfil = Perfil.objects.get(pk=self.pk)
 		escuela = User.objects.get(perfil=perfil)
-		evidencias_count = EvidenciaConstruccion.objects.filter(escuela=escuela).count()
+		evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela)
+		evidencias_count = evidencias.count()
 
 		self.evidencias = evidencias_count
 		
-#		if evidencias_count > 0:
-#			evidencias = EvidenciaConstruccion.objects.filter(escuela=escuela)	
+		if evidencias_count > 0:
+			if evidencias.filter(fase="10° Placa de identidad"):
+				self.nombre_ultima_evidencia = "10° Placa de identidad"
+			else:
+				ultimaEvidencia = evidencias.order_by("fase").last()
+				self.nombre_ultima_evidencia = ultimaEvidencia.fase
 #			evidencias = evidencias.extra(select={'myinteger': 'CAST(fase AS INTEGER)'}).order_by('myinteger')
 #			ultimaEvidencia = evidencias.last()		
 #			self.nombre_ultima_evidencia = ultimaEvidencia.fase
