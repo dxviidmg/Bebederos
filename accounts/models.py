@@ -168,12 +168,12 @@ class Perfil(models.Model):
 		if evidencias.filter(fase="10° Placa de identidad"):
 			self.avance = "100"
 #			print("100")
-		else:
+		elif evidencias.count() > 0:
 			ultimaEvidencia = evidencias.order_by("fase").last()
 #			print(ultimaEvidencia.fase[0:1])
 			self.avance = ultimaEvidencia.fase[0:1] + "0"
 		self.save()
-		
+
 #		if ultimaEvidencia.fase == "1° Trazo" and ultimaEvidencia.aprobacion_SI == "Aprobado":
 #			self.avance = 10
 #			self.save()
