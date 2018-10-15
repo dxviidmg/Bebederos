@@ -141,6 +141,7 @@ class DetailViewEscuela(View):
 		escuela = User.objects.get(username=username)
 		perfil = Perfil.objects.get(user=escuela)
 		perfil.UpdateEvidenciasCount()
+		perfil.UpdateAvance()
 		municipio = Municipio.objects.get(perfil=perfil)
 		zona = Zona.objects.get(municipio=municipio)
 		entidad = Entidad.objects.get(zona=zona)

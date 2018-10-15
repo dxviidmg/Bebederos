@@ -43,10 +43,11 @@
 				<table class="table table-bordered">
 					<thead>
 						<th>Mes y año</th>
-						<th>Fecha de mantenimiento</th>
+						<th>Fecha de realización</th>
 						<th>Volumen</th>
 						<th>Carnet</th>
-						<th>Mueble</th>
+						<th>Foto al iniciar</th>
+						<th>Foto durante</th>
 						<th>Tipo</th>
 						<th>Descripción</th>
 						<th>Fecha y hora de registro</th>
@@ -63,10 +64,13 @@
 							<td>{{mantenimiento.mes}} {{mantenimiento.año}}</td>
 							<td>
 							{{mantenimiento.fecha}}</td>
+									
 							<td>
 							{{mantenimiento.volumen}}</td>
 							<td><a href="{{mantenimiento.carnet.url}}">Descargar</a></td>
-							<td>{%if mantenimiento.foto_mueble%}<a href="{{mantenimiento.foto_mueble.url}}">Descargar</a> {%endif%}</td>
+							<td>{%if mantenimiento.foto_1%}<a href="{{mantenimiento.foto_1.url}}">Descargar</a>{%endif%}</td>
+							<td>{%if mantenimiento.foto_1%}<a href="{{mantenimiento.foto_2.url}}">Descargar</a>{%endif%}</td>
+						
 							<td>{{mantenimiento.tipo}}</td>
 							<td>{%if mantenimiento.descripcion%}{{mantenimiento.descripcion}}{%endif%}</td>
 							<td>{{mantenimiento.creacion}}</td>

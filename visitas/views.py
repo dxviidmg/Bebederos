@@ -76,10 +76,11 @@ class CRViewInicioFuncionamiento(View):
 		try:
 			funcionamiento = InicioFuncionamiento.objects.get(escuela=escuela)
 			EdicionFuncionamientoForm=InicioFuncionamientoCreateForm(instance=funcionamiento)
+			
 		except InicioFuncionamiento.DoesNotExist:
 			funcionamiento = None
 			EdicionFuncionamientoForm = None
-	
+
 		context = {
 			'perfil': perfil,
 			'escuela': escuela,
@@ -95,9 +96,10 @@ class CRViewInicioFuncionamiento(View):
 
 		try:
 			funcionamiento = InicioFuncionamiento.objects.get(escuela=escuela)
-			EdicionFuncionamientoForm=InicioFuncionamientoCreateForm(instance=funcionamiento, files=request.FILES)
+			EdicionFuncionamientoForm=InicioFuncionamientoCreateForm(instance=funcionamiento, files=request.FILES, data=request.POST)
 
 			if EdicionFuncionamientoForm.is_valid():
+				print("entra2")
 				EdicionFuncionamientoForm.save()
 
 		except InicioFuncionamiento.DoesNotExist:

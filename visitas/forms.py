@@ -28,10 +28,10 @@ class VisitaDeAcuerdoCreateForm(forms.ModelForm):
 class InicioFuncionamientoCreateForm(forms.ModelForm):
 	class Meta:
 		model = InicioFuncionamiento
-		fields = ('acta_funcionamiento', 'recibo_llaves', 'foto', 'foto_2', 'foto_3')
+		fields = ('acta_funcionamiento', 'foto', 'foto_2', 'foto_3', 'fecha')
 		#fields = ()
 
 class ActaEntregaCreateForm (forms.ModelForm):
 	class Meta:
 		model = ActaEntrega
-		fields = ('acta_entrega',)	
+		fields = ('acta_entrega', )	
