@@ -27,7 +27,7 @@ class EscuelaUserCreateForm(forms.ModelForm):
 class EscuelaPerfilCreateForm(forms.ModelForm):
 	class Meta:
 		model = Perfil
-		fields = ('localidad', 'domicilio', 'nivel_educativo', 'plantilla_escolar', 'coordenadas')
+		fields = ('numero', 'localidad', 'domicilio', 'nivel_educativo', 'plantilla_escolar', 'coordenadas')
 		
 class EscuelaUserUpdateForm(forms.ModelForm):
 	class Meta:
@@ -37,7 +37,7 @@ class EscuelaUserUpdateForm(forms.ModelForm):
 class EscuelaPerfilUpdateForm(forms.ModelForm):
 	class Meta:
 		model = Perfil
-		fields = ('director', 'turno', 'foto_escuela', 'telefono', 'domicilio', 'referencias', 'SSID', 'clave_SSID', 'coordenadas', 'expediente_tecnico')
+		fields = ('numero', 'director', 'turno', 'foto_escuela', 'telefono', 'domicilio', 'referencias', 'SSID', 'clave_SSID', 'coordenadas', 'expediente_tecnico')
 
 class EntidadUpdateForm(forms.ModelForm):
 	class Meta:

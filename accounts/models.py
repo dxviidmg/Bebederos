@@ -136,6 +136,7 @@ class Perfil(models.Model):
 	cargo = models.CharField(max_length=30, blank=True, null=True, verbose_name="Cargo", choices=cargo_choices)
 
 	#Atributos exclusivos de escuelas
+	numero = models.IntegerField(null=True, blank=True)
 	municipio = models.ForeignKey(Municipio, null=True, blank=True)
 	director = models.CharField(max_length=100, blank=True, null=True)
 	foto_escuela = models.ImageField(upload_to='fotos/escuela/%Y/%m/%d/', null=True, blank=True, verbose_name="Foto de la entrada de la escuela")
