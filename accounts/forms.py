@@ -42,4 +42,4 @@ class EscuelaPerfilUpdateForm(forms.ModelForm):
 class EntidadUpdateForm(forms.ModelForm):
 	class Meta:
 		model = Entidad
-		fields = ('t7',)
+		fields = ('doc1', 'fecha_doc1', 'doc2', 'fecha_doc2', 'doc3', 'fecha_doc3')

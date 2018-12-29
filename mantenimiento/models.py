@@ -32,7 +32,8 @@ class Mantenimiento (models.Model):
 
 	carnet = models.FileField(verbose_name="Carnet actualizado", upload_to='mantenimientos/%Y/%m/%d/')
 	foto_1 = models.FileField(verbose_name="Foto al iniciar el mantenimiento", upload_to='mantenimientos/%Y/%m/%d/', null=True, blank=True)
-	foto_2 = models.FileField(verbose_name="Foto durante mantenimiento", upload_to='mantenimientos/%Y/%m/%d/', null=True, blank=True)
+	foto_2 = models.FileField(verbose_name="Foto al finalizar el mantenimiento", upload_to='mantenimientos/%Y/%m/%d/', null=True, blank=True)
+	foto_3 = models.FileField(verbose_name="Foto del medidor", upload_to='mantenimientos/%Y/%m/%d/', null=True, blank=True)
 	escuela = models.ForeignKey(User, related_name="escuela_mtto")
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	mes = models.CharField(choices=mes_CHOICES, max_length=10)

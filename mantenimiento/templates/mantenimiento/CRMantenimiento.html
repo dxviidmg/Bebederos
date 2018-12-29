@@ -47,7 +47,8 @@
 						<th>Volumen</th>
 						<th>Carnet</th>
 						<th>Foto al iniciar</th>
-						<th>Foto durante</th>
+						<th>Foto al finalizar</th>
+						<th>Foto del medidor</th>
 						<th>Tipo</th>
 						<th>Descripción</th>
 						<th>Fecha y hora de registro</th>
@@ -69,8 +70,8 @@
 							{{mantenimiento.volumen}}</td>
 							<td><a href="{{mantenimiento.carnet.url}}">Descargar</a></td>
 							<td>{%if mantenimiento.foto_1%}<a href="{{mantenimiento.foto_1.url}}">Descargar</a>{%endif%}</td>
-							<td>{%if mantenimiento.foto_1%}<a href="{{mantenimiento.foto_2.url}}">Descargar</a>{%endif%}</td>
-						
+							<td>{%if mantenimiento.foto_2%}<a href="{{mantenimiento.foto_2.url}}">Descargar</a>{%endif%}</td>
+							<td>{%if mantenimiento.foto_3%}<a href="{{mantenimiento.foto_3.url}}">Descargar</a>{%endif%}</td>
 							<td>{{mantenimiento.tipo}}</td>
 							<td>{%if mantenimiento.descripcion%}{{mantenimiento.descripcion}}{%endif%}</td>
 							<td>{{mantenimiento.creacion}}</td>

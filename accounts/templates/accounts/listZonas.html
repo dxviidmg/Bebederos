@@ -4,7 +4,6 @@
 
 {%block content%}
 
-
 	<h1>{{entidad}}</h1>
 
 		{%if request.user.perfil.cargo == "SIM" or request.user.perfil.tipo == "Laboratorio"%}
@@ -110,7 +109,6 @@
 	{%endif%}
 
 	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"  or request.user.perfil.tipo == "PM"%}
-
 	<div class="table-responsive espacio2">
 		<table class="table table-bordered">
 			<thead>
@@ -142,15 +140,84 @@
 					{%endif%}
 				</tr>
 				<tr>
-					{%if request.user.perfil.tipo == "PM"%}
+					{%if request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Administrador"%}
 					<td colspan="5"><a href="{% url 'bebederos:ExportAvanceBebederosCSV' entidad.pk%}">Avance de sistemas bebederos</a>
 					</td>
 					{%endif%}
 				</tr>
+				<tr>
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora"%}
+					<td colspan="5"><a href="{% url 'incidencias:ExportIncidenciasCSV' entidad.pk%}">Reporte de incidencias</a>
+					</td>
+					{%endif%}
+				</tr>
 
+				<tr>
+					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora"%}
+					<td colspan="5"><a href="{% url 'incidencias:ExportIncidenciasCSV' entidad.pk%}">Reporte de incidencias</a>
+					</td>
+					{%endif%}
+				</tr>				
 			</tbody>
 		</table>
 	</div>
 	{%endif%}
+
+
+
+	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora"%}
+	<div class="table-responsive espacio2">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th colspan="3">Oficios</th>
+				</tr>
+				<tr>
+					<th>Nombre</th>
+					<th>Fecha de subida</th>
+					<th>Archivo</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td>Informe de respuesta de a Oficio
+					</td>
+					<td>
+					{%if entidad.fecha_doc1%}
+					{{entidad.fecha_doc1}}{%endif%}
+					</td>
+					<td>{%if entidad.doc1%}<a href="{{entidad.doc1.url}}">Descargar{%endif%}</a>
+					</td>
+				</tr>
+
+				<tr>
+					<td>Solicitud de diferimiento
+					</td>
+					<td>
+					{%if entidad.fecha_doc2%}
+					{{entidad.fecha_doc2}}{%endif%}
+					</td>
+					<td>{%if entidad.doc2%}<a href="{{entidad.doc2.url}}">Descargar{%endif%}</a>
+					</td>
+				</tr>
+
+				<tr>
+					<td>Solicitud de cartas de inicio y convenios de concertación
+					</td>
+					<td>
+					{%if entidad.fecha_doc3%}
+					{{entidad.fecha_doc3}}{%endif%}
+					</td>
+					<td>{%if entidad.doc3%}<a href="{{entidad.doc3.url}}">Descargar{%endif%}</a>
+					</td>
+				</tr>				
+
+
+				</tr>				
+			</tbody>
+		</table>
+	</div>
+	{%endif%}	
 
 {%endblock content%}

@@ -23,21 +23,6 @@
 			<h3>Escuela {{escuela.get_full_name}}</h3>
 			{%else%}
 
-	<div class="table-responsive espacio2">
-		<table class="table table-bordered">
-			<tbody>
-				
-
-				{%if request.user.perfil.tipo == "Administrador"%}
-				<tr>
-					<td colspan="5">
-						<a href="{%url 'incidencias:ExportIncidenciasCSV'%}">Reporte general de incidencias</a>
-					</td>
-				</tr>
-				{%endif%}
-			</tbody>
-		</table>
-	</div>
 
 			{%endif%}
 		</div>

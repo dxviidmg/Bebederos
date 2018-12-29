@@ -15,6 +15,7 @@
 				<tr>
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%}
+					<th rowspan="2">Número</th>
 					<th rowspan="2">Zona</th>
 					{%endif%}
 		
@@ -129,6 +130,9 @@
 				<tr>
 
 					{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "PQ"  or request.user.perfil.tipo == "PM" or request.user.perfil.tipo == "Invitado"%}
+					<td>
+					{{avanceEscuela.escuela.perfil.numero}}
+					</td>
 					<td style="background-color: {{avanceEscuela.escuela.perfil.municipio.zona.color}};">
 					{{avanceEscuela.escuela.perfil.municipio.zona.nombre}}
 					</td>

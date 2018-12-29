@@ -124,22 +124,22 @@ class UpdateViewIncidencia(View):
 
 		return redirect("incidencias:UpdateViewIncidencia", pk=incidencia.pk)
 
-def ExportIncidenciasCSV(request):
+def ExportIncidenciasCSV(request, pk):
 
 	ahora = datetime.now().strftime("%d-%m-%Y %H:%M")
 
-#	entidad = get_object_or_404(Entidad, pk=pk)
-#	zonas = Zona.objects.filter(entidad=entidad)
-#	municipios=Municipio.objects.filter(zona__in=zonas)
-#	perfiles = Perfil.objects.filter(municipio__in=municipios)
-#	escuelas = User.objects.filter(perfil__in=perfiles)
-	
+	entidad = get_object_or_404(Entidad, pk=pk)
+	zonas = Zona.objects.filter(entidad=entidad)
+	municipios=Municipio.objects.filter(zona__in=zonas)
+	perfiles = Perfil.objects.filter(municipio__in=municipios)
+	escuelas = User.objects.filter(perfil__in=perfiles)
+	print(escuelas)
 	response = HttpResponse(content_type='text/csv')
 	response['Content-Disposition'] = 'attachment; filename="Reporte de incidencias del ' + ahora +'.csv"'
 	writer = csv.writer(response)
-	writer.writerow(['Entidad', 'Zona', 'Municipio', 'Localidad', 'Domicilio', 'C. C. T.','Nombre', 'Folio', 'Descripción', 'Status', 'Prioridad', 'Fase', 'Solución', 'Autor(Nombre)',  'Autor(Apellidos)', 'Fecha de creacion'])
+	writer.writerow(['Número', 'Zona', 'Municipio', 'Localidad', 'Domicilio', 'C. C. T.','Nombre', 'Folio', 'Descripción', 'Status', 'Prioridad', 'Fase', 'Solución', 'Autor(Nombre)',  'Autor(Apellidos)', 'Fecha de creacion'])
 
-	inicidencias = Incidencia.objects.all().values_list('escuela__perfil__municipio__zona__entidad__nombre', 'escuela__perfil__municipio__zona__nombre', 'escuela__perfil__municipio__nombre', 'escuela__perfil__localidad', 'escuela__perfil__domicilio', 'escuela__username', 'escuela__first_name', 'pk', 'descripcion', 'status', 'prioridad', 'fase', 'solucion', 'autor__first_name', 'autor__last_name', 'creacion')
+	inicidencias = Incidencia.objects.filter(escuela__in=escuelas).values_list('escuela__perfil__numero', 'escuela__perfil__municipio__zona__nombre', 'escuela__perfil__municipio__nombre', 'escuela__perfil__localidad', 'escuela__perfil__domicilio', 'escuela__username', 'escuela__first_name', 'pk', 'descripcion', 'status', 'prioridad', 'fase', 'solucion', 'autor__first_name', 'autor__last_name', 'creacion')
 
 	for incidencia in inicidencias:
 		writer.writerow(incidencia)

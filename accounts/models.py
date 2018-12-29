@@ -38,9 +38,13 @@ class Entidad(models.Model):
 	abreviatura = models.CharField(max_length=4)
 	escuelas_asignadas = models.IntegerField(default=0)
 	escuelas_registradas = models.IntegerField(default=0)
-	imagen = models.ImageField(upload_to='estados/%Y/%m/%d/', default='img_no_disponible.jpg')
 	slug = models.SlugField(null=True)
-	t7 = models.FileField(upload_to='t7/%Y/%m/%d/', verbose_name="Archivo(s) de T7", null=True, blank=True)
+	doc1 = models.FileField(upload_to='doc/%Y/%m/%d/', verbose_name="Informe de respuesta de a Oficio", null=True, blank=True)
+	fecha_doc1 = models.DateField(verbose_name="Fecha de subida del Informe de respuesta de a Oficio", null=True, blank=True)
+	doc2 = models.FileField(upload_to='doc/%Y/%m/%d/', verbose_name="Solicitud de diferimiento", null=True, blank=True)
+	fecha_doc2 = models.DateField(verbose_name="Fecha de subida de la solicitud de diferimiento", null=True, blank=True)
+	doc3 = models.FileField(upload_to='doc/%Y/%m/%d/', verbose_name="Solicitud de cartas de inicio y convenios de concertación", null=True, blank=True)
+	fecha_doc3 = models.DateField(verbose_name="Fecha de subida de solicitud de cartas de inicio y convenios de concertación", null=True, blank=True)
 
 	def CountEscuelas(self):
 		entidad = Entidad.objects.get(pk=self.pk)
