@@ -133,7 +133,7 @@ def ExportIncidenciasCSV(request, pk):
 	municipios=Municipio.objects.filter(zona__in=zonas)
 	perfiles = Perfil.objects.filter(municipio__in=municipios)
 	escuelas = User.objects.filter(perfil__in=perfiles)
-	print(escuelas)
+#	print(escuelas)
 	response = HttpResponse(content_type='text/csv')
 	response['Content-Disposition'] = 'attachment; filename="Reporte de incidencias del ' + ahora +'.csv"'
 	writer = csv.writer(response)
