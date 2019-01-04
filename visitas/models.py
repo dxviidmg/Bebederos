@@ -13,7 +13,7 @@ class VisitaDeAcuerdo(models.Model):
 	memoria_calculo_2 = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Memoria de cálculo sanitario", null=True, blank=True)
 	memoria_calculo_3 = models.FileField(upload_to='instalaciones/memorias/%Y/%m/%d/', verbose_name="Memoria de cálculo eléctrico", null=True, blank=True)		
 	isometrico_instalacion = models.FileField(upload_to='visitas/pihs/%Y/%m/%d/', verbose_name="Isometricos de instalaciones", null=True, blank=True)
-	levantamiento_instalacion = models.FileField(upload_to='visitas/pihs/%Y/%m/%d/', verbose_name="Levantamiento de instalaciones", null=True, blank=True)
+	levantamiento_instalacion = models.FileField(upload_to='visitas/pihs/%Y/%m/%d/', verbose_name="Levantamiento de instalación", null=True, blank=True)
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 
 	def __str__(self):
