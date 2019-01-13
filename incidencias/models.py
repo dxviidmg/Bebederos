@@ -30,6 +30,7 @@ class Incidencia(models.Model):
 	prioridad = models.CharField(choices=prioridad_choices, max_length=10)
 	fase = models.CharField(choices=fase_choices, max_length=100)
 	solucion = models.TextField(verbose_name="Solución", null=True, blank=True)
+	fecha_solucion = models.DateTimeField(verbose_name="Fecha de solucion", null=True, blank=True)
 	creacion = models.DateTimeField(default=timezone.now, verbose_name="Fecha de creación")
 	escuela = models.ForeignKey(User, related_name="escuela_incidencia", null=True, blank=True)
 	evidencia = models.ImageField(upload_to="incidencias/%Y/%m/%d/", null=True, blank=True, verbose_name="Evidencia fotográfica de incidencia")
@@ -40,3 +41,9 @@ class Incidencia(models.Model):
 
 	class Meta:
 		ordering = ['creacion']
+
+	def update_solucion(self):
+		if self.status == "Solucionado":
+			print(timezone.now())
+			self.fecha_solucion = timezone.now()
+		self.save()

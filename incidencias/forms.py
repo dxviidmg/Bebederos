@@ -9,4 +9,4 @@ class IncidenciaCreateForm(forms.ModelForm):
 class IncidenciaEditForm(forms.ModelForm):
 	class Meta:
 		model = Incidencia
-		fields = ('solucion', 'status', 'evidencia_2')		
+		fields = ('solucion', 'status', 'evidencia_2')
