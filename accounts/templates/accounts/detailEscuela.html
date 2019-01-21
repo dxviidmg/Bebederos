@@ -6,8 +6,8 @@
 
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-12">
-			<h1>Nombre: {{escuela.get_full_name}}</h1>
-			<h2>CCT: {{escuela.username}}</h2>
+			<h1>CCT: {{escuela.username}}</h1>
+			<h2>Nombre: {{escuela.get_full_name}}</h2>
 			<h2>Número: {{perfil.numero}}</h2>			
 			{%if request.user.perfil.tipo != "Laboratorio" or request.user.perfil.tipo != "Escuela"%}
 				<p><a href="{%url 'accounts:ListViewEscuelas' municipio.pk%}"><i class="fa fa-angle-double-left" aria-hidden="true"></i>Regresar a municipio</a></p>
@@ -275,7 +275,7 @@
 		{%if primerPrueba%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
-			<a {%if perfil.avance == 100%} class="thumbnail thumbnail-prueba-aprobado container" {%elif evidenciasConstruccion%} class="thumbnail thumbnail-prueba-en-espera" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewEvidencias' perfil.pk%}">Evidencias de construccíón e instalación de mueble bebedero. <br>{%if perfil.avance%}Status: {%if perfil.avance == 100%}Finalizado{%else%}En construcción o revisión{%endif%}{%endif%}</a>
+			<a {%if perfil.avance == "100"%} class="thumbnail thumbnail-prueba-aprobado container" {%elif evidenciasConstruccion%} class="thumbnail thumbnail-prueba-en-espera" {%else%} class="thumbnail container" {%endif%} href="{%url 'construccion:CRViewEvidencias' perfil.pk%}"> Evidencias de construccíón e instalación de mueble bebedero. <br>{%if perfil.avance%}Status: {%if perfil.avance == "100"%}Finalizado{%else%}En construcción o revisión{%endif%}{%endif%}</a>
 		</div>
 		{%endif%}
 		{%endif%}

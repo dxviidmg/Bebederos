@@ -499,9 +499,8 @@ def ExportExpedienteZIP(request, pk):
 	foto2PrimerPrueba = origen + str(primerPrueba.foto_toma_agua_2.url)
 	fotoInicioFuncionamiento = origen + str(inicioFuncionamiento.foto.url)
 	actaFuncionamiento = origen + str(inicioFuncionamiento.acta_funcionamiento.url)
-	reciboLlaves = origen + str(inicioFuncionamiento.recibo_llaves.url)
 
-	filenames = [actaUbicacion, cedulaIdentificacion, convenioConcertacion, planoConjunto, distribucionPlanta, memoriaCalculo1, memoriaCalculo2, memoriaCalculo3, isometricoInstalacion, foto2PrimerPrueba, fotoInicioFuncionamiento, actaFuncionamiento, reciboLlaves]
+	filenames = [actaUbicacion, cedulaIdentificacion, convenioConcertacion, planoConjunto, distribucionPlanta, memoriaCalculo1, memoriaCalculo2, memoriaCalculo3, isometricoInstalacion, foto2PrimerPrueba, fotoInicioFuncionamiento, actaFuncionamiento]
 
 	zip_subdir = "Expediente técnico " + str(escuela.username)
 	zip_filename = "%s.zip" % zip_subdir
