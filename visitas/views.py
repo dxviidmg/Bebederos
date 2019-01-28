@@ -23,11 +23,19 @@ class CRViewVisitaDeAcuerdo(View):
 		template_name = "visitas/CRVisitaDeAcuerdo.html"
 		perfil = get_object_or_404(Perfil, pk=pk)
 		escuela = User.objects.get(perfil=perfil)
+
 		NuevaVisitaForm = VisitaDeAcuerdoCreateForm()
+
+		if request.user.perfil.tipo == "INIFED":
+					NuevaVisitaForm = VisitaDeAcuerdoCreateForm2()
 
 		try:
 			visita = VisitaDeAcuerdo.objects.get(escuela=escuela)
 			EdicionVisitaForm = VisitaDeAcuerdoCreateForm(instance=visita)
+
+			if request.user.perfil.tipo == "INIFED":
+					EdicionVisitaForm = VisitaDeAcuerdoCreateForm2(instance=visita)
+
 		except VisitaDeAcuerdo.DoesNotExist:
 			visita = None
 			EdicionVisitaForm= None

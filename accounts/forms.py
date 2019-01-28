@@ -39,6 +39,11 @@ class EscuelaPerfilUpdateForm(forms.ModelForm):
 		model = Perfil
 		fields = ('numero', 'director', 'turno', 'foto_escuela', 'telefono', 'domicilio', 'referencias', 'SSID', 'clave_SSID', 'coordenadas', 'expediente_tecnico')
 
+class EscuelaPerfilUpdateForm2(forms.ModelForm):
+	class Meta:
+		model = Perfil
+		fields = ('expediente_completo',)
+
 class EntidadUpdateForm(forms.ModelForm):
 	class Meta:
 		model = Entidad

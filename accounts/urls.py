@@ -25,6 +25,7 @@ urlpatterns = [
 	url(r'^escuelas/search/$',views.SearchViewEscuelas.as_view(), name='SearchViewEscuelas'),
 	url(r'^escuela/(?P<username>[-\w]+)/$', views.DetailViewEscuela.as_view(), name="DetailViewEscuela"),
 	url(r'^escuela/mapa/(?P<pk>[-\w]+)/$', views.DetailViewMapa.as_view(), name="DetailViewMapa"),
+	url(r'^escuela/actualizar/expediente/(?P<pk>[-\w]+)/$', views.UpdateViewEscuelaExpediente.as_view(), name="UpdateViewEscuelaExpediente"),
 	url(r'^escuela/actualizar/(?P<username>[-\w]+)/$', views.UpdateViewEscuela.as_view(), name="UpdateViewEscuela"),
 	url(r'^municipio/(?P<pk>[-\w]+)/escuela/crear/$', views.CreateViewEscuela.as_view(), name="CreateViewEscuela"),
 	url(r'^municipio/(?P<pk>[-\w]+)/$', views.ListViewEscuelas.as_view(), name="ListViewEscuelas"),

@@ -159,6 +159,7 @@ class Perfil(models.Model):
 	expediente_tecnico = models.BooleanField(default=False, verbose_name="Realización de expediente técnico")
 	prioridad = models.BooleanField(default=False, verbose_name="Prioridad de construcción")
 	nombre_ultima_evidencia = models.CharField(max_length=50, null=True, blank=True)
+	expediente_completo = models.FileField(upload_to='doc/%Y/%m/%d/', verbose_name="Expediente completo", null=True, blank=True)
 
 	#Llave foranea para Residentes Técnicos de INIFED
 	residente_tecnico_inifed = models.ForeignKey(Entidad, verbose_name="Es residente estatal de INIFED del estado de", null=True, blank=True, related_name="residente_tecnico_inifed")

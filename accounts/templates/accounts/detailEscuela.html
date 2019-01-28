@@ -315,10 +315,16 @@
 		<div class="col-lg-1 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
 			<a class="thumbnail thumbnail-available container" href="{%url 'accounts:ExportFotosEvidenciaZIP' escuela.pk%}">Descargar Fotos</a>
-		</div>		
+		</div>
 		{%endif%}
 		{%endif%}
 
+		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Escuela" or  request.user.perfil.tipo == "Invitado"%}
+		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+			<div class="dummy"></div>
+			<a {%if perfil.expediente_completo%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'accounts:UpdateViewEscuelaExpediente' escuela.pk%}"> Expediente completo</a>
+		</div>
+		{%endif%}
 
 
 		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "PQ" or  request.user.perfil.tipo == "Invitado"%}
@@ -335,7 +341,7 @@
 		{%if mantenimientos.count == 24%}
 		<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 			<div class="dummy"></div>
-			<a {%if actaEntrega%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewActaEntrega' perfil.pk%}"> Acta de entrega</a>
+			<a {%if actaEntrega%} class="thumbnail thumbnail-available container" {%else%} class="thumbnail container" {%endif%} href="{%url 'visitas:CRViewActaEntrega' escuela.pk%}"> Acta de entrega</a>
 		</div>
 		{%endif%}
 		{%endif%}
