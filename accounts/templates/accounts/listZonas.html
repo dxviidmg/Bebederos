@@ -172,42 +172,18 @@
 				</tr>
 			</thead>
 			<tbody>
-			
+			{%for oficio in oficios%}
 				<tr>
-					<td>Informe de respuesta de a Oficio
+					<td>{{oficio.nombre}}
 					</td>
 					<td>
-					{%if entidad.fecha_doc1%}
-					{{entidad.fecha_doc1}}{%endif%}
+					{{oficio.fecha}}
 					</td>
-					<td>{%if entidad.doc1%}<a href="{{entidad.doc1.url}}">Descargar{%endif%}</a>
+					<td><a href="{{oficio.archivo.url}}">Descargar</a>
 					</td>
+
 				</tr>
-
-				<tr>
-					<td>Solicitud de diferimiento
-					</td>
-					<td>
-					{%if entidad.fecha_doc2%}
-					{{entidad.fecha_doc2}}{%endif%}
-					</td>
-					<td>{%if entidad.doc2%}<a href="{{entidad.doc2.url}}">Descargar{%endif%}</a>
-					</td>
-				</tr>
-
-				<tr>
-					<td>Solicitud de cartas de inicio y convenios de concertación
-					</td>
-					<td>
-					{%if entidad.fecha_doc3%}
-					{{entidad.fecha_doc3}}{%endif%}
-					</td>
-					<td>{%if entidad.doc3%}<a href="{{entidad.doc3.url}}">Descargar{%endif%}</a>
-					</td>
-				</tr>				
-
-
-				</tr>				
+			{%endfor%}
 			</tbody>
 		</table>
 	</div>

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'bootstrapform',
     'geoposition',
     'plantillas',
+    'oficios',
 ]
 
 MIDDLEWARE = [

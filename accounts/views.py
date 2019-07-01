@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import csv
 from datetime import datetime
+from oficios.models import *
 
 #Librerias para generar ZIP
 import zipfile
@@ -89,7 +90,9 @@ class ListViewZonas(View):
 		zonas = Zona.objects.filter(entidad=entidad)
 		municipios = Municipio.objects.filter(zona__in=zonas)
 		region = Region.objects.get(entidad=entidad)
-		
+		oficios = Oficio.objects.filter(entidad=entidad)
+#		print(oficios)
+
 		EdicionEntidadForm = EntidadUpdateForm(instance=entidad)
 
 		ListMunicipiosPorZona = []
@@ -101,6 +104,7 @@ class ListViewZonas(View):
 			'ListMunicipiosPorZona': ListMunicipiosPorZona,
 			'region': region,
 			'EdicionEntidadForm': EdicionEntidadForm,
+			'oficios': oficios,
 		}
 		return render(request,template_name, context)
 	def post(self, request, slug):
