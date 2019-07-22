@@ -93,7 +93,7 @@ class ListViewZonas(View):
 		oficios = Oficio.objects.filter(entidad=entidad)
 #		print(oficios)
 
-		EdicionEntidadForm = EntidadUpdateForm(instance=entidad)
+#		EdicionEntidadForm = EntidadUpdateForm(instance=entidad)
 
 		ListMunicipiosPorZona = []
 		for zona in zonas:
@@ -103,19 +103,19 @@ class ListViewZonas(View):
 			'entidad': entidad,
 			'ListMunicipiosPorZona': ListMunicipiosPorZona,
 			'region': region,
-			'EdicionEntidadForm': EdicionEntidadForm,
+#			'EdicionEntidadForm': EdicionEntidadForm,
 			'oficios': oficios,
 		}
 		return render(request,template_name, context)
-	def post(self, request, slug):
-		entidad = Entidad.objects.get(slug=slug)
-		EdicionEntidadForm = EntidadUpdateForm(instance=entidad, files=request.FILES, data=request.POST)
+#	def post(self, request, slug):
+#		entidad = Entidad.objects.get(slug=slug)
+#		EdicionEntidadForm = EntidadUpdateForm(instance=entidad, files=request.FILES, data=request.POST)
 
-		if EdicionEntidadForm.is_valid():
-			EdicionEntidadForm.save()
-			messages.success(request, "Actualización exitosa")
+#		if EdicionEntidadForm.is_valid():
+#			EdicionEntidadForm.save()
+#			messages.success(request, "Actualización exitosa")
 
-		return redirect("accounts:ListViewZonas", slug=entidad.slug)
+#		return redirect("accounts:ListViewZonas", slug=entidad.slug)
 
 #Lista de escuelas
 class ListViewEscuelas(View):
