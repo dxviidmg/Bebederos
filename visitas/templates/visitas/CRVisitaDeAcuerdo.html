@@ -126,6 +126,8 @@
 	
 	</div>
 
+		{%if request.user.perfil.tipo == "Administrador"%}
+
 	<div class="row">
 		<div class="col-12">
 			<br>
@@ -138,9 +140,11 @@
 		</div>
 	</div>
 
+		{%endif%}
+
 	{%else%}
 
-		{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "INIFED"%}
+		{%if request.user.perfil.tipo == "Administrador"%}
 	<div class="row">
 		<div class="col-12">
 			<h4>Registro de documentación</h4>

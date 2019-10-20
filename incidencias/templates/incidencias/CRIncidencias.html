@@ -31,7 +31,7 @@
 	<div class="row">
 		<div class="col-12">
 			
-			{% if request.get_full_path != "/incidencias/" %}
+			{% if request.get_full_path != "/incidencias/" and request.user.perfil == "Administrador"%}
 
 			<form action="." method="post" enctype="multipart/form-data">
 				<h4>Registro</h4>	

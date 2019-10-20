@@ -19,7 +19,7 @@
 		</div>
 	</div>
 
-	{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Escuela" or request.user.perfil.tipo == "Administrador"  or request.user.perfil.tipo == "INIFED"%}
+	{%if request.user.perfil.tipo == "Administrador"%}
 		{%if mantenimientos.count < 24%}
 
 	<div class="row espacio2">
@@ -53,7 +53,7 @@
 						<th>Descripción</th>
 						<th>Fecha y hora de registro</th>
 
-						{%if request.user.perfil.tipo != "INIFED"%}
+						{%if request.user.perfil.tipo == "Administrador"%}
 						<th>Opciones</th>
 						{%endif%}
 					</thead>
@@ -76,7 +76,7 @@
 							<td>{%if mantenimiento.descripcion%}{{mantenimiento.descripcion}}{%endif%}</td>
 							<td>{{mantenimiento.creacion}}</td>
 
-							{%if request.user.perfil.tipo != "INIFED"%}
+							{%if request.user.perfil.tipo == "Administrador"%}
 							<td><a href="{%url 'mantenimiento:UpdateViewMantenimiento' mantenimiento.pk%}">Actualizar</a></td>
 							{%endif%}
 						</tr>
@@ -84,7 +84,7 @@
 					{%empty%}
 
 						<tr>
-							<td colspan="10">Sin registro</td>
+							<td colspan="11">Sin registro</td>
 						</tr>
 
 					{%endfor%}

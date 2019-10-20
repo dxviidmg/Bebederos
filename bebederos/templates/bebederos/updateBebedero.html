@@ -20,6 +20,8 @@
 			<a href="{%url 'accounts:DetailViewEscuela' perfil.user.username%}">Regresar</a>
 			<h3>Escuela {{escuela.get_full_name}}</h3>
 
+			{%if request.user.perfil.tipo == "Administrador"%}
+
 			<form action="." method="post" enctype="multipart/form-data">
 				<h4>Asignación de componentes y especificaciones</h4>
 				{%csrf_token%}
@@ -46,6 +48,8 @@
 			{%endif%}
 
 			{%if sistemaBebedero.asignacion is False%}
+
+	{%endif%}
 
 		<div class="row">
 			<div class="col-md-4 col-sm-6 col-12">

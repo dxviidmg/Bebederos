@@ -23,7 +23,7 @@
 	<div class="row">
 		<div class="col-12">
 
-	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "Ejecutora"%}
+	{%if request.user.perfil.tipo == "Administrador"%}
 		{%if evidencias.count < 10%}
 			<form action="." method="post" enctype="multipart/form-data">
 				<h4>Registro de evidencia de construcción</h4>	
@@ -76,9 +76,9 @@
 						{%endif%}	
 							<td><a href="{{evidencia.foto.url}}">Ver</a></td>
 
-							{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador"%}
+							{%if request.user.perfil.tipo == "Administrador"%}
 
-							<td><a href="{%url 'construccion:UpdateViewEvidencia' evidencia.pk%}">{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.cargo == "SIM"%}Revisar{%else%}Editar{%endif%}</a></td>
+							<td><a href="{%url 'construccion:UpdateViewEvidencia' evidencia.pk%}">{%if request.user.perfil.tipo == "Administrador"%}Revisar{%else%}Editar{%endif%}</a></td>
 							{%endif%}
 						</tr>
 
