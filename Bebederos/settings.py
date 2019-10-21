@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'geoposition',
     'plantillas',
     'oficios',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
