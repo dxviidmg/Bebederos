@@ -13,8 +13,7 @@ def run():
 
 	users_no_activos = User.objects.filter(perfil__in=perfiles_no_activos).update(is_active=False, is_staff=False, is_superuser=False)
 #	print("USERS NO activos", users_no_activos)
-	print("Desactivacion de usuarios completada!!!")
+	print("Desactivación de usuarios completada!!!")
 
 	for perfil_activo in perfiles_activos:
 		print(perfil_activo, perfil_activo.user.username)
-
