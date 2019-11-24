@@ -282,7 +282,7 @@
   </ul>
 </nav>
 
-	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio"%}
+	{%if request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Laboratorio" or request.user.perfil.tipo == "INIFED"%}
 
 	<div class="table-responsive espacio2">
 		<table class="table table-bordered">
@@ -294,7 +294,7 @@
 			<tbody>
 				
 
-				{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ"%}
+				{%if request.user.perfil.tipo == "Ejecutora" or request.user.perfil.tipo == "Administrador" or request.user.perfil.tipo == "PQ" or request.user.perfil.tipo == "INIFED"%}
 				<tr>
 					<td colspan="5">
 						<a href="{%url 'accounts:ExportAvancePorEscuelasCSV' entidad.pk%}">Reporte general</a>

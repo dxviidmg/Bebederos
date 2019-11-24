@@ -35,7 +35,7 @@ class VisitaDeAcuerdoCreateForm2(forms.ModelForm):
 class InicioFuncionamientoCreateForm(forms.ModelForm):
 	class Meta:
 		model = InicioFuncionamiento
-		fields = ('acta_funcionamiento', 'foto', 'foto_2', 'foto_3', 'fecha')
+		fields = ('acta_funcionamiento', 'foto', 'foto_2', 'foto_3')
 		#fields = ()
 
 class ActaEntregaCreateForm (forms.ModelForm):

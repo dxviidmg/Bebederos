@@ -553,6 +553,20 @@ def ExportFotosEvidenciaZIP(request, pk):
 
 	return response
 
+def get_fechas(atributo, indice):
+	try:
+		return atributo[indice:indice+10]
+	except:
+		return None
+
+def remove_diagonal(atributo):
+		try:
+			if atributo.endswith('/'):
+				return "2" + escuela[i][:-1]
+			return atributo
+		except:
+			return None
+
 def ExportAvancePorEscuelasCSV(request, pk):
 	entidad = get_object_or_404(Entidad, pk=pk)
 	zonas = Zona.objects.filter(entidad=entidad)
@@ -565,10 +579,27 @@ def ExportAvancePorEscuelasCSV(request, pk):
 	response['Content-Disposition'] = 'attachment; filename="Reporte general de ' + entidad.nombre + ' ' + ahora +'.csv"'
 	writer = csv.writer(response)
 	writer.writerow(['Número', 'Zona', 'Municipio', 'Localidad', 'Domicilio', 'C. C. T.','Nombre', 'Nivel educativo', 'Plantilla escolar', 'Mueble', 'Sistema potabilizador', 'Fecha de primer muestreo', 'Resultados de laboratorio de primer prueba', 'Validación de primer prueba', 'Acta de ubicación', 'Cedula de identificación','Convenio de concertación', 'Plano de conjunto', 'Distribución en planta', 'Memoria de cálculo hidráulico', 'Memoria de cálculo sanitario', 'Memoria de cálculo electrico', 'Isométricos', 'Levantamiento de instalacion', 'Acta de inicio de construcción', 'Número de evidencias subidas', 'Ultima foto de evidencia subida', 'Porcentaje de construcción', 'Salida de mueble', 'Fecha de segundo muestreo', 'Resultados de laboratorio de segunda prueba', 'Validación de segunda prueba', 'Acta de inicio de funcionamiento', 'Foto de inicio de funcionamiento', 'Mantenimientos', 'Acta de entrega', 'Director', 'Teléfono', 'Expediente técnico completo', 'PRDC'])
-
 	escuelas = User.objects.filter(perfil__in=perfiles).values_list('perfil__numero', 'perfil__municipio__zona__nombre', 'perfil__municipio__nombre', 'perfil__localidad', 'perfil__domicilio', 'username', 'first_name', 'perfil__nivel_educativo', 'perfil__plantilla_escolar', 'escuela__mueble__modelo', 'escuela__sistema_potabilizacion__tipo', 'escuela_primer_prueba__creacion','escuela_primer_prueba__resultados_laboratorio', 'escuela_primer_prueba__validacion', 'escuela_visita_acuerdo__acta_ubicacion', 'escuela_visita_acuerdo__cedula_identificacion', 'escuela_visita_acuerdo__convenio_concertacion', 'escuela_visita_acuerdo__plano_conjunto', 'escuela_visita_acuerdo__distribucion_planta', 'escuela_visita_acuerdo__memoria_calculo_1', 'escuela_visita_acuerdo__memoria_calculo_2', 'escuela_visita_acuerdo__memoria_calculo_3', 'escuela_visita_acuerdo__isometrico_instalacion', 'escuela_visita_acuerdo__levantamiento_instalacion','escuela_inicio_trabajo__acta_inicio', 'perfil__evidencias', 'perfil__nombre_ultima_evidencia', 'perfil__avance', 'escuela__packing_list', 'escuela_segunda_prueba__creacion', 'escuela_segunda_prueba__resultados_laboratorio', 'escuela_segunda_prueba__validacion', 'escuela_inicio_funcionamiento__acta_funcionamiento', 'escuela_inicio_funcionamiento__foto', 'perfil__mantenimientos', 'escuela_acta_entrega__creacion', 'perfil__director', 'perfil__telefono', 'perfil__expediente_completo', 'perfil__prioridad')
 	for escuela in escuelas:
+		escuela = list(escuela)
+		for i, atributo in enumerate(escuela):
+#			print(i, atributo)
+			if i == 12 or i == 24 or i == 30 or i == 32 or i == 33:
+				escuela[i] = get_fechas(atributo, 21)
+			elif i == 14 or i == 22 or  i == 23:
+				escuela[i] = get_fechas(atributo, 13)
+			elif i == 15:
+				escuela[i] = get_fechas(atributo, 15)
+			elif i == 16 or  i == 17 or  i == 18 or  i == 19 or  i == 20 or  i == 21:
+				escuela[i] = get_fechas(atributo, 23)
+			elif i == 38:
+				escuela[i] = get_fechas(atributo, 4)
+			
+			escuela[i] = remove_diagonal(escuela[i])
+
+			print(i, escuela[i])	
 		writer.writerow(escuela)
+#		input()
 
 	return response
 
